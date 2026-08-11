@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa demostrativo — Índice de sitios</title>
+<style>
+  :root{
+    --bg:#15181C;
+    --card:#1C2027;
+    --text:#F3F0E9;
+    --muted:#9AA3AC;
+    --accent-torreon:#F2B705;
+    --accent-arqueo:#D97A4D;
+    --accent-ile:#B96A4B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    padding:48px 20px 80px;
+    line-height:1.6;
+  }
+  .wrap{max-width:880px;margin:0 auto;}
+  header{margin-bottom:48px;}
+  h1{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:12px;}
+  header p{color:var(--muted);max-width:60ch;font-size:0.95rem;}
+  .notice{
+    background:rgba(242,183,5,0.08);
+    border:1px solid rgba(242,183,5,0.3);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-top:20px;
+    font-size:0.88rem;
+    color:var(--muted);
+  }
+  .notice b{color:var(--text);}
+  .brand-group{margin-bottom:44px;}
+  .brand-title{
+    display:flex;align-items:center;gap:10px;
+    font-size:1.15rem;font-weight:700;margin-bottom:16px;
+  }
+  .brand-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .torreon .brand-dot{background:var(--accent-torreon);}
+  .arqueo .brand-dot{background:var(--accent-arqueo);}
+  .ile .brand-dot{background:var(--accent-ile);}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  a.card{
+    display:block;
+    background:var(--card);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px;
+    padding:20px;
+    text-decoration:none;
+    color:var(--text);
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  a.card:hover{transform:translateY(-2px);}
+  .torreon a.card:hover{border-color:var(--accent-torreon);}
+  .arqueo a.card:hover{border-color:var(--accent-arqueo);}
+  .ile a.card:hover{border-color:var(--accent-ile);}
+  .card-label{
+    font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;
+    color:var(--muted);margin-bottom:8px;font-weight:600;
+  }
+  .card-name{font-size:1rem;font-weight:700;margin-bottom:8px;}
+  .card-desc{font-size:0.84rem;color:var(--muted);}
+  footer{
+    margin-top:56px;padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.08);
+    font-size:0.8rem;color:var(--muted);
+  }
+  .top-actions{
+    display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;
+  }
+  .btn-repo{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 16px;border-radius:999px;
+    border:1px solid rgba(255,255,255,0.15);
+    color:var(--text);text-decoration:none;
+    font-size:0.82rem;font-weight:600;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .btn-repo:hover{border-color:var(--accent-arqueo);background:rgba(255,255,255,0.04);}
+  .btn-repo svg{width:16px;height:16px;flex-shrink:0;}
+
+  details.legal{
+    margin-top:40px;
+    background:var(--card);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px;
+    padding:4px 20px;
+  }
+  details.legal summary{
+    cursor:pointer;
+    padding:16px 0;
+    font-weight:700;
+    font-size:0.95rem;
+    list-style:none;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  details.legal summary::-webkit-details-marker{display:none;}
+  details.legal summary .chev{
+    color:var(--muted);transition:transform .2s ease;font-weight:400;
+  }
+  details.legal[open] summary .chev{transform:rotate(180deg);}
+  .legal-body{
+    padding-bottom:22px;font-size:0.85rem;color:var(--muted);
+  }
+  .legal-body h3{
+    color:var(--text);font-size:0.82rem;text-transform:uppercase;
+    letter-spacing:0.04em;margin:18px 0 8px;
+  }
+  .legal-body h3:first-child{margin-top:0;}
+  .legal-body p, .legal-body li{margin-bottom:6px;line-height:1.65;}
+  .legal-body ul{padding-left:20px;}
+  @media (max-width:720px){
+    .cards{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Mapa demostrativo — Plataforma digital de tres negocios</h1>
+    <p>Prototipos de alta fidelidad para tres líneas de negocio. Cada una tiene un catálogo público, un panel de cliente y un panel administrativo interno.</p>
+    <div class="notice">
+      <b>Esto no es un producto terminado.</b> Son maquetas de navegador sin backend ni base de datos. Los nombres, precios y datos son ficticios. El inicio de sesión de los paneles acepta cualquier usuario y contraseña a propósito, solo para poder mostrar el panel por dentro.
+    </div>
+
+    <div class="top-actions">
+      <a class="btn-repo" href="https://github.com/valtara-executive/planner" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        Ver repositorio en GitHub
+      </a>
+    </div>
+
+    <details class="legal">
+      <summary>Alcances, propiedad y condiciones <span class="chev">▾</span></summary>
+      <div class="legal-body">
+        <h3>Propiedad</h3>
+        <p>Este repositorio y todo su contenido —código, textos, estructura e imágenes de muestra referenciadas— son propiedad de <b style="color:var(--text)">Grupo Gevizz S.A.S.</b> © 2026. Todos los derechos reservados. Queda prohibida la reproducción, distribución o uso comercial de este material sin autorización previa por escrito de Grupo Gevizz S.A.S.</p>
+
+        <h3>Naturaleza del software</h3>
+        <p>Lo publicado aquí es un <b style="color:var(--text)">software demostrativo</b>: un conjunto de prototipos de interfaz construidos únicamente para representar visualmente el alcance funcional de una futura plataforma. No constituye un producto terminado, comercializable ni apto para uso en producción bajo ninguna circunstancia.</p>
+
+        <h3>Qué SÍ representa este alcance</h3>
+        <ul>
+          <li>La estructura y navegación propuesta para tres plataformas: constructora, despacho de arquitectura/inmobiliaria y coworking de bienestar.</li>
+          <li>Los flujos principales de cada plataforma: catálogo público, panel de cliente autenticado y panel administrativo interno.</li>
+          <li>Ejemplos de interacción esperada: filtros, reservas, formularios, notificaciones y mensajería, simulados en el navegador.</li>
+        </ul>
+
+        <h3>Qué NO representa este alcance</h3>
+        <ul>
+          <li>Ningún dato real: nombres de empresa, personas, obras, proyectos, precios y cifras son ficticios.</li>
+          <li>Ninguna funcionalidad real de backend: no hay base de datos, autenticación real, procesamiento de pagos ni envío de notificaciones o mensajes.</li>
+          <li>El inicio de sesión mostrado en los paneles es simulado a propósito y acepta cualquier credencial; no debe tomarse como referencia de un sistema de seguridad real.</li>
+          <li>Ninguna garantía de que la plataforma final se construya exactamente igual a como aquí se muestra: este es un punto de partida para definir alcance, no una especificación cerrada.</li>
+        </ul>
+
+        <h3>Condiciones de uso</h3>
+        <p>El acceso a este repositorio es público únicamente con fines de consulta y evaluación del alcance propuesto. Cualquier uso del código, diseño o estructura aquí presentados fuera de ese fin requiere autorización expresa de Grupo Gevizz S.A.S.</p>
+      </div>
+    </details>
+  </header>
+
+  <div class="brand-group torreon">
+    <div class="brand-title"><span class="brand-dot"></span>Torreón Constructora</div>
+    <div class="cards">
+      <a class="card" href="catalogo-publico-torreon.html">
+        <div class="card-label">Catálogo público</div>
+        <div class="card-name">Obras y cotización</div>
+        <div class="card-desc">Explora obras terminadas y en curso, filtra por tipo y ubicación, y solicita una cotización.</div>
+      </a>
+      <a class="card" href="panel-cliente-torreon.html">
+        <div class="card-label">Panel de cliente</div>
+        <div class="card-name">Seguimiento de obra</div>
+        <div class="card-desc">Avance de obra, bitácora fotográfica, cronograma, pagos y documentos de tu proyecto.</div>
+      </a>
+      <a class="card" href="panel-admin-torreon.html">
+        <div class="card-label">Panel administrativo</div>
+        <div class="card-name">Gestión interna</div>
+        <div class="card-desc">Control de todas las obras activas, personal, seguridad y finanzas de la constructora.</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="brand-group arqueo">
+    <div class="brand-title"><span class="brand-dot"></span>Arqueo Estudio</div>
+    <div class="cards">
+      <a class="card" href="arqueo-catalogo-publico.html">
+        <div class="card-label">Catálogo público</div>
+        <div class="card-name">Showroom de proyectos</div>
+        <div class="card-desc">Catálogo tipo inmobiliaria de diseños arquitectónicos disponibles, con filtros y favoritos.</div>
+      </a>
+      <a class="card" href="arqueo-panel-cliente.html">
+        <div class="card-label">Panel de cliente</div>
+        <div class="card-name">Mi proyecto</div>
+        <div class="card-desc">Seguimiento del proceso de diseño a la medida, renders, planos y citas con tu arquitecto.</div>
+      </a>
+      <a class="card" href="#" style="opacity:0.4;pointer-events:none;">
+        <div class="card-label">Panel administrativo</div>
+        <div class="card-name">Próximamente</div>
+        <div class="card-desc">Pendiente de subir a este repositorio.</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="brand-group ile">
+    <div class="brand-title"><span class="brand-dot"></span>Ilé Wellness</div>
+    <div class="cards">
+      <a class="card" href="ile-wellness-catalogo.html">
+        <div class="card-label">Catálogo público</div>
+        <div class="card-name">Reserva de espacios</div>
+        <div class="card-desc">Explora cabinas y oficinas disponibles con disponibilidad en tiempo real, estilo Airbnb.</div>
+      </a>
+      <a class="card" href="ile-wellness-panel-cliente.html">
+        <div class="card-label">Panel de cliente</div>
+        <div class="card-name">Panel del profesional</div>
+        <div class="card-desc">Reservas, agenda de pacientes, membresía y comunicación con el equipo de Ilé.</div>
+      </a>
+      <a class="card" href="ile-wellness-panel-admin.html">
+        <div class="card-label">Panel administrativo</div>
+        <div class="card-name">Operación del coworking</div>
+        <div class="card-desc">Gestión de reservas, espacios, membresías y profesionales activos.</div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Grupo Gevizz S.A.S. — Mapa demostrativo de alcance funcional. No representa la plataforma final ni tiene conexión a ningún sistema real.
+  </footer>
+
+</div>
+</body>
+</html>
