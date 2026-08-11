@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torreón Constructora — Catálogo de Obras</title>
+<meta name="description" content="Torreón Constructora: catálogo de obras entregadas y en curso. Vivienda, remodelación, refuerzo sísmico, naves industriales. Cotiza tu obra hoy.">
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="preconnect" href="https://i.pravatar.cc">
+<style>
+/* =========================================================
+   RESET
+========================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea,select{font:inherit;}
+ul,ol{list-style:none;}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+}
+
+/* =========================================================
+   TOKENS
+========================================================= */
+:root{
+  --ink:#1A1508;
+  --paper-alt:#252017;
+  --paper-alt-2:#2E2818;
+  --paper-alt-3:#372F1B;
+  --paper:#EDE7DB;
+  --cream-field:#EDE7DB;
+  --yellow:#F2B705;
+  --yellow-soft:#ffd94d;
+  --blue:#4C8C9C;
+  --blue-soft:#7fb9c7;
+  --red:#D9502E;
+  --green:#7A9B5E;
+  --steel:#B7AC9A;
+  --steel-dim:#726a56;
+  --line:rgba(237,231,219,0.12);
+  --line-strong:rgba(237,231,219,0.24);
+  --display:'Tor-Display', Arial, sans-serif;
+  --body:'Tor-Body', Arial, sans-serif;
+  --radius-s:3px;
+  --radius-m:6px;
+  --shadow-hard:6px 6px 0 rgba(0,0,0,0.4);
+  --shadow-hard-sm:3px 3px 0 rgba(0,0,0,0.35);
+}
+@font-face{font-family:'Tor-Display';src:local('Arial Black'),local('Arial');font-weight:700 900;}
+@font-face{font-family:'Tor-Body';src:local('Inter'),local('Arial');font-weight:400 700;}
+
+body{font-family:var(--body), Arial, sans-serif;background:var(--ink);color:var(--paper);}
+h1,h2,h3,.disp{font-family:var(--display), Arial, sans-serif;text-transform:uppercase;letter-spacing:-0.01em;font-weight:900;}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--yellow);color:var(--ink);padding:10px 16px;z-index:9999;font-weight:800;}
+.skip-link:focus{left:8px;top:8px;}
+.wrap{max-width:1360px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:0.74rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:14px;}
+.eyebrow::before{content:"";width:10px;height:10px;background:var(--yellow);display:inline-block;}
+.eyebrow.on-light{color:#a15a3b;}
+
+.btn-solid-yellow{padding:14px 26px;background:var(--yellow);color:var(--ink);border-radius:var(--radius-s);font-weight:900;font-size:0.84rem;text-transform:uppercase;letter-spacing:0.02em;display:inline-flex;align-items:center;gap:9px;transition:background .2s;}
+.btn-solid-yellow:hover{background:var(--yellow-soft);}
+.btn-solid-yellow:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-outline-cream{padding:13px 24px;border:2px solid var(--line-strong);color:var(--paper);border-radius:var(--radius-s);font-weight:800;font-size:0.82rem;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;}
+.btn-outline-cream:hover{border-color:var(--yellow);color:var(--yellow);}
+.btn-outline-yellow{padding:13px 24px;border:2px solid var(--yellow);color:var(--yellow);border-radius:var(--radius-s);font-weight:800;font-size:0.82rem;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;}
+.btn-outline-yellow:hover{background:rgba(242,183,5,0.1);}
+
+/* =========================================================
+   HEADER
+========================================================= */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(26,21,8,0.94);backdrop-filter:blur(10px);border-bottom:2px solid var(--line-strong);}
+.site-header-inner{display:flex;align-items:center;gap:24px;padding:16px 0;}
+.site-logo{display:flex;align-items:center;gap:9px;font-family:var(--display);font-size:1.05rem;flex-shrink:0;}
+.site-logo .mark{width:14px;height:14px;background:var(--yellow);flex-shrink:0;}
+.site-nav{display:flex;gap:26px;font-size:0.83rem;font-weight:700;flex:1;}
+.site-nav a{padding:4px 0;border-bottom:2px solid transparent;transition:border-color .2s;white-space:nowrap;}
+.site-nav a:hover{border-color:var(--yellow);}
+.header-actions{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0;}
+.header-icon-link{position:relative;width:40px;height:40px;border-radius:var(--radius-s);border:2px solid var(--line-strong);display:flex;align-items:center;justify-content:center;color:var(--steel);transition:all .15s;}
+.header-icon-link:hover{color:var(--yellow);border-color:var(--yellow);}
+.header-icon-link svg{width:18px;height:18px;}
+.header-icon-link .badge-count{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;background:var(--red);color:#fff;font-size:0.62rem;font-weight:800;border-radius:999px;display:flex;align-items:center;justify-content:center;border:2px solid var(--ink);}
+.btn-login{font-size:0.82rem;font-weight:800;color:var(--paper);padding:10px 16px;border:2px solid var(--line-strong);border-radius:var(--radius-s);}
+.btn-login:hover{border-color:var(--steel);}
+.mobile-menu-toggle{display:none;}
+
+@media (max-width:1080px){
+  .site-nav{display:none;}
+}
+@media (max-width:640px){
+  .btn-login{display:none;}
+  .header-actions .btn-solid-yellow span{display:none;}
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.42) saturate(1.05) contrast(1.05);}
+.hero-tape{position:absolute;top:0;left:0;right:0;height:9px;background:repeating-linear-gradient(45deg,var(--yellow) 0 18px, var(--ink) 18px 36px);z-index:2;}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(26,21,8,0.96), rgba(26,21,8,0.25) 55%);z-index:1;}
+.hero-inner{position:relative;z-index:2;padding:80px 0 60px;width:100%;}
+.hero h1{font-size:clamp(2.4rem,6vw,5.2rem);line-height:0.92;max-width:15ch;margin-bottom:22px;}
+.hero h1 span{color:var(--yellow);}
+.hero p{font-size:1.05rem;line-height:1.6;max-width:52ch;opacity:0.92;font-weight:400;margin-bottom:30px;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid rgba(237,231,219,0.25);padding-top:22px;}
+.hero-stat{padding-right:20px;border-right:1px solid rgba(237,231,219,0.2);}
+.hero-stat:last-child{border-right:none;}
+.hero-stat b{display:block;font-family:var(--display);font-size:clamp(1.6rem,3vw,2.3rem);color:var(--yellow);}
+.hero-stat span{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.8;}
+
+@media (max-width:760px){
+  .hero-stats{grid-template-columns:1fr 1fr;gap:16px 0;}
+  .hero-stat{border-right:none;padding-right:0;}
+}
+
+/* =========================================================
+   CATÁLOGO
+========================================================= */
+.catalogo-section{padding:80px 0 90px;}
+.catalogo-head{margin-bottom:28px;}
+.catalogo-head h2{font-size:clamp(1.8rem,3.2vw,2.6rem);margin-bottom:10px;}
+.catalogo-head p{font-size:0.95rem;color:var(--steel);max-width:60ch;}
+
+.catalogo-toolbar{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap;}
+.cat-search{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;background:var(--paper-alt);border:2px solid var(--line-strong);border-radius:var(--radius-s);padding:12px 16px;}
+.cat-search svg{width:17px;height:17px;color:var(--steel);flex-shrink:0;}
+.cat-search input{flex:1;background:none;border:none;color:var(--paper);font-size:0.88rem;}
+.cat-search input::placeholder{color:var(--steel-dim);}
+.cat-sort select{padding:12px 14px;background:var(--paper-alt);border:2px solid var(--line-strong);color:var(--paper);border-radius:var(--radius-s);font-size:0.84rem;font-weight:700;}
+.filtros-toggle-btn{display:none;padding:12px 16px;background:var(--paper-alt);border:2px solid var(--line-strong);border-radius:var(--radius-s);font-size:0.84rem;font-weight:800;align-items:center;gap:8px;}
+.filtros-toggle-btn svg{width:16px;height:16px;}
+
+.catalogo-layout{display:grid;grid-template-columns:270px 1fr;gap:26px;align-items:start;}
+.filtros-panel{background:var(--paper-alt);border:2px solid var(--line-strong);border-radius:var(--radius-m);padding:22px;position:sticky;top:88px;}
+.filtro-group{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--line);}
+.filtro-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.filtro-group h4{font-size:0.76rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--steel);margin-bottom:12px;font-weight:800;}
+.filtro-check{display:flex;align-items:center;gap:9px;font-size:0.85rem;padding:6px 0;cursor:pointer;}
+.filtro-check input{accent-color:var(--yellow);width:16px;height:16px;flex-shrink:0;}
+.filtro-check .fc-count{margin-left:auto;font-size:0.74rem;color:var(--steel-dim);}
+.range-row{display:flex;gap:8px;align-items:center;}
+.range-row select{flex:1;padding:9px 10px;background:var(--paper-alt-2);border:2px solid var(--line-strong);color:var(--paper);border-radius:var(--radius-s);font-size:0.8rem;}
+.range-row span{color:var(--steel);font-size:0.8rem;}
+.filtro-clear-btn{width:100%;padding:10px;border:2px solid var(--line-strong);border-radius:var(--radius-s);font-size:0.78rem;font-weight:800;color:var(--steel);text-transform:uppercase;margin-top:4px;}
+.filtro-clear-btn:hover{border-color:var(--red);color:var(--red);}
+
+.catalogo-results-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.catalogo-count{font-size:0.86rem;color:var(--steel);}
+.catalogo-count strong{color:var(--paper);}
+.compare-mode-toggle{display:flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:700;color:var(--steel);}
+.compare-mode-toggle input{accent-color:var(--yellow);width:16px;height:16px;}
+
+.obras-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.obra-card{background:var(--paper-alt);border:2px solid var(--line-strong);border-radius:var(--radius-m);overflow:hidden;transition:transform .2s ease, border-color .2s ease;position:relative;cursor:pointer;}
+.obra-card:hover{transform:translateY(-3px);border-color:var(--steel);}
+.obra-card-img-wrap{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.obra-card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+.obra-card:hover .obra-card-img-wrap img{transform:scale(1.06);}
+.obra-card-status{position:absolute;top:12px;left:12px;font-size:0.66rem;font-weight:800;text-transform:uppercase;padding:5px 10px;border-radius:999px;z-index:2;}
+.obra-card-status.entregada{background:rgba(122,155,94,0.9);color:#12180c;}
+.obra-card-status.obra{background:rgba(76,140,156,0.92);color:#0c1517;}
+.obra-card-status.proxima{background:rgba(242,183,5,0.92);color:#1A1508;}
+.obra-card-fav{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(26,21,8,0.65);display:flex;align-items:center;justify-content:center;color:#fff;z-index:2;transition:background .15s;}
+.obra-card-fav:hover{background:rgba(26,21,8,0.9);}
+.obra-card-fav svg{width:16px;height:16px;transition:all .15s;}
+.obra-card-fav.is-fav svg{fill:var(--red);stroke:var(--red);}
+.obra-card-compare-check{position:absolute;bottom:10px;right:10px;z-index:2;display:none;}
+.obra-card-compare-check.show{display:flex;align-items:center;gap:6px;background:rgba(26,21,8,0.75);padding:6px 10px;border-radius:999px;font-size:0.72rem;font-weight:700;color:#fff;}
+.obra-card-compare-check input{accent-color:var(--yellow);width:15px;height:15px;}
+.obra-card-body{padding:16px;}
+.obra-card-cat{font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--yellow);}
+.obra-card-name{font-family:var(--display);font-size:1.05rem;text-transform:uppercase;margin:6px 0 4px;line-height:1.1;}
+.obra-card-loc{font-size:0.8rem;color:var(--steel);margin-bottom:12px;}
+.obra-card-meta-row{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:12px;}
+.obra-card-price{font-family:var(--display);font-size:0.95rem;color:var(--paper);}
+.obra-card-price span{display:block;font-size:0.66rem;color:var(--steel-dim);text-transform:uppercase;font-weight:400;font-family:var(--body);}
+.obra-card-m2{font-size:0.78rem;color:var(--steel);}
+
+.load-more-wrap{text-align:center;margin-top:36px;}
+.empty-catalogo{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--steel);}
+.empty-catalogo svg{width:52px;height:52px;margin:0 auto 16px;opacity:0.5;}
+
+/* FILTROS MODAL MÓVIL */
+.filtros-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;display:none;}
+.filtros-modal-backdrop.is-open{display:block;}
+.filtros-modal-sheet{position:fixed;bottom:0;left:0;right:0;max-height:82vh;background:var(--paper-alt);border-radius:16px 16px 0 0;overflow-y:auto;padding:22px;z-index:401;border-top:2px solid var(--line-strong);}
+.filtros-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.filtros-modal-close{width:34px;height:34px;border-radius:50%;background:var(--paper-alt-2);display:flex;align-items:center;justify-content:center;}
+
+@media (max-width:1100px){
+  .obras-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:900px){
+  .catalogo-layout{grid-template-columns:1fr;}
+  .filtros-panel{display:none;}
+  .filtros-toggle-btn{display:inline-flex;}
+}
+@media (max-width:640px){
+  .obras-grid{grid-template-columns:1fr;}
+  .catalogo-toolbar{flex-direction:column;align-items:stretch;}
+}
+
+/* =========================================================
+   MODAL DE DETALLE DE OBRA
+========================================================= */
+.mkt-backdrop{position:fixed;inset:0;background:rgba(26,21,8,0.82);z-index:550;display:none;align-items:flex-start;justify-content:center;padding:5vh 20px;overflow-y:auto;}
+.mkt-backdrop.is-open{display:flex;}
+.mkt-modal{background:var(--paper-alt);border:2px solid var(--line-strong);color:var(--paper);max-width:980px;width:100%;border-radius:var(--radius-m);overflow:hidden;position:relative;margin-bottom:5vh;box-shadow:0 30px 80px rgba(0,0,0,0.55);}
+.mkt-close{position:absolute;top:16px;right:16px;z-index:6;width:38px;height:38px;border-radius:50%;background:rgba(26,21,8,0.75);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.mkt-close:hover{background:var(--red);}
+.mkt-gallery{position:relative;aspect-ratio:16/9;background:var(--paper-alt-2);}
+.mkt-gallery img{width:100%;height:100%;object-fit:cover;}
+.mkt-gallery-nav{position:absolute;bottom:14px;right:14px;display:flex;gap:6px;z-index:3;}
+.mkt-gallery-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;}
+.mkt-gallery-dot.is-active{background:#fff;}
+.mkt-gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(26,21,8,0.6);color:#fff;display:flex;align-items:center;justify-content:center;z-index:3;}
+.mkt-gallery-arrow.prev{left:14px;}
+.mkt-gallery-arrow.next{right:14px;}
+.mkt-gallery-status{position:absolute;top:14px;left:14px;font-size:0.68rem;font-weight:800;text-transform:uppercase;padding:5px 10px;border-radius:999px;z-index:3;}
+.mkt-gallery-status.entregada{background:rgba(122,155,94,0.92);color:#12180c;}
+.mkt-gallery-status.obra{background:rgba(76,140,156,0.92);color:#0c1517;}
+.mkt-gallery-status.proxima{background:rgba(242,183,5,0.92);color:#1A1508;}
+.mkt-body{padding:30px clamp(20px,4vw,42px) 38px;}
+.mkt-tag{display:inline-block;font-size:0.7rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px;}
+.mkt-title{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:6px;}
+.mkt-loc{font-size:0.9rem;color:var(--steel);margin-bottom:20px;}
+.mkt-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.mkt-price{font-family:var(--display);font-size:1.6rem;color:var(--yellow);}
+.mkt-price-label{font-size:0.78rem;color:var(--steel);text-transform:uppercase;letter-spacing:0.03em;}
+.mkt-meta-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:24px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.mkt-meta-item b{display:block;font-size:1.15rem;font-family:var(--display);}
+.mkt-meta-item span{font-size:0.7rem;text-transform:uppercase;color:var(--steel);letter-spacing:0.03em;}
+.mkt-desc p{font-size:0.95rem;line-height:1.75;margin-bottom:14px;max-width:68ch;color:var(--paper);}
+.mkt-options{margin-top:24px;}
+.mkt-options h4{font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;color:var(--steel);}
+.mkt-options ul{display:flex;flex-direction:column;gap:9px;margin-bottom:12px;}
+.mkt-options li{display:flex;gap:10px;font-size:0.9rem;align-items:flex-start;}
+.mkt-options li::before{content:"✓";color:var(--yellow);font-weight:800;flex-shrink:0;}
+.mkt-testi{background:var(--paper-alt-2);border:1px solid var(--line);border-radius:var(--radius-s);padding:18px;margin-top:24px;display:flex;gap:14px;align-items:flex-start;}
+.mkt-testi img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.mkt-testi .mt-stars{color:var(--yellow);font-size:0.8rem;margin-bottom:4px;}
+.mkt-testi p{font-size:0.86rem;line-height:1.6;color:var(--paper);font-style:italic;margin-bottom:6px;}
+.mkt-testi span{font-size:0.78rem;color:var(--steel);font-weight:700;}
+.mkt-arqueo-note{display:flex;gap:10px;padding:12px 14px;background:rgba(217,122,77,0.1);border:1px solid rgba(217,122,77,0.3);border-radius:var(--radius-s);margin-top:20px;font-size:0.82rem;color:#e0a483;}
+.mkt-arqueo-note svg{width:16px;height:16px;flex-shrink:0;margin-top:1px;}
+.mkt-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;margin-bottom:34px;}
+.mkt-related h4{font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;color:var(--steel);}
+.mkt-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.mkt-related-card{cursor:pointer;border-radius:var(--radius-s);overflow:hidden;background:var(--paper-alt-2);border:1px solid var(--line);}
+.mkt-related-card img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.mkt-related-card .r-info{padding:10px 12px;}
+.mkt-related-card .r-name{font-size:0.8rem;font-weight:800;}
+.mkt-related-card .r-loc{font-size:0.72rem;color:var(--steel);}
+@media (max-width:640px){
+  .mkt-related-grid{grid-template-columns:1fr;}
+  .mkt-meta-row{gap:16px;}
+}
+
+/* =========================================================
+   DRAWER (FAVORITOS / COMPARADOR)
+========================================================= */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:560;display:none;}
+.drawer-backdrop.is-open{display:block;}
+.drawer-panel{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--paper-alt);border-left:2px solid var(--line-strong);z-index:561;overflow-y:auto;transform:translateX(100%);transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.drawer-backdrop.is-open .drawer-panel{transform:translateX(0);}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:2px solid var(--line-strong);position:sticky;top:0;background:var(--paper-alt);z-index:2;}
+.drawer-head h3{font-size:1.05rem;}
+.drawer-close{width:34px;height:34px;border-radius:50%;background:var(--paper-alt-2);display:flex;align-items:center;justify-content:center;}
+.drawer-body{padding:20px 22px;}
+.drawer-empty{text-align:center;padding:50px 20px;color:var(--steel);}
+.drawer-empty svg{width:48px;height:48px;margin:0 auto 16px;opacity:0.5;}
+.fav-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center;}
+.fav-item img{width:64px;height:52px;object-fit:cover;border-radius:var(--radius-s);flex-shrink:0;cursor:pointer;}
+.fav-item .fi-info{flex:1;min-width:0;cursor:pointer;}
+.fav-item .fi-info b{display:block;font-size:0.85rem;}
+.fav-item .fi-info span{font-size:0.75rem;color:var(--steel);}
+.fav-item .fi-remove{width:30px;height:30px;border-radius:50%;background:var(--paper-alt-2);display:flex;align-items:center;justify-content:center;color:var(--steel);flex-shrink:0;}
+.fav-item .fi-remove:hover{color:var(--red);}
+
+.compare-table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+.compare-table th,.compare-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+.compare-table th{color:var(--steel);font-weight:700;width:110px;}
+.compare-table td img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-s);margin-bottom:6px;}
+.compare-table td b{display:block;font-size:0.84rem;margin-bottom:2px;}
+.compare-remove-btn{font-size:0.68rem;color:var(--red);font-weight:700;margin-top:6px;}
+
+/* =========================================================
+   CÓMO TRABAJAMOS
+========================================================= */
+.como-section{padding:90px 0;background:var(--paper-alt);}
+.como-head{margin-bottom:48px;max-width:70ch;}
+.como-head h2{font-size:clamp(1.8rem,3.2vw,2.6rem);margin-bottom:12px;}
+.como-head p{font-size:0.98rem;color:var(--steel);line-height:1.6;}
+.proceso-steps{display:flex;flex-direction:column;border-top:2px solid var(--line-strong);}
+.proceso-step{display:grid;grid-template-columns:100px 1fr 1.3fr;gap:24px;padding:30px 0;border-bottom:2px solid var(--line-strong);align-items:start;}
+.proceso-step .num{font-family:var(--display);font-size:1.6rem;color:var(--yellow);}
+.proceso-step h3{font-size:1.1rem;margin-bottom:6px;text-transform:none;letter-spacing:0;}
+.proceso-step p{font-size:0.9rem;line-height:1.6;color:var(--steel);font-weight:400;}
+
+/* =========================================================
+   SEGURIDAD (marketing)
+========================================================= */
+.seguridad-section{padding:90px 0;}
+.seguridad-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.seguridad-img{aspect-ratio:4/3;border-radius:var(--radius-m);overflow:hidden;}
+.seguridad-img img{width:100%;height:100%;object-fit:cover;}
+.seguridad-stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px;}
+.seguridad-stat{background:var(--paper-alt);border:2px solid var(--line-strong);border-radius:var(--radius-s);padding:18px;}
+.seguridad-stat b{display:block;font-family:var(--display);font-size:1.8rem;color:var(--yellow);}
+.seguridad-stat span{font-size:0.76rem;color:var(--steel);text-transform:uppercase;letter-spacing:0.03em;}
+.seguridad-list{margin-top:24px;display:flex;flex-direction:column;gap:14px;}
+.seguridad-list li{display:flex;gap:12px;font-size:0.92rem;line-height:1.5;}
+.seguridad-list li svg{width:20px;height:20px;color:var(--yellow);flex-shrink:0;margin-top:1px;}
+
+/* =========================================================
+   TESTIMONIOS
+========================================================= */
+.testimonios-section{padding:90px 0;background:var(--paper-alt);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px;}
+.testi-card{background:var(--paper-alt-2);border:2px solid var(--line-strong);border-radius:var(--radius-m);padding:28px 26px;display:flex;flex-direction:column;height:100%;box-shadow:var(--shadow-hard-sm);}
+.testi-stars{color:var(--yellow);font-size:0.9rem;margin-bottom:14px;letter-spacing:2px;}
+.testi-text{font-size:0.92rem;line-height:1.7;color:var(--paper);margin-bottom:20px;flex:1;font-style:italic;}
+.testi-person{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:16px;}
+.testi-person img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.testi-person b{font-size:0.85rem;display:block;}
+.testi-person span{font-size:0.76rem;color:var(--steel);}
+
+@media (max-width:900px){
+  .seguridad-grid{grid-template-columns:1fr;}
+  .proceso-step{grid-template-columns:1fr;gap:8px;}
+}
+@media (max-width:760px){
+  .testi-grid{grid-template-columns:1fr;}
+  .seguridad-stats-row{grid-template-columns:1fr 1fr;}
+}
+
+/* =========================================================
+   COTIZADOR — WIZARD MULTI-PASO
+========================================================= */
+.cotizar-section{padding:90px 0;background:var(--paper-alt);}
+.wizard-shell{max-width:760px;margin:0 auto;background:var(--paper-alt-2);border:2px solid var(--line-strong);border-radius:var(--radius-m);overflow:hidden;box-shadow:var(--shadow-hard);}
+.wizard-progress{display:flex;background:var(--ink);}
+.wizard-progress-step{flex:1;padding:16px 8px;text-align:center;font-size:0.68rem;font-weight:800;text-transform:uppercase;color:var(--steel-dim);border-bottom:3px solid var(--paper-alt-3);position:relative;}
+.wizard-progress-step.is-active{color:var(--yellow);border-bottom-color:var(--yellow);}
+.wizard-progress-step.is-done{color:var(--green);border-bottom-color:var(--green);}
+.wizard-body{padding:36px clamp(20px,4vw,44px);min-height:340px;}
+.wizard-step{display:none;}
+.wizard-step.is-active{display:block;animation:sectionIn .3s ease;}
+@keyframes sectionIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.wizard-step h3{font-size:1.3rem;margin-bottom:8px;}
+.wizard-step .ws-sub{font-size:0.88rem;color:var(--steel);margin-bottom:26px;font-weight:400;}
+.opcion-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.opcion-card{padding:20px 16px;border:2px solid var(--line-strong);border-radius:var(--radius-s);text-align:left;transition:all .15s ease;background:var(--paper-alt);}
+.opcion-card:hover{border-color:var(--steel);}
+.opcion-card.is-selected{border-color:var(--yellow);background:rgba(242,183,5,0.08);}
+.opcion-card svg{width:24px;height:24px;color:var(--yellow);margin-bottom:10px;}
+.opcion-card b{display:block;font-size:0.92rem;margin-bottom:4px;}
+.opcion-card span{font-size:0.78rem;color:var(--steel);}
+.wizard-field{margin-bottom:18px;}
+.wizard-field label{display:block;font-size:0.75rem;font-weight:800;text-transform:uppercase;color:var(--steel);margin-bottom:9px;letter-spacing:0.03em;}
+.wizard-field input,.wizard-field select,.wizard-field textarea{width:100%;padding:13px 15px;border:2px solid var(--line-strong);background:var(--paper-alt);color:var(--paper);border-radius:var(--radius-s);font-size:0.92rem;}
+.wizard-field input:focus,.wizard-field select:focus,.wizard-field textarea:focus{border-color:var(--yellow);}
+.wizard-field .err{color:var(--red);font-size:0.78rem;margin-top:6px;display:none;font-weight:700;}
+.wizard-field.has-error input,.wizard-field.has-error select{border-color:var(--red);}
+.wizard-field.has-error .err{display:block;}
+.wizard-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.slider-row{display:flex;align-items:center;gap:16px;}
+.slider-row input[type="range"]{flex:1;accent-color:var(--yellow);}
+.slider-row .slider-val{font-family:var(--display);font-size:1.3rem;color:var(--yellow);min-width:90px;text-align:right;}
+.resumen-cotizacion{background:var(--paper-alt);border:2px solid var(--line-strong);border-radius:var(--radius-s);padding:22px;margin-bottom:22px;}
+.resumen-cotizacion .rc-row{display:flex;justify-content:space-between;font-size:0.88rem;padding:9px 0;border-bottom:1px solid var(--line);}
+.resumen-cotizacion .rc-row:last-child{border-bottom:none;}
+.resumen-cotizacion .rc-row span:first-child{color:var(--steel);}
+.resumen-cotizacion .rc-row span:last-child{font-weight:700;}
+.resumen-estimado{text-align:center;padding:20px;background:rgba(242,183,5,0.08);border:2px solid var(--yellow);border-radius:var(--radius-s);margin-bottom:22px;}
+.resumen-estimado .re-label{font-size:0.76rem;text-transform:uppercase;color:var(--steel);letter-spacing:0.04em;margin-bottom:6px;}
+.resumen-estimado .re-amount{font-family:var(--display);font-size:2.2rem;color:var(--yellow);}
+.resumen-estimado .re-note{font-size:0.76rem;color:var(--steel);margin-top:8px;}
+.wizard-nav{display:flex;justify-content:space-between;padding:20px clamp(20px,4vw,44px);border-top:2px solid var(--line-strong);background:var(--ink);}
+.wizard-nav-btn{padding:12px 22px;border-radius:var(--radius-s);font-weight:800;font-size:0.82rem;text-transform:uppercase;}
+.wizard-nav-back{color:var(--steel);border:2px solid var(--line-strong);}
+.wizard-nav-back:hover{color:var(--paper);border-color:var(--steel);}
+.wizard-nav-back:disabled{opacity:0.35;cursor:default;}
+.wizard-success{text-align:center;padding:40px 20px;}
+.wizard-success svg{width:60px;height:60px;color:var(--green);margin:0 auto 20px;animation:popIn .4s cubic-bezier(.16,1,.3,1);}
+@keyframes popIn{from{transform:scale(0.6);opacity:0;}to{transform:scale(1);opacity:1;}}
+.wizard-success h3{margin-bottom:10px;}
+.wizard-success p{font-size:0.9rem;color:var(--steel);max-width:44ch;margin:0 auto;line-height:1.6;}
+
+@media (max-width:640px){
+  .opcion-cards{grid-template-columns:1fr;}
+  .wizard-row-2{grid-template-columns:1fr;}
+  .wizard-progress-step span{display:none;}
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+.site-footer{background:var(--paper-alt-2);padding:64px 0 28px;border-top:4px solid var(--yellow);}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid var(--line-strong);}
+.footer-top h4{font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;opacity:0.6;font-weight:800;}
+.footer-top li{font-size:0.87rem;margin-bottom:10px;opacity:0.85;}
+.footer-top li a:hover,.footer-top li button:hover{text-decoration:underline;}
+.footer-brand p{font-size:0.87rem;opacity:0.7;max-width:32ch;line-height:1.6;margin-top:12px;}
+.footer-meridiano{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.footer-meridiano span{font-size:0.68rem;padding:5px 10px;border:1px solid var(--line-strong);border-radius:999px;color:var(--steel);}
+.footer-bottom{display:flex;justify-content:space-between;padding-top:22px;font-size:0.76rem;opacity:0.55;flex-wrap:wrap;gap:10px;}
+@media (max-width:900px){ .footer-top{grid-template-columns:1fr 1fr;} }
+@media (max-width:560px){ .footer-top{grid-template-columns:1fr;} }
+
+/* =========================================================
+   CHATBOT
+========================================================= */
+.chat-launcher{position:fixed;bottom:24px;right:24px;z-index:300;width:60px;height:60px;border-radius:50%;background:var(--yellow);color:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(0,0,0,0.4);border:3px solid var(--ink);transition:transform .2s ease;}
+.chat-launcher:hover{transform:scale(1.07) rotate(-2deg);}
+.chat-launcher svg{width:26px;height:26px;}
+.chat-launcher .dot{position:absolute;top:-4px;right:-4px;width:12px;height:12px;background:var(--red);border-radius:50%;border:2px solid var(--paper);}
+.chat-window{position:fixed;bottom:96px;right:24px;z-index:300;width:min(380px,calc(100vw - 32px));height:min(560px,calc(100vh - 140px));background:var(--paper-alt);border:2px solid var(--line-strong);box-shadow:0 20px 60px rgba(0,0,0,0.45);border-radius:var(--radius-m);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(16px) scale(0.97);pointer-events:none;transition:opacity .25s ease, transform .25s ease;}
+.chat-window.is-open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.chat-header{background:var(--ink);color:var(--paper);padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:4px solid var(--yellow);}
+.chat-header img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--yellow);}
+.chat-header .h-info b{display:block;font-size:0.88rem;text-transform:none;font-family:var(--body);font-weight:800;}
+.chat-header .h-info span{font-size:0.72rem;opacity:0.7;display:flex;align-items:center;gap:5px;}
+.chat-header .h-info span::before{content:"";width:7px;height:7px;background:var(--yellow);border-radius:50%;display:inline-block;}
+.chat-header .close-x{margin-left:auto;opacity:0.7;font-size:1.2rem;}
+.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.chat-msg{max-width:82%;padding:10px 14px;font-size:0.86rem;line-height:1.5;border-radius:var(--radius-s);}
+.chat-msg.bot{background:var(--paper-alt-2);border:1px solid var(--line-strong);align-self:flex-start;color:var(--paper);}
+.chat-msg.user{background:var(--yellow);color:var(--ink);align-self:flex-end;font-weight:700;}
+.chat-typing{align-self:flex-start;background:var(--paper-alt-2);border:1px solid var(--line-strong);padding:12px 16px;border-radius:var(--radius-s);display:flex;gap:4px;}
+.chat-typing span{width:6px;height:6px;background:var(--steel);border-radius:50%;animation:chatTypingBounce 1.2s infinite ease-in-out;}
+.chat-typing span:nth-child(2){animation-delay:.15s;}
+.chat-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes chatTypingBounce{0%,60%,100%{transform:translateY(0);opacity:0.5;}30%{transform:translateY(-4px);opacity:1;}}
+.chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;transition:opacity .25s ease;}
+.chat-quick.is-hidden{opacity:0;}
+.chat-msg-img{margin-top:8px;border-radius:8px;overflow:hidden;}
+.chat-msg-img img{width:100%;display:block;border-radius:8px;}
+.chat-msg-img span{display:block;font-size:0.72rem;opacity:0.65;margin-top:5px;font-style:italic;}
+.chat-quick button{font-size:0.76rem;padding:7px 12px;border:1px solid var(--line-strong);border-radius:999px;background:var(--paper-alt-2);color:var(--paper);transition:background .15s;}
+.chat-quick button:hover{background:var(--paper-alt-3);}
+.chat-input-row{display:flex;gap:8px;padding:12px;border-top:2px solid var(--line-strong);background:var(--paper-alt-2);}
+.chat-input-row input{flex:1;padding:10px 14px;border:2px solid var(--line-strong);border-radius:999px;font-size:0.86rem;color:var(--paper);background:var(--paper-alt);}
+.chat-input-row button{width:38px;height:38px;border-radius:50%;background:var(--yellow);color:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.chat-input-row button svg{width:16px;height:16px;}
+@media (max-width:560px){
+  .chat-window{right:16px;bottom:88px;}
+  .chat-launcher{right:16px;bottom:16px;}
+}
+</style>
+</head>
+<body>
+<a href="#catalogo" class="skip-link">Saltar al catálogo</a>
+
+<header class="site-header">
+  <div class="wrap site-header-inner">
+    <div class="site-logo"><span class="mark"></span>TORREÓN</div>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#como-trabajamos">Cómo trabajamos</a>
+      <a href="#seguridad">Seguridad</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#cotizar">Cotizar</a>
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-link" id="favoritos-btn" aria-label="Ver mis favoritos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        <span class="badge-count" id="fav-count" style="display:none;">0</span>
+      </button>
+      <button class="header-icon-link" id="comparador-btn" aria-label="Ver comparador">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v18M3 8h6M3 14h6M15 3v18M15 8h6M15 14h6"/></svg>
+        <span class="badge-count" id="compare-count" style="display:none;">0</span>
+      </button>
+      <a href="#" class="btn-login" id="login-link">Iniciar sesión</a>
+      <a href="#cotizar" class="btn-solid-yellow"><span>Cotizar mi obra</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg" style="background-image:url('https://picsum.photos/seed/torreon-hero-catalogo/1800/1400')"></div>
+  <div class="hero-tape"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Constructora · Tizayuca, Hidalgo</span>
+    <h1>Construimos lo que <span>ves entregado</span>, no lo que prometemos.</h1>
+    <p>Explora más de 35 obras entregadas y en curso: vivienda, remodelación, refuerzo sísmico y naves industriales en CDMX, Hidalgo, Puebla, Querétaro y Estado de México. Cronograma público y bitácora fotográfica diaria en cada una.</p>
+    <div class="hero-ctas">
+      <a href="#catalogo" class="btn-solid-yellow">Explorar catálogo de obras</a>
+      <a href="#cotizar" class="btn-outline-cream">Cotizar mi obra</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>127</b><span>Obras entregadas</span></div>
+      <div class="hero-stat"><b>340,000 m²</b><span>Superficie construida</span></div>
+      <div class="hero-stat"><b>15</b><span>Años de experiencia</span></div>
+      <div class="hero-stat"><b>0</b><span>Accidentes graves 2025</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CATÁLOGO
+========================================================= -->
+<section class="catalogo-section" id="catalogo">
+  <div class="wrap">
+    <div class="catalogo-head">
+      <span class="eyebrow">Catálogo de obras</span>
+      <h2>Lo que hemos construido y lo que puedes visitar hoy</h2>
+      <p>Filtra por categoría, ubicación, presupuesto y metraje. Cada ficha incluye galería, ficha técnica completa y la opción de cotizar algo similar o agendar una visita.</p>
+    </div>
+
+    <div class="catalogo-toolbar">
+      <div class="cat-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="cat-search-input" placeholder="Buscar por nombre o ubicación…">
+      </div>
+      <div class="cat-sort">
+        <select id="cat-sort-select">
+          <option value="reciente">Ordenar: más reciente</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="m2-desc">Metraje: mayor a menor</option>
+          <option value="m2-asc">Metraje: menor a mayor</option>
+        </select>
+      </div>
+      <button class="filtros-toggle-btn" id="filtros-toggle-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        Filtros
+      </button>
+    </div>
+
+    <div class="catalogo-layout">
+      <aside class="filtros-panel" id="filtros-panel-desktop"></aside>
+
+      <div>
+        <div class="catalogo-results-bar">
+          <div class="catalogo-count">Mostrando <strong id="results-showing">0</strong> de <strong id="results-total">0</strong> obras</div>
+          <label class="compare-mode-toggle"><input type="checkbox" id="compare-mode-check"> Activar comparador</label>
+        </div>
+        <div class="obras-grid" id="obras-grid"></div>
+        <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
+          <button class="btn-outline-cream" id="load-more-btn">Cargar más obras</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CÓMO TRABAJAMOS
+========================================================= -->
+<section class="como-section" id="como-trabajamos">
+  <div class="wrap">
+    <div class="como-head">
+      <span class="eyebrow">Proceso</span>
+      <h2>Un proceso de seis etapas, siempre visible</h2>
+      <p>No prometemos plazos que no podemos verificar. Cada obra tiene cronograma público, bitácora fotográfica diaria y un solo punto de contacto durante toda la ejecución.</p>
+    </div>
+    <div class="proceso-steps">
+      <div class="proceso-step">
+        <span class="num">01</span>
+        <h3>Visita de sitio y cotización</h3>
+        <p>Levantamiento del predio o del proyecto ejecutivo existente. Te damos una cotización desglosada por partida sin costo.</p>
+      </div>
+      <div class="proceso-step">
+        <span class="num">02</span>
+        <h3>Firma y cronograma</h3>
+        <p>Firmamos contrato con cronograma detallado y penalizaciones por retraso atribuible a nosotros, para que ambas partes tengan claridad desde el inicio.</p>
+      </div>
+      <div class="proceso-step">
+        <span class="num">03</span>
+        <h3>Ejecución con bitácora diaria</h3>
+        <p>Reportamos avance real cada día con fotografías, disponibles para ti en tu panel de cliente en cualquier momento.</p>
+      </div>
+      <div class="proceso-step">
+        <span class="num">04</span>
+        <h3>Supervisión de calidad</h3>
+        <p>Inspecciones periódicas internas y, cuando aplica, coordinación directa con el despacho de arquitectura del proyecto.</p>
+      </div>
+      <div class="proceso-step">
+        <span class="num">05</span>
+        <h3>Entrega con checklist firmado</h3>
+        <p>Revisamos junto contigo cada detalle de acabados antes de la entrega formal, con checklist firmado por ambas partes.</p>
+      </div>
+      <div class="proceso-step">
+        <span class="num">06</span>
+        <h3>Garantía por escrito</h3>
+        <p>Entregamos garantía por escrito sobre estructura, instalaciones y acabados, con vigencia y condiciones claras en el contrato.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SEGURIDAD
+========================================================= -->
+<section class="seguridad-section" id="seguridad">
+  <div class="wrap">
+    <div class="seguridad-grid">
+      <div>
+        <span class="eyebrow">Seguridad en obra</span>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:16px;">Cero accidentes graves no es casualidad</h2>
+        <p style="font-size:0.95rem;color:var(--steel);line-height:1.6;">Cada frente de obra activo tiene supervisor de seguridad de tiempo completo y bitácora fotográfica diaria — la misma disciplina que aplicamos a plazos, la aplicamos a la seguridad de nuestro personal.</p>
+        <ul class="seguridad-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Inducción de seguridad obligatoria para todo el personal antes de pisar la obra.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Equipo de protección personal certificado, revisado semanalmente.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.4 14.5L16 10 4 20"/><path d="M15 6l4 4-2 2-4-4 2-2z"/></svg>Bitácora fotográfica diaria compartida con el cliente en tiempo real.</li>
+        </ul>
+        <div class="seguridad-stats-row">
+          <div class="seguridad-stat"><b>418</b><span>Días sin accidentes graves</span></div>
+          <div class="seguridad-stat"><b>0</b><span>Accidentes graves en 2025</span></div>
+        </div>
+      </div>
+      <div class="seguridad-img"><img src="https://picsum.photos/seed/con-seguridad-catalogo/900/700" alt="Personal de obra con equipo de protección"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     TESTIMONIOS
+========================================================= -->
+<section class="testimonios-section" id="testimonios">
+  <div class="wrap">
+    <span class="eyebrow">Clientes</span>
+    <h2 style="font-size:clamp(1.8rem,3.2vw,2.6rem);">Obras entregadas, clientes conformes</h2>
+    <div class="testi-grid" id="testi-grid"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     COTIZADOR
+========================================================= -->
+<section class="cotizar-section" id="cotizar">
+  <div class="wrap">
+    <div class="como-head" style="text-align:center;margin-left:auto;margin-right:auto;">
+      <span class="eyebrow">Cotización</span>
+      <h2>Cotiza tu obra en 4 pasos</h2>
+      <p style="margin:0 auto;">Sin costo, sin compromiso. Recibirás un estimado preliminar al instante y te contactaremos para agendar tu visita de sitio.</p>
+    </div>
+
+    <div class="wizard-shell" id="wizard-shell">
+      <div class="wizard-progress" id="wizard-progress"></div>
+      <div class="wizard-body" id="wizard-body">
+
+        <div class="wizard-step is-active" data-step="1">
+          <h3>¿Qué tipo de proyecto tienes en mente?</h3>
+          <p class="ws-sub">Selecciona la opción que mejor describa tu obra.</p>
+          <div class="opcion-cards" id="wizard-tipo-cards">
+            <button type="button" class="opcion-card" data-tipo="residencial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21l1.5-9.5L12 3l7.5 8.5L21 21"/><path d="M8 21v-6h8v6"/></svg><b>Obra nueva residencial</b><span>Casa habitación, vivienda nueva</span></button>
+            <button type="button" class="opcion-card" data-tipo="remodelacion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg><b>Remodelación</b><span>Ampliación o renovación integral</span></button>
+            <button type="button" class="opcion-card" data-tipo="sismico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg><b>Refuerzo sísmico</b><span>Reforzamiento estructural</span></button>
+            <button type="button" class="opcion-card" data-tipo="industrial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M7 8V5a2 2 0 012-2h6a2 2 0 012 2v3"/></svg><b>Nave industrial</b><span>Bodega o nave logística</span></button>
+          </div>
+        </div>
+
+        <div class="wizard-step" data-step="2">
+          <h3>Cuéntanos del proyecto</h3>
+          <p class="ws-sub">Con esto podemos darte un estimado preliminar más preciso.</p>
+          <div class="wizard-row-2">
+            <div class="wizard-field" data-field="m2">
+              <label for="wiz-m2">Metros cuadrados aproximados</label>
+              <input type="number" id="wiz-m2" placeholder="Ej. 300" min="20">
+              <span class="err">Escribe el metraje aproximado del proyecto.</span>
+            </div>
+            <div class="wizard-field" data-field="ubicacion">
+              <label for="wiz-ubicacion">Ubicación</label>
+              <select id="wiz-ubicacion">
+                <option value="">Selecciona una opción</option>
+                <option>CDMX</option><option>Hidalgo</option><option>Puebla</option><option>Querétaro</option><option>Estado de México</option><option>Otro</option>
+              </select>
+              <span class="err">Selecciona la ubicación del proyecto.</span>
+            </div>
+          </div>
+          <div class="wizard-field">
+            <label>Nivel de acabados esperado</label>
+            <div class="slider-row">
+              <input type="range" id="wiz-acabados" min="1" max="3" value="2" step="1">
+              <span class="slider-val" id="wiz-acabados-label">Estándar</span>
+            </div>
+          </div>
+          <div class="wizard-field">
+            <label for="wiz-detalle">¿Algo más que debamos saber? (opcional)</label>
+            <textarea id="wiz-detalle" rows="3" placeholder="Tiempos deseados, referencias, restricciones del predio…"></textarea>
+          </div>
+        </div>
+
+        <div class="wizard-step" data-step="3">
+          <h3>Tus datos de contacto</h3>
+          <p class="ws-sub">Te contactaremos para agendar tu visita de sitio sin costo.</p>
+          <div class="wizard-field" data-field="nombre">
+            <label for="wiz-nombre">Nombre completo</label>
+            <input type="text" id="wiz-nombre" placeholder="Tu nombre">
+            <span class="err">Escribe tu nombre completo.</span>
+          </div>
+          <div class="wizard-row-2">
+            <div class="wizard-field" data-field="telefono">
+              <label for="wiz-telefono">Teléfono</label>
+              <input type="tel" id="wiz-telefono" placeholder="10 dígitos">
+              <span class="err">Escribe un teléfono válido a 10 dígitos.</span>
+            </div>
+            <div class="wizard-field" data-field="email">
+              <label for="wiz-email">Correo electrónico</label>
+              <input type="email" id="wiz-email" placeholder="tu@correo.com">
+              <span class="err">Escribe un correo válido.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="wizard-step" data-step="4">
+          <h3>Revisa tu cotización preliminar</h3>
+          <p class="ws-sub">Este estimado es referencial; el monto final se confirma tras la visita de sitio.</p>
+          <div class="resumen-estimado">
+            <div class="re-label">Estimado preliminar</div>
+            <div class="re-amount" id="wiz-estimado">—</div>
+            <div class="re-note">Rango: <span id="wiz-estimado-rango">—</span> — sujeto a visita de sitio</div>
+          </div>
+          <div class="resumen-cotizacion" id="wiz-resumen"></div>
+        </div>
+
+        <div class="wizard-step" data-step="success">
+          <div class="wizard-success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+            <h3>¡Listo! Recibimos tu solicitud.</h3>
+            <p>Un miembro de nuestro equipo te contactará en menos de 24 horas hábiles para agendar tu visita de sitio sin costo. Revisa tu correo para la confirmación.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="wizard-nav" id="wizard-nav">
+        <button class="wizard-nav-btn wizard-nav-back" id="wizard-back-btn" disabled>← Atrás</button>
+        <button class="wizard-nav-btn btn-solid-yellow" id="wizard-next-btn">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="site-logo" style="display:flex;margin-bottom:4px;"><span class="mark"></span>TORREÓN</span>
+        <p>Constructora del Grupo Meridiano. Obra civil y edificación con cronograma verificable.</p>
+        <div class="footer-meridiano">
+          <span>Arqueo Estudio</span>
+          <span>Ilé Wellness</span>
+        </div>
+      </div>
+      <div>
+        <h4>Catálogo</h4>
+        <ul>
+          <li><a href="#catalogo">Ver todas las obras</a></li>
+          <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
+          <li><a href="#seguridad">Seguridad</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#cotizar">Cotizar mi obra</a></li>
+          <li><button id="footer-login-link">Panel de cliente</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><button data-open-legal="privacidad">Aviso de privacidad</button></li>
+          <li><button data-open-legal="terminos">Términos de servicio</button></li>
+          <li><button data-open-legal="garantia">Política de garantía</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Torreón Constructora — Grupo Meridiano. Catálogo de demostración, no representa una empresa operativa.</span>
+      <span>Hecho en México</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODALES LEGALES -->
+<div class="drawer-backdrop" id="legal-privacidad" style="display:none;align-items:center;justify-content:center;">
+  <div class="drawer-panel" style="position:relative;width:min(600px,92vw);max-height:82vh;transform:none;left:0;right:0;margin:0 auto;top:9vh;border-radius:var(--radius-m);">
+    <div class="drawer-head"><h3>Aviso de privacidad</h3><button class="drawer-close" data-legal-close aria-label="Cerrar">✕</button></div>
+    <div class="drawer-body">
+      <p style="font-size:0.88rem;line-height:1.65;color:var(--steel);margin-bottom:14px;">Torreón Constructora, parte de Grupo Meridiano, es responsable del tratamiento de los datos personales que nos proporciones a través de este sitio, incluyendo el cotizador y el chat de asistencia.</p>
+      <p style="font-size:0.88rem;line-height:1.65;color:var(--steel);margin-bottom:14px;">Usamos estos datos únicamente para responder tu solicitud de cotización, agendar visitas de sitio y dar seguimiento a proyectos en curso.</p>
+      <p style="font-size:0.88rem;line-height:1.65;color:var(--steel);">Puedes solicitar acceso, rectificación, cancelación u oposición al tratamiento de tus datos escribiendo a privacidad@grupomeridiano.mx</p>
+    </div>
+  </div>
+</div>
+<div class="drawer-backdrop" id="legal-terminos" style="display:none;align-items:center;justify-content:center;">
+  <div class="drawer-panel" style="position:relative;width:min(600px,92vw);max-height:82vh;transform:none;left:0;right:0;margin:0 auto;top:9vh;border-radius:var(--radius-m);">
+    <div class="drawer-head"><h3>Términos de servicio</h3><button class="drawer-close" data-legal-close aria-label="Cerrar">✕</button></div>
+    <div class="drawer-body">
+      <p style="font-size:0.88rem;line-height:1.65;color:var(--steel);">Toda cotización generada mediante este sitio es preliminar y está sujeta a visita de obra y firma de contrato formal. Los precios y plazos del catálogo corresponden a obras de referencia y pueden variar según condiciones de sitio.</p>
+    </div>
+  </div>
+</div>
+<div class="drawer-backdrop" id="legal-garantia" style="display:none;align-items:center;justify-content:center;">
+  <div class="drawer-panel" style="position:relative;width:min(600px,92vw);max-height:82vh;transform:none;left:0;right:0;margin:0 auto;top:9vh;border-radius:var(--radius-m);">
+    <div class="drawer-head"><h3>Política de garantía</h3><button class="drawer-close" data-legal-close aria-label="Cerrar">✕</button></div>
+    <div class="drawer-body">
+      <p style="font-size:0.88rem;line-height:1.65;color:var(--steel);">Todas las obras entregadas cuentan con garantía por escrito sobre estructura, instalaciones y acabados, con vigencia y condiciones detalladas en el contrato de obra correspondiente.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<button class="chat-launcher" id="chat-launcher" aria-label="Abrir asistente virtual de Torreón">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <span class="dot"></span>
+</button>
+<div class="chat-window" id="chat-window" role="dialog" aria-label="Asistente virtual de Torreón Constructora">
+  <div class="chat-header">
+    <img src="https://picsum.photos/seed/torreon-hero-catalogo/100/72" alt="">
+    <div class="h-info"><b>Asistente Torreón</b><span>En línea ahora</span></div>
+    <button class="close-x" id="chat-close" aria-label="Cerrar chat">✕</button>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-quick" id="chat-quick"></div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" placeholder="Escribe tu pregunta…" aria-label="Mensaje para el asistente">
+    <button id="chat-send" aria-label="Enviar mensaje"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button>
+  </div>
+</div>
+
+<!-- FILTROS MODAL MÓVIL -->
+<div class="filtros-modal-backdrop" id="filtros-modal-backdrop">
+  <div class="filtros-modal-sheet">
+    <div class="filtros-modal-head">
+      <h3 style="font-size:1.05rem;">Filtros</h3>
+      <button class="filtros-modal-close" id="filtros-modal-close" aria-label="Cerrar">✕</button>
+    </div>
+    <div id="filtros-panel-mobile"></div>
+    <button class="btn-solid-yellow" id="filtros-modal-apply" style="width:100%;justify-content:center;margin-top:16px;">Ver resultados</button>
+  </div>
+</div>
+
+<!-- MODAL DE DETALLE DE OBRA -->
+<div class="mkt-backdrop" id="mkt-backdrop" role="dialog" aria-modal="true" aria-label="Detalle de obra">
+  <div class="mkt-modal">
+    <button class="mkt-close" id="mkt-close" aria-label="Cerrar">✕</button>
+    <div class="mkt-gallery" id="mkt-gallery">
+      <span class="mkt-gallery-status" id="mkt-gallery-status"></span>
+      <img id="mkt-gallery-img" src="" alt="">
+      <button class="mkt-gallery-arrow prev" id="mkt-gallery-prev" aria-label="Foto anterior">←</button>
+      <button class="mkt-gallery-arrow next" id="mkt-gallery-next" aria-label="Foto siguiente">→</button>
+      <div class="mkt-gallery-nav" id="mkt-gallery-dots"></div>
+    </div>
+    <div class="mkt-body">
+      <span class="mkt-tag" id="mkt-cat"></span>
+      <h3 class="mkt-title" id="mkt-title"></h3>
+      <p class="mkt-loc" id="mkt-loc"></p>
+      <div class="mkt-price-row">
+        <span class="mkt-price" id="mkt-price"></span>
+        <span class="mkt-price-label">Estimado — sujeto a visita de sitio</span>
+      </div>
+      <div class="mkt-meta-row">
+        <div class="mkt-meta-item"><b id="mkt-m2"></b><span>m² construidos</span></div>
+        <div class="mkt-meta-item"><b id="mkt-duracion"></b><span>Meses de obra</span></div>
+        <div class="mkt-meta-item"><b id="mkt-anio"></b><span>Año</span></div>
+        <div class="mkt-meta-item"><b id="mkt-cimentacion"></b><span>Cimentación</span></div>
+      </div>
+      <div class="mkt-desc" id="mkt-desc"></div>
+      <div class="mkt-options">
+        <h4>Materiales y sistema constructivo</h4>
+        <ul id="mkt-materiales"></ul>
+      </div>
+      <div class="mkt-arqueo-note" id="mkt-arqueo-note" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21l1.5-9.5L12 3l7.5 8.5L21 21"/><path d="M8 21v-6h8v6"/></svg>
+        <span>Proyecto ejecutivo diseñado por Arqueo Estudio, despacho de arquitectura hermano dentro de Grupo Meridiano.</span>
+      </div>
+      <div class="mkt-testi" id="mkt-testi"></div>
+      <div class="mkt-cta-row">
+        <a href="#cotizar" class="btn-solid-yellow" id="mkt-cta-cotizar">Cotizar algo similar</a>
+        <button class="btn-outline-cream" id="mkt-cta-visita">Agendar visita</button>
+        <button class="btn-outline-cream" id="mkt-cta-chat">Preguntarle al asistente</button>
+      </div>
+      <div class="mkt-related">
+        <h4>También te puede interesar</h4>
+        <div class="mkt-related-grid" id="mkt-related"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER FAVORITOS -->
+<div class="drawer-backdrop" id="fav-drawer-backdrop">
+  <div class="drawer-panel">
+    <div class="drawer-head"><h3>Mis favoritos</h3><button class="drawer-close" data-drawer-close aria-label="Cerrar">✕</button></div>
+    <div class="drawer-body" id="fav-drawer-body"></div>
+  </div>
+</div>
+
+<!-- DRAWER COMPARADOR -->
+<div class="drawer-backdrop" id="compare-drawer-backdrop">
+  <div class="drawer-panel" style="width:min(720px,100vw);">
+    <div class="drawer-head"><h3>Comparar obras</h3><button class="drawer-close" data-drawer-close aria-label="Cerrar">✕</button></div>
+    <div class="drawer-body" id="compare-drawer-body"></div>
+  </div>
+</div>
+
+<div id="toast-stack" aria-live="polite"></div>
+
+<script>
+window.__catalogo = [
+{"id": "o1", "nombre": "Villas las Lomas", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Tizayuca, Hidalgo", "zona": "Hidalgo", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2023, "m2": 496, "precio": 4450000, "duracion": 6, "seed": "tor-0-residencial-9279", "materiales": ["Block y castillo ahogado", "Madera de encino", "Piedra local"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": false, "descripcion": ["Villas las Lomas es una vivienda pensada para el clima de Hidalgo, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Tizayuca, Hidalgo, la obra tiene 496 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Sofía Aranda", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "sofia-aranda-o1", "rating": 4}, "galeria": ["tor-0-residencial-9279-g1", "tor-0-residencial-9279-g2", "tor-0-residencial-9279-g3", "tor-0-residencial-9279-g4", "tor-0-residencial-9279-g5", "tor-0-residencial-9279-g6"]},
+{"id": "o2", "nombre": "Centro Logístico San Rafael", "categoria": "industrial", "categoriaLabel": "Nave industrial / bodega", "ubicacion": "Toluca, Edo. Méx.", "zona": "Edo. Méx.", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 5262, "precio": 20500000, "duracion": 11, "seed": "tor-1-industrial-2519", "materiales": ["Panel aislante térmico", "Piso pulido industrial de alta resistencia", "Losa de concreto armado"], "cimentacion": "Zapatas aisladas", "arqueo": true, "destacada": false, "descripcion": ["Centro Logístico San Rafael es una nave industrial construida con estructura metálica preensamblada y piso pulido de alta resistencia, pensada para operación logística intensiva desde el día uno.", "Esta bodega se entregó con instalaciones especiales coordinadas desde el proyecto ejecutivo, cumpliendo los tiempos de entrega comprometidos con el cliente.", "Ubicada en Toluca, Edo. Méx., la obra tiene 5,262 m² construidos y tomó 11 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Joaquín Herrera", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "joaquin-herrera-o2", "rating": 5}, "galeria": ["tor-1-industrial-2519-g1", "tor-1-industrial-2519-g2", "tor-1-industrial-2519-g3", "tor-1-industrial-2519-g4", "tor-1-industrial-2519-g5", "tor-1-industrial-2519-g6"]},
+{"id": "o3", "nombre": "Centro Altavista", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Pachuca, Hidalgo", "zona": "Hidalgo", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 2264, "precio": 9500000, "duracion": 3, "seed": "tor-2-institucional-4733", "materiales": ["Block y castillo ahogado", "Acabados de bajo mantenimiento", "Instalaciones especiales"], "cimentacion": "Zapata corrida", "arqueo": false, "destacada": false, "descripcion": ["Centro Altavista amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Pachuca, Hidalgo, la obra tiene 2,264 m² construidos y tomó 3 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Diego Montemayor", "texto": "La garantía por escrito nos dio confianza para firmar. Meses después, todo sigue funcionando perfecto.", "avatar": "diego-montemayor-o3", "rating": 5}, "galeria": ["tor-2-institucional-4733-g1", "tor-2-institucional-4733-g2", "tor-2-institucional-4733-g3", "tor-2-institucional-4733-g4", "tor-2-institucional-4733-g5", "tor-2-institucional-4733-g6"]},
+{"id": "o4", "nombre": "Reforzamiento Sísmico Sur", "categoria": "sismico", "categoriaLabel": "Refuerzo sísmico", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2025, "m2": 1927, "precio": 6950000, "duracion": 6, "seed": "tor-3-sismico-8573", "materiales": ["Contraventeo metálico", "Disipadores sísmicos", "Refuerzo de mampostería"], "cimentacion": "Zapatas aisladas", "arqueo": true, "destacada": true, "descripcion": ["Reforzamiento Sísmico Sur refuerza la estructura existente conforme a la normativa vigente, ejecutado por fases para no interrumpir la operación del inmueble durante los trabajos.", "Un proyecto de refuerzo estructural que priorizó la seguridad sin comprometer el uso cotidiano del espacio, con supervisión de ingeniería estructural en cada etapa.", "Ubicada en Ciudad de México, la obra tiene 1,927 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Ximena Torres", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "ximena-torres-o4", "rating": 5}, "galeria": ["tor-3-sismico-8573-g1", "tor-3-sismico-8573-g2", "tor-3-sismico-8573-g3", "tor-3-sismico-8573-g4", "tor-3-sismico-8573-g5", "tor-3-sismico-8573-g6"]},
+{"id": "o5", "nombre": "Quinta del Sol", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Puebla, Puebla", "zona": "Puebla", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2025, "m2": 258, "precio": 2300000, "duracion": 11, "seed": "tor-4-residencial-5040", "materiales": ["Block y castillo ahogado", "Piedra local", "Losa de concreto armado"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": false, "descripcion": ["Quinta del Sol es una vivienda pensada para el clima de Puebla, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Puebla, Puebla, la obra tiene 258 m² construidos y tomó 11 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Paola Nieto", "texto": "El equipo de obra fue profesional en todo momento. La coordinación con el despacho de arquitectura fue impecable.", "avatar": "paola-nieto-o5", "rating": 4}, "galeria": ["tor-4-residencial-5040-g1", "tor-4-residencial-5040-g2", "tor-4-residencial-5040-g3", "tor-4-residencial-5040-g4", "tor-4-residencial-5040-g5", "tor-4-residencial-5040-g6"]},
+{"id": "o6", "nombre": "Centro las Lomas", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Cholula, Puebla", "zona": "Puebla", "estado": "proxima", "estadoLabel": "Próxima a iniciar", "anio": 2026, "m2": 2047, "precio": 8600000, "duracion": 8, "seed": "tor-5-institucional-7916", "materiales": ["Acabados de bajo mantenimiento", "Losa de concreto armado", "Instalaciones especiales"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": false, "descripcion": ["Centro las Lomas amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Cholula, Puebla, la obra tiene 2,047 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Paola Nieto", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "paola-nieto-o6", "rating": 5}, "galeria": ["tor-5-institucional-7916-g1", "tor-5-institucional-7916-g2", "tor-5-institucional-7916-g3", "tor-5-institucional-7916-g4", "tor-5-institucional-7916-g5", "tor-5-institucional-7916-g6"]},
+{"id": "o7", "nombre": "Ampliación Vista Hermosa", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Tizayuca, Hidalgo", "zona": "Hidalgo", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 1196, "precio": 5000000, "duracion": 6, "seed": "tor-6-institucional-1053", "materiales": ["Instalaciones especiales", "Acabados de bajo mantenimiento", "Block y castillo ahogado"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": false, "descripcion": ["Ampliación Vista Hermosa amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Tizayuca, Hidalgo, la obra tiene 1,196 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Gabriel Uribe", "texto": "El equipo de obra fue profesional en todo momento. La coordinación con el despacho de arquitectura fue impecable.", "avatar": "gabriel-uribe-o7", "rating": 5}, "galeria": ["tor-6-institucional-1053-g1", "tor-6-institucional-1053-g2", "tor-6-institucional-1053-g3", "tor-6-institucional-1053-g4", "tor-6-institucional-1053-g5", "tor-6-institucional-1053-g6"]},
+{"id": "o8", "nombre": "Refuerzo Estructural del Roble", "categoria": "sismico", "categoriaLabel": "Refuerzo sísmico", "ubicacion": "Ecatepec, Edo. Méx.", "zona": "Edo. Méx.", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2024, "m2": 601, "precio": 2150000, "duracion": 2, "seed": "tor-7-sismico-4923", "materiales": ["Encamisado de columnas", "Refuerzo de mampostería", "Contraventeo metálico"], "cimentacion": "Zapatas aisladas", "arqueo": true, "destacada": false, "descripcion": ["Refuerzo Estructural del Roble refuerza la estructura existente conforme a la normativa vigente, ejecutado por fases para no interrumpir la operación del inmueble durante los trabajos.", "Un proyecto de refuerzo estructural que priorizó la seguridad sin comprometer el uso cotidiano del espacio, con supervisión de ingeniería estructural en cada etapa.", "Ubicada en Ecatepec, Edo. Méx., la obra tiene 601 m² construidos y tomó 2 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Daniela Peña", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "daniela-peña-o8", "rating": 5}, "galeria": ["tor-7-sismico-4923-g1", "tor-7-sismico-4923-g2", "tor-7-sismico-4923-g3", "tor-7-sismico-4923-g4", "tor-7-sismico-4923-g5", "tor-7-sismico-4923-g6"]},
+{"id": "o9", "nombre": "Ampliación del Parque", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "proxima", "estadoLabel": "Próxima a iniciar", "anio": 2026, "m2": 1742, "precio": 7300000, "duracion": 8, "seed": "tor-8-institucional-6107", "materiales": ["Instalaciones especiales", "Losa de concreto armado", "Acabados de bajo mantenimiento"], "cimentacion": "Zapatas aisladas", "arqueo": true, "destacada": true, "descripcion": ["Ampliación del Parque amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Ciudad de México, la obra tiene 1,742 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Daniela Peña", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "daniela-peña-o9", "rating": 4}, "galeria": ["tor-8-institucional-6107-g1", "tor-8-institucional-6107-g2", "tor-8-institucional-6107-g3", "tor-8-institucional-6107-g4", "tor-8-institucional-6107-g5", "tor-8-institucional-6107-g6"]},
+{"id": "o10", "nombre": "Casa del Pinar", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Puebla, Puebla", "zona": "Puebla", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 451, "precio": 4050000, "duracion": 11, "seed": "tor-9-residencial-6413", "materiales": ["Madera de encino", "Piedra local", "Losa de concreto armado"], "cimentacion": "Zapata corrida", "arqueo": true, "destacada": true, "descripcion": ["Casa del Pinar es una vivienda pensada para el clima de Puebla, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Puebla, Puebla, la obra tiene 451 m² construidos y tomó 11 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Joaquín Herrera", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "joaquin-herrera-o10", "rating": 5}, "galeria": ["tor-9-residencial-6413-g1", "tor-9-residencial-6413-g2", "tor-9-residencial-6413-g3", "tor-9-residencial-6413-g4", "tor-9-residencial-6413-g5", "tor-9-residencial-6413-g6"]},
+{"id": "o11", "nombre": "Restauración del Pinar", "categoria": "remodelacion", "categoriaLabel": "Remodelación integral", "ubicacion": "Naucalpan, Edo. Méx.", "zona": "Edo. Méx.", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2026, "m2": 2067, "precio": 9900000, "duracion": 10, "seed": "tor-10-remodelacion-8651", "materiales": ["Refuerzo de acero estructural", "Sistemas de anclaje sísmico", "Mampostería confinada"], "cimentacion": "Zapatas aisladas", "arqueo": false, "destacada": false, "descripcion": ["Restauración del Pinar transformó un inmueble existente sin sacrificar su estructura original. El proceso se ejecutó por fases para minimizar la interrupción de las actividades del cliente durante la obra.", "Esta remodelación integral incluyó actualización completa de instalaciones y refuerzo donde el diagnóstico estructural lo indicó, entregada con garantía por escrito sobre todo lo intervenido.", "Ubicada en Naucalpan, Edo. Méx., la obra tiene 2,067 m² construidos y tomó 10 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Gabriel Uribe", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "gabriel-uribe-o11", "rating": 5}, "galeria": ["tor-10-remodelacion-8651-g1", "tor-10-remodelacion-8651-g2", "tor-10-remodelacion-8651-g3", "tor-10-remodelacion-8651-g4", "tor-10-remodelacion-8651-g5", "tor-10-remodelacion-8651-g6"]},
+{"id": "o12", "nombre": "Refuerzo Estructural Mirador", "categoria": "sismico", "categoriaLabel": "Refuerzo sísmico", "ubicacion": "Pachuca, Hidalgo", "zona": "Hidalgo", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2026, "m2": 975, "precio": 3500000, "duracion": 5, "seed": "tor-11-sismico-1828", "materiales": ["Encamisado de columnas", "Refuerzo de mampostería", "Disipadores sísmicos"], "cimentacion": "Losa de cimentación", "arqueo": false, "destacada": false, "descripcion": ["Refuerzo Estructural Mirador refuerza la estructura existente conforme a la normativa vigente, ejecutado por fases para no interrumpir la operación del inmueble durante los trabajos.", "Un proyecto de refuerzo estructural que priorizó la seguridad sin comprometer el uso cotidiano del espacio, con supervisión de ingeniería estructural en cada etapa.", "Ubicada en Pachuca, Hidalgo, la obra tiene 975 m² construidos y tomó 5 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Emilio Zúñiga", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "emilio-zuñiga-o12", "rating": 5}, "galeria": ["tor-11-sismico-1828-g1", "tor-11-sismico-1828-g2", "tor-11-sismico-1828-g3", "tor-11-sismico-1828-g4", "tor-11-sismico-1828-g5", "tor-11-sismico-1828-g6"]},
+{"id": "o13", "nombre": "Planta del Lago", "categoria": "industrial", "categoriaLabel": "Nave industrial / bodega", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2026, "m2": 9390, "precio": 36600000, "duracion": 14, "seed": "tor-12-industrial-8973", "materiales": ["Panel aislante térmico", "Estructura metálica preensamblada", "Losa de concreto armado"], "cimentacion": "Cimentación especial en talud", "arqueo": true, "destacada": false, "descripcion": ["Planta del Lago es una nave industrial construida con estructura metálica preensamblada y piso pulido de alta resistencia, pensada para operación logística intensiva desde el día uno.", "Esta bodega se entregó con instalaciones especiales coordinadas desde el proyecto ejecutivo, cumpliendo los tiempos de entrega comprometidos con el cliente.", "Ubicada en Ciudad de México, la obra tiene 9,390 m² construidos y tomó 14 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Daniela Peña", "texto": "Entregaron dos semanas antes de lo pactado y con la calidad que esperábamos, sin sorpresas al final.", "avatar": "daniela-peña-o13", "rating": 5}, "galeria": ["tor-12-industrial-8973-g1", "tor-12-industrial-8973-g2", "tor-12-industrial-8973-g3", "tor-12-industrial-8973-g4", "tor-12-industrial-8973-g5", "tor-12-industrial-8973-g6"]},
+{"id": "o14", "nombre": "Villas del Valle", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Naucalpan, Edo. Méx.", "zona": "Edo. Méx.", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2026, "m2": 407, "precio": 3650000, "duracion": 6, "seed": "tor-13-residencial-4853", "materiales": ["Block y castillo ahogado", "Madera de encino", "Piedra local"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": true, "descripcion": ["Villas del Valle es una vivienda pensada para el clima de Edo. Méx., con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Naucalpan, Edo. Méx., la obra tiene 407 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Renata Solís", "texto": "La garantía por escrito nos dio confianza para firmar. Meses después, todo sigue funcionando perfecto.", "avatar": "renata-solis-o14", "rating": 5}, "galeria": ["tor-13-residencial-4853-g1", "tor-13-residencial-4853-g2", "tor-13-residencial-4853-g3", "tor-13-residencial-4853-g4", "tor-13-residencial-4853-g5", "tor-13-residencial-4853-g6"]},
+{"id": "o15", "nombre": "Conjunto del Pinar", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Cholula, Puebla", "zona": "Puebla", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2025, "m2": 254, "precio": 2300000, "duracion": 8, "seed": "tor-14-residencial-6180", "materiales": ["Concreto aparente", "Block y castillo ahogado", "Madera de encino"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": false, "descripcion": ["Conjunto del Pinar es una vivienda pensada para el clima de Puebla, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Cholula, Puebla, la obra tiene 254 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Diego Montemayor", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "diego-montemayor-o15", "rating": 5}, "galeria": ["tor-14-residencial-6180-g1", "tor-14-residencial-6180-g2", "tor-14-residencial-6180-g3", "tor-14-residencial-6180-g4", "tor-14-residencial-6180-g5", "tor-14-residencial-6180-g6"]},
+{"id": "o16", "nombre": "Conjunto Mirador", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Pachuca, Hidalgo", "zona": "Hidalgo", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2024, "m2": 627, "precio": 5650000, "duracion": 8, "seed": "tor-15-residencial-5956", "materiales": ["Block y castillo ahogado", "Concreto aparente", "Piedra local"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": false, "descripcion": ["Conjunto Mirador es una vivienda pensada para el clima de Hidalgo, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Pachuca, Hidalgo, la obra tiene 627 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Daniela Peña", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "daniela-peña-o16", "rating": 5}, "galeria": ["tor-15-residencial-5956-g1", "tor-15-residencial-5956-g2", "tor-15-residencial-5956-g3", "tor-15-residencial-5956-g4", "tor-15-residencial-5956-g5", "tor-15-residencial-5956-g6"]},
+{"id": "o17", "nombre": "Villas Los Encinos", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 530, "precio": 4750000, "duracion": 10, "seed": "tor-16-residencial-5325", "materiales": ["Piedra local", "Concreto aparente", "Losa de concreto armado"], "cimentacion": "Zapata corrida", "arqueo": false, "destacada": false, "descripcion": ["Villas Los Encinos es una vivienda pensada para el clima de CDMX, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Ciudad de México, la obra tiene 530 m² construidos y tomó 10 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Rodrigo Salcedo", "texto": "Nunca sentimos que estuviéramos a ciegas durante la obra. Cada semana teníamos información clara del avance.", "avatar": "rodrigo-salcedo-o17", "rating": 4}, "galeria": ["tor-16-residencial-5325-g1", "tor-16-residencial-5325-g2", "tor-16-residencial-5325-g3", "tor-16-residencial-5325-g4", "tor-16-residencial-5325-g5", "tor-16-residencial-5325-g6"]},
+{"id": "o18", "nombre": "Villas del Río", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Tizayuca, Hidalgo", "zona": "Hidalgo", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2025, "m2": 232, "precio": 2100000, "duracion": 10, "seed": "tor-17-residencial-3442", "materiales": ["Piedra local", "Madera de encino", "Losa de concreto armado"], "cimentacion": "Losa de cimentación", "arqueo": false, "destacada": true, "descripcion": ["Villas del Río es una vivienda pensada para el clima de Hidalgo, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Tizayuca, Hidalgo, la obra tiene 232 m² construidos y tomó 10 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Sofía Aranda", "texto": "El equipo de obra fue profesional en todo momento. La coordinación con el despacho de arquitectura fue impecable.", "avatar": "sofia-aranda-o18", "rating": 4}, "galeria": ["tor-17-residencial-3442-g1", "tor-17-residencial-3442-g2", "tor-17-residencial-3442-g3", "tor-17-residencial-3442-g4", "tor-17-residencial-3442-g5", "tor-17-residencial-3442-g6"]},
+{"id": "o19", "nombre": "Reforzamiento Sísmico Mirador", "categoria": "sismico", "categoriaLabel": "Refuerzo sísmico", "ubicacion": "Tizayuca, Hidalgo", "zona": "Hidalgo", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 1324, "precio": 4750000, "duracion": 3, "seed": "tor-18-sismico-7755", "materiales": ["Disipadores sísmicos", "Contraventeo metálico", "Encamisado de columnas"], "cimentacion": "Pilotes de concreto", "arqueo": true, "destacada": true, "descripcion": ["Reforzamiento Sísmico Mirador refuerza la estructura existente conforme a la normativa vigente, ejecutado por fases para no interrumpir la operación del inmueble durante los trabajos.", "Un proyecto de refuerzo estructural que priorizó la seguridad sin comprometer el uso cotidiano del espacio, con supervisión de ingeniería estructural en cada etapa.", "Ubicada en Tizayuca, Hidalgo, la obra tiene 1,324 m² construidos y tomó 3 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Diego Montemayor", "texto": "Entregaron dos semanas antes de lo pactado y con la calidad que esperábamos, sin sorpresas al final.", "avatar": "diego-montemayor-o19", "rating": 5}, "galeria": ["tor-18-sismico-7755-g1", "tor-18-sismico-7755-g2", "tor-18-sismico-7755-g3", "tor-18-sismico-7755-g4", "tor-18-sismico-7755-g5", "tor-18-sismico-7755-g6"]},
+{"id": "o20", "nombre": "Casa Cerro Alto", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Cholula, Puebla", "zona": "Puebla", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2024, "m2": 568, "precio": 5100000, "duracion": 7, "seed": "tor-19-residencial-6378", "materiales": ["Concreto aparente", "Piedra local", "Madera de encino"], "cimentacion": "Cimentación especial en talud", "arqueo": true, "destacada": false, "descripcion": ["Casa Cerro Alto es una vivienda pensada para el clima de Puebla, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Cholula, Puebla, la obra tiene 568 m² construidos y tomó 7 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Fernando Casas", "texto": "Nunca sentimos que estuviéramos a ciegas durante la obra. Cada semana teníamos información clara del avance.", "avatar": "fernando-casas-o20", "rating": 5}, "galeria": ["tor-19-residencial-6378-g1", "tor-19-residencial-6378-g2", "tor-19-residencial-6378-g3", "tor-19-residencial-6378-g4", "tor-19-residencial-6378-g5", "tor-19-residencial-6378-g6"]},
+{"id": "o21", "nombre": "Ampliación Los Encinos", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Puebla, Puebla", "zona": "Puebla", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 578, "precio": 2450000, "duracion": 6, "seed": "tor-20-institucional-9379", "materiales": ["Losa de concreto armado", "Acabados de bajo mantenimiento", "Block y castillo ahogado"], "cimentacion": "Zapata corrida", "arqueo": true, "destacada": true, "descripcion": ["Ampliación Los Encinos amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Puebla, Puebla, la obra tiene 578 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Paola Nieto", "texto": "La garantía por escrito nos dio confianza para firmar. Meses después, todo sigue funcionando perfecto.", "avatar": "paola-nieto-o21", "rating": 5}, "galeria": ["tor-20-institucional-9379-g1", "tor-20-institucional-9379-g2", "tor-20-institucional-9379-g3", "tor-20-institucional-9379-g4", "tor-20-institucional-9379-g5", "tor-20-institucional-9379-g6"]},
+{"id": "o22", "nombre": "Ampliación Sur", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Ecatepec, Edo. Méx.", "zona": "Edo. Méx.", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2025, "m2": 755, "precio": 3150000, "duracion": 8, "seed": "tor-21-institucional-7691", "materiales": ["Instalaciones especiales", "Acabados de bajo mantenimiento", "Block y castillo ahogado"], "cimentacion": "Losa de cimentación", "arqueo": true, "destacada": false, "descripcion": ["Ampliación Sur amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Ecatepec, Edo. Méx., la obra tiene 755 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Ximena Torres", "texto": "El equipo de obra fue profesional en todo momento. La coordinación con el despacho de arquitectura fue impecable.", "avatar": "ximena-torres-o22", "rating": 5}, "galeria": ["tor-21-institucional-7691-g1", "tor-21-institucional-7691-g2", "tor-21-institucional-7691-g3", "tor-21-institucional-7691-g4", "tor-21-institucional-7691-g5", "tor-21-institucional-7691-g6"]},
+{"id": "o23", "nombre": "Bodega La Loma", "categoria": "industrial", "categoriaLabel": "Nave industrial / bodega", "ubicacion": "Ecatepec, Edo. Méx.", "zona": "Edo. Méx.", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 4289, "precio": 16750000, "duracion": 15, "seed": "tor-22-industrial-6279", "materiales": ["Losa de concreto armado", "Panel aislante térmico", "Estructura metálica preensamblada"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": false, "descripcion": ["Bodega La Loma es una nave industrial construida con estructura metálica preensamblada y piso pulido de alta resistencia, pensada para operación logística intensiva desde el día uno.", "Esta bodega se entregó con instalaciones especiales coordinadas desde el proyecto ejecutivo, cumpliendo los tiempos de entrega comprometidos con el cliente.", "Ubicada en Ecatepec, Edo. Méx., la obra tiene 4,289 m² construidos y tomó 15 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Ana Cristina Lugo", "texto": "Entregaron dos semanas antes de lo pactado y con la calidad que esperábamos, sin sorpresas al final.", "avatar": "ana-cristina-lugo-o23", "rating": 5}, "galeria": ["tor-22-industrial-6279-g1", "tor-22-industrial-6279-g2", "tor-22-industrial-6279-g3", "tor-22-industrial-6279-g4", "tor-22-industrial-6279-g5", "tor-22-industrial-6279-g6"]},
+{"id": "o24", "nombre": "Rehabilitación Cumbres", "categoria": "remodelacion", "categoriaLabel": "Remodelación integral", "ubicacion": "Ecatepec, Edo. Méx.", "zona": "Edo. Méx.", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2025, "m2": 1362, "precio": 6550000, "duracion": 6, "seed": "tor-23-remodelacion-8784", "materiales": ["Refuerzo de acero estructural", "Concreto reforzado", "Sistemas de anclaje sísmico"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": true, "descripcion": ["Rehabilitación Cumbres transformó un inmueble existente sin sacrificar su estructura original. El proceso se ejecutó por fases para minimizar la interrupción de las actividades del cliente durante la obra.", "Esta remodelación integral incluyó actualización completa de instalaciones y refuerzo donde el diagnóstico estructural lo indicó, entregada con garantía por escrito sobre todo lo intervenido.", "Ubicada en Ecatepec, Edo. Méx., la obra tiene 1,362 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Renata Solís", "texto": "La garantía por escrito nos dio confianza para firmar. Meses después, todo sigue funcionando perfecto.", "avatar": "renata-solis-o24", "rating": 4}, "galeria": ["tor-23-remodelacion-8784-g1", "tor-23-remodelacion-8784-g2", "tor-23-remodelacion-8784-g3", "tor-23-remodelacion-8784-g4", "tor-23-remodelacion-8784-g5", "tor-23-remodelacion-8784-g6"]},
+{"id": "o25", "nombre": "Planta las Lomas", "categoria": "industrial", "categoriaLabel": "Nave industrial / bodega", "ubicacion": "Querétaro, Qro.", "zona": "Querétaro", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2023, "m2": 5282, "precio": 20600000, "duracion": 6, "seed": "tor-24-industrial-5082", "materiales": ["Estructura metálica preensamblada", "Piso pulido industrial de alta resistencia", "Losa de concreto armado"], "cimentacion": "Zapata corrida", "arqueo": false, "destacada": false, "descripcion": ["Planta las Lomas es una nave industrial construida con estructura metálica preensamblada y piso pulido de alta resistencia, pensada para operación logística intensiva desde el día uno.", "Esta bodega se entregó con instalaciones especiales coordinadas desde el proyecto ejecutivo, cumpliendo los tiempos de entrega comprometidos con el cliente.", "Ubicada en Querétaro, Qro., la obra tiene 5,282 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Fernando Casas", "texto": "Entregaron dos semanas antes de lo pactado y con la calidad que esperábamos, sin sorpresas al final.", "avatar": "fernando-casas-o25", "rating": 5}, "galeria": ["tor-24-industrial-5082-g1", "tor-24-industrial-5082-g2", "tor-24-industrial-5082-g3", "tor-24-industrial-5082-g4", "tor-24-industrial-5082-g5", "tor-24-industrial-5082-g6"]},
+{"id": "o26", "nombre": "Centro del Río", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Toluca, Edo. Méx.", "zona": "Edo. Méx.", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 2357, "precio": 9900000, "duracion": 6, "seed": "tor-25-institucional-5246", "materiales": ["Instalaciones especiales", "Acabados de bajo mantenimiento", "Losa de concreto armado"], "cimentacion": "Losa de cimentación", "arqueo": false, "destacada": false, "descripcion": ["Centro del Río amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Toluca, Edo. Méx., la obra tiene 2,357 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Rodrigo Salcedo", "texto": "El equipo de obra fue profesional en todo momento. La coordinación con el despacho de arquitectura fue impecable.", "avatar": "rodrigo-salcedo-o26", "rating": 5}, "galeria": ["tor-25-institucional-5246-g1", "tor-25-institucional-5246-g2", "tor-25-institucional-5246-g3", "tor-25-institucional-5246-g4", "tor-25-institucional-5246-g5", "tor-25-institucional-5246-g6"]},
+{"id": "o27", "nombre": "Villas del Sol", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Naucalpan, Edo. Méx.", "zona": "Edo. Méx.", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2023, "m2": 220, "precio": 2000000, "duracion": 7, "seed": "tor-26-residencial-6421", "materiales": ["Losa de concreto armado", "Concreto aparente", "Block y castillo ahogado"], "cimentacion": "Zapata corrida", "arqueo": false, "destacada": false, "descripcion": ["Villas del Sol es una vivienda pensada para el clima de Edo. Méx., con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Naucalpan, Edo. Méx., la obra tiene 220 m² construidos y tomó 7 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Paola Nieto", "texto": "La garantía por escrito nos dio confianza para firmar. Meses después, todo sigue funcionando perfecto.", "avatar": "paola-nieto-o27", "rating": 5}, "galeria": ["tor-26-residencial-6421-g1", "tor-26-residencial-6421-g2", "tor-26-residencial-6421-g3", "tor-26-residencial-6421-g4", "tor-26-residencial-6421-g5", "tor-26-residencial-6421-g6"]},
+{"id": "o28", "nombre": "Ampliación Cerro Alto", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Naucalpan, Edo. Méx.", "zona": "Edo. Méx.", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 1220, "precio": 5100000, "duracion": 8, "seed": "tor-27-institucional-9947", "materiales": ["Losa de concreto armado", "Acabados de bajo mantenimiento", "Block y castillo ahogado"], "cimentacion": "Pilotes de concreto", "arqueo": false, "destacada": false, "descripcion": ["Ampliación Cerro Alto amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Naucalpan, Edo. Méx., la obra tiene 1,220 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Sofía Aranda", "texto": "Nunca sentimos que estuviéramos a ciegas durante la obra. Cada semana teníamos información clara del avance.", "avatar": "sofia-aranda-o28", "rating": 5}, "galeria": ["tor-27-institucional-9947-g1", "tor-27-institucional-9947-g2", "tor-27-institucional-9947-g3", "tor-27-institucional-9947-g4", "tor-27-institucional-9947-g5", "tor-27-institucional-9947-g6"]},
+{"id": "o29", "nombre": "Villas Vista Hermosa", "categoria": "residencial", "categoriaLabel": "Vivienda residencial nueva", "ubicacion": "Cholula, Puebla", "zona": "Puebla", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 357, "precio": 3200000, "duracion": 10, "seed": "tor-28-residencial-1444", "materiales": ["Losa de concreto armado", "Madera de encino", "Block y castillo ahogado"], "cimentacion": "Losa de cimentación", "arqueo": true, "destacada": true, "descripcion": ["Villas Vista Hermosa es una vivienda pensada para el clima de Puebla, con materiales nobles y bajo mantenimiento. La orientación solar y la ventilación cruzada se calcularon desde el primer boceto, no se ajustaron después.", "Un desarrollo residencial que prioriza espacios abiertos y luz natural. Cada detalle constructivo, desde la cimentación hasta los acabados, se supervisó con bitácora fotográfica diaria compartida con el cliente.", "Ubicada en Cholula, Puebla, la obra tiene 357 m² construidos y tomó 10 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Sebastián Caraveo", "texto": "El equipo de obra fue profesional en todo momento. La coordinación con el despacho de arquitectura fue impecable.", "avatar": "sebastian-caraveo-o29", "rating": 4}, "galeria": ["tor-28-residencial-1444-g1", "tor-28-residencial-1444-g2", "tor-28-residencial-1444-g3", "tor-28-residencial-1444-g4", "tor-28-residencial-1444-g5", "tor-28-residencial-1444-g6"]},
+{"id": "o30", "nombre": "Bodega Cardales", "categoria": "industrial", "categoriaLabel": "Nave industrial / bodega", "ubicacion": "Puebla, Puebla", "zona": "Puebla", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2026, "m2": 8639, "precio": 33700000, "duracion": 14, "seed": "tor-29-industrial-6733", "materiales": ["Estructura metálica preensamblada", "Panel aislante térmico", "Losa de concreto armado"], "cimentacion": "Zapatas aisladas", "arqueo": true, "destacada": false, "descripcion": ["Bodega Cardales es una nave industrial construida con estructura metálica preensamblada y piso pulido de alta resistencia, pensada para operación logística intensiva desde el día uno.", "Esta bodega se entregó con instalaciones especiales coordinadas desde el proyecto ejecutivo, cumpliendo los tiempos de entrega comprometidos con el cliente.", "Ubicada en Puebla, Puebla, la obra tiene 8,639 m² construidos y tomó 14 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Paola Nieto", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "paola-nieto-o30", "rating": 5}, "galeria": ["tor-29-industrial-6733-g1", "tor-29-industrial-6733-g2", "tor-29-industrial-6733-g3", "tor-29-industrial-6733-g4", "tor-29-industrial-6733-g5", "tor-29-industrial-6733-g6"]},
+{"id": "o31", "nombre": "Restauración del Roble", "categoria": "remodelacion", "categoriaLabel": "Remodelación integral", "ubicacion": "Tizayuca, Hidalgo", "zona": "Hidalgo", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2026, "m2": 868, "precio": 4150000, "duracion": 8, "seed": "tor-30-remodelacion-2876", "materiales": ["Concreto reforzado", "Mampostería confinada", "Refuerzo de acero estructural"], "cimentacion": "Cimentación especial en talud", "arqueo": false, "destacada": true, "descripcion": ["Restauración del Roble transformó un inmueble existente sin sacrificar su estructura original. El proceso se ejecutó por fases para minimizar la interrupción de las actividades del cliente durante la obra.", "Esta remodelación integral incluyó actualización completa de instalaciones y refuerzo donde el diagnóstico estructural lo indicó, entregada con garantía por escrito sobre todo lo intervenido.", "Ubicada en Tizayuca, Hidalgo, la obra tiene 868 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Rodrigo Salcedo", "texto": "Nunca sentimos que estuviéramos a ciegas durante la obra. Cada semana teníamos información clara del avance.", "avatar": "rodrigo-salcedo-o31", "rating": 5}, "galeria": ["tor-30-remodelacion-2876-g1", "tor-30-remodelacion-2876-g2", "tor-30-remodelacion-2876-g3", "tor-30-remodelacion-2876-g4", "tor-30-remodelacion-2876-g5", "tor-30-remodelacion-2876-g6"]},
+{"id": "o32", "nombre": "Reforzamiento Sísmico Poniente", "categoria": "sismico", "categoriaLabel": "Refuerzo sísmico", "ubicacion": "Toluca, Edo. Méx.", "zona": "Edo. Méx.", "estado": "proxima", "estadoLabel": "Próxima a iniciar", "anio": 2026, "m2": 1812, "precio": 6500000, "duracion": 2, "seed": "tor-31-sismico-2983", "materiales": ["Encamisado de columnas", "Contraventeo metálico", "Disipadores sísmicos"], "cimentacion": "Pilotes de concreto", "arqueo": false, "destacada": true, "descripcion": ["Reforzamiento Sísmico Poniente refuerza la estructura existente conforme a la normativa vigente, ejecutado por fases para no interrumpir la operación del inmueble durante los trabajos.", "Un proyecto de refuerzo estructural que priorizó la seguridad sin comprometer el uso cotidiano del espacio, con supervisión de ingeniería estructural en cada etapa.", "Ubicada en Toluca, Edo. Méx., la obra tiene 1,812 m² construidos y tomó 2 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Joaquín Herrera", "texto": "Nunca sentimos que estuviéramos a ciegas durante la obra. Cada semana teníamos información clara del avance.", "avatar": "joaquin-herrera-o32", "rating": 5}, "galeria": ["tor-31-sismico-2983-g1", "tor-31-sismico-2983-g2", "tor-31-sismico-2983-g3", "tor-31-sismico-2983-g4", "tor-31-sismico-2983-g5", "tor-31-sismico-2983-g6"]},
+{"id": "o33", "nombre": "Reforzamiento Sísmico La Herradura", "categoria": "sismico", "categoriaLabel": "Refuerzo sísmico", "ubicacion": "Tizayuca, Hidalgo", "zona": "Hidalgo", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2026, "m2": 1901, "precio": 6850000, "duracion": 5, "seed": "tor-32-sismico-9548", "materiales": ["Disipadores sísmicos", "Refuerzo de mampostería", "Contraventeo metálico"], "cimentacion": "Zapata corrida", "arqueo": false, "destacada": false, "descripcion": ["Reforzamiento Sísmico La Herradura refuerza la estructura existente conforme a la normativa vigente, ejecutado por fases para no interrumpir la operación del inmueble durante los trabajos.", "Un proyecto de refuerzo estructural que priorizó la seguridad sin comprometer el uso cotidiano del espacio, con supervisión de ingeniería estructural en cada etapa.", "Ubicada en Tizayuca, Hidalgo, la obra tiene 1,901 m² construidos y tomó 5 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Daniela Peña", "texto": "Nunca sentimos que estuviéramos a ciegas durante la obra. Cada semana teníamos información clara del avance.", "avatar": "daniela-peña-o33", "rating": 4}, "galeria": ["tor-32-sismico-9548-g1", "tor-32-sismico-9548-g2", "tor-32-sismico-9548-g3", "tor-32-sismico-9548-g4", "tor-32-sismico-9548-g5", "tor-32-sismico-9548-g6"]},
+{"id": "o34", "nombre": "Centro Cerro Alto", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2023, "m2": 1451, "precio": 6100000, "duracion": 6, "seed": "tor-33-institucional-6325", "materiales": ["Losa de concreto armado", "Acabados de bajo mantenimiento", "Instalaciones especiales"], "cimentacion": "Pilotes de concreto", "arqueo": true, "destacada": false, "descripcion": ["Centro Cerro Alto amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Ciudad de México, la obra tiene 1,451 m² construidos y tomó 6 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Héctor Villalobos", "texto": "Nunca sentimos que estuviéramos a ciegas durante la obra. Cada semana teníamos información clara del avance.", "avatar": "hector-villalobos-o34", "rating": 4}, "galeria": ["tor-33-institucional-6325-g1", "tor-33-institucional-6325-g2", "tor-33-institucional-6325-g3", "tor-33-institucional-6325-g4", "tor-33-institucional-6325-g5", "tor-33-institucional-6325-g6"]},
+{"id": "o35", "nombre": "Centro Las Torres", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Naucalpan, Edo. Méx.", "zona": "Edo. Méx.", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2024, "m2": 1500, "precio": 6300000, "duracion": 8, "seed": "tor-34-institucional-9041", "materiales": ["Block y castillo ahogado", "Acabados de bajo mantenimiento", "Losa de concreto armado"], "cimentacion": "Losa de cimentación", "arqueo": false, "destacada": false, "descripcion": ["Centro Las Torres amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Naucalpan, Edo. Méx., la obra tiene 1,500 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Diego Montemayor", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "diego-montemayor-o35", "rating": 4}, "galeria": ["tor-34-institucional-9041-g1", "tor-34-institucional-9041-g2", "tor-34-institucional-9041-g3", "tor-34-institucional-9041-g4", "tor-34-institucional-9041-g5", "tor-34-institucional-9041-g6"]},
+{"id": "o36", "nombre": "Restauración Sur", "categoria": "remodelacion", "categoriaLabel": "Remodelación integral", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2025, "m2": 2654, "precio": 12750000, "duracion": 8, "seed": "tor-35-remodelacion-2976", "materiales": ["Sistemas de anclaje sísmico", "Refuerzo de acero estructural", "Mampostería confinada"], "cimentacion": "Losa de cimentación", "arqueo": false, "destacada": true, "descripcion": ["Restauración Sur transformó un inmueble existente sin sacrificar su estructura original. El proceso se ejecutó por fases para minimizar la interrupción de las actividades del cliente durante la obra.", "Esta remodelación integral incluyó actualización completa de instalaciones y refuerzo donde el diagnóstico estructural lo indicó, entregada con garantía por escrito sobre todo lo intervenido.", "Ubicada en Ciudad de México, la obra tiene 2,654 m² construidos y tomó 8 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Diego Montemayor", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "diego-montemayor-o36", "rating": 5}, "galeria": ["tor-35-remodelacion-2976-g1", "tor-35-remodelacion-2976-g2", "tor-35-remodelacion-2976-g3", "tor-35-remodelacion-2976-g4", "tor-35-remodelacion-2976-g5", "tor-35-remodelacion-2976-g6"]},
+{"id": "o37", "nombre": "Centro Logístico Los Encinos", "categoria": "industrial", "categoriaLabel": "Nave industrial / bodega", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "obra", "estadoLabel": "En obra", "anio": 2026, "m2": 3269, "precio": 12750000, "duracion": 10, "seed": "tor-36-industrial-1893", "materiales": ["Piso pulido industrial de alta resistencia", "Panel aislante térmico", "Losa de concreto armado"], "cimentacion": "Zapatas aisladas", "arqueo": false, "destacada": false, "descripcion": ["Centro Logístico Los Encinos es una nave industrial construida con estructura metálica preensamblada y piso pulido de alta resistencia, pensada para operación logística intensiva desde el día uno.", "Esta bodega se entregó con instalaciones especiales coordinadas desde el proyecto ejecutivo, cumpliendo los tiempos de entrega comprometidos con el cliente.", "Ubicada en Ciudad de México, la obra tiene 3,269 m² construidos y tomó 10 meses de ejecución. El proyecto ejecutivo fue desarrollado internamente por el equipo técnico de Torreón."], "testimonio": {"nombre": "Rodrigo Salcedo", "texto": "El cronograma público nos dio tranquilidad en todo momento; sabíamos exactamente en qué etapa iba la obra sin tener que preguntar.", "avatar": "rodrigo-salcedo-o37", "rating": 5}, "galeria": ["tor-36-industrial-1893-g1", "tor-36-industrial-1893-g2", "tor-36-industrial-1893-g3", "tor-36-industrial-1893-g4", "tor-36-industrial-1893-g5", "tor-36-industrial-1893-g6"]},
+{"id": "o38", "nombre": "Centro del Parque", "categoria": "institucional", "categoriaLabel": "Ampliación institucional", "ubicacion": "Ciudad de México", "zona": "CDMX", "estado": "entregada", "estadoLabel": "Entregada", "anio": 2024, "m2": 1478, "precio": 6200000, "duracion": 3, "seed": "tor-37-institucional-1878", "materiales": ["Instalaciones especiales", "Block y castillo ahogado", "Acabados de bajo mantenimiento"], "cimentacion": "Zapatas aisladas", "arqueo": true, "destacada": false, "descripcion": ["Centro del Parque amplía la capacidad de un inmueble institucional en operación, ejecutada con circulaciones temporales para no afectar el servicio durante la obra.", "Un proyecto institucional entregado con cumplimiento normativo completo y acabados de bajo mantenimiento pensados para uso intensivo.", "Ubicada en Ciudad de México, la obra tiene 1,478 m² construidos y tomó 3 meses de ejecución. El proyecto ejecutivo fue diseñado por Arqueo Estudio, marca hermana de Grupo Meridiano."], "testimonio": {"nombre": "Héctor Villalobos", "texto": "La bitácora fotográfica diaria fue lo que más valoramos: veíamos el avance real, no solo lo que nos contaban.", "avatar": "hector-villalobos-o38", "rating": 5}, "galeria": ["tor-37-institucional-1878-g1", "tor-37-institucional-1878-g2", "tor-37-institucional-1878-g3", "tor-37-institucional-1878-g4", "tor-37-institucional-1878-g5", "tor-37-institucional-1878-g6"]}
+];
+</script>
+
+<script>
+/* =========================================================
+   HELPERS
+========================================================= */
+function fmtMoney(n){ return '$' + Math.round(n).toLocaleString('es-MX') + ' MXN'; }
+function fmtMoneyShort(n){
+  if(n >= 1000000) return '$' + (n/1000000).toFixed(1).replace('.0','') + 'M';
+  if(n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + n;
+}
+window.__toast = function(msg, opts){
+  opts = opts || {};
+  const stack = document.getElementById('toast-stack');
+  const div = document.createElement('div');
+  div.className = 'toast';
+  div.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><p></p>`;
+  div.querySelector('p').textContent = msg;
+  if(opts.onClick){ div.style.cursor='pointer'; div.addEventListener('click', opts.onClick); }
+  stack.appendChild(div);
+  const life = opts.life || 5000;
+  setTimeout(() => { div.classList.add('leaving'); setTimeout(() => div.remove(), 260); }, life);
+};
+
+/* =========================================================
+   ESTADO GLOBAL: FAVORITOS Y COMPARADOR
+========================================================= */
+window.__favoritos = new Set();
+window.__comparador = new Set();
+let compareMode = false;
+
+function toggleFavorito(id){
+  if(window.__favoritos.has(id)) window.__favoritos.delete(id);
+  else window.__favoritos.add(id);
+  updateFavCount();
+  renderObrasGrid();
+}
+function updateFavCount(){
+  const el = document.getElementById('fav-count');
+  const n = window.__favoritos.size;
+  if(n > 0){ el.style.display='flex'; el.textContent = n; } else { el.style.display='none'; }
+}
+function updateCompareCount(){
+  const el = document.getElementById('compare-count');
+  const n = window.__comparador.size;
+  if(n > 0){ el.style.display='flex'; el.textContent = n; } else { el.style.display='none'; }
+}
+
+/* =========================================================
+   FILTROS
+========================================================= */
+let filters = {
+  categorias: new Set(),
+  estados: new Set(),
+  zonas: new Set(),
+  precioMin: null, precioMax: null,
+  m2Min: null, m2Max: null,
+  q: '',
+  sort: 'reciente'
+};
+let visibleCount = 12;
+const PAGE_SIZE = 12;
+
+const catLabels = {residencial:'Vivienda residencial nueva', remodelacion:'Remodelación integral', sismico:'Refuerzo sísmico', industrial:'Nave industrial / bodega', institucional:'Ampliación institucional'};
+const estadoLabels = {entregada:'Entregada', obra:'En obra', proxima:'Próxima a iniciar'};
+
+function buildFiltrosPanelHTML(){
+  const data = window.__catalogo;
+  const zonas = [...new Set(data.map(o => o.zona))].sort();
+  function countCat(c){ return data.filter(o => o.categoria === c).length; }
+  function countEstado(e){ return data.filter(o => o.estado === e).length; }
+  function countZona(z){ return data.filter(o => o.zona === z).length; }
+
+  return `
+    <div class="filtro-group">
+      <h4>Categoría</h4>
+      ${Object.entries(catLabels).map(([k,v]) => `
+        <label class="filtro-check"><input type="checkbox" data-filter-type="categoria" value="${k}"> ${v} <span class="fc-count">${countCat(k)}</span></label>
+      `).join('')}
+    </div>
+    <div class="filtro-group">
+      <h4>Estado</h4>
+      ${Object.entries(estadoLabels).map(([k,v]) => `
+        <label class="filtro-check"><input type="checkbox" data-filter-type="estado" value="${k}"> ${v} <span class="fc-count">${countEstado(k)}</span></label>
+      `).join('')}
+    </div>
+    <div class="filtro-group">
+      <h4>Ubicación</h4>
+      ${zonas.map(z => `
+        <label class="filtro-check"><input type="checkbox" data-filter-type="zona" value="${z}"> ${z} <span class="fc-count">${countZona(z)}</span></label>
+      `).join('')}
+    </div>
+    <div class="filtro-group">
+      <h4>Presupuesto (MXN)</h4>
+      <div class="range-row">
+        <select data-filter-type="precioMin"><option value="">Mín.</option><option value="1000000">$1M</option><option value="3000000">$3M</option><option value="5000000">$5M</option><option value="10000000">$10M</option><option value="20000000">$20M</option></select>
+        <span>—</span>
+        <select data-filter-type="precioMax"><option value="">Máx.</option><option value="3000000">$3M</option><option value="5000000">$5M</option><option value="10000000">$10M</option><option value="20000000">$20M</option><option value="999999999">Sin límite</option></select>
+      </div>
+    </div>
+    <div class="filtro-group">
+      <h4>Metraje (m²)</h4>
+      <div class="range-row">
+        <select data-filter-type="m2Min"><option value="">Mín.</option><option value="100">100</option><option value="500">500</option><option value="1000">1,000</option><option value="3000">3,000</option></select>
+        <span>—</span>
+        <select data-filter-type="m2Max"><option value="">Máx.</option><option value="500">500</option><option value="1000">1,000</option><option value="3000">3,000</option><option value="99999">Sin límite</option></select>
+      </div>
+    </div>
+    <button class="filtro-clear-btn" type="button">Limpiar filtros</button>
+  `;
+}
+
+function attachFiltroListeners(container, instanceId){
+  container.querySelectorAll('[data-filter-type="categoria"]').forEach(cb => cb.addEventListener('change', () => {
+    if(cb.checked) filters.categorias.add(cb.value); else filters.categorias.delete(cb.value);
+    syncFilterUI(); applyFilters();
+  }));
+  container.querySelectorAll('[data-filter-type="estado"]').forEach(cb => cb.addEventListener('change', () => {
+    if(cb.checked) filters.estados.add(cb.value); else filters.estados.delete(cb.value);
+    syncFilterUI(); applyFilters();
+  }));
+  container.querySelectorAll('[data-filter-type="zona"]').forEach(cb => cb.addEventListener('change', () => {
+    if(cb.checked) filters.zonas.add(cb.value); else filters.zonas.delete(cb.value);
+    syncFilterUI(); applyFilters();
+  }));
+  container.querySelector('[data-filter-type="precioMin"]').addEventListener('change', function(){ filters.precioMin = this.value ? parseInt(this.value) : null; syncFilterUI(); applyFilters(); });
+  container.querySelector('[data-filter-type="precioMax"]').addEventListener('change', function(){ filters.precioMax = this.value ? parseInt(this.value) : null; syncFilterUI(); applyFilters(); });
+  container.querySelector('[data-filter-type="m2Min"]').addEventListener('change', function(){ filters.m2Min = this.value ? parseInt(this.value) : null; syncFilterUI(); applyFilters(); });
+  container.querySelector('[data-filter-type="m2Max"]').addEventListener('change', function(){ filters.m2Max = this.value ? parseInt(this.value) : null; syncFilterUI(); applyFilters(); });
+  const clearBtn = container.querySelector('.filtro-clear-btn');
+  clearBtn.addEventListener('click', () => {
+    filters = {categorias:new Set(), estados:new Set(), zonas:new Set(), precioMin:null, precioMax:null, m2Min:null, m2Max:null, q:filters.q, sort:filters.sort};
+    syncFilterUI(); applyFilters();
+  });
+}
+
+function syncFilterUI(){
+  [document.getElementById('filtros-panel-desktop'), document.getElementById('filtros-panel-mobile')].forEach(panel => {
+    if(!panel) return;
+    panel.querySelectorAll('[data-filter-type="categoria"]').forEach(cb => cb.checked = filters.categorias.has(cb.value));
+    panel.querySelectorAll('[data-filter-type="estado"]').forEach(cb => cb.checked = filters.estados.has(cb.value));
+    panel.querySelectorAll('[data-filter-type="zona"]').forEach(cb => cb.checked = filters.zonas.has(cb.value));
+    const pMin = panel.querySelector('[data-filter-type="precioMin"]'); if(pMin) pMin.value = filters.precioMin || '';
+    const pMax = panel.querySelector('[data-filter-type="precioMax"]'); if(pMax) pMax.value = filters.precioMax || '';
+    const mMin = panel.querySelector('[data-filter-type="m2Min"]'); if(mMin) mMin.value = filters.m2Min || '';
+    const mMax = panel.querySelector('[data-filter-type="m2Max"]'); if(mMax) mMax.value = filters.m2Max || '';
+  });
+}
+
+function initFiltrosPanels(){
+  const desktop = document.getElementById('filtros-panel-desktop');
+  const mobile = document.getElementById('filtros-panel-mobile');
+  desktop.innerHTML = buildFiltrosPanelHTML();
+  mobile.innerHTML = buildFiltrosPanelHTML();
+  attachFiltroListeners(desktop, 'desktop');
+  attachFiltroListeners(mobile, 'mobile');
+}
+
+function getFilteredSorted(){
+  let list = window.__catalogo.filter(o => {
+    if(filters.categorias.size && !filters.categorias.has(o.categoria)) return false;
+    if(filters.estados.size && !filters.estados.has(o.estado)) return false;
+    if(filters.zonas.size && !filters.zonas.has(o.zona)) return false;
+    if(filters.precioMin !== null && o.precio < filters.precioMin) return false;
+    if(filters.precioMax !== null && o.precio > filters.precioMax) return false;
+    if(filters.m2Min !== null && o.m2 < filters.m2Min) return false;
+    if(filters.m2Max !== null && o.m2 > filters.m2Max) return false;
+    if(filters.q){
+      const q = filters.q.toLowerCase();
+      if(!o.nombre.toLowerCase().includes(q) && !o.ubicacion.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+  switch(filters.sort){
+    case 'precio-asc': list.sort((a,b) => a.precio - b.precio); break;
+    case 'precio-desc': list.sort((a,b) => b.precio - a.precio); break;
+    case 'm2-desc': list.sort((a,b) => b.m2 - a.m2); break;
+    case 'm2-asc': list.sort((a,b) => a.m2 - b.m2); break;
+    default: list.sort((a,b) => b.anio - a.anio || (b.destacada - a.destacada));
+  }
+  return list;
+}
+
+function applyFilters(){
+  visibleCount = PAGE_SIZE;
+  renderObrasGrid();
+}
+
+function renderObrasGrid(){
+  const list = getFilteredSorted();
+  const grid = document.getElementById('obras-grid');
+  document.getElementById('results-total').textContent = list.length;
+  document.getElementById('results-showing').textContent = Math.min(visibleCount, list.length);
+
+  if(list.length === 0){
+    grid.innerHTML = `<div class="empty-catalogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg><p>No encontramos obras con esos filtros. Intenta ajustar la búsqueda o el rango de presupuesto.</p></div>`;
+    document.getElementById('load-more-wrap').style.display = 'none';
+    return;
+  }
+
+  const visible = list.slice(0, visibleCount);
+  grid.innerHTML = visible.map(o => `
+    <article class="obra-card" data-id="${o.id}">
+      <div class="obra-card-img-wrap">
+        <img src="https://picsum.photos/seed/${o.seed}/640/480" alt="Fotografía de ${o.nombre}" loading="lazy">
+        <span class="obra-card-status ${o.estado}">${o.estadoLabel}</span>
+        <button class="obra-card-fav ${window.__favoritos.has(o.id) ? 'is-fav':''}" data-fav-id="${o.id}" aria-label="Guardar en favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        </button>
+        <span class="obra-card-compare-check ${compareMode ? 'show':''}"><input type="checkbox" data-compare-id="${o.id}" ${window.__comparador.has(o.id)?'checked':''} aria-label="Comparar ${o.nombre}"> Comparar</span>
+      </div>
+      <div class="obra-card-body">
+        <span class="obra-card-cat">${o.categoriaLabel}</span>
+        <div class="obra-card-name">${o.nombre}</div>
+        <div class="obra-card-loc">${o.ubicacion} · ${o.anio}</div>
+        <div class="obra-card-meta-row">
+          <span class="obra-card-price">${fmtMoneyShort(o.precio)}<span>Desde</span></span>
+          <span class="obra-card-m2">${o.m2.toLocaleString('es-MX')} m²</span>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  grid.querySelectorAll('.obra-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if(e.target.closest('[data-fav-id]') || e.target.closest('[data-compare-id]')) return;
+      openObraModal(card.dataset.id);
+    });
+  });
+  grid.querySelectorAll('[data-fav-id]').forEach(btn => {
+    btn.addEventListener('click', (e) => { e.stopPropagation(); toggleFavorito(btn.dataset.favId); });
+  });
+  grid.querySelectorAll('[data-compare-id]').forEach(cb => {
+    cb.addEventListener('click', e => e.stopPropagation());
+    cb.addEventListener('change', function(){
+      if(this.checked){
+        if(window.__comparador.size >= 3){ this.checked = false; window.__toast('Puedes comparar hasta 3 obras a la vez.'); return; }
+        window.__comparador.add(this.dataset.compareId);
+      } else {
+        window.__comparador.delete(this.dataset.compareId);
+      }
+      updateCompareCount();
+    });
+  });
+
+  document.getElementById('load-more-wrap').style.display = visibleCount < list.length ? '' : 'none';
+}
+
+document.getElementById('load-more-btn').addEventListener('click', () => {
+  visibleCount += PAGE_SIZE;
+  renderObrasGrid();
+});
+document.getElementById('cat-search-input').addEventListener('input', function(){ filters.q = this.value; applyFilters(); });
+document.getElementById('cat-sort-select').addEventListener('change', function(){ filters.sort = this.value; applyFilters(); });
+
+document.getElementById('compare-mode-check').addEventListener('change', function(){
+  compareMode = this.checked;
+  renderObrasGrid();
+});
+
+/* MODAL FILTROS MÓVIL */
+const filtrosModalBackdrop = document.getElementById('filtros-modal-backdrop');
+document.getElementById('filtros-toggle-btn').addEventListener('click', () => filtrosModalBackdrop.classList.add('is-open'));
+document.getElementById('filtros-modal-close').addEventListener('click', () => filtrosModalBackdrop.classList.remove('is-open'));
+document.getElementById('filtros-modal-apply').addEventListener('click', () => filtrosModalBackdrop.classList.remove('is-open'));
+filtrosModalBackdrop.addEventListener('click', e => { if(e.target === filtrosModalBackdrop) filtrosModalBackdrop.classList.remove('is-open'); });
+
+/* =========================================================
+   MODAL DE DETALLE DE OBRA
+========================================================= */
+let mktCurrent = null;
+let mktGalIdx = 0;
+
+function openObraModal(id){
+  const o = window.__catalogo.find(x => x.id === id);
+  if(!o) return;
+  mktCurrent = o;
+  mktGalIdx = 0;
+  renderMktGallery();
+
+  document.getElementById('mkt-cat').textContent = o.categoriaLabel;
+  document.getElementById('mkt-title').textContent = o.nombre;
+  document.getElementById('mkt-loc').textContent = `${o.ubicacion} · ${o.anio}`;
+  document.getElementById('mkt-price').textContent = fmtMoney(o.precio);
+  document.getElementById('mkt-m2').textContent = o.m2.toLocaleString('es-MX');
+  document.getElementById('mkt-duracion').textContent = o.duracion;
+  document.getElementById('mkt-anio').textContent = o.anio;
+  document.getElementById('mkt-cimentacion').textContent = o.cimentacion;
+  document.getElementById('mkt-desc').innerHTML = o.descripcion.map(p => `<p>${p}</p>`).join('');
+  document.getElementById('mkt-materiales').innerHTML = o.materiales.map(m => `<li>${m}</li>`).join('');
+  document.getElementById('mkt-arqueo-note').style.display = o.arqueo ? 'flex' : 'none';
+
+  const t = o.testimonio;
+  document.getElementById('mkt-testi').innerHTML = `
+    <img src="https://i.pravatar.cc/100?u=${t.avatar}" alt="">
+    <div>
+      <div class="mt-stars">${'★'.repeat(t.rating)}${'☆'.repeat(5-t.rating)}</div>
+      <p>"${t.texto}"</p>
+      <span>${t.nombre} — Cliente, ${o.nombre}</span>
+    </div>
+  `;
+
+  const related = window.__catalogo.filter(x => x.categoria === o.categoria && x.id !== o.id).slice(0,3);
+  const fallback = related.length ? related : window.__catalogo.filter(x => x.id !== o.id).slice(0,3);
+  document.getElementById('mkt-related').innerHTML = fallback.map(r => `
+    <div class="mkt-related-card" data-id="${r.id}">
+      <img src="https://picsum.photos/seed/${r.seed}/400/300" alt="${r.nombre}" loading="lazy">
+      <div class="r-info"><div class="r-name">${r.nombre}</div><div class="r-loc">${r.ubicacion}</div></div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#mkt-related .mkt-related-card').forEach(card => {
+    card.addEventListener('click', () => openObraModal(card.dataset.id));
+  });
+
+  document.getElementById('mkt-backdrop').classList.add('is-open');
+  document.addEventListener('keydown', mktKeyHandler);
+}
+
+function renderMktGallery(){
+  const o = mktCurrent;
+  document.getElementById('mkt-gallery-img').src = `https://picsum.photos/seed/${o.galeria[mktGalIdx]}/1200/675`;
+  document.getElementById('mkt-gallery-img').alt = `Fotografía ${mktGalIdx+1} de ${o.nombre}`;
+  const statusEl = document.getElementById('mkt-gallery-status');
+  statusEl.className = 'mkt-gallery-status ' + o.estado;
+  statusEl.textContent = o.estadoLabel;
+  document.getElementById('mkt-gallery-dots').innerHTML = o.galeria.map((g,i) => `<span class="mkt-gallery-dot ${i===mktGalIdx?'is-active':''}" data-i="${i}"></span>`).join('');
+  document.querySelectorAll('#mkt-gallery-dots .mkt-gallery-dot').forEach(dot => {
+    dot.addEventListener('click', () => { mktGalIdx = parseInt(dot.dataset.i); renderMktGallery(); });
+  });
+}
+function mktNext(){ mktGalIdx = (mktGalIdx+1) % mktCurrent.galeria.length; renderMktGallery(); }
+function mktPrev(){ mktGalIdx = (mktGalIdx-1+mktCurrent.galeria.length) % mktCurrent.galeria.length; renderMktGallery(); }
+function closeObraModal(){ document.getElementById('mkt-backdrop').classList.remove('is-open'); document.removeEventListener('keydown', mktKeyHandler); }
+function mktKeyHandler(e){
+  if(e.key === 'Escape') closeObraModal();
+  if(e.key === 'ArrowRight') mktNext();
+  if(e.key === 'ArrowLeft') mktPrev();
+}
+document.getElementById('mkt-close').addEventListener('click', closeObraModal);
+document.getElementById('mkt-gallery-next').addEventListener('click', mktNext);
+document.getElementById('mkt-gallery-prev').addEventListener('click', mktPrev);
+document.getElementById('mkt-backdrop').addEventListener('click', e => { if(e.target.id === 'mkt-backdrop') closeObraModal(); });
+document.getElementById('mkt-cta-visita').addEventListener('click', () => {
+  window.__toast(`Solicitud de visita para "${mktCurrent.nombre}" enviada. Te contactaremos para agendar.`);
+});
+document.getElementById('mkt-cta-chat').addEventListener('click', () => {
+  closeObraModal();
+  document.getElementById('chat-launcher').click();
+  setTimeout(() => {
+    const input = document.getElementById('chat-input');
+    input.value = `Cuéntame más sobre ${mktCurrent.nombre}`;
+    document.getElementById('chat-send').click();
+  }, 350);
+});
+
+/* =========================================================
+   TESTIMONIOS (extraídos del catálogo)
+========================================================= */
+(function(){
+  const picks = window.__catalogo.filter(o => o.estado === 'entregada').slice(0, 30);
+  const shuffled = [...picks].sort(() => Math.random()-0.5).slice(0,3);
+  document.getElementById('testi-grid').innerHTML = shuffled.map(o => `
+    <div class="testi-card">
+      <div class="testi-stars">${'★'.repeat(o.testimonio.rating)}${'☆'.repeat(5-o.testimonio.rating)}</div>
+      <p class="testi-text">"${o.testimonio.texto}"</p>
+      <div class="testi-person">
+        <img src="https://i.pravatar.cc/100?u=${o.testimonio.avatar}" alt="">
+        <div><b>${o.testimonio.nombre}</b><span>${o.categoriaLabel} · ${o.nombre}</span></div>
+      </div>
+    </div>
+  `).join('');
+})();
+
+/* =========================================================
+   DRAWERS — FAVORITOS Y COMPARADOR
+========================================================= */
+const favDrawer = document.getElementById('fav-drawer-backdrop');
+const compareDrawer = document.getElementById('compare-drawer-backdrop');
+
+function renderFavDrawer(){
+  const body = document.getElementById('fav-drawer-body');
+  const items = [...window.__favoritos].map(id => window.__catalogo.find(o => o.id === id)).filter(Boolean);
+  if(items.length === 0){
+    body.innerHTML = `<div class="drawer-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg><p>Aún no has guardado ninguna obra. Toca el corazón en cualquier ficha para guardarla aquí.</p></div>`;
+    return;
+  }
+  body.innerHTML = items.map(o => `
+    <div class="fav-item">
+      <img src="https://picsum.photos/seed/${o.seed}/200/160" alt="" data-open-id="${o.id}">
+      <div class="fi-info" data-open-id="${o.id}"><b>${o.nombre}</b><span>${o.ubicacion} · ${fmtMoneyShort(o.precio)}</span></div>
+      <button class="fi-remove" data-remove-id="${o.id}" aria-label="Quitar de favoritos">✕</button>
+    </div>
+  `).join('');
+  body.querySelectorAll('[data-open-id]').forEach(el => el.addEventListener('click', () => { closeDrawers(); openObraModal(el.dataset.openId); }));
+  body.querySelectorAll('[data-remove-id]').forEach(btn => btn.addEventListener('click', () => { toggleFavorito(btn.dataset.removeId); renderFavDrawer(); }));
+}
+
+function renderCompareDrawer(){
+  const body = document.getElementById('compare-drawer-body');
+  const items = [...window.__comparador].map(id => window.__catalogo.find(o => o.id === id)).filter(Boolean);
+  if(items.length === 0){
+    body.innerHTML = `<div class="drawer-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3v18M15 3v18"/></svg><p>Activa el comparador sobre el catálogo y selecciona hasta 3 obras para comparar aquí lado a lado.</p></div>`;
+    return;
+  }
+  const rows = [
+    {label:'Categoría', get:o=>o.categoriaLabel},
+    {label:'Ubicación', get:o=>o.ubicacion},
+    {label:'Estado', get:o=>o.estadoLabel},
+    {label:'Precio desde', get:o=>fmtMoney(o.precio)},
+    {label:'Metraje', get:o=>o.m2.toLocaleString('es-MX')+' m²'},
+    {label:'Duración', get:o=>o.duracion+' meses'},
+    {label:'Cimentación', get:o=>o.cimentacion}
+  ];
+  body.innerHTML = `
+    <table class="compare-table">
+      <tr><th></th>${items.map(o => `<td><img src="https://picsum.photos/seed/${o.seed}/300/225" alt=""><b>${o.nombre}</b><button class="compare-remove-btn" data-remove-compare="${o.id}">Quitar</button></td>`).join('')}</tr>
+      ${rows.map(r => `<tr><th>${r.label}</th>${items.map(o => `<td>${r.get(o)}</td>`).join('')}</tr>`).join('')}
+    </table>
+  `;
+  body.querySelectorAll('[data-remove-compare]').forEach(btn => btn.addEventListener('click', () => {
+    window.__comparador.delete(btn.dataset.removeCompare);
+    updateCompareCount();
+    renderCompareDrawer();
+    renderObrasGrid();
+  }));
+}
+
+function closeDrawers(){ favDrawer.classList.remove('is-open'); compareDrawer.classList.remove('is-open'); }
+document.getElementById('favoritos-btn').addEventListener('click', () => { renderFavDrawer(); favDrawer.classList.add('is-open'); });
+document.getElementById('comparador-btn').addEventListener('click', () => { renderCompareDrawer(); compareDrawer.classList.add('is-open'); });
+document.querySelectorAll('[data-drawer-close]').forEach(b => b.addEventListener('click', closeDrawers));
+favDrawer.addEventListener('click', e => { if(e.target === favDrawer) closeDrawers(); });
+compareDrawer.addEventListener('click', e => { if(e.target === compareDrawer) closeDrawers(); });
+
+/* =========================================================
+   COTIZADOR — WIZARD
+========================================================= */
+const wizardSteps = ['1','2','3','4','success'];
+let wizardCurrentIdx = 0;
+let wizardData = {tipo:null, m2:null, ubicacion:null, acabados:2, detalle:'', nombre:'', telefono:'', email:''};
+
+const acabadosLabels = {1:'Económico', 2:'Estándar', 3:'Premium'};
+const acabadosMultiplier = {1:0.8, 2:1, 3:1.4};
+const precioBaseM2 = {residencial:9000, remodelacion:4800, sismico:3600, industrial:3900};
+const tipoLabels = {residencial:'Obra nueva residencial', remodelacion:'Remodelación', sismico:'Refuerzo sísmico', industrial:'Nave industrial'};
+
+function renderWizardProgress(){
+  const labels = ['Tipo','Detalles','Contacto','Resumen'];
+  const progress = document.getElementById('wizard-progress');
+  progress.innerHTML = labels.map((l,i) => {
+    let cls = '';
+    if(i < wizardCurrentIdx) cls = 'is-done';
+    if(i === wizardCurrentIdx) cls = 'is-active';
+    return `<div class="wizard-progress-step ${cls}"><span>${i+1}. </span>${l}</div>`;
+  }).join('');
+}
+
+function showWizardStep(idx){
+  wizardCurrentIdx = idx;
+  const key = wizardSteps[idx];
+  document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('is-active'));
+  document.querySelector(`.wizard-step[data-step="${key}"]`).classList.add('is-active');
+  renderWizardProgress();
+  const nav = document.getElementById('wizard-nav');
+  const backBtn = document.getElementById('wizard-back-btn');
+  const nextBtn = document.getElementById('wizard-next-btn');
+  if(key === 'success'){ nav.style.display = 'none'; return; }
+  nav.style.display = 'flex';
+  backBtn.disabled = idx === 0;
+  nextBtn.textContent = key === '4' ? 'Enviar solicitud' : 'Siguiente →';
+  if(key === '4') renderWizardResumen();
+}
+
+document.getElementById('wizard-tipo-cards').addEventListener('click', e => {
+  const card = e.target.closest('.opcion-card');
+  if(!card) return;
+  document.querySelectorAll('#wizard-tipo-cards .opcion-card').forEach(c => c.classList.remove('is-selected'));
+  card.classList.add('is-selected');
+  wizardData.tipo = card.dataset.tipo;
+});
+
+document.getElementById('wiz-acabados').addEventListener('input', function(){
+  wizardData.acabados = parseInt(this.value);
+  document.getElementById('wiz-acabados-label').textContent = acabadosLabels[this.value];
+});
+
+function validateWizardStep(idx){
+  const key = wizardSteps[idx];
+  if(key === '1'){
+    if(!wizardData.tipo){ window.__toast('Selecciona el tipo de proyecto para continuar.'); return false; }
+    return true;
+  }
+  if(key === '2'){
+    const m2 = document.getElementById('wiz-m2');
+    const ubic = document.getElementById('wiz-ubicacion');
+    let valid = true;
+    m2.closest('.wizard-field').classList.toggle('has-error', !m2.value || parseInt(m2.value) < 20);
+    ubic.closest('.wizard-field').classList.toggle('has-error', !ubic.value);
+    if(!m2.value || parseInt(m2.value) < 20) valid = false;
+    if(!ubic.value) valid = false;
+    if(valid){
+      wizardData.m2 = parseInt(m2.value);
+      wizardData.ubicacion = ubic.value;
+      wizardData.detalle = document.getElementById('wiz-detalle').value.trim();
+    }
+    return valid;
+  }
+  if(key === '3'){
+    const nombre = document.getElementById('wiz-nombre');
+    const tel = document.getElementById('wiz-telefono');
+    const email = document.getElementById('wiz-email');
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let valid = true;
+    nombre.closest('.wizard-field').classList.toggle('has-error', nombre.value.trim().length < 2);
+    tel.closest('.wizard-field').classList.toggle('has-error', tel.value.replace(/\D/g,'').length !== 10);
+    email.closest('.wizard-field').classList.toggle('has-error', !emailRe.test(email.value.trim()));
+    if(nombre.value.trim().length < 2) valid = false;
+    if(tel.value.replace(/\D/g,'').length !== 10) valid = false;
+    if(!emailRe.test(email.value.trim())) valid = false;
+    if(valid){
+      wizardData.nombre = nombre.value.trim();
+      wizardData.telefono = tel.value.trim();
+      wizardData.email = email.value.trim();
+    }
+    return valid;
+  }
+  return true;
+}
+
+function calcEstimado(){
+  const base = precioBaseM2[wizardData.tipo] * wizardData.m2 * acabadosMultiplier[wizardData.acabados];
+  const low = Math.round(base*0.9/50000)*50000;
+  const high = Math.round(base*1.15/50000)*50000;
+  const mid = Math.round(base/50000)*50000;
+  return {low, high, mid};
+}
+
+function renderWizardResumen(){
+  const est = calcEstimado();
+  document.getElementById('wiz-estimado').textContent = fmtMoney(est.mid);
+  document.getElementById('wiz-estimado-rango').textContent = `${fmtMoney(est.low)} – ${fmtMoney(est.high)}`;
+  document.getElementById('wiz-resumen').innerHTML = `
+    <div class="rc-row"><span>Tipo de proyecto</span><span>${tipoLabels[wizardData.tipo]}</span></div>
+    <div class="rc-row"><span>Metraje</span><span>${wizardData.m2.toLocaleString('es-MX')} m²</span></div>
+    <div class="rc-row"><span>Ubicación</span><span>${wizardData.ubicacion}</span></div>
+    <div class="rc-row"><span>Nivel de acabados</span><span>${acabadosLabels[wizardData.acabados]}</span></div>
+    <div class="rc-row"><span>Contacto</span><span>${wizardData.nombre} — ${wizardData.telefono}</span></div>
+  `;
+}
+
+document.getElementById('wizard-back-btn').addEventListener('click', () => {
+  if(wizardCurrentIdx > 0) showWizardStep(wizardCurrentIdx - 1);
+});
+document.getElementById('wizard-next-btn').addEventListener('click', () => {
+  const key = wizardSteps[wizardCurrentIdx];
+  if(!validateWizardStep(wizardCurrentIdx)) return;
+  if(key === '4'){
+    const btn = document.getElementById('wizard-next-btn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = 'Enviar solicitud';
+      showWizardStep(wizardSteps.length - 1);
+      window.__toast(`Gracias ${wizardData.nombre.split(' ')[0]}, tu solicitud fue recibida.`);
+    }, 1200);
+    return;
+  }
+  showWizardStep(wizardCurrentIdx + 1);
+});
+renderWizardProgress();
+
+document.getElementById('login-link').addEventListener('click', e => {
+  e.preventDefault();
+  window.__toast('Este acceso llevaría al panel de cliente de Torreón — es un archivo aparte en esta maqueta.');
+});
+document.getElementById('footer-login-link').addEventListener('click', () => {
+  window.__toast('Este acceso llevaría al panel de cliente de Torreón — es un archivo aparte en esta maqueta.');
+});
+
+/* =========================================================
+   MODALES LEGALES
+========================================================= */
+document.addEventListener('click', function(e){
+  const openBtn = e.target.closest('[data-open-legal]');
+  if(openBtn){
+    const modal = document.getElementById('legal-' + openBtn.dataset.openLegal);
+    if(modal) modal.style.display = 'flex';
+  }
+  const closeBtn = e.target.closest('[data-legal-close]');
+  if(closeBtn){
+    closeBtn.closest('.drawer-backdrop').style.display = 'none';
+  }
+  if(e.target.classList && e.target.classList.contains('drawer-backdrop')){
+    e.target.style.display = 'none';
+  }
+});
+
+/* =========================================================
+   CHATBOT
+========================================================= */
+(function(){
+  const launcher = document.getElementById('chat-launcher');
+  const win = document.getElementById('chat-window');
+  const closeBtn = document.getElementById('chat-close');
+  const body = document.getElementById('chat-body');
+  const quick = document.getElementById('chat-quick');
+  const input = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+
+  const respuestas = [
+    { match: /precio|costo|cu[aá]nto cuesta|presupuesto|cotiza/i,
+      reply: 'Los precios varían según tipo de proyecto y metraje. Puedes usar nuestro cotizador para un estimado instantáneo, o explorar el catálogo para ver precios de obras similares. ¿Te llevo al cotizador?',
+      action: 'goto-cotizar' },
+    { match: /tiempo|tarda|cu[aá]nto dura|plazo|duraci[oó]n/i,
+      reply: 'Depende del tipo de obra: una vivienda residencial toma entre 6 y 11 meses; una remodelación, entre 4 y 12; una nave industrial, entre 6 y 15. El 94% de nuestras obras se entrega en el plazo firmado.' },
+    { match: /garant[ií]a/i,
+      reply: 'Sí, toda obra entregada tiene garantía por escrito sobre estructura, instalaciones y acabados, con vigencia detallada en el contrato.' },
+    { match: /seguridad|accidente/i,
+      reply: 'Llevamos 418 días sin accidentes graves. Cada frente de obra activo tiene supervisor de seguridad de tiempo completo y bitácora fotográfica diaria.',
+      img: 'https://picsum.photos/seed/con-seguridad-catalogo/700/460',
+      imgCaption: 'Supervisión de seguridad en obra activa' },
+    { match: /arquitect|dise[ñn]o|proyecto ejecutivo|planos/i,
+      reply: 'El diseño lo hace Arqueo Estudio, marca hermana dentro de Grupo Meridiano. Puedes contratar diseño y obra juntos con un solo punto de contacto.' },
+    { match: /d[oó]nde|ubicaci[oó]n|zona|cobertura/i,
+      reply: 'Ejecutamos obra en CDMX, Hidalgo (Tizayuca/Pachuca), Puebla, Querétaro y Estado de México.' },
+    { match: /industrial|bodega|nave/i,
+      reply: 'Construimos naves industriales con estructura metálica preensamblada y piso pulido de alta resistencia. Tenemos varios ejemplos en el catálogo filtrando por "Nave industrial / bodega".',
+      action: 'goto-catalogo' },
+    { match: /remodela|refuerzo s[ií]smico|s[ií]smico/i,
+      reply: 'Hacemos remodelación integral y refuerzo sísmico en inmuebles existentes, ejecutado por fases para no interrumpir tu operación diaria.' },
+    { match: /catálogo|catalogo|ver obras|proyectos|ejemplos/i,
+      reply: 'Claro, puedes filtrar el catálogo por categoría, ubicación y presupuesto. Te llevo directo.',
+      action: 'goto-catalogo' },
+    { match: /favoritos|comparar|comparador/i,
+      reply: 'Puedes guardar obras que te interesen con el ícono de corazón, y activar el comparador para ver hasta 3 obras lado a lado. Ambos están en la parte superior del sitio.' },
+    { match: /hola|buenas|qu[eé] tal|buen d[ií]a/i,
+      reply: '¡Hola! 👷 Soy el asistente de Torreón Constructora. Puedo ayudarte con precios, plazos, garantía, seguridad o mostrarte el catálogo. ¿Qué te gustaría saber?' },
+    { match: /gracias/i, reply: 'Con gusto, aquí sigo si necesitas algo más.' },
+  ];
+  const fallback = 'No estoy seguro de haber entendido bien. Puedo ayudarte con precios, plazos, garantía, seguridad en obra o mostrarte el catálogo. ¿Podrías darme un poco más de detalle?';
+
+  const quickPool = [
+    '¿Cuánto cuesta mi obra?','¿Cuál es el plazo?','¿Tienen garantía?','¿Qué tan segura es su obra?',
+    '¿Dónde tienen cobertura?','Ver catálogo','¿Hacen refuerzo sísmico?','¿También hacen el diseño?',
+    '¿Cómo funciona el comparador?'
+  ];
+  function pickQuick(n){
+    const shuffled = [...quickPool].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, n);
+  }
+
+  function addMsg(text, who, imgUrl, imgCaption){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    div.textContent = text;
+    if(imgUrl){
+      const figure = document.createElement('div');
+      figure.className = 'chat-msg-img';
+      figure.innerHTML = `<img src="${imgUrl}" alt="${imgCaption||''}" loading="lazy">${imgCaption ? `<span>${imgCaption}</span>` : ''}`;
+      div.appendChild(figure);
+    }
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  function showTyping(){
+    const div = document.createElement('div');
+    div.className = 'chat-typing';
+    div.id = 'chat-typing-indicator';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  function hideTyping(){
+    const t = document.getElementById('chat-typing-indicator');
+    if(t) t.remove();
+  }
+  function renderQuick(){
+    quick.classList.remove('is-hidden');
+    quick.innerHTML = pickQuick(3).map(q => `<button type="button">${q}</button>`).join('');
+    quick.querySelectorAll('button').forEach(b => b.addEventListener('click', () => handleUserMessage(b.textContent)));
+  }
+  function botReply(userText){
+    quick.classList.add('is-hidden');
+    quick.innerHTML = '';
+    showTyping();
+    new Promise(r => setTimeout(r, 650 + Math.random()*450)).then(() => {
+      hideTyping();
+      const match = respuestas.find(r => r.match.test(userText));
+      const reply = match ? match.reply : fallback;
+      addMsg(reply, 'bot', match && match.img, match && match.imgCaption);
+      if(match && match.action === 'goto-cotizar'){
+        setTimeout(() => document.getElementById('cotizar').scrollIntoView({behavior:'smooth'}), 400);
+      }
+      if(match && match.action === 'goto-catalogo'){
+        setTimeout(() => document.getElementById('catalogo').scrollIntoView({behavior:'smooth'}), 400);
+      }
+      setTimeout(renderQuick, 300);
+    });
+  }
+  function handleUserMessage(text){
+    if(!text.trim()) return;
+    addMsg(text, 'user');
+    input.value = '';
+    botReply(text);
+  }
+  launcher.addEventListener('click', () => {
+    win.classList.add('is-open');
+    if(!body.dataset.greeted){
+      addMsg('¡Hola! 👷 Soy el asistente virtual de Torreón Constructora. Puedo ayudarte con precios, plazos, garantía, seguridad o mostrarte el catálogo. ¿En qué te ayudo?', 'bot');
+      renderQuick();
+      body.dataset.greeted = '1';
+    }
+    input.focus();
+  });
+  closeBtn.addEventListener('click', () => win.classList.remove('is-open'));
+  sendBtn.addEventListener('click', () => handleUserMessage(input.value));
+  input.addEventListener('keydown', e => { if(e.key === 'Enter') handleUserMessage(input.value); });
+})();
+
+/* =========================================================
+   INICIALIZACIÓN
+========================================================= */
+initFiltrosPanels();
+renderObrasGrid();
+</script>
+</body>
+</html>

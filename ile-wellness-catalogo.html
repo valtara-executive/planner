@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilé Wellness — Cabinas y oficinas en renta para profesionales de la salud</title>
+<meta name="description" content="Explora y reserva al instante cabinas terapéuticas y oficinas privadas en Reforma CDMX y Tizayuca-Pachuca. Más de 80 profesionales activos.">
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="preconnect" href="https://i.pravatar.cc">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea,select{font:inherit;}
+ul,ol{list-style:none;}
+:focus-visible{outline:3px solid #C9974C;outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+}
+
+:root{
+  --ink:#2B2420;
+  --clay:#B96A4B;
+  --clay-deep:#a1583c;
+  --sage:#7C8B6F;
+  --sage-deep:#657056;
+  --gold:#C9974C;
+  --paper:#F4EEE5;
+  --cream:#FBF8F3;
+  --surface:#FFFEFB;
+  --line:rgba(43,36,32,0.1);
+  --muted:#6b5f54;
+  --muted-2:#8a7c70;
+  --display:'Ile-Display', Georgia, 'Times New Roman', serif;
+  --body:'Ile-Body', Arial, Helvetica, sans-serif;
+  --shadow-soft:0 10px 30px rgba(43,36,32,0.08);
+  --shadow-lift:0 20px 46px rgba(43,36,32,0.14);
+}
+@font-face{font-family:'Ile-Display';src:local('Georgia'),local('Times New Roman');font-weight:400 700;}
+
+body{
+  font-family:var(--body);
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.5;
+}
+h1,h2,h3,h4,.display{font-family:var(--display);font-weight:600;letter-spacing:-0.01em;}
+.wrap{max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px);}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:12px;}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--clay);}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:#000;padding:10px 16px;z-index:999;}
+.skip-link:focus{left:8px;top:8px;}
+
+/* ============ HEADER ============ */
+.site-header{position:sticky;top:0;z-index:80;background:rgba(251,248,243,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,4vw,56px);gap:20px;}
+.logo{font-family:var(--display);font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.logo .dot{width:8px;height:8px;background:var(--clay);border-radius:50%;display:inline-block;}
+.main-nav{display:flex;gap:26px;font-size:0.86rem;font-weight:500;flex:1;justify-content:center;}
+.main-nav a{border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .2s;}
+.main-nav a:hover{border-color:var(--clay);}
+.header-actions{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.btn-ghost{padding:10px 16px;border-radius:999px;font-size:0.82rem;font-weight:600;border:1px solid var(--line);transition:background .2s,border-color .2s;}
+.btn-ghost:hover{border-color:var(--clay);background:var(--paper);}
+.btn-primary{background:var(--clay);color:#fff;padding:11px 22px;border-radius:999px;font-size:0.82rem;font-weight:700;transition:background .2s,transform .15s;}
+.btn-primary:hover{background:var(--clay-deep);transform:translateY(-1px);}
+.fav-toggle-nav{display:flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;padding:9px 14px;border-radius:999px;border:1px solid var(--line);position:relative;}
+.fav-toggle-nav:hover{border-color:var(--clay);}
+.fav-toggle-nav .count{background:var(--clay);color:#fff;font-size:0.68rem;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;}
+.burger{display:none;width:40px;height:40px;border-radius:10px;align-items:center;justify-content:center;border:1px solid var(--line);}
+@media (max-width:980px){
+  .main-nav{display:none;}
+  .header-actions .btn-ghost{display:none;}
+}
+@media (max-width:640px){
+  .header-actions .fav-toggle-nav span.label{display:none;}
+}
+
+/* ============ SEARCH BAR ============ */
+.search-bar-wrap{border-top:1px solid var(--line);padding:14px clamp(20px,4vw,56px);}
+.search-bar{display:grid;grid-template-columns:1.1fr 1.1fr 1fr 1fr auto;gap:10px;max-width:1100px;margin:0 auto;}
+.search-field{display:flex;flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:9px 14px;}
+.search-field label{font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted-2);}
+.search-field select,.search-field input{border:none;background:transparent;font-size:0.88rem;color:var(--ink);padding:0;}
+.search-field select:focus,.search-field input:focus{outline:none;}
+.search-submit{background:var(--ink);color:#fff;border-radius:14px;padding:0 26px;font-weight:700;font-size:0.86rem;display:flex;align-items:center;gap:8px;justify-content:center;transition:background .2s;}
+.search-submit:hover{background:var(--clay);}
+@media (max-width:980px){
+  .search-bar{grid-template-columns:1fr 1fr;}
+  .search-submit{grid-column:1/3;padding:12px;}
+}
+@media (max-width:560px){
+  .search-bar{grid-template-columns:1fr;}
+}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:82vh;display:flex;align-items:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.72) saturate(1.05);}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg, rgba(43,36,32,0.68), rgba(43,36,32,0.18) 60%, rgba(43,36,32,0.05));}
+.hero-inner{position:relative;z-index:2;padding:70px 0 60px;max-width:680px;color:#FBF8F3;}
+.hero-inner .eyebrow{color:#f0c9b4;}
+.hero-inner .eyebrow::before{background:#f0c9b4;}
+.hero h1{font-size:clamp(2.2rem,5.6vw,4.4rem);line-height:1.04;}
+.hero p{margin-top:20px;font-size:1.08rem;line-height:1.65;max-width:48ch;opacity:0.94;}
+.hero-stats{margin-top:36px;display:flex;gap:clamp(20px,3vw,44px);flex-wrap:wrap;}
+.hero-stats div{border-left:1px solid rgba(251,248,243,0.4);padding-left:14px;}
+.hero-stats b{display:block;font-family:var(--display);font-size:1.7rem;}
+.hero-stats span{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.8;}
+
+/* ============ SECTIONS ============ */
+section{padding:88px 0;}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px;}
+.section-head h2{font-size:clamp(1.7rem,3vw,2.5rem);}
+.section-lead{max-width:56ch;font-size:0.98rem;color:var(--muted);line-height:1.65;}
+
+/* ============ CATALOG TOOLBAR ============ */
+.catalog-toolbar{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:var(--shadow-soft);margin-bottom:28px;}
+.toolbar-row1{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px;}
+.search-text{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;background:var(--paper);border-radius:12px;padding:10px 16px;}
+.search-text input{flex:1;background:transparent;border:none;font-size:0.9rem;}
+.search-text input:focus{outline:none;}
+.view-toggle{display:flex;background:var(--paper);border-radius:12px;padding:4px;gap:4px;}
+.view-toggle button{padding:8px 16px;border-radius:9px;font-size:0.82rem;font-weight:600;color:var(--muted);}
+.view-toggle button.is-active{background:var(--surface);color:var(--ink);box-shadow:0 2px 8px rgba(43,36,32,0.08);}
+.sort-select{background:var(--paper);border-radius:12px;padding:10px 14px;font-size:0.85rem;font-weight:600;border:none;}
+.filters-toggle-mobile{display:none;}
+.toolbar-row2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.filter-chip-group{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-chip{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:0.8rem;font-weight:600;color:var(--muted);transition:all .15s;background:var(--surface);}
+.filter-chip:hover{border-color:var(--clay);}
+.filter-chip.is-active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.filter-divider{width:1px;height:24px;background:var(--line);}
+.price-range-wrap{display:flex;align-items:center;gap:10px;font-size:0.8rem;color:var(--muted);}
+.price-range-wrap input[type="range"]{width:120px;}
+.results-count{font-size:0.85rem;color:var(--muted-2);font-weight:600;margin-bottom:20px;}
+
+/* Filters panel (advanced, collapsible on mobile) */
+.filters-panel{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+.filters-panel.is-collapsed{display:none;}
+.amenity-chip{padding:7px 13px;border-radius:999px;border:1px dashed var(--line);font-size:0.76rem;font-weight:600;color:var(--sage-deep);background:#eef1ea;}
+.amenity-chip.is-active{background:var(--sage);color:#fff;border-color:var(--sage);border-style:solid;}
+@media (max-width:900px){
+  .filters-toggle-mobile{display:inline-flex;}
+}
+
+/* ============ SPACE CARDS GRID ============ */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.space-card{background:var(--surface);border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-soft);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer;display:flex;flex-direction:column;opacity:0;transform:translateY(16px);}
+.space-card.is-visible{animation:cardIn .5s ease forwards;}
+@keyframes cardIn{to{opacity:1;transform:translateY(0);}}
+.space-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);}
+.card-img-wrap{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.space-card:hover .card-img-wrap img{transform:scale(1.06);}
+.card-badge{position:absolute;top:12px;left:12px;background:var(--sage);color:#fff;font-size:0.68rem;font-weight:700;padding:6px 12px;border-radius:999px;letter-spacing:0.02em;}
+.card-fav{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:rgba(251,248,243,0.92);display:flex;align-items:center;justify-content:center;transition:transform .15s;}
+.card-fav:hover{transform:scale(1.1);}
+.card-fav svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2;transition:fill .15s,stroke .15s;}
+.card-fav.is-fav svg{fill:var(--clay);stroke:var(--clay);}
+.card-type-tag{position:absolute;bottom:12px;left:12px;background:rgba(43,36,32,0.72);color:#fff;font-size:0.68rem;font-weight:600;padding:5px 11px;border-radius:999px;}
+.card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.card-top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.card-name{font-family:var(--display);font-size:1.08rem;font-weight:700;}
+.card-rating{display:flex;align-items:center;gap:4px;font-size:0.82rem;font-weight:700;flex-shrink:0;}
+.card-rating svg{width:14px;height:14px;fill:var(--gold);}
+.card-rating span.count{color:var(--muted-2);font-weight:400;}
+.card-loc{font-size:0.82rem;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.card-meta-row{display:flex;gap:12px;font-size:0.78rem;color:var(--muted-2);margin-top:2px;}
+.card-amenities{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.card-amenities span{font-size:0.68rem;background:var(--paper);color:var(--muted);padding:4px 9px;border-radius:999px;}
+.card-price-row{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;}
+.card-price-row b{font-family:var(--display);font-size:1.15rem;color:var(--clay);}
+.card-price-row .unit{font-size:0.74rem;color:var(--muted-2);}
+.card-price-alt{font-size:0.72rem;color:var(--muted-2);margin-top:2px;}
+
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-state h3{font-family:var(--display);font-size:1.3rem;margin-bottom:10px;color:var(--ink);}
+.empty-state button{margin-top:16px;}
+
+@media (max-width:1100px){.cards-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){.cards-grid{grid-template-columns:1fr;}}
+
+/* ============ MAP VIEW ============ */
+.map-view{display:none;}
+.map-view.is-active{display:block;}
+.cards-grid.is-hidden{display:none;}
+.map-shell{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow-soft);}
+.map-cities{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.map-city{background:var(--paper);border-radius:18px;padding:20px;}
+.map-city h4{font-family:var(--display);margin-bottom:14px;font-size:1.05rem;}
+.map-grid{position:relative;min-height:340px;background:var(--cream);border-radius:14px;border:1px dashed var(--line);overflow:hidden;}
+.map-pin{position:absolute;width:34px;height:34px;border-radius:50%;background:var(--clay);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;box-shadow:0 6px 16px rgba(185,106,75,0.4);transition:transform .15s;cursor:pointer;}
+.map-pin.tipo-oficina{background:var(--sage);box-shadow:0 6px 16px rgba(124,139,111,0.4);}
+.map-pin:hover{transform:scale(1.2);z-index:5;}
+.map-tooltip{position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:0.72rem;padding:8px 12px;border-radius:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;}
+.map-pin:hover .map-tooltip{opacity:1;}
+@media (max-width:760px){.map-cities{grid-template-columns:1fr;}}
+
+/* ============ HOW IT WORKS ============ */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px;}
+.step-card{background:var(--surface);border-radius:20px;padding:30px 24px;border:1px solid var(--line);}
+.step-num{font-family:var(--display);font-size:1.6rem;color:var(--clay);margin-bottom:12px;}
+.step-card h3{font-size:1.08rem;margin-bottom:8px;}
+.step-card p{font-size:0.88rem;color:var(--muted);line-height:1.6;}
+@media (max-width:980px){.steps-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.steps-grid{grid-template-columns:1fr;}}
+
+/* ============ COMMUNITY ============ */
+.community-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:36px;}
+.pro-card{text-align:center;}
+.pro-card img{width:76px;height:76px;border-radius:50%;object-fit:cover;margin:0 auto 10px;border:3px solid var(--surface);box-shadow:0 4px 14px rgba(43,36,32,0.12);}
+.pro-card b{display:block;font-size:0.86rem;}
+.pro-card span{font-size:0.74rem;color:var(--muted-2);}
+@media (max-width:980px){.community-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:560px){.community-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ============ PLANS ============ */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
+.plan-card{background:var(--surface);border-radius:22px;padding:34px 28px;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;}
+.plan-card.is-featured{border:2px solid var(--clay);position:relative;}
+.plan-card.is-featured::before{content:"Más elegido";position:absolute;top:-13px;left:28px;background:var(--clay);color:#fff;font-size:0.68rem;font-weight:700;padding:5px 14px;border-radius:999px;}
+.plan-card h3{font-size:1.2rem;margin-bottom:6px;}
+.plan-price{font-family:var(--display);font-size:2rem;color:var(--clay);margin:14px 0 4px;}
+.plan-price span{font-size:0.85rem;color:var(--muted-2);font-family:var(--body);}
+.plan-desc{font-size:0.85rem;color:var(--muted);margin-bottom:18px;}
+.plan-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;flex:1;}
+.plan-features li{font-size:0.86rem;display:flex;gap:8px;color:var(--ink);}
+.plan-features li::before{content:"✓";color:var(--sage-deep);font-weight:700;}
+.plan-select-btn{width:100%;padding:13px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;font-size:0.88rem;transition:background .2s;}
+.plan-select-btn:hover{background:var(--clay);}
+@media (max-width:900px){.plans-grid{grid-template-columns:1fr;}}
+
+/* ============ TESTIMONIALS ============ */
+.testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px;}
+.testi-card{background:var(--surface);border-radius:20px;padding:26px 24px;border:1px solid var(--line);display:flex;flex-direction:column;height:100%;}
+.testi-stars{color:var(--gold);letter-spacing:2px;font-size:0.85rem;margin-bottom:12px;}
+.testi-text{font-size:0.88rem;line-height:1.65;color:var(--ink);margin-bottom:18px;flex:1;}
+.testi-person{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line);}
+.testi-person img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.testi-name{font-weight:700;font-size:0.82rem;}
+.testi-role{font-size:0.72rem;color:var(--muted-2);}
+@media (max-width:980px){.testi-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.testi-grid{grid-template-columns:1fr;}}
+
+/* ============ CROSS-SELL ============ */
+.crosssell-section{background:var(--paper);}
+.crosssell-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px;}
+.crosssell-card{background:var(--surface);border-radius:20px;padding:30px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);}
+.crosssell-card .tag{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted-2);}
+.crosssell-card h3{font-size:1.2rem;}
+.crosssell-card p{font-size:0.88rem;color:var(--muted);line-height:1.6;}
+.crosssell-card a{margin-top:8px;font-size:0.84rem;font-weight:700;color:var(--clay);display:inline-flex;align-items:center;gap:6px;}
+@media (max-width:760px){.crosssell-grid{grid-template-columns:1fr;}}
+
+/* ============ FOOTER ============ */
+.site-footer{background:var(--ink);color:var(--cream);padding:64px 0 28px;}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(251,248,243,0.14);}
+.footer-top h4{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;opacity:0.55;font-weight:700;}
+.footer-top li{font-size:0.86rem;margin-bottom:9px;opacity:0.85;}
+.footer-top li a:hover{text-decoration:underline;}
+.footer-bottom{display:flex;justify-content:space-between;padding-top:22px;font-size:0.76rem;opacity:0.5;flex-wrap:wrap;gap:10px;}
+@media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+
+/* ============ MODAL: DETAIL ============ */
+.detail-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.72);z-index:500;display:none;align-items:flex-start;justify-content:center;padding:4vh 16px;overflow-y:auto;}
+.detail-backdrop.is-open{display:flex;}
+.detail-modal{background:var(--cream);max-width:980px;width:100%;border-radius:26px;overflow:hidden;position:relative;margin-bottom:5vh;box-shadow:0 40px 90px rgba(43,36,32,0.4);}
+.detail-close{position:absolute;top:18px;right:18px;z-index:6;width:40px;height:40px;border-radius:50%;background:rgba(43,36,32,0.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.detail-close:hover{background:var(--ink);}
+.detail-gallery{position:relative;aspect-ratio:16/9;background:var(--paper);}
+.detail-gallery img{width:100%;height:100%;object-fit:cover;}
+.gal-nav{position:absolute;bottom:16px;right:16px;display:flex;gap:6px;}
+.gal-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.55);cursor:pointer;}
+.gal-dot.is-active{background:#fff;}
+.gal-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(43,36,32,0.55);color:#fff;display:flex;align-items:center;justify-content:center;}
+.gal-arrow.prev{left:16px;}
+.gal-arrow.next{right:16px;}
+.detail-body{padding:32px clamp(20px,4vw,44px) 44px;}
+.detail-header-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:6px;}
+.detail-title{font-size:clamp(1.5rem,3vw,2.1rem);}
+.detail-loc{font-size:0.92rem;color:var(--muted-2);margin-top:6px;}
+.detail-rating-block{text-align:right;flex-shrink:0;}
+.detail-rating-block .stars{color:var(--gold);font-size:0.95rem;}
+.detail-rating-block .num{font-family:var(--display);font-size:1.3rem;}
+.detail-rating-block .count{font-size:0.76rem;color:var(--muted-2);}
+.detail-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;margin-top:26px;}
+.detail-desc{font-size:0.96rem;line-height:1.8;color:var(--ink);margin-bottom:26px;}
+.detail-desc p+p{margin-top:12px;}
+.amenities-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:30px;}
+.amenity-item{display:flex;align-items:center;gap:8px;font-size:0.86rem;color:var(--ink);}
+.amenity-item svg{width:16px;height:16px;color:var(--sage-deep);flex-shrink:0;}
+.reviews-block h4{font-size:1rem;margin-bottom:14px;}
+.review-item{padding:16px 0;border-top:1px solid var(--line);display:flex;gap:14px;}
+.review-item img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.review-name-row{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+.review-name{font-weight:700;font-size:0.85rem;}
+.review-date{font-size:0.72rem;color:var(--muted-2);}
+.review-stars{color:var(--gold);font-size:0.75rem;margin:2px 0 4px;}
+.review-text{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+
+/* Booking panel inside modal */
+.booking-panel{background:var(--surface);border-radius:20px;padding:24px;border:1px solid var(--line);position:sticky;top:16px;}
+.booking-price{display:flex;align-items:baseline;gap:6px;margin-bottom:16px;}
+.booking-price b{font-family:var(--display);font-size:1.6rem;color:var(--clay);}
+.booking-price span{font-size:0.8rem;color:var(--muted-2);}
+.duration-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:18px;}
+.duration-tabs button{padding:9px 4px;border-radius:10px;border:1px solid var(--line);font-size:0.72rem;font-weight:700;text-align:center;}
+.duration-tabs button.is-active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.detail-field{margin-bottom:14px;}
+.detail-field label{display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;color:var(--muted-2);margin-bottom:6px;}
+.detail-field input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-size:0.88rem;background:var(--cream);}
+.detail-field input:focus{border-color:var(--clay);outline:none;}
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.time-slot{padding:8px 4px;border-radius:9px;border:1px solid var(--line);font-size:0.75rem;text-align:center;background:var(--cream);}
+.time-slot.ocupado{opacity:0.35;text-decoration:line-through;cursor:not-allowed;}
+.time-slot:not(.ocupado):hover{border-color:var(--clay);}
+.time-slot.is-selected{background:var(--clay);color:#fff;border-color:var(--clay);}
+.total-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;margin:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.total-row b{font-family:var(--display);font-size:1.3rem;color:var(--ink);}
+.reserve-btn{width:100%;padding:14px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;font-size:0.9rem;transition:background .2s;}
+.reserve-btn:hover{background:var(--clay);}
+.reserve-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.fav-btn-detail{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1px solid var(--line);font-weight:600;font-size:0.85rem;display:flex;align-items:center;justify-content:center;gap:8px;}
+.fav-btn-detail svg{width:16px;height:16px;stroke:var(--ink);fill:none;}
+.fav-btn-detail.is-fav svg{fill:var(--clay);stroke:var(--clay);}
+
+.related-block{margin-top:44px;}
+.related-block h4{font-size:1rem;margin-bottom:16px;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.related-card{cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);}
+.related-card img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.related-card .r-info{padding:12px 14px;}
+.related-card .r-name{font-size:0.84rem;font-weight:700;}
+.related-card .r-loc{font-size:0.74rem;color:var(--muted-2);}
+@media (max-width:820px){
+  .detail-grid{grid-template-columns:1fr;}
+  .booking-panel{position:static;}
+  .amenities-list{grid-template-columns:1fr;}
+  .related-grid{grid-template-columns:1fr;}
+}
+
+/* ============ BOOKING SUCCESS SCREEN ============ */
+.success-screen{text-align:center;padding:50px 20px;}
+.success-icon{width:76px;height:76px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;}
+.success-icon svg{width:36px;height:36px;}
+.success-screen h3{font-size:1.5rem;margin-bottom:10px;}
+.success-screen p{color:var(--muted);font-size:0.92rem;margin-bottom:6px;}
+.success-folio{display:inline-block;background:var(--paper);padding:10px 20px;border-radius:999px;font-weight:700;font-family:var(--display);margin:16px 0;letter-spacing:0.03em;}
+.success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+
+/* ============ QUICK BOOKING MODAL (from card) ============ */
+.quickbook-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;}
+@media (max-width:520px){.quickbook-fields{grid-template-columns:1fr;}}
+
+/* ============ FAVORITES DRAWER ============ */
+.fav-drawer-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.5);z-index:490;display:none;}
+.fav-drawer-backdrop.is-open{display:block;}
+.fav-drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100vw);background:var(--cream);z-index:495;transform:translateX(100%);transition:transform .3s ease;padding:28px 24px;overflow-y:auto;}
+.fav-drawer.is-open{transform:translateX(0);}
+.fav-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.fav-drawer-head h3{font-size:1.3rem;}
+.fav-drawer-close{width:36px;height:36px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;}
+.fav-item{display:flex;gap:12px;background:var(--surface);border-radius:14px;padding:12px;margin-bottom:12px;border:1px solid var(--line);cursor:pointer;}
+.fav-item img{width:70px;height:70px;border-radius:10px;object-fit:cover;flex-shrink:0;}
+.fav-item-info{flex:1;}
+.fav-item-info b{font-size:0.88rem;display:block;}
+.fav-item-info span{font-size:0.76rem;color:var(--muted-2);}
+.fav-item-remove{align-self:center;color:var(--clay);font-size:0.78rem;font-weight:700;}
+.fav-empty{text-align:center;padding:60px 10px;color:var(--muted);}
+
+/* ============ TOASTS ============ */
+.toast-stack{position:fixed;bottom:24px;left:24px;z-index:350;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+.toast{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow-lift);font-size:0.82rem;max-width:320px;display:flex;gap:10px;align-items:flex-start;opacity:0;transform:translateY(10px);animation:toastIn .4s ease forwards;pointer-events:auto;}
+.toast.leaving{animation:toastOut .3s ease forwards;}
+@keyframes toastIn{to{opacity:1;transform:translateY(0);}}
+@keyframes toastOut{to{opacity:0;transform:translateY(6px);}}
+.toast-icon{width:30px;height:30px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.9rem;}
+.toast-text b{display:block;font-size:0.83rem;}
+.toast-text span{font-size:0.76rem;color:var(--muted-2);}
+@media (max-width:640px){.toast-stack{left:12px;right:12px;bottom:88px;}.toast{max-width:none;}}
+
+/* ============ CHATBOT ============ */
+#ile-chat-launcher{position:fixed;bottom:24px;right:24px;z-index:300;width:60px;height:60px;border-radius:50%;background:var(--clay);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(43,36,32,0.3);transition:transform .2s ease;}
+#ile-chat-launcher:hover{transform:scale(1.06);}
+#ile-chat-launcher svg{width:26px;height:26px;color:#fff;}
+#ile-chat-launcher .dot{position:absolute;top:6px;right:6px;width:10px;height:10px;background:var(--sage);border-radius:50%;border:2px solid #fff;}
+#ile-chat-window{position:fixed;bottom:96px;right:24px;z-index:300;width:370px;max-width:calc(100vw - 32px);height:520px;max-height:70vh;background:var(--surface);border-radius:20px;box-shadow:0 24px 64px rgba(43,36,32,0.3);display:none;flex-direction:column;overflow:hidden;}
+#ile-chat-window.is-open{display:flex;}
+.chat-header{background:var(--ink);color:#fff;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;}
+.chat-header .title{font-weight:700;font-size:0.92rem;}
+.chat-header .subtitle{font-size:0.72rem;opacity:0.7;display:flex;align-items:center;gap:6px;}
+.chat-header .subtitle::before{content:"";width:7px;height:7px;background:var(--sage);border-radius:50%;}
+.chat-close{color:#fff;font-size:1.1rem;opacity:0.8;}
+.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--cream);}
+.chat-msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:0.85rem;line-height:1.45;}
+.chat-msg.bot{background:var(--surface);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px;}
+.chat-msg.user{background:var(--clay);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.chat-msg-img{margin-top:8px;border-radius:10px;overflow:hidden;}
+.chat-msg-img img{width:100%;display:block;}
+.chat-typing{display:flex;gap:4px;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;align-self:flex-start;width:fit-content;}
+.chat-typing span{width:6px;height:6px;background:#b8ada3;border-radius:50%;animation:chatTyping 1.2s infinite ease-in-out;}
+.chat-typing span:nth-child(2){animation-delay:.15s;}
+.chat-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes chatTyping{0%,60%,100%{transform:translateY(0);opacity:0.4;}30%{transform:translateY(-4px);opacity:1;}}
+.chat-quick{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 12px;transition:opacity .25s ease;}
+.chat-quick.is-hidden{opacity:0;}
+.chat-quick button{font-size:0.76rem;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);transition:all .15s;}
+.chat-quick button:hover{border-color:var(--clay);color:var(--clay);}
+.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:var(--surface);}
+.chat-input-row input{flex:1;border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:0.85rem;}
+.chat-input-row input:focus{border-color:var(--clay);outline:none;}
+.chat-send{width:38px;height:38px;border-radius:50%;background:var(--clay);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+/* ============ MOBILE FILTERS MODAL ============ */
+.mobile-filters-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.5);z-index:400;display:none;}
+.mobile-filters-backdrop.is-open{display:block;}
+.mobile-filters-sheet{position:fixed;bottom:0;left:0;right:0;background:var(--cream);border-radius:24px 24px 0 0;z-index:405;max-height:82vh;overflow-y:auto;padding:24px;transform:translateY(100%);transition:transform .3s ease;}
+.mobile-filters-sheet.is-open{transform:translateY(0);}
+
+/* generic modal reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-top">
+    <span class="logo"><span class="dot"></span>Ilé Wellness</span>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#catalogo">Espacios</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#comunidad">Comunidad</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <button class="fav-toggle-nav" id="open-fav-drawer" aria-label="Ver mis favoritos">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <span class="label">Favoritos</span>
+        <span class="count" id="fav-count">0</span>
+      </button>
+      <button class="btn-ghost" id="btn-login-deco">Iniciar sesión</button>
+      <button class="btn-primary" id="btn-reservar-nav" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Reservar ahora</button>
+      <button class="burger" aria-label="Abrir menú">☰</button>
+    </div>
+  </div>
+  <div class="search-bar-wrap">
+    <form class="search-bar" id="hero-search-form">
+      <div class="search-field">
+        <label for="sf-sede">Sede</label>
+        <select id="sf-sede">
+          <option value="">Todas las sedes</option>
+          <option value="Reforma CDMX">Reforma, CDMX</option>
+          <option value="Tizayuca-Pachuca">Tizayuca / Pachuca</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="sf-tipo">Tipo de espacio</label>
+        <select id="sf-tipo">
+          <option value="">Cabina u oficina</option>
+          <option value="cabina">Cabina</option>
+          <option value="oficina">Oficina</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label for="sf-fecha">Fecha</label>
+        <input type="date" id="sf-fecha">
+      </div>
+      <div class="search-field">
+        <label for="sf-hora">Hora</label>
+        <input type="time" id="sf-hora">
+      </div>
+      <button type="submit" class="search-submit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Buscar
+      </button>
+    </form>
+  </div>
+</header>
+
+<main id="main">
+<!-- ============ HERO ============ -->
+<section class="hero" style="padding:0;">
+  <div class="hero-bg" style="background-image:url('https://picsum.photos/seed/ile-catalogo-hero/1800/1200')"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Coworking de salud y bienestar</span>
+    <h1>Reserva tu cabina u oficina en segundos, no en llamadas.</h1>
+    <p>Explora cabinas terapéuticas y oficinas privadas en Reforma CDMX y Tizayuca-Pachuca. Elige tu espacio, ve la disponibilidad real y confirma tu reserva al instante, como en tu app de viajes favorita.</p>
+    <div class="hero-stats">
+      <div><b>80+</b><span>Profesionales activos</span></div>
+      <div><b>4.9/5</b><span>Calificación promedio</span></div>
+      <div><b>Al instante</b><span>Confirmación de reserva</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATÁLOGO ============ -->
+<section id="catalogo">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">El catálogo completo</span>
+        <h2>Encuentra tu espacio ideal</h2>
+      </div>
+      <p class="section-lead">Cabinas equipadas para terapia manual y oficinas insonorizadas para consulta, con disponibilidad real y precio claro por hora, día o mes.</p>
+    </div>
+
+    <div class="catalog-toolbar">
+      <div class="toolbar-row1">
+        <div class="search-text">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="text-search" placeholder="Busca por nombre, sede o amenidad…">
+        </div>
+        <select class="sort-select" id="sort-select">
+          <option value="recomendados">Mejor calificados</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="recientes">Más recientes</option>
+        </select>
+        <div class="view-toggle" role="group" aria-label="Cambiar vista">
+          <button type="button" class="is-active" data-view="lista">Lista</button>
+          <button type="button" data-view="mapa">Mapa</button>
+        </div>
+        <button type="button" class="filter-chip filters-toggle-mobile" id="toggle-mobile-filters">Filtros</button>
+      </div>
+
+      <div class="toolbar-row2" id="filters-desktop">
+        <div class="filter-chip-group" id="chip-sede">
+          <button class="filter-chip is-active" data-filter="sede" data-value="">Todas las sedes</button>
+          <button class="filter-chip" data-filter="sede" data-value="Reforma CDMX">Reforma CDMX</button>
+          <button class="filter-chip" data-filter="sede" data-value="Tizayuca-Pachuca">Tizayuca-Pachuca</button>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="filter-chip-group" id="chip-tipo">
+          <button class="filter-chip is-active" data-filter="tipo" data-value="">Todos los tipos</button>
+          <button class="filter-chip" data-filter="tipo" data-value="cabina-masaje">Cabina de masaje</button>
+          <button class="filter-chip" data-filter="tipo" data-value="cabina-manual">Cabina terapia manual</button>
+          <button class="filter-chip" data-filter="tipo" data-value="oficina-individual">Oficina individual</button>
+          <button class="filter-chip" data-filter="tipo" data-value="oficina-grupal">Oficina grupal/familiar</button>
+        </div>
+      </div>
+
+      <div class="filters-panel" id="filters-advanced">
+        <div class="filter-chip-group" id="chip-amenidad">
+          <span class="amenity-chip" data-filter="amenidad" data-value="aromaterapia">Aromaterapia</span>
+          <span class="amenity-chip" data-filter="amenidad" data-value="insonorizacion">Insonorización</span>
+          <span class="amenity-chip" data-filter="amenidad" data-value="tina">Tina de hidroterapia</span>
+          <span class="amenity-chip" data-filter="amenidad" data-value="luz-natural">Luz natural</span>
+          <span class="amenity-chip" data-filter="amenidad" data-value="acceso-independiente">Acceso independiente</span>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="price-range-wrap">
+          <label for="price-range">Hasta $<span id="price-range-val">1200</span>/hora</label>
+          <input type="range" id="price-range" min="150" max="1200" step="50" value="1200">
+        </div>
+        <div class="filter-divider"></div>
+        <div class="price-range-wrap">
+          <label for="cap-range">Capacidad ≥ <span id="cap-range-val">1</span></label>
+          <input type="range" id="cap-range" min="1" max="6" step="1" value="1">
+        </div>
+      </div>
+    </div>
+
+    <p class="results-count" id="results-count">Mostrando 30 de 30 espacios</p>
+
+    <div class="cards-grid" id="cards-grid"></div>
+
+    <div class="map-view" id="map-view">
+      <div class="map-shell">
+        <div class="map-cities">
+          <div class="map-city">
+            <h4>Reforma, Ciudad de México</h4>
+            <div class="map-grid" id="map-grid-reforma"></div>
+          </div>
+          <div class="map-city">
+            <h4>Tizayuca / Pachuca, Hidalgo</h4>
+            <div class="map-grid" id="map-grid-tizayuca"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO FUNCIONA ============ -->
+<section id="como-funciona" style="background:var(--paper);">
+  <div class="wrap">
+    <span class="eyebrow">El proceso</span>
+    <h2>Reservar toma menos de un minuto</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Explora espacios</h3>
+        <p>Filtra por sede, tipo y amenidades hasta encontrar la cabina u oficina perfecta para tu práctica.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Reserva al instante</h3>
+        <p>Elige fecha, hora y duración. Tu reserva queda confirmada de inmediato, sin esperar respuesta de nadie.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Llega y trabaja</h3>
+        <p>El espacio te espera higienizado, con aromaterapia y sonido ambiental listos para tu sesión.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Recibimos a tu paciente</h3>
+        <p>Nuestra recepción compartida agenda y recibe a quien llega a verte, dando una imagen profesional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMUNIDAD ============ -->
+<section id="comunidad">
+  <div class="wrap">
+    <span class="eyebrow">Quiénes ya trabajan aquí</span>
+    <h2>Una comunidad activa de profesionales de la salud</h2>
+    <div class="community-grid" id="community-grid"></div>
+  </div>
+</section>
+
+<!-- ============ PLANES ============ -->
+<section id="planes" style="background:var(--paper);">
+  <div class="wrap">
+    <span class="eyebrow">Membresías</span>
+    <h2>Elige cómo quieres trabajar con nosotros</h2>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <h3>Flexible</h3>
+        <p class="plan-desc">Paga solo por lo que usas, sin compromiso mensual.</p>
+        <div class="plan-price">Pago por uso<span> / según reserva</span></div>
+        <ul class="plan-features">
+          <li>Acceso a todas las cabinas y oficinas</li>
+          <li>Reserva por hora, medio día o día completo</li>
+          <li>Sin permanencia mínima</li>
+          <li>Café y wifi incluidos</li>
+        </ul>
+        <button class="plan-select-btn" data-plan="Flexible">Seleccionar plan</button>
+      </div>
+      <div class="plan-card is-featured">
+        <h3>Mensual Cabina</h3>
+        <p class="plan-desc">Ideal para masoterapeutas con agenda regular de pacientes.</p>
+        <div class="plan-price">$4,200<span> MXN / mes</span></div>
+        <ul class="plan-features">
+          <li>40 horas de cabina incluidas al mes</li>
+          <li>Prioridad de horario en reservas</li>
+          <li>Aromaterapia y sonido sin costo extra</li>
+          <li>Descuento en horas adicionales</li>
+        </ul>
+        <button class="plan-select-btn" data-plan="Mensual Cabina">Seleccionar plan</button>
+      </div>
+      <div class="plan-card">
+        <h3>Mensual Oficina</h3>
+        <p class="plan-desc">Para psicólogos y nutriólogos con consulta fija cada semana.</p>
+        <div class="plan-price">$6,800<span> MXN / mes</span></div>
+        <ul class="plan-features">
+          <li>Oficina privada insonorizada de tiempo completo</li>
+          <li>Sala de espera compartida con recepción</li>
+          <li>Casillero personal</li>
+          <li>Acceso preferente a salas de terapia grupal</li>
+        </ul>
+        <button class="plan-select-btn" data-plan="Mensual Oficina">Seleccionar plan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section id="testimonios">
+  <div class="wrap">
+    <span class="eyebrow">Prueba social</span>
+    <h2>Lo que dicen los profesionales de Ilé</h2>
+    <div class="testi-grid" id="testi-grid"></div>
+  </div>
+</section>
+
+<!-- ============ CROSS-SELL ============ -->
+<section class="crosssell-section">
+  <div class="wrap">
+    <span class="eyebrow">También somos Grupo Meridiano</span>
+    <h2>Un grupo que acompaña tu práctica más allá del espacio rentado</h2>
+    <div class="crosssell-grid">
+      <div class="crosssell-card">
+        <span class="tag">Arqueo Estudio · Arquitectura</span>
+        <h3>¿Sueñas con tu propio consultorio?</h3>
+        <p>Diseñamos consultorios y clínicas a la medida de tu práctica, con la misma calidez que ves en Ilé.</p>
+        <a href="#">Conocer Arqueo Estudio →</a>
+      </div>
+      <div class="crosssell-card">
+        <span class="tag">Torreón Constructora · Construcción</span>
+        <h3>Construye o remodela tu espacio propio</h3>
+        <p>Obra nueva y remodelación integral para cuando estés listo para tener tu consultorio físico.</p>
+        <a href="#">Conocer Torreón Constructora →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto">
+  <div class="wrap" style="text-align:center;max-width:640px;">
+    <span class="eyebrow" style="justify-content:center;">Contacto</span>
+    <h2>¿Tienes dudas antes de reservar?</h2>
+    <p class="section-lead" style="margin:14px auto 0;">Escríbenos a hola@ilewellness.mx o usa el asistente virtual en la esquina inferior. Respondemos rápido, como todo aquí.</p>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <span class="logo" style="display:block;margin-bottom:14px;color:#fff;">Ilé Wellness</span>
+        <p style="font-size:0.86rem;opacity:0.7;max-width:32ch;line-height:1.6;">Cabinas terapéuticas y oficinas profesionales en renta para el cuidado de la salud.</p>
+      </div>
+      <div>
+        <h4>Ilé</h4>
+        <ul>
+          <li><a href="#catalogo">Espacios</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#planes">Planes y membresías</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sedes</h4>
+        <ul>
+          <li>Paseo de la Reforma, CDMX</li>
+          <li>Tizayuca / Pachuca, Hidalgo</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#" onclick="return false;">Aviso de privacidad</a></li>
+          <li><a href="#" onclick="return false;">Términos de servicio</a></li>
+          <li><a href="#" onclick="return false;">Política de cancelación</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Ilé Wellness forma parte de Grupo Meridiano, junto con Arqueo Estudio y Torreón Constructora.</span>
+      <span>© 2026 Ilé Wellness. Boceto de demostración.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ DETAIL MODAL ============ -->
+<div class="detail-backdrop" id="detail-backdrop" role="dialog" aria-modal="true" aria-label="Detalle del espacio">
+  <div class="detail-modal" id="detail-modal-content">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ============ FAVORITES DRAWER ============ -->
+<div class="fav-drawer-backdrop" id="fav-drawer-backdrop"></div>
+<aside class="fav-drawer" id="fav-drawer" aria-label="Mis favoritos">
+  <div class="fav-drawer-head">
+    <h3>Mis favoritos</h3>
+    <button class="fav-drawer-close" id="close-fav-drawer" aria-label="Cerrar">✕</button>
+  </div>
+  <div id="fav-drawer-list"></div>
+</aside>
+
+<!-- ============ MOBILE FILTERS ============ -->
+<div class="mobile-filters-backdrop" id="mobile-filters-backdrop"></div>
+<div class="mobile-filters-sheet" id="mobile-filters-sheet">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+    <h3 style="font-family:var(--display);font-size:1.2rem;">Filtros</h3>
+    <button id="close-mobile-filters" style="width:36px;height:36px;border-radius:50%;background:var(--paper);">✕</button>
+  </div>
+  <div id="mobile-filters-content"></div>
+  <button id="apply-mobile-filters" class="btn-primary" style="width:100%;margin-top:16px;padding:14px;">Ver resultados</button>
+</div>
+
+<!-- ============ TOASTS ============ -->
+<div class="toast-stack" id="toast-stack"></div>
+
+<!-- ============ CHATBOT ============ -->
+<button id="ile-chat-launcher" aria-label="Abrir asistente virtual de Ilé">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  <span class="dot"></span>
+</button>
+<div id="ile-chat-window" role="dialog" aria-label="Asistente virtual de Ilé">
+  <div class="chat-header">
+    <div><div class="title">Asistente Ilé</div><div class="subtitle">En línea</div></div>
+    <button class="chat-close" id="chat-close" aria-label="Cerrar chat">✕</button>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-quick" id="chat-quick"></div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" placeholder="Escribe tu pregunta…" aria-label="Escribe tu mensaje">
+    <button class="chat-send" id="chat-send" aria-label="Enviar mensaje">➤</button>
+  </div>
+</div>
+
+<script>
+// =========================================================
+// DATOS DE EJEMPLO — ILÉ WELLNESS CATÁLOGO
+// =========================================================
+
+const AMENIDADES_INFO = {
+  'aromaterapia': {label:'Aromaterapia configurable', icon:'leaf'},
+  'insonorizacion': {label:'Insonorización acústica', icon:'shield'},
+  'tina': {label:'Tina de hidroterapia', icon:'droplet'},
+  'luz-natural': {label:'Luz natural directa', icon:'sun'},
+  'acceso-independiente': {label:'Acceso independiente', icon:'key'},
+  'sonido': {label:'Sonido ambiental', icon:'music'},
+  'wifi': {label:'Wifi de alta velocidad', icon:'wifi'},
+  'cafe': {label:'Café de cortesía', icon:'coffee'},
+  'recepcion': {label:'Recepción compartida', icon:'users'},
+  'higienizacion': {label:'Higienización entre sesiones', icon:'sparkle'},
+  'sala-espera': {label:'Sala de espera propia', icon:'sofa'},
+  'casillero': {label:'Casillero personal', icon:'lock'}
+};
+
+function seedRandom(seed){
+  let h = 0;
+  for(let i=0;i<seed.length;i++){ h = (h*31 + seed.charCodeAt(i)) >>> 0; }
+  return function(){
+    h ^= h << 13; h >>>= 0;
+    h ^= h >>> 17;
+    h ^= h << 5; h >>>= 0;
+    return (h % 10000) / 10000;
+  };
+}
+
+const NOMBRES_CABINA = [
+  'Cabina Roble','Cabina Bruma','Cabina Musgo','Cabina Arcilla','Cabina Ceniza','Cabina Sal',
+  'Cabina Palma','Cabina Cedro','Cabina Nube','Cabina Ámbar','Cabina Jade','Cabina Vainilla',
+  'Cabina Ocre','Cabina Lino','Cabina Coral','Cabina Bambú'
+];
+const NOMBRES_OFICINA = [
+  'Oficina Alcanfor','Oficina Membrillo','Oficina Azahar','Oficina Laurel','Oficina Romero',
+  'Oficina Girasol','Oficina Magnolia','Oficina Ciprés','Oficina Jazmín','Oficina Alba',
+  'Oficina Nogal','Oficina Salvia','Oficina Amaranto','Oficina Tepozán'
+];
+
+const ESPECIALIDADES_CABINA = ['Masoterapia','Reflexología','Terapia manual','Drenaje linfático','Quiromasaje deportivo'];
+const ESPECIALIDADES_OFICINA_IND = ['Consulta psicológica','Consulta nutricional','Terapia individual'];
+const ESPECIALIDADES_OFICINA_GRUPAL = ['Terapia de pareja','Terapia familiar','Sesiones grupales'];
+
+const AMBIENTACIONES = [
+  'con luz natural directa desde ventanal orientado al jardín',
+  'con tina de hidroterapia integrada y acabados en piedra',
+  'de ambiente zen con vista a jardín interior y difusor de esencias',
+  'con acceso independiente para pacientes con movilidad reducida',
+  'con paredes de madera cálida y sonido ambiental envolvente',
+  'con textiles naturales y luz regulable para sesiones nocturnas'
+];
+
+function generarEspacios(){
+  const espacios = [];
+  let contador = 1;
+
+  // 18 cabinas — variedad entre Reforma y Tizayuca-Pachuca
+  for(let i=0;i<18;i++){
+    const seed = 'ile-space-cabina-' + i;
+    const rnd = seedRandom(seed);
+    const sede = i % 2 === 0 ? 'Reforma CDMX' : 'Tizayuca-Pachuca';
+    const nombre = NOMBRES_CABINA[i % NOMBRES_CABINA.length];
+    const ambientacion = AMBIENTACIONES[i % AMBIENTACIONES.length];
+    const tieneAroma = rnd() > 0.15;
+    const tieneTina = ambientacion.includes('tina') || rnd() > 0.85;
+    const tieneLuzNatural = ambientacion.includes('luz natural') || rnd() > 0.6;
+    const tieneAccesoIndep = ambientacion.includes('independiente') || rnd() > 0.8;
+    const capacidad = rnd() > 0.85 ? 2 : 1;
+    const precioHora = 160 + Math.round(rnd()*8)*10;
+    const rating = (4.5 + rnd()*0.5).toFixed(1);
+    const reviews = 8 + Math.round(rnd()*60);
+
+    const amenidades = ['sonido','wifi','cafe','recepcion','higienizacion'];
+    if(tieneAroma) amenidades.unshift('aromaterapia');
+    if(tieneTina) amenidades.push('tina');
+    if(tieneLuzNatural) amenidades.push('luz-natural');
+    if(tieneAccesoIndep) amenidades.push('acceso-independiente');
+
+    espacios.push({
+      id:'esp-cabina-' + contador,
+      seed:seed,
+      nombre:nombre + ' ' + (Math.floor(i/NOMBRES_CABINA.length)+1 > 1 ? (Math.floor(i/NOMBRES_CABINA.length)+1) : ''),
+      nombreCorto:nombre,
+      tipo:'cabina',
+      subtipo: rnd() > 0.5 ? 'cabina-masaje' : 'cabina-manual',
+      especialidadSugerida: ESPECIALIDADES_CABINA[i % ESPECIALIDADES_CABINA.length],
+      sede: sede,
+      capacidad: capacidad,
+      rating: parseFloat(rating),
+      reviewCount: reviews,
+      precioHora: precioHora,
+      precioDia: Math.round(precioHora * 6.2),
+      precioMes: Math.round(precioHora * 6.2 * 18),
+      amenidades: amenidades,
+      descripcion: `Cabina equipada para ${ESPECIALIDADES_CABINA[i % ESPECIALIDADES_CABINA.length].toLowerCase()}, ${ambientacion}. Incluye camilla profesional ajustable, ropa de cama y toallas de algodón, higienizada por completo antes de tu llegada.\n\nPensada para terapeutas que buscan un espacio propio sin la carga de mantener un local: llegas, tu paciente es recibido en recepción, y al terminar la sesión nuestro equipo se encarga de la limpieza y preparación para la siguiente reserva.\n\nCuenta con control de aromaterapia y sonido ambiental configurables desde un panel discreto, para que cada sesión se sienta hecha a la medida de tu práctica.`,
+      diasCreacion: 400 - i*7,
+      antiguedad: i,
+    });
+    contador++;
+  }
+
+  // 14 oficinas — variedad de tamaños
+  for(let i=0;i<14;i++){
+    const seed = 'ile-space-oficina-' + i;
+    const rnd = seedRandom(seed);
+    const sede = i % 2 === 0 ? 'Tizayuca-Pachuca' : 'Reforma CDMX';
+    const esGrupal = i % 4 === 0;
+    const nombre = NOMBRES_OFICINA[i % NOMBRES_OFICINA.length];
+    const capacidad = esGrupal ? (2 + Math.round(rnd()*2)) : 1;
+    const precioHora = esGrupal ? 260 + Math.round(rnd()*10)*10 : 190 + Math.round(rnd()*8)*10;
+    const rating = (4.5 + rnd()*0.5).toFixed(1);
+    const reviews = 6 + Math.round(rnd()*50);
+
+    const amenidades = ['insonorizacion','wifi','cafe','recepcion','casillero','sala-espera'];
+    if(esGrupal) amenidades.push('sonido');
+    if(rnd() > 0.7) amenidades.push('luz-natural');
+    if(rnd() > 0.85) amenidades.push('acceso-independiente');
+
+    espacios.push({
+      id:'esp-oficina-' + (i+1),
+      seed:seed,
+      nombre: nombre,
+      nombreCorto: nombre,
+      tipo:'oficina',
+      subtipo: esGrupal ? 'oficina-grupal' : 'oficina-individual',
+      especialidadSugerida: esGrupal ? ESPECIALIDADES_OFICINA_GRUPAL[i % ESPECIALIDADES_OFICINA_GRUPAL.length] : ESPECIALIDADES_OFICINA_IND[i % ESPECIALIDADES_OFICINA_IND.length],
+      sede: sede,
+      capacidad: capacidad,
+      rating: parseFloat(rating),
+      reviewCount: reviews,
+      precioHora: precioHora,
+      precioDia: Math.round(precioHora * 6.5),
+      precioMes: esGrupal ? Math.round(precioHora * 6.5 * 20) : (6200 + Math.round(rnd()*8)*100),
+      amenidades: amenidades,
+      descripcion: esGrupal
+        ? `Oficina privada pensada para ${ESPECIALIDADES_OFICINA_GRUPAL[i % ESPECIALIDADES_OFICINA_GRUPAL.length].toLowerCase()}, con espacio para hasta ${capacidad} personas además del profesional. Mobiliario flexible que se puede reorganizar según la dinámica de la sesión.\n\nLa insonorización está pensada para conversaciones sensibles: nada se escucha desde la sala de espera ni desde oficinas contiguas.\n\nIncluye sala de espera propia para que las familias o parejas esperen con privacidad antes de entrar.`
+        : `Oficina privada insonorizada, ideal para ${ESPECIALIDADES_OFICINA_IND[i % ESPECIALIDADES_OFICINA_IND.length].toLowerCase()} que requiere total confidencialidad. Mobiliario base incluido: escritorio, sillón cómodo y espacio de trabajo.\n\nTus pacientes esperan en la sala común con café de cortesía mientras recepción confirma tu disponibilidad y los anuncia a tu llegada.\n\nCuenta con casillero personal para guardar expedientes y material de trabajo entre sesiones.`,
+      diasCreacion: 380 - i*9,
+      antiguedad: i + 18,
+    });
+  }
+
+  return espacios;
+}
+
+const ESPACIOS = generarEspacios();
+
+// Galerías de imágenes por espacio (6-8 fotos usando seeds derivadas)
+function galeriaFor(espacio){
+  const base = espacio.seed;
+  const n = espacio.tipo === 'cabina' ? 7 : 6;
+  const arr = [];
+  for(let i=0;i<n;i++) arr.push(base + '-g' + i);
+  return arr;
+}
+
+// Reseñas de ejemplo
+const NOMBRES_REVIEW = ['Fernanda Castillo','Ricardo Palma','Diana Reyes','Mariana Cobos','Joaquín Herrera','Paola Nieto','Renata Solís','Andrés Falcón','Camila Ortiz','Lucía Mendoza','Sofía Barragán','Emilio Vidal','Valeria Nuño','Héctor Prado','Ximena Rosales','Iván Casares'];
+const TEXTOS_REVIEW = [
+  'La higienización entre sesiones se nota de verdad, siempre llego a un espacio impecable.',
+  'La aromaterapia hace toda la diferencia con pacientes ansiosos, se relajan desde que entran.',
+  'Reservar desde el celular entre paciente y paciente me ahorra muchísimo tiempo.',
+  'La insonorización es real, nunca me preocupo de que se escuche la conversación desde afuera.',
+  'La recepción trata a mis pacientes con una calidez que eleva la imagen de toda mi práctica.',
+  'El café y el wifi son un detalle pequeño que se agradece cuando tienes jornadas largas.',
+  'Cambié de espacio varias veces según mi agenda y siempre encontré disponibilidad al instante.',
+  'La luz natural de esta cabina en particular hace que las sesiones se sientan distintas, más cálidas.',
+  'Cancelé una reserva a último momento sin ningún problema, la política de 24 horas es justa.',
+  'Llevo seis meses aquí y jamás he tenido un problema de limpieza o de puntualidad del espacio.'
+];
+function generarReseñas(espacio){
+  const rnd = seedRandom(espacio.seed + '-reviews');
+  const count = 5 + Math.floor(rnd()*4);
+  const reviews = [];
+  for(let i=0;i<count;i++){
+    const nombreIdx = Math.floor(rnd()*NOMBRES_REVIEW.length);
+    const textoIdx = Math.floor(rnd()*TEXTOS_REVIEW.length);
+    const diasAtras = 3 + Math.floor(rnd()*180);
+    reviews.push({
+      nombre: NOMBRES_REVIEW[(nombreIdx+i) % NOMBRES_REVIEW.length],
+      avatarSeed: 'ile-review-' + espacio.id + '-' + i,
+      texto: TEXTOS_REVIEW[(textoIdx+i) % TEXTOS_REVIEW.length],
+      rating: rnd() > 0.15 ? 5 : 4,
+      diasAtras: diasAtras
+    });
+  }
+  return reviews.sort((a,b)=>a.diasAtras-b.diasAtras);
+}
+
+// Profesionales de la comunidad
+const ESPECIALIDADES_COMUNIDAD = ['Masoterapeuta','Psicóloga clínica','Nutriólogo','Reflexóloga','Fisioterapeuta','Quiropráctico','Terapeuta familiar','Acupunturista','Psicóloga infantil','Nutrióloga deportiva','Masoterapeuta deportivo','Terapeuta de pareja'];
+const NOMBRES_COMUNIDAD = ['Lucía Mendoza','Andrés Falcón','Camila Ortiz','Renata Solís','Joaquín Herrera','Paola Nieto','Fernanda Castillo','Ricardo Palma','Diana Reyes','Mariana Cobos','Sofía Barragán','Emilio Vidal'];
+const COMUNIDAD = NOMBRES_COMUNIDAD.map((nombre,i) => ({
+  nombre, especialidad: ESPECIALIDADES_COMUNIDAD[i], avatarSeed:'ile-pro-'+i
+}));
+
+// Testimonios generales (sección 6)
+const TESTIMONIOS = [
+  {nombre:'Lucía Mendoza', especialidad:'Masoterapeuta', avatarSeed:'ile-testi-0', rating:5, texto:'Dejé de pagar renta fija de un local que usaba tres días a la semana. Ahora reservo cabina solo cuando tengo pacientes agendados y eso cambió mis números por completo.'},
+  {nombre:'Andrés Falcón', especialidad:'Psicólogo clínico', avatarSeed:'ile-testi-1', rating:5, texto:'La insonorización de la oficina me da la privacidad que necesito para sesiones difíciles. Mis pacientes se sienten cómodos desde que llegan a la sala de espera.'},
+  {nombre:'Camila Ortiz', especialidad:'Nutrióloga', avatarSeed:'ile-testi-2', rating:5, texto:'El catálogo hace que reservar tome treinta segundos. Ver disponibilidad real antes de comprometerme cambió cómo organizo mi semana entera.'},
+  {nombre:'Renata Solís', especialidad:'Reflexóloga', avatarSeed:'ile-testi-3', rating:5, texto:'La recepción compartida da una imagen mucho más profesional que un consultorio solo, y mis pacientes lo notan desde la primera visita.'},
+  {nombre:'Joaquín Herrera', especialidad:'Fisioterapeuta', avatarSeed:'ile-testi-4', rating:5, texto:'Empecé con el plan flexible y ahora tengo la membresía mensual de cabina. Ilé creció conmigo según fue creciendo mi consulta.'},
+  {nombre:'Paola Nieto', especialidad:'Terapeuta familiar', avatarSeed:'ile-testi-5', rating:5, texto:'Las oficinas para terapia de pareja tienen el tamaño exacto que necesito, con sala de espera propia para que las familias no se crucommuten entre sí.'},
+  {nombre:'Diana Reyes', especialidad:'Quiropráctica', avatarSeed:'ile-testi-6', rating:4, texto:'La higiene entre sesiones es consistente, aunque a veces en horas pico hay que reservar con un poco más de anticipación.'},
+  {nombre:'Mariana Cobos', especialidad:'Acupunturista', avatarSeed:'ile-testi-7', rating:5, texto:'La aromaterapia y el sonido ambiental configurables hacen que cada cabina se sienta como si la hubiera diseñado yo misma para mi práctica.'}
+];
+
+// Nombres de pacientes de ejemplo (para toasts de prueba social)
+const NOMBRES_TOAST = ['alguien','un profesional','una terapeuta','un psicólogo','una nutrióloga'];
+
+</script>
+<script>
+// =========================================================
+// ESTADO GLOBAL
+// =========================================================
+const state = {
+  filtroSede:'',
+  filtroTipo:'',
+  filtroAmenidades:new Set(),
+  precioMax:1200,
+  capMin:1,
+  textoBusqueda:'',
+  orden:'recomendados',
+  vista:'lista',
+  favoritos:new Set(),
+  detalleActual:null,
+  duracionActual:'hora',
+  fechaSeleccionada:null,
+  horaSeleccionada:null,
+  galIdx:0
+};
+
+const HORA_ACTUAL = new Date().getHours();
+
+function img(seed,w,h){ return `https://picsum.photos/seed/${seed}/${w}/${h}`; }
+function avatar(seed,size){ return `https://i.pravatar.cc/${size||100}?u=${seed}`; }
+
+function iconSvg(name){
+  const icons = {
+    leaf:'<path d="M11 20A7 7 0 019.8 6.1C15.5 5 17 9.4 18.3 11.5 20.4 15 16 20 11 20z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
+    shield:'<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>',
+    droplet:'<path d="M12 2s6 7 6 12a6 6 0 01-12 0c0-5 6-12 6-12z"/>',
+    sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    key:'<circle cx="8" cy="15" r="4"/><path d="M10.5 12.5L20 3M17 6l2 2M14 9l2 2"/>',
+    music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+    wifi:'<path d="M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0M12 20h.01"/>',
+    coffee:'<path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v6a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><path d="M6 2v2M10 2v2M14 2v2"/>',
+    users:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
+    sparkle:'<path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/>',
+    sofa:'<path d="M4 13v-2a2 2 0 012-2h12a2 2 0 012 2v2"/><path d="M3 13h18v4a1 1 0 01-1 1h-2v2h-1v-2H7v2H6v-2H4a1 1 0 01-1-1z"/>',
+    lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'
+  };
+  return icons[name] || icons.sparkle;
+}
+
+// =========================================================
+// FILTRADO Y ORDEN
+// =========================================================
+function espacioDisponibleAhora(espacio){
+  const rnd = seedRandom(espacio.seed + '-now-' + new Date().toDateString());
+  return rnd() > 0.35 && HORA_ACTUAL >= 8 && HORA_ACTUAL <= 20;
+}
+
+function filtrarEspacios(){
+  let list = ESPACIOS.slice();
+
+  if(state.filtroSede) list = list.filter(e => e.sede === state.filtroSede);
+  if(state.filtroTipo) list = list.filter(e => e.subtipo === state.filtroTipo);
+  if(state.filtroAmenidades.size){
+    list = list.filter(e => [...state.filtroAmenidades].every(a => e.amenidades.includes(a)));
+  }
+  list = list.filter(e => e.precioHora <= state.precioMax);
+  list = list.filter(e => e.capacidad >= state.capMin);
+  if(state.textoBusqueda.trim()){
+    const q = state.textoBusqueda.toLowerCase();
+    list = list.filter(e =>
+      e.nombre.toLowerCase().includes(q) ||
+      e.sede.toLowerCase().includes(q) ||
+      e.especialidadSugerida.toLowerCase().includes(q) ||
+      e.amenidades.some(a => (AMENIDADES_INFO[a]?.label||'').toLowerCase().includes(q))
+    );
+  }
+
+  switch(state.orden){
+    case 'precio-asc': list.sort((a,b)=>a.precioHora-b.precioHora); break;
+    case 'precio-desc': list.sort((a,b)=>b.precioHora-a.precioHora); break;
+    case 'recientes': list.sort((a,b)=>a.antiguedad-b.antiguedad); break;
+    default: list.sort((a,b)=>b.rating-a.rating);
+  }
+  return list;
+}
+
+// =========================================================
+// RENDER: TARJETAS
+// =========================================================
+function tipoLabel(subtipo){
+  const map = {'cabina-masaje':'Cabina de masaje','cabina-manual':'Cabina de terapia manual','oficina-individual':'Oficina individual','oficina-grupal':'Oficina grupal/familiar'};
+  return map[subtipo] || subtipo;
+}
+
+function renderCards(){
+  const grid = document.getElementById('cards-grid');
+  const list = filtrarEspacios();
+  document.getElementById('results-count').textContent = `Mostrando ${list.length} de ${ESPACIOS.length} espacios`;
+
+  if(!list.length){
+    grid.innerHTML = `<div class="empty-state">
+      <h3>No encontramos espacios con esos filtros</h3>
+      <p>Intenta ampliar el rango de precio o quitar alguna amenidad para ver más opciones.</p>
+      <button class="btn-primary" id="clear-filters-btn">Limpiar filtros</button>
+    </div>`;
+    document.getElementById('clear-filters-btn').addEventListener('click', limpiarFiltros);
+    return;
+  }
+
+  grid.innerHTML = list.map(e => {
+    const disponible = espacioDisponibleAhora(e);
+    const isFav = state.favoritos.has(e.id);
+    return `
+    <article class="space-card" data-id="${e.id}" tabindex="0" role="button" aria-label="Ver detalle de ${e.nombre}">
+      <div class="card-img-wrap">
+        <img src="${img(e.seed,640,480)}" alt="${e.nombre}, ${tipoLabel(e.subtipo)} en ${e.sede}" loading="lazy">
+        ${disponible ? '<span class="card-badge">Disponible ahora</span>' : ''}
+        <button class="card-fav ${isFav?'is-fav':''}" data-fav-id="${e.id}" aria-label="${isFav?'Quitar de favoritos':'Guardar en favoritos'}">
+          <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </button>
+        <span class="card-type-tag">${tipoLabel(e.subtipo)}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top-row">
+          <span class="card-name">${e.nombre}</span>
+          <span class="card-rating"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg>${e.rating} <span class="count">(${e.reviewCount})</span></span>
+        </div>
+        <div class="card-loc">📍 ${e.sede} · Cap. ${e.capacidad} ${e.capacidad>1?'personas':'persona'}</div>
+        <div class="card-amenities">
+          ${e.amenidades.slice(0,3).map(a => `<span>${AMENIDADES_INFO[a]?.label || a}</span>`).join('')}
+        </div>
+        <div class="card-price-row">
+          <div><b>$${e.precioHora}</b> <span class="unit">MXN/hora</span></div>
+          <div class="card-price-alt">$${e.precioDia}/día</div>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+
+  grid.querySelectorAll('.space-card').forEach(card => {
+    card.addEventListener('click', (ev) => {
+      if(ev.target.closest('.card-fav')) return;
+      abrirDetalle(card.dataset.id);
+    });
+    card.addEventListener('keydown', e => { if(e.key==='Enter') abrirDetalle(card.dataset.id); });
+  });
+  grid.querySelectorAll('.card-fav').forEach(btn => {
+    btn.addEventListener('click', (ev) => { ev.stopPropagation(); toggleFavorito(btn.dataset.favId); });
+  });
+
+  revealCards();
+}
+
+function revealCards(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, {threshold:0.1});
+  document.querySelectorAll('.space-card').forEach(c => io.observe(c));
+}
+
+// =========================================================
+// FAVORITOS
+// =========================================================
+function toggleFavorito(id){
+  if(state.favoritos.has(id)) state.favoritos.delete(id);
+  else state.favoritos.add(id);
+  document.getElementById('fav-count').textContent = state.favoritos.size;
+  document.querySelectorAll(`[data-fav-id="${id}"]`).forEach(el => el.classList.toggle('is-fav', state.favoritos.has(id)));
+  const detailFavBtn = document.getElementById('detail-fav-btn');
+  if(detailFavBtn && state.detalleActual && state.detalleActual.id === id){
+    detailFavBtn.classList.toggle('is-fav', state.favoritos.has(id));
+    detailFavBtn.querySelector('span').textContent = state.favoritos.has(id) ? 'Guardado en favoritos' : 'Guardar en favoritos';
+  }
+  renderFavDrawer();
+}
+
+function renderFavDrawer(){
+  const list = document.getElementById('fav-drawer-list');
+  const favs = ESPACIOS.filter(e => state.favoritos.has(e.id));
+  if(!favs.length){
+    list.innerHTML = `<div class="fav-empty">Aún no tienes favoritos.<br>Toca el corazón en cualquier espacio para guardarlo aquí.</div>`;
+    return;
+  }
+  list.innerHTML = favs.map(e => `
+    <div class="fav-item" data-id="${e.id}">
+      <img src="${img(e.seed,140,140)}" alt="${e.nombre}">
+      <div class="fav-item-info"><b>${e.nombre}</b><span>${e.sede} · $${e.precioHora}/hora</span></div>
+      <button class="fav-item-remove" data-remove-fav="${e.id}">Quitar</button>
+    </div>
+  `).join('');
+  list.querySelectorAll('.fav-item').forEach(item => {
+    item.addEventListener('click', (ev) => {
+      if(ev.target.closest('[data-remove-fav]')) return;
+      cerrarFavDrawer();
+      abrirDetalle(item.dataset.id);
+    });
+  });
+  list.querySelectorAll('[data-remove-fav]').forEach(btn => {
+    btn.addEventListener('click', (ev) => { ev.stopPropagation(); toggleFavorito(btn.dataset.removeFav); });
+  });
+}
+
+function abrirFavDrawer(){
+  renderFavDrawer();
+  document.getElementById('fav-drawer').classList.add('is-open');
+  document.getElementById('fav-drawer-backdrop').classList.add('is-open');
+}
+function cerrarFavDrawer(){
+  document.getElementById('fav-drawer').classList.remove('is-open');
+  document.getElementById('fav-drawer-backdrop').classList.remove('is-open');
+}
+
+// =========================================================
+// DISPONIBILIDAD SIMULADA (determinística por fecha+espacio)
+// =========================================================
+const HORARIOS_DIA = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+function horariosOcupados(espacio, fechaStr){
+  const rnd = seedRandom(espacio.seed + '-' + fechaStr);
+  return HORARIOS_DIA.filter(() => rnd() > 0.65);
+}
+
+// =========================================================
+// MODAL DE DETALLE
+// =========================================================
+function precioPorDuracion(espacio, duracion){
+  switch(duracion){
+    case 'medio-dia': return Math.round(espacio.precioDia * 0.55);
+    case 'dia': return espacio.precioDia;
+    case 'mes': return espacio.precioMes;
+    default: return espacio.precioHora;
+  }
+}
+const DURACION_LABEL = {hora:'por hora', 'medio-dia':'medio día', dia:'día completo', mes:'mes completo'};
+
+function abrirDetalle(id){
+  const espacio = ESPACIOS.find(e => e.id === id);
+  if(!espacio) return;
+  state.detalleActual = espacio;
+  state.duracionActual = 'hora';
+  state.horaSeleccionada = null;
+  state.galIdx = 0;
+
+  const today = new Date();
+  const yyyy = today.getFullYear(), mm = String(today.getMonth()+1).padStart(2,'0'), dd = String(today.getDate()).padStart(2,'0');
+  state.fechaSeleccionada = `${yyyy}-${mm}-${dd}`;
+
+  const gal = galeriaFor(espacio);
+  const reviews = generarReseñas(espacio);
+  const related = ESPACIOS.filter(e => e.tipo === espacio.tipo && e.id !== espacio.id).sort((a,b)=>b.rating-a.rating).slice(0,3);
+
+  document.getElementById('detail-modal-content').innerHTML = `
+    <button class="detail-close" id="detail-close-btn" aria-label="Cerrar">✕</button>
+    <div class="detail-gallery" id="detail-gallery">
+      <img id="detail-gallery-img" src="${img(gal[0],1200,675)}" alt="Fotografía 1 de ${espacio.nombre}">
+      <button class="gal-arrow prev" id="gal-prev" aria-label="Foto anterior">←</button>
+      <button class="gal-arrow next" id="gal-next" aria-label="Foto siguiente">→</button>
+      <div class="gal-nav" id="gal-dots">${gal.map((g,i)=>`<span class="gal-dot ${i===0?'is-active':''}" data-i="${i}"></span>`).join('')}</div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-header-row">
+        <div>
+          <h3 class="detail-title">${espacio.nombre}</h3>
+          <div class="detail-loc">📍 ${espacio.sede} · ${tipoLabel(espacio.subtipo)} · Capacidad ${espacio.capacidad}</div>
+        </div>
+        <div class="detail-rating-block">
+          <div class="stars">★★★★★</div>
+          <div class="num">${espacio.rating}</div>
+          <div class="count">${espacio.reviewCount} reseñas</div>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <div>
+          <div class="detail-desc">${espacio.descripcion.split('\n\n').map(p=>`<p>${p}</p>`).join('')}</div>
+
+          <h4 style="margin-bottom:14px;">Amenidades incluidas</h4>
+          <div class="amenities-list">
+            ${espacio.amenidades.map(a => `<div class="amenity-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${iconSvg(AMENIDADES_INFO[a]?.icon)}</svg>${AMENIDADES_INFO[a]?.label || a}</div>`).join('')}
+          </div>
+
+          <div class="reviews-block">
+            <h4>Reseñas de profesionales</h4>
+            ${reviews.map(r => `
+              <div class="review-item">
+                <img src="${avatar(r.avatarSeed,80)}" alt="${r.nombre}">
+                <div style="flex:1;">
+                  <div class="review-name-row"><span class="review-name">${r.nombre}</span><span class="review-date">Hace ${r.diasAtras} días</span></div>
+                  <div class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+                  <div class="review-text">${r.texto}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="booking-panel">
+          <div class="booking-price"><b id="detail-price">$${espacio.precioHora}</b><span id="detail-price-unit">MXN / hora</span></div>
+          <div class="duration-tabs" id="duration-tabs">
+            <button data-dur="hora" class="is-active">Hora</button>
+            <button data-dur="medio-dia">Medio día</button>
+            <button data-dur="dia">Día</button>
+            <button data-dur="mes">Mes</button>
+          </div>
+          <div class="detail-field">
+            <label for="detail-fecha">Fecha</label>
+            <input type="date" id="detail-fecha" value="${state.fechaSeleccionada}">
+          </div>
+          <div class="detail-field" id="detail-hora-field">
+            <label>Horario disponible</label>
+            <div class="time-slots" id="detail-time-slots"></div>
+          </div>
+          <div class="total-row">
+            <span>Total estimado</span>
+            <b id="detail-total">$${espacio.precioHora}</b>
+          </div>
+          <button class="reserve-btn" id="detail-reserve-btn" disabled>Selecciona un horario</button>
+          <button class="fav-btn-detail ${state.favoritos.has(espacio.id)?'is-fav':''}" id="detail-fav-btn">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <span>${state.favoritos.has(espacio.id) ? 'Guardado en favoritos' : 'Guardar en favoritos'}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="related-block">
+        <h4>Espacios similares que también te pueden interesar</h4>
+        <div class="related-grid">
+          ${related.map(r => `
+            <div class="related-card" data-related-id="${r.id}">
+              <img src="${img(r.seed,400,300)}" alt="${r.nombre}">
+              <div class="r-info"><div class="r-name">${r.nombre}</div><div class="r-loc">${r.sede} · $${r.precioHora}/hora</div></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('detail-backdrop').classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+
+  // Wire up detail modal interactions
+  document.getElementById('detail-close-btn').addEventListener('click', cerrarDetalle);
+  document.getElementById('gal-prev').addEventListener('click', () => cambiarGaleria(-1, gal));
+  document.getElementById('gal-next').addEventListener('click', () => cambiarGaleria(1, gal));
+  document.querySelectorAll('#gal-dots .gal-dot').forEach(dot => dot.addEventListener('click', () => { state.galIdx = parseInt(dot.dataset.i); updateGaleria(gal); }));
+  document.querySelectorAll('#duration-tabs button').forEach(btn => btn.addEventListener('click', () => seleccionarDuracion(btn.dataset.dur)));
+  document.getElementById('detail-fecha').addEventListener('change', (e) => { state.fechaSeleccionada = e.target.value; state.horaSeleccionada = null; renderTimeSlots(); });
+  document.getElementById('detail-fav-btn').addEventListener('click', () => toggleFavorito(espacio.id));
+  document.getElementById('detail-reserve-btn').addEventListener('click', confirmarReserva);
+  document.querySelectorAll('.related-card').forEach(card => card.addEventListener('click', () => abrirDetalle(card.dataset.relatedId)));
+
+  renderTimeSlots();
+}
+
+function cambiarGaleria(delta, gal){
+  state.galIdx = (state.galIdx + delta + gal.length) % gal.length;
+  updateGaleria(gal);
+}
+function updateGaleria(gal){
+  document.getElementById('detail-gallery-img').src = img(gal[state.galIdx],1200,675);
+  document.querySelectorAll('#gal-dots .gal-dot').forEach((d,i) => d.classList.toggle('is-active', i===state.galIdx));
+}
+
+function seleccionarDuracion(dur){
+  state.duracionActual = dur;
+  document.querySelectorAll('#duration-tabs button').forEach(b => b.classList.toggle('is-active', b.dataset.dur === dur));
+  const espacio = state.detalleActual;
+  const precio = precioPorDuracion(espacio, dur);
+  document.getElementById('detail-price').textContent = '$' + precio;
+  document.getElementById('detail-price-unit').textContent = 'MXN / ' + DURACION_LABEL[dur];
+  document.getElementById('detail-total').textContent = '$' + precio;
+
+  const horaField = document.getElementById('detail-hora-field');
+  horaField.style.display = (dur === 'hora' || dur === 'medio-dia') ? '' : 'none';
+  updateReserveBtn();
+}
+
+function renderTimeSlots(){
+  const espacio = state.detalleActual;
+  const ocupados = horariosOcupados(espacio, state.fechaSeleccionada);
+  const wrap = document.getElementById('detail-time-slots');
+  wrap.innerHTML = HORARIOS_DIA.map(h => `<div class="time-slot ${ocupados.includes(h)?'ocupado':''}" data-hora="${h}">${h}</div>`).join('');
+  wrap.querySelectorAll('.time-slot:not(.ocupado)').forEach(el => {
+    el.addEventListener('click', () => {
+      wrap.querySelectorAll('.time-slot').forEach(x => x.classList.remove('is-selected'));
+      el.classList.add('is-selected');
+      state.horaSeleccionada = el.dataset.hora;
+      updateReserveBtn();
+    });
+  });
+}
+
+function updateReserveBtn(){
+  const btn = document.getElementById('detail-reserve-btn');
+  const necesitaHora = state.duracionActual === 'hora' || state.duracionActual === 'medio-dia';
+  const listo = !necesitaHora || state.horaSeleccionada;
+  btn.disabled = !listo;
+  btn.textContent = listo ? `Reservar ahora — $${precioPorDuracion(state.detalleActual, state.duracionActual)}` : 'Selecciona un horario';
+}
+
+function cerrarDetalle(){
+  document.getElementById('detail-backdrop').classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+function confirmarReserva(){
+  const espacio = state.detalleActual;
+  const folio = 'ILE-' + Math.random().toString(36).slice(2,8).toUpperCase();
+  const precio = precioPorDuracion(espacio, state.duracionActual);
+  const horaTxt = state.horaSeleccionada ? ` a las ${state.horaSeleccionada}` : '';
+  const fechaTxt = new Date(state.fechaSeleccionada + 'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
+
+  document.getElementById('detail-modal-content').innerHTML = `
+    <button class="detail-close" id="detail-close-btn" aria-label="Cerrar">✕</button>
+    <div class="detail-body">
+      <div class="success-screen">
+        <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Reserva confirmada</h3>
+        <p>${espacio.nombre} · ${fechaTxt}${horaTxt}</p>
+        <p>Duración: ${DURACION_LABEL[state.duracionActual]} · Total: $${precio} MXN</p>
+        <div class="success-folio">Folio ${folio}</div>
+        <p style="font-size:0.82rem;">Te enviamos los detalles por correo. Preséntate 10 minutos antes en recepción.</p>
+        <div class="success-actions">
+          <button class="btn-primary" id="add-calendar-btn">Agregar a mi calendario</button>
+          <button class="btn-ghost" id="close-success-btn">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById('detail-close-btn').addEventListener('click', cerrarDetalle);
+  document.getElementById('close-success-btn').addEventListener('click', cerrarDetalle);
+  document.getElementById('add-calendar-btn').addEventListener('click', () => descargarICS(espacio, folio));
+  mostrarToast('✓', 'Reserva confirmada', `${espacio.nombre} · folio ${folio}`);
+}
+
+function descargarICS(espacio, folio){
+  const fecha = state.fechaSeleccionada.replace(/-/g,'');
+  const hora = (state.horaSeleccionada || '09:00').replace(':','') + '00';
+  const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+UID:${folio}@ilewellness.mx
+DTSTAMP:${fecha}T${hora}
+DTSTART:${fecha}T${hora}
+SUMMARY:Reserva Ilé Wellness — ${espacio.nombre}
+LOCATION:${espacio.sede}
+DESCRIPTION:Folio de reserva ${folio}
+END:VEVENT
+END:VCALENDAR`;
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `reserva-ile-${folio}.ics`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// =========================================================
+// VISTA DE MAPA
+// =========================================================
+function renderMapa(){
+  const reforma = ESPACIOS.filter(e => e.sede === 'Reforma CDMX');
+  const tizayuca = ESPACIOS.filter(e => e.sede === 'Tizayuca-Pachuca');
+  renderMapaGrid('map-grid-reforma', reforma);
+  renderMapaGrid('map-grid-tizayuca', tizayuca);
+}
+function renderMapaGrid(elId, list){
+  const el = document.getElementById(elId);
+  el.innerHTML = list.map((e,i) => {
+    const rnd = seedRandom(e.seed + '-pos');
+    const left = 8 + rnd()*82;
+    const top = 8 + rnd()*78;
+    return `<div class="map-pin ${e.tipo==='oficina'?'tipo-oficina':''}" style="left:${left}%;top:${top}%;" data-id="${e.id}" title="${e.nombre}">
+      ${e.tipo==='cabina'?'C':'O'}
+      <span class="map-tooltip">${e.nombre} · $${e.precioHora}/h</span>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.map-pin').forEach(pin => pin.addEventListener('click', () => abrirDetalle(pin.dataset.id)));
+}
+
+// =========================================================
+// FILTROS: eventos
+// =========================================================
+function limpiarFiltros(){
+  state.filtroSede=''; state.filtroTipo=''; state.filtroAmenidades.clear();
+  state.precioMax=1200; state.capMin=1; state.textoBusqueda='';
+  document.getElementById('text-search').value='';
+  document.getElementById('price-range').value=1200;
+  document.getElementById('price-range-val').textContent=1200;
+  document.getElementById('cap-range').value=1;
+  document.getElementById('cap-range-val').textContent=1;
+  document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => chip.classList.toggle('is-active', chip.dataset.value === ''));
+  document.querySelectorAll('.amenity-chip').forEach(chip => chip.classList.remove('is-active'));
+  renderCards();
+}
+
+function wireFiltros(){
+  document.querySelectorAll('#chip-sede .filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#chip-sede .filter-chip').forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      state.filtroSede = chip.dataset.value;
+      renderCards();
+    });
+  });
+  document.querySelectorAll('#chip-tipo .filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#chip-tipo .filter-chip').forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      state.filtroTipo = chip.dataset.value;
+      renderCards();
+    });
+  });
+  document.querySelectorAll('.amenity-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('is-active');
+      const val = chip.dataset.value;
+      if(state.filtroAmenidades.has(val)) state.filtroAmenidades.delete(val);
+      else state.filtroAmenidades.add(val);
+      renderCards();
+    });
+  });
+  document.getElementById('price-range').addEventListener('input', (e) => {
+    state.precioMax = parseInt(e.target.value);
+    document.getElementById('price-range-val').textContent = state.precioMax;
+    renderCards();
+  });
+  document.getElementById('cap-range').addEventListener('input', (e) => {
+    state.capMin = parseInt(e.target.value);
+    document.getElementById('cap-range-val').textContent = state.capMin;
+    renderCards();
+  });
+  document.getElementById('text-search').addEventListener('input', (e) => {
+    state.textoBusqueda = e.target.value;
+    renderCards();
+  });
+  document.getElementById('sort-select').addEventListener('change', (e) => {
+    state.orden = e.target.value;
+    renderCards();
+  });
+  document.querySelectorAll('.view-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      state.vista = btn.dataset.view;
+      document.getElementById('cards-grid').classList.toggle('is-hidden', state.vista === 'mapa');
+      document.getElementById('map-view').classList.toggle('is-active', state.vista === 'mapa');
+      if(state.vista === 'mapa') renderMapa();
+    });
+  });
+
+  // Búsqueda del header (hero search)
+  document.getElementById('hero-search-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const sede = document.getElementById('sf-sede').value;
+    const tipo = document.getElementById('sf-tipo').value;
+    state.filtroSede = sede;
+    if(tipo){
+      // tipo genérico "cabina"/"oficina" -> limpiar subtipo específico, filtrar por tipo base
+      state.filtroTipo = '';
+    }
+    document.querySelectorAll('#chip-sede .filter-chip').forEach(c => c.classList.toggle('is-active', c.dataset.value===sede));
+    document.getElementById('catalogo').scrollIntoView({behavior:'smooth'});
+    if(tipo){
+      let list = ESPACIOS.filter(x => x.tipo === tipo);
+    }
+    // Apply base type filter via textoBusqueda fallback if tipo chosen
+    state.textoBusqueda = '';
+    renderCardsWithBaseType(tipo);
+  });
+
+  // Mobile filters
+  document.getElementById('toggle-mobile-filters').addEventListener('click', abrirFiltrosMobile);
+  document.getElementById('close-mobile-filters').addEventListener('click', cerrarFiltrosMobile);
+  document.getElementById('mobile-filters-backdrop').addEventListener('click', cerrarFiltrosMobile);
+  document.getElementById('apply-mobile-filters').addEventListener('click', cerrarFiltrosMobile);
+}
+
+function renderCardsWithBaseType(tipoBase){
+  if(!tipoBase){ renderCards(); return; }
+  const grid = document.getElementById('cards-grid');
+  let list = filtrarEspacios().filter(e => e.tipo === tipoBase);
+  document.getElementById('results-count').textContent = `Mostrando ${list.length} de ${ESPACIOS.length} espacios`;
+  if(!list.length){
+    grid.innerHTML = `<div class="empty-state"><h3>Sin resultados para ese filtro</h3><p>Prueba quitando el tipo de espacio.</p></div>`;
+    return;
+  }
+  // Reuse renderCards logic by temporarily overriding filter — simplest: set filtroTipo won't match subtype, so filter manually
+  const savedFn = filtrarEspacios;
+  renderCards();
+  // After generic render, further narrow displayed cards by tipoBase
+  const allowedIds = new Set(list.map(e=>e.id));
+  document.querySelectorAll('.space-card').forEach(card => {
+    if(!allowedIds.has(card.dataset.id)) card.remove();
+  });
+}
+
+function abrirFiltrosMobile(){
+  const content = document.getElementById('mobile-filters-content');
+  content.innerHTML = document.getElementById('filters-desktop').innerHTML + document.getElementById('filters-advanced').innerHTML;
+  document.getElementById('mobile-filters-sheet').classList.add('is-open');
+  document.getElementById('mobile-filters-backdrop').classList.add('is-open');
+  // rewire cloned controls
+  content.querySelectorAll('.filter-chip[data-filter="sede"]').forEach(chip => {
+    chip.classList.toggle('is-active', chip.dataset.value === state.filtroSede);
+    chip.addEventListener('click', () => {
+      content.querySelectorAll('[data-filter="sede"]').forEach(c=>c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      state.filtroSede = chip.dataset.value;
+      document.querySelectorAll('#chip-sede .filter-chip').forEach(c => c.classList.toggle('is-active', c.dataset.value===state.filtroSede));
+      renderCards();
+    });
+  });
+  content.querySelectorAll('.filter-chip[data-filter="tipo"]').forEach(chip => {
+    chip.classList.toggle('is-active', chip.dataset.value === state.filtroTipo);
+    chip.addEventListener('click', () => {
+      content.querySelectorAll('[data-filter="tipo"]').forEach(c=>c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      state.filtroTipo = chip.dataset.value;
+      document.querySelectorAll('#chip-tipo .filter-chip').forEach(c => c.classList.toggle('is-active', c.dataset.value===state.filtroTipo));
+      renderCards();
+    });
+  });
+  content.querySelectorAll('.amenity-chip').forEach(chip => {
+    chip.classList.toggle('is-active', state.filtroAmenidades.has(chip.dataset.value));
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('is-active');
+      const val = chip.dataset.value;
+      if(state.filtroAmenidades.has(val)) state.filtroAmenidades.delete(val); else state.filtroAmenidades.add(val);
+      document.querySelectorAll(`.amenity-chip[data-value="${val}"]`).forEach(c => c.classList.toggle('is-active', state.filtroAmenidades.has(val)));
+      renderCards();
+    });
+  });
+}
+function cerrarFiltrosMobile(){
+  document.getElementById('mobile-filters-sheet').classList.remove('is-open');
+  document.getElementById('mobile-filters-backdrop').classList.remove('is-open');
+}
+
+// =========================================================
+// COMUNIDAD, PLANES, TESTIMONIOS
+// =========================================================
+function renderComunidad(){
+  document.getElementById('community-grid').innerHTML = COMUNIDAD.map(p => `
+    <div class="pro-card">
+      <img src="${avatar(p.avatarSeed,140)}" alt="${p.nombre}">
+      <b>${p.nombre}</b>
+      <span>${p.especialidad}</span>
+    </div>
+  `).join('');
+}
+
+function renderTestimonios(){
+  document.getElementById('testi-grid').innerHTML = TESTIMONIOS.map(t => `
+    <div class="testi-card">
+      <div class="testi-stars">${'★'.repeat(t.rating)}${'☆'.repeat(5-t.rating)}</div>
+      <p class="testi-text">${t.texto}</p>
+      <div class="testi-person">
+        <img src="${avatar(t.avatarSeed,80)}" alt="${t.nombre}">
+        <div><div class="testi-name">${t.nombre}</div><div class="testi-role">${t.especialidad}</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+document.addEventListener('click', (e) => {
+  const planBtn = e.target.closest('[data-plan]');
+  if(planBtn){
+    mostrarToast('🌿', `Plan ${planBtn.dataset.plan} seleccionado`, 'Te contactaremos para completar tu registro.');
+  }
+});
+
+// =========================================================
+// TOASTS DE PRUEBA SOCIAL
+// =========================================================
+function mostrarToast(icon, titulo, texto){
+  const stack = document.getElementById('toast-stack');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<span class="toast-icon">${icon}</span><span class="toast-text"><b>${titulo}</b><span>${texto}</span></span>`;
+  stack.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('leaving');
+    setTimeout(() => el.remove(), 320);
+  }, 4600);
+}
+
+function iniciarToastsSociales(){
+  const eventos = [
+    () => { const e = ESPACIOS[Math.floor(Math.random()*ESPACIOS.length)]; return ['📅','Reserva reciente', `Alguien acaba de reservar ${e.nombreCorto} para hoy.`]; },
+    () => { const e = ESPACIOS[Math.floor(Math.random()*ESPACIOS.length)]; return ['🔥','Espacio popular', `${e.nombreCorto} se ha reservado ${8+Math.floor(Math.random()*10)} veces esta semana.`]; },
+    () => { const p = COMUNIDAD[Math.floor(Math.random()*COMUNIDAD.length)]; return ['👋','Nuevo profesional', `${p.nombre} se unió a la comunidad Ilé.`]; },
+  ];
+  function tick(){
+    const [icon,titulo,texto] = eventos[Math.floor(Math.random()*eventos.length)]();
+    mostrarToast(icon,titulo,texto);
+    setTimeout(tick, 22000 + Math.random()*18000);
+  }
+  setTimeout(tick, 9000);
+}
+
+// =========================================================
+// CHATBOT
+// =========================================================
+function wireChatbot(){
+  const launcher = document.getElementById('ile-chat-launcher');
+  const win = document.getElementById('ile-chat-window');
+  const closeBtn = document.getElementById('chat-close');
+  const body = document.getElementById('chat-body');
+  const quick = document.getElementById('chat-quick');
+  const input = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+
+  const respuestas = [
+    { match:/precio|costo|cu[aá]nto cuesta|tarifa/i, reply:'Las cabinas van desde $160 MXN/hora y las oficinas desde $190 MXN/hora, con tarifas por día y mes también disponibles. Filtra por precio en el catálogo para ver justo lo que buscas.', action:'goto-catalogo' },
+    { match:/reserv|agendar|apartar/i, reply:'Para reservar, elige un espacio en el catálogo, selecciona fecha y horario disponible, y confirma. Queda listo al instante, sin esperar respuesta. ¿Te muestro el catálogo?', action:'goto-catalogo' },
+    { match:/horario|abren|cierran|hora/i, reply:'Ilé abre de 8:00 a 20:00 todos los días. La disponibilidad exacta por espacio la ves al elegir una fecha en su ficha de detalle.' },
+    { match:/ubicaci[oó]n|d[oó]nde est[aá]n|direcci[oó]n|sede/i, reply:'Tenemos presencia en Paseo de la Reforma, Ciudad de México, y en Tizayuca/Pachuca, Hidalgo. Puedes filtrar el catálogo por sede.' },
+    { match:/cancelar|cancelaci[oó]n/i, reply:'Puedes cancelar una reserva de cabina sin costo hasta 24 horas antes del horario reservado. Las rentas mensuales de oficina se rigen por tu contrato.' },
+    { match:/amenidad|aromaterapia|insonoriza|tina|hidroterapia/i, reply:'Tenemos cabinas con aromaterapia, tina de hidroterapia y luz natural, y oficinas insonorizadas. Usa los filtros de amenidades en el catálogo para encontrar justo lo que necesitas.', action:'goto-catalogo' },
+    { match:/plan|membres[ií]a|mensual/i, reply:'Tenemos plan Flexible por uso, Mensual Cabina ($4,200/mes) y Mensual Oficina ($6,800/mes). Bajemos a la sección de planes para ver el detalle completo.', action:'goto-planes' },
+    { match:/cabina/i, reply:'Tenemos 18 cabinas equipadas para masoterapia, reflexología y terapia manual, con variedad de ambientaciones. Te llevo al catálogo filtrado por cabinas.', action:'goto-cabinas' },
+    { match:/oficina/i, reply:'Tenemos 14 oficinas privadas, desde consulta individual hasta espacios para terapia de pareja o familiar. Te muestro las opciones.', action:'goto-oficinas' },
+    { match:/hola|buenas|qu[eé] tal|buen d[ií]a/i, reply:'¡Hola! Soy el asistente de Ilé. Puedo ayudarte a encontrar un espacio, explicarte precios, horarios o el proceso de reserva. ¿En qué te ayudo?' },
+    { match:/gracias/i, reply:'Con gusto, aquí sigo si necesitas algo más 🌿' },
+  ];
+  const fallback = 'No estoy seguro de haber entendido bien. Puedo ayudarte con reservaciones, precios, horarios, amenidades o los planes de membresía. ¿Podrías darme un poco más de detalle?';
+  const quickPool = ['¿Cómo reservo un espacio?','¿Cuál es el horario?','¿Qué cabinas tienen tina?','¿Cuánto cuesta la oficina?','¿Dónde están ubicados?','¿Puedo cancelar mi reserva?','Ver planes mensuales','Muéstrame las cabinas'];
+
+  function pickQuick(n){ return [...quickPool].sort(()=>Math.random()-0.5).slice(0,n); }
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  function showTyping(){
+    const div = document.createElement('div');
+    div.className = 'chat-typing'; div.id='typing-indicator';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function hideTyping(){ const t=document.getElementById('typing-indicator'); if(t) t.remove(); }
+  function renderQuick(){
+    quick.classList.remove('is-hidden');
+    quick.innerHTML = pickQuick(3).map(q=>`<button type="button">${q}</button>`).join('');
+    quick.querySelectorAll('button').forEach(b=>b.addEventListener('click', ()=>handleUserMessage(b.textContent)));
+  }
+  function botReply(text){
+    quick.classList.add('is-hidden'); quick.innerHTML='';
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      const match = respuestas.find(r=>r.match.test(text));
+      addMsg(match?match.reply:fallback,'bot');
+      if(match && match.action==='goto-catalogo') setTimeout(()=>document.getElementById('catalogo').scrollIntoView({behavior:'smooth'}),400);
+      if(match && match.action==='goto-planes') setTimeout(()=>document.getElementById('planes').scrollIntoView({behavior:'smooth'}),400);
+      if(match && match.action==='goto-cabinas'){ document.querySelector('#chip-tipo [data-value=""]').click(); state.filtroTipo=''; document.getElementById('text-search').value='cabina'; state.textoBusqueda=''; renderCardsWithBaseType('cabina'); setTimeout(()=>document.getElementById('catalogo').scrollIntoView({behavior:'smooth'}),400); }
+      if(match && match.action==='goto-oficinas'){ renderCardsWithBaseType('oficina'); setTimeout(()=>document.getElementById('catalogo').scrollIntoView({behavior:'smooth'}),400); }
+      setTimeout(renderQuick,300);
+    }, 700+Math.random()*500);
+  }
+  function handleUserMessage(text){
+    if(!text.trim()) return;
+    addMsg(text,'user'); input.value=''; botReply(text);
+  }
+  launcher.addEventListener('click', () => {
+    win.classList.add('is-open');
+    if(!body.dataset.greeted){
+      addMsg('¡Hola! Soy el asistente virtual de Ilé 🌿 Puedo ayudarte a encontrar un espacio, reservar o resolver dudas de precios y horarios. ¿En qué te ayudo?','bot');
+      renderQuick();
+      body.dataset.greeted='1';
+    }
+    input.focus();
+  });
+  closeBtn.addEventListener('click', () => win.classList.remove('is-open'));
+  sendBtn.addEventListener('click', () => handleUserMessage(input.value));
+  input.addEventListener('keydown', e => { if(e.key==='Enter') handleUserMessage(input.value); });
+}
+
+// =========================================================
+// INIT
+// =========================================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderCards();
+  renderComunidad();
+  renderTestimonios();
+  wireFiltros();
+  wireChatbot();
+  iniciarToastsSociales();
+
+  document.getElementById('open-fav-drawer').addEventListener('click', abrirFavDrawer);
+  document.getElementById('close-fav-drawer').addEventListener('click', cerrarFavDrawer);
+  document.getElementById('fav-drawer-backdrop').addEventListener('click', cerrarFavDrawer);
+  document.getElementById('detail-backdrop').addEventListener('click', (e) => { if(e.target.id==='detail-backdrop') cerrarDetalle(); });
+  document.addEventListener('keydown', (e) => { if(e.key==='Escape'){ cerrarDetalle(); cerrarFavDrawer(); cerrarFiltrosMobile(); } });
+
+  document.getElementById('btn-login-deco').addEventListener('click', () => {
+    mostrarToast('🔐','Panel de profesional','Esta acción es decorativa en esta maqueta y llevaría al panel de cliente.');
+  });
+});
+
+</script>
+</body>
+</html>

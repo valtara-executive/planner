@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilé Wellness — Panel interno</title>
+<meta name="description" content="Panel administrativo de Ilé Wellness: reservas, profesionales, espacios, facturación y reportes.">
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="preconnect" href="https://i.pravatar.cc">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea,select{font:inherit;}
+ul,ol{list-style:none;}
+:focus-visible{outline:3px solid #C9974C;outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}}
+
+:root{
+  --ink:#2B2420; --clay:#B96A4B; --clay-deep:#a1583c; --sage:#7C8B6F; --sage-deep:#657056;
+  --gold:#C9974C; --paper:#F4EEE5; --cream:#FBF8F3; --surface:#FFFEFB;
+  --line:rgba(43,36,32,0.1); --muted:#6b5f54; --muted-2:#8a7c70;
+  --display:'Ile-Display', Georgia, serif; --body:'Ile-Body', Arial, sans-serif;
+  --shadow-soft:0 10px 30px rgba(43,36,32,0.08); --shadow-lift:0 20px 46px rgba(43,36,32,0.14);
+  --danger:#B15642; --ok:#5c7a4e;
+}
+@font-face{font-family:'Ile-Display';src:local('Georgia'),local('Times New Roman');font-weight:400 700;}
+body{font-family:var(--body);background:var(--cream);color:var(--ink);line-height:1.5;}
+h1,h2,h3,h4,.display{font-family:var(--display);font-weight:600;letter-spacing:-0.01em;}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:#000;padding:10px 16px;z-index:999;}
+.skip-link:focus{left:8px;top:8px;}
+
+/* ============ LOGIN ============ */
+#login-screen{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+.login-visual{position:relative;overflow:hidden;}
+.login-visual img{width:100%;height:100%;object-fit:cover;filter:brightness(0.7) saturate(1.05);}
+.login-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,36,32,0.2),rgba(43,36,32,0.6));}
+.login-visual-copy{position:absolute;bottom:48px;left:48px;right:48px;color:#FBF8F3;z-index:2;}
+.login-visual-copy .eyebrow{color:#f0c9b4;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px;display:block;}
+.login-visual-copy h2{font-size:1.8rem;line-height:1.2;max-width:20ch;}
+.login-form-wrap{display:flex;align-items:center;justify-content:center;padding:40px;}
+.login-form{max-width:400px;width:100%;}
+.login-logo{font-family:var(--display);font-size:1.6rem;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.login-logo .dot{width:9px;height:9px;background:var(--clay);border-radius:50%;}
+.login-badge-interno{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted-2);margin-bottom:24px;display:block;}
+.login-demo-note{background:var(--paper);border-radius:12px;padding:12px 16px;font-size:0.82rem;color:var(--muted);margin-bottom:22px;border-left:3px solid var(--gold);}
+.login-field{margin-bottom:16px;}
+.login-field label{display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted-2);margin-bottom:7px;}
+.login-field input,.login-field select{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-size:0.94rem;background:var(--surface);}
+.login-field input:focus,.login-field select:focus{border-color:var(--clay);outline:none;}
+.login-submit{width:100%;padding:14px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;font-size:0.94rem;margin-top:8px;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.login-submit:hover{background:var(--clay);}
+.login-submit:disabled{opacity:0.7;cursor:wait;}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media (max-width:860px){#login-screen{grid-template-columns:1fr;}.login-visual{min-height:200px;}.login-visual-copy{bottom:20px;left:24px;right:24px;}.login-visual-copy h2{font-size:1.3rem;}}
+
+/* ============ APP SHELL ============ */
+#app-shell{display:none;min-height:100vh;}
+#app-shell.is-active{display:flex;}
+.sidebar{width:250px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:22px 14px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+.sidebar-logo{font-family:var(--display);font-size:1.25rem;padding:0 10px 6px;display:flex;align-items:center;gap:8px;}
+.sidebar-logo .dot{width:8px;height:8px;background:var(--clay);border-radius:50%;}
+.sidebar-sub{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted-2);padding:0 10px 18px;}
+.sidebar-nav{display:flex;flex-direction:column;gap:3px;flex:1;}
+.sidebar-nav button{display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:11px;font-size:0.85rem;font-weight:600;color:var(--muted);text-align:left;transition:background .15s,color .15s;}
+.sidebar-nav button svg{width:17px;height:17px;flex-shrink:0;}
+.sidebar-nav button:hover{background:var(--paper);color:var(--ink);}
+.sidebar-nav button.is-active{background:var(--clay);color:#fff;}
+.sidebar-user{display:flex;align-items:center;gap:10px;padding:14px 10px;border-top:1px solid var(--line);margin-top:10px;}
+.sidebar-user img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
+.sidebar-user b{font-size:0.8rem;display:block;}
+.sidebar-user span{font-size:0.7rem;color:var(--muted-2);}
+
+.main-col{flex:1;min-width:0;}
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);padding:14px 26px;display:flex;align-items:center;gap:18px;position:sticky;top:0;z-index:40;}
+.topbar-search{flex:1;max-width:420px;display:flex;align-items:center;gap:10px;background:var(--paper);border-radius:12px;padding:9px 14px;}
+.topbar-search input{flex:1;background:transparent;border:none;font-size:0.86rem;}
+.topbar-search input:focus{outline:none;}
+.topbar-actions{display:flex;align-items:center;gap:12px;margin-left:auto;}
+.bell-btn{position:relative;width:40px;height:40px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;}
+.bell-btn .badge{position:absolute;top:-2px;right:-2px;background:var(--clay);color:#fff;font-size:0.63rem;font-weight:700;min-width:16px;height:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+.topbar-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;cursor:pointer;}
+.mobile-menu-btn{display:none;width:38px;height:38px;border-radius:10px;background:var(--paper);align-items:center;justify-content:center;}
+
+.view{display:none;padding:26px clamp(14px,3vw,30px) 50px;}
+.view.is-active{display:block;}
+.view-head{margin-bottom:22px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;}
+.view-head h1{font-size:1.5rem;}
+.view-head p{color:var(--muted);font-size:0.88rem;margin-top:4px;}
+
+@media (max-width:980px){.sidebar{display:none;}.mobile-menu-btn{display:flex;}.topbar-search{display:none;}}
+
+.mobile-sidebar-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.5);z-index:200;display:none;}
+.mobile-sidebar-backdrop.is-open{display:block;}
+.mobile-sidebar{position:fixed;top:0;left:0;height:100%;width:270px;background:var(--surface);z-index:210;transform:translateX(-100%);transition:transform .25s ease;padding:22px 14px;overflow-y:auto;}
+.mobile-sidebar.is-open{transform:translateX(0);}
+
+/* ============ DASHBOARD ============ */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px;}
+.kpi-card{background:var(--surface);border-radius:16px;padding:18px;border:1px solid var(--line);}
+.kpi-card b{font-family:var(--display);font-size:1.5rem;display:block;color:var(--clay);}
+.kpi-card span{font-size:0.74rem;color:var(--muted-2);}
+@media (max-width:1100px){.kpi-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:640px){.kpi-grid{grid-template-columns:1fr 1fr;}}
+
+.dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:20px;}
+.panel-card{background:var(--surface);border-radius:18px;padding:20px 22px;border:1px solid var(--line);}
+.panel-card h3{font-size:1rem;margin-bottom:14px;}
+@media (max-width:980px){.dash-grid{grid-template-columns:1fr;}}
+
+.occ-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;}
+.occ-cell{border-radius:10px;padding:10px 6px;text-align:center;font-size:0.68rem;font-weight:700;background:var(--paper);}
+.occ-cell.ocupado{background:#F4E1DB;color:var(--danger);}
+.occ-cell.limpieza{background:#FCEFD9;color:#9a7a2c;}
+.occ-cell.disponible{background:#E4E9DE;color:var(--sage-deep);}
+.occ-cell span{display:block;font-weight:400;opacity:0.75;margin-top:2px;}
+
+.arrival-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+.arrival-item:first-child{border-top:none;}
+.arrival-item b{font-size:0.85rem;display:block;}
+.arrival-item span{font-size:0.74rem;color:var(--muted-2);}
+.pac-tag{font-size:0.68rem;background:var(--paper);padding:3px 8px;border-radius:999px;color:var(--muted-2);}
+
+.alert-item{display:flex;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:0.83rem;}
+.alert-item:first-child{border-top:none;}
+.alert-icon{flex-shrink:0;}
+
+.activity-item{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:0.83rem;}
+.activity-item:first-child{border-top:none;}
+
+.crosssell-widget2{background:var(--paper);border-radius:18px;padding:20px 22px;margin-top:18px;}
+.crosssell-widget2 h4{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted-2);margin-bottom:12px;}
+.crosssell-mini-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.crosssell-mini2{background:var(--surface);border-radius:12px;padding:14px;font-size:0.82rem;}
+.crosssell-mini2 b{display:block;margin-bottom:4px;font-size:0.85rem;}
+@media (max-width:640px){.crosssell-mini-grid2{grid-template-columns:1fr;}}
+
+/* ============ RESERVAS MAESTRAS ============ */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center;}
+.filter-bar select,.filter-bar input{padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:0.84rem;}
+.view-toggle2{display:flex;background:var(--paper);border-radius:11px;padding:3px;gap:3px;margin-left:auto;}
+.view-toggle2 button{padding:8px 15px;border-radius:8px;font-size:0.8rem;font-weight:600;color:var(--muted);}
+.view-toggle2 button.is-active{background:var(--surface);color:var(--ink);}
+.data-table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:14px;overflow:hidden;}
+.data-table th,.data-table td{text-align:left;padding:11px 14px;font-size:0.83rem;border-bottom:1px solid var(--line);}
+.data-table th{background:var(--paper);font-size:0.7rem;text-transform:uppercase;color:var(--muted-2);}
+.status-pill{font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;}
+.status-pill.confirmada{background:#E4E9DE;color:var(--sage-deep);}
+.status-pill.completada{background:var(--paper);color:var(--muted);}
+.status-pill.cancelada{background:#F4E1DB;color:var(--danger);}
+.table-action{font-size:0.76rem;font-weight:700;color:var(--clay);margin-right:10px;}
+@media (max-width:900px){.data-table{display:block;overflow-x:auto;}}
+
+.cleaning-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:20px;}
+.cleaning-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;}
+.cleaning-card b{display:block;font-size:0.88rem;}
+.cleaning-timer{font-family:var(--display);font-size:1.3rem;color:var(--gold);margin:8px 0;}
+.cleaning-card button{font-size:0.8rem;font-weight:700;color:#fff;background:var(--sage);padding:8px 14px;border-radius:999px;width:100%;}
+
+/* ============ PROFESIONALES ============ */
+.pro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+.pro-card3{background:var(--surface);border-radius:16px;padding:18px;border:1px solid var(--line);cursor:pointer;transition:box-shadow .2s;}
+.pro-card3:hover{box-shadow:var(--shadow-soft);}
+.pro-card3 img{width:54px;height:54px;border-radius:50%;object-fit:cover;margin-bottom:10px;}
+.pro-card3 b{font-size:0.9rem;display:block;}
+.pro-card3 .esp{font-size:0.78rem;color:var(--muted-2);}
+.pro-card3 .meta-row{display:flex;justify-content:space-between;margin-top:10px;font-size:0.74rem;color:var(--muted-2);}
+.estado-badge{font-size:0.68rem;font-weight:700;padding:3px 9px;border-radius:999px;text-transform:uppercase;}
+.estado-badge.activo{background:#E4E9DE;color:var(--sage-deep);}
+.estado-badge.pausado{background:var(--paper);color:var(--muted);}
+.estado-badge.moroso{background:#F4E1DB;color:var(--danger);}
+
+/* ============ ESPACIOS ============ */
+.espacios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.espacio-card3{background:var(--surface);border-radius:16px;overflow:hidden;border:1px solid var(--line);}
+.espacio-card3 img{width:100%;height:120px;object-fit:cover;}
+.espacio-card3-body{padding:14px 16px;}
+.espacio-card3-body b{font-size:0.9rem;display:block;}
+.espacio-card3-body .sede{font-size:0.78rem;color:var(--muted-2);}
+.espacio-stats-row{display:flex;justify-content:space-between;margin-top:10px;font-size:0.76rem;}
+.espacio-stats-row b{font-family:var(--display);font-size:0.95rem;display:block;color:var(--clay);}
+.espacio-card3-actions{display:flex;gap:8px;margin-top:12px;}
+.espacio-card3-actions button{flex:1;font-size:0.76rem;font-weight:700;padding:8px;border-radius:9px;border:1px solid var(--line);}
+
+/* ============ MEMBRESÍAS Y FACTURACIÓN ============ */
+.planes-admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;}
+.plan-admin-card{background:var(--surface);border-radius:16px;padding:20px;border:1px solid var(--line);}
+.plan-admin-card h4{font-size:1rem;margin-bottom:6px;}
+.plan-admin-card .price{font-family:var(--display);color:var(--clay);font-size:1.3rem;margin:8px 0;}
+@media (max-width:900px){.planes-admin-grid{grid-template-columns:1fr;}}
+
+.moros-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--line);flex-wrap:wrap;gap:8px;}
+.moros-item:first-child{border-top:none;}
+.moros-actions{display:flex;gap:8px;}
+.moros-actions button{font-size:0.76rem;font-weight:700;padding:7px 13px;border-radius:999px;border:1px solid var(--line);}
+.moros-actions button.danger{color:var(--danger);border-color:rgba(177,86,66,0.3);}
+
+/* ============ REPORTES ============ */
+.report-form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:24px;background:var(--surface);padding:20px;border-radius:16px;border:1px solid var(--line);}
+.report-form .field{display:flex;flex-direction:column;gap:6px;}
+.report-form label{font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--muted-2);}
+.report-form select,.report-form input{padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:var(--cream);}
+.report-preview{background:var(--surface);border-radius:16px;padding:22px;border:1px solid var(--line);display:none;}
+.report-preview.show{display:block;}
+.bar-chart{display:flex;align-items:flex-end;gap:10px;height:180px;margin-top:16px;}
+.bar-chart .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.bar-chart .bar{width:100%;background:var(--clay);border-radius:6px 6px 0 0;}
+.bar-chart .bar-label{font-size:0.7rem;color:var(--muted-2);}
+
+.heatmap-grid{display:grid;grid-template-columns:60px repeat(6,1fr);gap:4px;margin-top:16px;}
+.heatmap-cell{padding:10px 4px;border-radius:8px;text-align:center;font-size:0.68rem;font-weight:700;color:#fff;}
+.heatmap-label{font-size:0.72rem;color:var(--muted-2);display:flex;align-items:center;}
+
+/* ============ MENSAJES ============ */
+.inbox-layout{display:grid;grid-template-columns:300px 1fr;gap:0;background:var(--surface);border-radius:18px;border:1px solid var(--line);height:600px;overflow:hidden;}
+.conv-list{border-right:1px solid var(--line);overflow-y:auto;}
+.conv-item{display:flex;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);cursor:pointer;}
+.conv-item.is-active{background:var(--paper);}
+.conv-item img{width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.conv-item-info{flex:1;min-width:0;}
+.conv-item-info b{font-size:0.84rem;display:block;}
+.conv-item-info span{font-size:0.76rem;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;}
+.unread-dot{width:8px;height:8px;background:var(--clay);border-radius:50%;flex-shrink:0;margin-top:4px;}
+.conv-panel{display:flex;flex-direction:column;}
+.conv-panel-header{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+.conv-panel-header img{width:38px;height:38px;border-radius:50%;object-fit:cover;}
+.conv-panel-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;}
+.msg-bubble2{max-width:70%;padding:10px 15px;border-radius:14px;font-size:0.86rem;}
+.msg-bubble2.pro{background:var(--paper);align-self:flex-start;border-bottom-left-radius:4px;}
+.msg-bubble2.admin{background:var(--clay);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.templates-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 10px;}
+.templates-row button{font-size:0.74rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);}
+.conv-panel-input{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--line);}
+.conv-panel-input input{flex:1;border:1px solid var(--line);border-radius:999px;padding:11px 16px;font-size:0.87rem;}
+.conv-panel-input button{width:40px;height:40px;border-radius:50%;background:var(--clay);color:#fff;flex-shrink:0;}
+@media (max-width:900px){.inbox-layout{grid-template-columns:1fr;height:auto;}.conv-list{max-height:220px;}}
+
+/* ============ MOBILE NAV ============ */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--line);z-index:60;padding:8px 4px;}
+.mobile-nav-inner{display:flex;justify-content:space-around;}
+.mobile-nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:0.6rem;font-weight:600;color:var(--muted-2);padding:6px 4px;flex:1;}
+.mobile-nav button svg{width:19px;height:19px;}
+.mobile-nav button.is-active{color:var(--clay);}
+@media (max-width:980px){.mobile-nav{display:block;}.view{padding-bottom:90px;}}
+
+/* ============ MODALS ============ */
+.modal-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.6);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
+.modal-backdrop.is-open{display:flex;}
+.modal-box{background:var(--cream);border-radius:20px;padding:28px;max-width:520px;width:100%;position:relative;max-height:88vh;overflow-y:auto;margin:auto;}
+.modal-close2{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--paper);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media (max-width:520px){.form-row{grid-template-columns:1fr;}}
+
+.notif-dropdown{position:absolute;top:58px;right:24px;width:340px;max-width:90vw;background:var(--surface);border-radius:16px;box-shadow:var(--shadow-lift);border:1px solid var(--line);z-index:100;display:none;max-height:70vh;overflow-y:auto;}
+.notif-dropdown.is-open{display:block;}
+.notif-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);}
+.notif-head b{font-size:0.9rem;}
+.notif-head button{font-size:0.76rem;font-weight:700;color:var(--clay);}
+.notif-item{padding:13px 16px;border-bottom:1px solid var(--line);font-size:0.84rem;cursor:pointer;}
+.notif-item:hover{background:var(--paper);}
+.notif-item.unread{background:#FBF3EC;}
+.notif-item span{display:block;font-size:0.72rem;color:var(--muted-2);margin-top:3px;}
+
+.toast-stack{position:fixed;bottom:24px;right:24px;z-index:350;display:flex;flex-direction:column;gap:10px;pointer-events:none;align-items:flex-end;}
+.toast{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow-lift);font-size:0.82rem;max-width:320px;display:flex;gap:10px;opacity:0;transform:translateY(10px);animation:toastIn .4s ease forwards;pointer-events:auto;}
+.toast.leaving{animation:toastOut .3s ease forwards;}
+@keyframes toastIn{to{opacity:1;transform:translateY(0);}}
+@keyframes toastOut{to{opacity:0;transform:translateY(6px);}}
+.toast-icon{width:30px;height:30px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.toast-text b{display:block;font-size:0.83rem;}
+.toast-text span{font-size:0.76rem;color:var(--muted-2);}
+@media (max-width:640px){.toast-stack{right:12px;left:12px;bottom:90px;align-items:stretch;}.toast{max-width:none;}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+<!-- ============ LOGIN ============ -->
+<div id="login-screen">
+  <div class="login-visual">
+    <img src="https://picsum.photos/seed/ile-admin-recepcion/1000/1200" alt="Recepción de Ilé Wellness">
+    <div class="login-visual-copy">
+      <span class="eyebrow">Centro de operaciones</span>
+      <h2>La operación diaria de Ilé, en un solo lugar.</h2>
+    </div>
+  </div>
+  <div class="login-form-wrap">
+    <div class="login-form">
+      <div class="login-logo"><span class="dot"></span>Ilé Wellness</div>
+      <span class="login-badge-interno">Panel interno</span>
+      <div class="login-demo-note">Panel interno de demostración — cualquier usuario y contraseña te dará acceso.</div>
+      <form id="login-form">
+        <div class="login-field"><label for="login-user">Usuario</label><input type="text" id="login-user" autocomplete="username"></div>
+        <div class="login-field"><label for="login-pass">Contraseña</label><input type="password" id="login-pass" autocomplete="current-password"></div>
+        <div class="login-field">
+          <label for="login-role">Rol</label>
+          <select id="login-role">
+            <option>Recepción</option><option>Administración</option><option>Gerencia</option><option>Mantenimiento</option>
+          </select>
+        </div>
+        <button type="submit" class="login-submit" id="login-submit-btn"><span class="label">Iniciar sesión</span></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="dot"></span>Ilé Wellness</div>
+    <div class="sidebar-sub">Panel interno</div>
+    <nav class="sidebar-nav" id="sidebar-nav"></nav>
+    <div class="sidebar-user">
+      <img src="" alt="" id="sidebar-avatar">
+      <div><b id="sidebar-name"></b><span id="sidebar-role"></span></div>
+    </div>
+  </aside>
+
+  <div class="mobile-sidebar-backdrop" id="mobile-sidebar-backdrop"></div>
+  <aside class="mobile-sidebar" id="mobile-sidebar">
+    <div class="sidebar-logo"><span class="dot"></span>Ilé Wellness</div>
+    <nav class="sidebar-nav" id="mobile-sidebar-nav"></nav>
+  </aside>
+
+  <div class="main-col" id="main">
+    <div class="topbar">
+      <button class="mobile-menu-btn" id="open-mobile-sidebar" aria-label="Abrir menú">☰</button>
+      <div class="topbar-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Buscar profesionales o reservas…" id="global-search">
+      </div>
+      <div class="topbar-actions">
+        <button class="bell-btn" id="bell-btn" aria-label="Notificaciones">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0112 0c0 4 1.5 5.5 1.5 6.5H4.5C4.5 13.5 6 12 6 8z"/><path d="M10 19a2 2 0 004 0"/></svg>
+          <span class="badge" id="notif-badge">0</span>
+        </button>
+        <img class="topbar-avatar" src="" alt="" id="topbar-avatar">
+      </div>
+    </div>
+
+    <div class="notif-dropdown" id="notif-dropdown">
+      <div class="notif-head"><b>Notificaciones</b><button id="mark-all-read">Marcar todas como leídas</button></div>
+      <div id="notif-list"></div>
+    </div>
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="view is-active" data-view="dashboard">
+      <div class="view-head"><div><h1>Dashboard de operaciones</h1><p>Vista general del día en ambas sedes.</p></div></div>
+      <div class="kpi-grid" id="kpi-grid"></div>
+      <div class="dash-grid">
+        <div class="panel-card">
+          <h3>Ocupación en tiempo real</h3>
+          <div class="occ-grid" id="occ-grid"></div>
+        </div>
+        <div class="panel-card">
+          <h3>Próximas llegadas</h3>
+          <div id="arrivals-list"></div>
+        </div>
+      </div>
+      <div class="dash-grid">
+        <div class="panel-card">
+          <h3>Alertas operativas</h3>
+          <div id="alerts-list"></div>
+        </div>
+        <div class="panel-card">
+          <h3>Actividad reciente</h3>
+          <div id="activity-list"></div>
+        </div>
+      </div>
+      <div class="crosssell-widget2">
+        <h4>Grupo Meridiano</h4>
+        <div class="crosssell-mini-grid2">
+          <div class="crosssell-mini2"><b>Arqueo Estudio</b>3 profesionales de Ilé han preguntado por espacios propios este mes — considera referirlos.</div>
+          <div class="crosssell-mini2"><b>Torreón Constructora</b>Acceso simbólico al panel de la constructora hermana del grupo.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RESERVAS ===== -->
+    <section class="view" data-view="reservas">
+      <div class="view-head">
+        <div><h1>Gestión de reservas</h1><p>Vista maestra de todas las reservas de todos los profesionales.</p></div>
+        <button class="login-submit" id="new-reservation-btn" style="width:auto;padding:11px 18px;">+ Nueva reserva</button>
+      </div>
+      <div class="filter-bar">
+        <select id="res-filter-espacio"><option value="">Todos los espacios</option></select>
+        <select id="res-filter-estado"><option value="">Todos los estados</option><option value="confirmada">Confirmada</option><option value="completada">Completada</option><option value="cancelada">Cancelada</option></select>
+        <input type="date" id="res-filter-fecha">
+        <div class="view-toggle2">
+          <button class="is-active" data-rview="tabla">Tabla</button>
+          <button data-rview="limpieza">En limpieza</button>
+        </div>
+      </div>
+      <div id="reservas-tabla-wrap"><table class="data-table"><thead><tr><th>Profesional</th><th>Espacio</th><th>Fecha</th><th>Hora</th><th>Estado</th><th>Paciente</th><th></th></tr></thead><tbody id="reservas-tbody"></tbody></table></div>
+      <div id="limpieza-wrap" style="display:none;"><div class="cleaning-grid" id="cleaning-grid"></div></div>
+    </section>
+
+    <!-- ===== PROFESIONALES ===== -->
+    <section class="view" data-view="profesionales">
+      <div class="view-head">
+        <div><h1>Profesionales</h1><p>Directorio completo de miembros activos.</p></div>
+        <button class="login-submit" id="new-pro-btn" style="width:auto;padding:11px 18px;">+ Registrar profesional</button>
+      </div>
+      <div class="filter-bar">
+        <select id="pro-filter-especialidad"><option value="">Todas las especialidades</option></select>
+        <select id="pro-filter-plan"><option value="">Todos los planes</option><option>Flexible</option><option>Mensual Cabina</option><option>Mensual Oficina</option></select>
+        <select id="pro-filter-estado"><option value="">Todos los estados</option><option>activo</option><option>pausado</option><option>moroso</option></select>
+      </div>
+      <div class="pro-grid" id="pro-grid"></div>
+    </section>
+
+    <!-- ===== ESPACIOS ===== -->
+    <section class="view" data-view="espacios">
+      <div class="view-head"><div><h1>Espacios</h1><p>Inventario de cabinas y oficinas, uso y rentabilidad.</p></div><button class="login-submit" id="new-space-btn" style="width:auto;padding:11px 18px;">+ Agregar espacio</button></div>
+      <div class="espacios-grid" id="espacios-grid"></div>
+      <h3 style="margin:28px 0 14px;font-size:1.05rem;">Mantenimiento programado</h3>
+      <div id="maint-list"></div>
+    </section>
+
+    <!-- ===== MEMBRESÍAS Y FACTURACIÓN ===== -->
+    <section class="view" data-view="facturacion">
+      <div class="view-head"><h1>Membresías y facturación</h1><p>Planes disponibles, cargos del periodo y morosidad.</p></div>
+      <h3 style="margin-bottom:14px;font-size:1.05rem;">Planes de membresía</h3>
+      <div class="planes-admin-grid" id="planes-admin-grid"></div>
+      <h3 style="margin-bottom:14px;font-size:1.05rem;">Facturación del periodo</h3>
+      <div class="filter-bar"><select id="fact-filter-estado"><option value="">Todos los estados</option><option>pagado</option><option>pendiente</option><option>vencido</option></select><button class="login-submit" id="export-btn" style="width:auto;padding:9px 16px;margin-left:auto;">Exportar</button></div>
+      <table class="data-table" style="margin-bottom:28px;"><thead><tr><th>Profesional</th><th>Concepto</th><th>Monto</th><th>Estado</th><th></th></tr></thead><tbody id="fact-tbody"></tbody></table>
+      <h3 style="margin-bottom:14px;font-size:1.05rem;">Morosidad</h3>
+      <div class="panel-card" id="morosidad-panel"></div>
+      <h3 style="margin:28px 0 14px;font-size:1.05rem;">Ingresos mensuales recurrentes (MRR)</h3>
+      <div class="panel-card"><div class="bar-chart" id="mrr-chart"></div></div>
+    </section>
+
+    <!-- ===== MENSAJES ===== -->
+    <section class="view" data-view="mensajes">
+      <div class="view-head"><h1>Mensajes</h1><p>Bandeja de conversaciones con profesionales activos.</p></div>
+      <div class="inbox-layout">
+        <div class="conv-list" id="conv-list"></div>
+        <div class="conv-panel" id="conv-panel"><p style="padding:40px;color:var(--muted-2);text-align:center;">Selecciona una conversación.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== REPORTES ===== -->
+    <section class="view" data-view="reportes">
+      <div class="view-head"><h1>Reportes y analítica</h1><p>Genera reportes de ocupación, ingresos y retención.</p></div>
+      <div class="report-form">
+        <div class="field"><label>Tipo de reporte</label><select id="report-type"><option>Ocupación por espacio</option><option>Ingresos por periodo</option><option>Profesionales más activos</option><option>Retención de membresías</option><option>Satisfacción promedio</option></select></div>
+        <div class="field"><label>Desde</label><input type="date" id="report-from"></div>
+        <div class="field"><label>Hasta</label><input type="date" id="report-to"></div>
+        <button class="login-submit" id="generate-report-btn" style="width:auto;padding:11px 18px;">Generar</button>
+      </div>
+      <div class="report-preview" id="report-preview"></div>
+      <h3 style="margin:32px 0 14px;font-size:1.05rem;">Heatmap de ocupación semanal</h3>
+      <div class="panel-card"><div class="heatmap-grid" id="heatmap-grid"></div></div>
+    </section>
+  </div>
+</div>
+
+<div class="mobile-nav" id="mobile-nav"><div class="mobile-nav-inner" id="mobile-nav-inner"></div></div>
+
+<!-- ============ MODALS ============ -->
+<div class="modal-backdrop" id="new-res-modal">
+  <div class="modal-box">
+    <button class="modal-close2" data-close-modal>✕</button>
+    <h3 style="margin-bottom:16px;">Nueva reserva manual</h3>
+    <div class="login-field"><label>Profesional</label><select id="nr-pro"></select></div>
+    <div class="login-field"><label>Espacio</label><select id="nr-espacio"></select></div>
+    <div class="form-row">
+      <div class="login-field"><label>Fecha</label><input type="date" id="nr-fecha"></div>
+      <div class="login-field"><label>Hora</label><input type="time" id="nr-hora"></div>
+    </div>
+    <button class="login-submit" id="nr-save">Crear reserva</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="new-pro-modal">
+  <div class="modal-box">
+    <button class="modal-close2" data-close-modal>✕</button>
+    <h3 style="margin-bottom:16px;">Registrar nuevo profesional</h3>
+    <div class="login-field"><label>Nombre completo</label><input type="text" id="np-nombre"></div>
+    <div class="form-row">
+      <div class="login-field"><label>Especialidad</label><input type="text" id="np-especialidad"></div>
+      <div class="login-field"><label>Plan</label><select id="np-plan"><option>Flexible</option><option>Mensual Cabina</option><option>Mensual Oficina</option></select></div>
+    </div>
+    <div class="login-field"><label>Método de pago</label><input type="text" id="np-pago" placeholder="Tarjeta terminada en ****"></div>
+    <button class="login-submit" id="np-save">Registrar profesional</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="pro-detail-modal">
+  <div class="modal-box" id="pro-detail-content"></div>
+</div>
+
+<div class="modal-backdrop" id="new-space-modal">
+  <div class="modal-box">
+    <button class="modal-close2" data-close-modal>✕</button>
+    <h3 style="margin-bottom:16px;">Agregar nuevo espacio</h3>
+    <div class="login-field"><label>Nombre</label><input type="text" id="ns-nombre"></div>
+    <div class="form-row">
+      <div class="login-field"><label>Tipo</label><select id="ns-tipo"><option value="cabina">Cabina</option><option value="oficina">Oficina</option></select></div>
+      <div class="login-field"><label>Sede</label><select id="ns-sede"><option>Reforma CDMX</option><option>Tizayuca-Pachuca</option></select></div>
+    </div>
+    <div class="login-field"><label>Tarifa por hora (MXN)</label><input type="number" id="ns-precio" value="180"></div>
+    <button class="login-submit" id="ns-save">Agregar espacio</button>
+  </div>
+</div>
+
+<div class="toast-stack" id="toast-stack"></div>
+
+<script>
+// =========================================================
+// DATOS — PANEL ADMIN ILÉ WELLNESS
+// =========================================================
+function seedRandom(seed){
+  let h = 0;
+  for(let i=0;i<seed.length;i++){ h = (h*31 + seed.charCodeAt(i)) >>> 0; }
+  return function(){
+    h ^= h << 13; h >>>= 0; h ^= h >>> 17; h ^= h << 5; h >>>= 0;
+    return (h % 10000) / 10000;
+  };
+}
+function img(seed,w,h){ return `https://picsum.photos/seed/${seed}/${w}/${h}`; }
+function avatar(seed,size){ return `https://i.pravatar.cc/${size||100}?u=${seed}`; }
+
+const EMPLEADO = {nombre:'Karina Rueda', rol:'Recepción', avatarSeed:'ile-admin-karina'};
+const ROLES = ['Recepción','Administración','Gerencia','Mantenimiento'];
+
+// ============ ESPACIOS ============
+const NOMBRES_CABINA = ['Cabina Roble','Cabina Bruma','Cabina Musgo','Cabina Arcilla','Cabina Ceniza','Cabina Sal','Cabina Palma','Cabina Cedro','Cabina Nube','Cabina Ámbar','Cabina Jade','Cabina Vainilla','Cabina Ocre','Cabina Lino','Cabina Coral','Cabina Bambú'];
+const NOMBRES_OFICINA = ['Oficina Alcanfor','Oficina Membrillo','Oficina Azahar','Oficina Laurel','Oficina Romero','Oficina Girasol','Oficina Magnolia','Oficina Ciprés','Oficina Jazmín','Oficina Alba','Oficina Nogal','Oficina Salvia'];
+
+function generarEspacios(){
+  const espacios = [];
+  for(let i=0;i<16;i++){
+    const seed='ile-space-cabina-'+i; const rnd=seedRandom(seed);
+    const sede = i%2===0 ? 'Reforma CDMX' : 'Tizayuca-Pachuca';
+    const amenidades=['sonido','wifi']; if(rnd()>0.2) amenidades.unshift('aromaterapia'); if(rnd()>0.75) amenidades.push('tina'); if(rnd()>0.5) amenidades.push('luz-natural');
+    const estados=['disponible','ocupado','limpieza'];
+    espacios.push({
+      id:'esp-cabina-'+i, seed, nombre:NOMBRES_CABINA[i%NOMBRES_CABINA.length], tipo:'cabina', sede,
+      capacidad:1, precioHora:160+Math.round(rnd()*8)*10, amenidades,
+      estado: estados[Math.floor(rnd()*estados.length)],
+      horasOcupadoMes: 30+Math.floor(rnd()*90), ingresoMes: 0
+    });
+  }
+  for(let i=0;i<12;i++){
+    const seed='ile-space-oficina-'+i; const rnd=seedRandom(seed);
+    const sede = i%2===0 ? 'Tizayuca-Pachuca' : 'Reforma CDMX';
+    const amenidades=['insonorizacion','wifi']; if(rnd()>0.6) amenidades.push('luz-natural');
+    const estados=['disponible','ocupado','limpieza'];
+    espacios.push({
+      id:'esp-oficina-'+i, seed, nombre:NOMBRES_OFICINA[i%NOMBRES_OFICINA.length], tipo:'oficina', sede,
+      capacidad: i%4===0?3:1, precioHora:190+Math.round(rnd()*8)*10, amenidades,
+      estado: estados[Math.floor(rnd()*estados.length)],
+      horasOcupadoMes: 20+Math.floor(rnd()*70), ingresoMes: 0
+    });
+  }
+  espacios.forEach(e => e.ingresoMes = e.horasOcupadoMes * e.precioHora);
+  return espacios;
+}
+const ESPACIOS = generarEspacios();
+
+// ============ PROFESIONALES ============
+const ESPECIALIDADES = ['Masoterapeuta','Psicóloga clínica','Nutriólogo','Reflexóloga','Fisioterapeuta','Quiropráctico','Terapeuta familiar','Acupunturista','Psicóloga infantil','Nutrióloga deportiva','Masoterapeuta deportivo','Terapeuta de pareja','Osteópata','Podólogo'];
+const NOMBRES_PRO = ['Lucía Mendoza','Andrés Falcón','Camila Ortiz','Renata Solís','Joaquín Herrera','Paola Nieto','Fernanda Castillo','Ricardo Palma','Diana Reyes','Mariana Cobos','Sofía Barragán','Emilio Vidal','Valeria Nuño','Héctor Prado','Ximena Rosales','Iván Casares','Gabriela Soto','Tomás Villagrán','Alejandra Puente','Marcos Ibarra','Natalia Cervantes','Rodrigo Guzmán','Melissa Torreblanca','Fabián Duarte'];
+const PLANES_NOMBRES = ['Flexible','Mensual Cabina','Mensual Oficina'];
+const ESTADOS_PRO = ['activo','activo','activo','pausado','moroso'];
+
+function generarProfesionales(){
+  return NOMBRES_PRO.map((nombre,i) => {
+    const rnd = seedRandom('pro-'+i);
+    const diasIngreso = 30+Math.floor(rnd()*700);
+    const fechaIngreso = new Date(); fechaIngreso.setDate(fechaIngreso.getDate()-diasIngreso);
+    return {
+      id:'pro-'+i, nombre, especialidad:ESPECIALIDADES[i%ESPECIALIDADES.length],
+      plan:PLANES_NOMBRES[Math.floor(rnd()*PLANES_NOMBRES.length)],
+      fechaIngreso: fechaIngreso.toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}),
+      estado:ESTADOS_PRO[Math.floor(rnd()*ESTADOS_PRO.length)],
+      calificacion:(4.4+rnd()*0.6).toFixed(1),
+      avatarSeed:'ile-pro-'+i,
+      notasInternas: rnd() > 0.6 ? 'Prefiere cabinas con luz natural. Puntual en pagos.' : '',
+      relacionArqueo: rnd() > 0.85,
+      relacionTorreon: rnd() > 0.9
+    };
+  });
+}
+const PROFESIONALES = generarProfesionales();
+
+// ============ RESERVAS MAESTRAS ============
+function generarReservasMaestras(){
+  const reservas = [];
+  const hoy = new Date();
+  for(let i=0;i<40;i++){
+    const rnd = seedRandom('res-master-'+i);
+    const offsetDias = Math.floor(rnd()*6)-2;
+    const fecha = new Date(hoy); fecha.setDate(hoy.getDate()+offsetDias);
+    const espacio = ESPACIOS[Math.floor(rnd()*ESPACIOS.length)];
+    const pro = PROFESIONALES[Math.floor(rnd()*PROFESIONALES.length)];
+    const horas = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+    const hora = horas[Math.floor(rnd()*horas.length)];
+    const estados = offsetDias < 0 ? ['completada','completada','cancelada'] : ['confirmada','confirmada','confirmada','cancelada'];
+    reservas.push({
+      id:'resm-'+i, espacio, profesional:pro, fecha, hora,
+      duracion:'hora', precio:espacio.precioHora,
+      estado: estados[Math.floor(rnd()*estados.length)],
+      tienePaciente: rnd() > 0.4
+    });
+  }
+  return reservas.sort((a,b)=>a.fecha-b.fecha);
+}
+const RESERVAS = generarReservasMaestras();
+
+// ============ FACTURACIÓN ============
+function generarFacturacion(){
+  const cargos = [];
+  PROFESIONALES.forEach((p,i) => {
+    const rnd = seedRandom('cargo-'+i);
+    const monto = p.plan==='Mensual Oficina' ? 6800 : (p.plan==='Mensual Cabina' ? 4200 : 1200+Math.floor(rnd()*2000));
+    const estado = p.estado==='moroso' ? 'vencido' : (rnd()>0.15 ? 'pagado' : 'pendiente');
+    cargos.push({id:'cargo-'+i, profesional:p, concepto:'Membresía mensual — Plan '+p.plan, monto, estado, fecha:'01 ago 2026'});
+  });
+  return cargos;
+}
+const FACTURACION = generarFacturacion();
+
+// ============ MANTENIMIENTO PROGRAMADO ============
+const MANTENIMIENTO = [
+  {espacio:'Cabina Roble', tipo:'Mantenimiento profundo', fecha:'Próximo lunes, 8:00 AM'},
+  {espacio:'Oficina Alcanfor', tipo:'Revisión de aire acondicionado', fecha:'Miércoles, 2:00 PM'},
+  {espacio:'Cabina Musgo', tipo:'Cambio de difusor de aromaterapia', fecha:'Viernes, 10:00 AM'},
+];
+
+// ============ ACTIVIDAD RECIENTE ============
+const ACTIVIDAD = [
+  {icono:'✓', texto:'Nueva reserva confirmada — Cabina Roble, 3:00 PM', tiempo:'Hace 8 min'},
+  {icono:'🧹', texto:'Cabina Bruma marcada como lista tras limpieza', tiempo:'Hace 22 min'},
+  {icono:'👤', texto:'Nuevo profesional registrado: Andrea Solís', tiempo:'Hace 40 min'},
+  {icono:'💬', texto:'Mensaje nuevo de Joaquín Herrera esperando respuesta', tiempo:'Hace 1 h'},
+  {icono:'⚠️', texto:'Pago vencido — recordatorio enviado a un profesional moroso', tiempo:'Hace 2 h'},
+  {icono:'✕', texto:'Cancelación: Oficina Laurel, hoy 11:00 AM', tiempo:'Hace 3 h'},
+  {icono:'⭐', texto:'Nueva calificación de 5 estrellas para Cabina Palma', tiempo:'Hace 4 h'},
+  {icono:'🔄', texto:'Renovación de membresía — Plan Mensual Oficina', tiempo:'Ayer'},
+  {icono:'📋', texto:'Se generó el reporte de ocupación semanal', tiempo:'Ayer'},
+  {icono:'🏛️', texto:'Un profesional preguntó por espacios propios — sugerido a Arqueo Estudio', tiempo:'Hace 2 días'},
+];
+
+// ============ MENSAJES (bandeja) ============
+function generarConversaciones(){
+  const temas = [
+    ['Hola, ¿podrían ajustar la temperatura de mi cabina para hoy?','Claro, ya quedó ajustada a 22°C para tu sesión.'],
+    ['Mi paciente llegará 15 minutos tarde, avísenle a recepción por favor.','Anotado, la recibiremos con calma cuando llegue.'],
+    ['¿Tienen disponibilidad de última hora para hoy en la tarde?','Sí, tenemos una cabina libre de 5 a 7 PM, ¿la reservamos?'],
+    ['Buenas, quisiera cambiar mi plan a Mensual Oficina.','Con gusto, te paso la comparativa de planes por aquí mismo.'],
+    ['¿Podrían confirmarme mi reserva de mañana?','Sí, tu reserva de mañana a las 10 AM está confirmada.'],
+  ];
+  return PROFESIONALES.slice(0,10).map((p,i) => {
+    const t = temas[i % temas.length];
+    return {
+      id:'conv-'+i, profesional:p,
+      mensajes:[
+        {who:'pro', texto:t[0], tiempo:'Hace ' + (1+i) + ' h'},
+        {who:'admin', texto:t[1], tiempo:'Hace ' + i + ' h'}
+      ],
+      noLeido: i < 3
+    };
+  });
+}
+const CONVERSACIONES = generarConversaciones();
+const PLANTILLAS_RESPUESTA = [
+  'Tu espacio ya está listo y disponible.',
+  'Hemos recibido tu solicitud, la confirmamos en breve.',
+  'Tu reserva quedó confirmada, te esperamos.',
+  'Gracias por avisarnos, quedó registrado.'
+];
+
+// ============ MEMBRESÍAS / PLANES ============
+const PLANES = [
+  {nombre:'Flexible', precio:'Pago por uso', beneficios:'Sin compromiso mensual, acceso a todos los espacios.'},
+  {nombre:'Mensual Cabina', precio:'$4,200 MXN/mes', beneficios:'40 horas de cabina incluidas, prioridad de horario.'},
+  {nombre:'Mensual Oficina', precio:'$6,800 MXN/mes', beneficios:'Oficina privada de tiempo completo, casillero personal.'}
+];
+
+// ============ MRR histórico ============
+const MRR_HISTORICO = [
+  {mes:'Mar', valor:298000}, {mes:'Abr', valor:312000}, {mes:'May', valor:305000},
+  {mes:'Jun', valor:334000}, {mes:'Jul', valor:351000}, {mes:'Ago', valor:368000}
+];
+
+// ============ HEATMAP OCUPACIÓN ============
+function generarHeatmap(){
+  const dias = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const horas = ['8-10','10-12','12-14','14-16','16-18','18-20'];
+  const data = [];
+  dias.forEach((d,di) => {
+    horas.forEach((h,hi) => {
+      const rnd = seedRandom('heat-'+di+'-'+hi);
+      data.push({dia:d, hora:h, intensidad: Math.round(rnd()*100)});
+    });
+  });
+  return {dias, horas, data};
+}
+const HEATMAP = generarHeatmap();
+
+</script>
+<script>
+// =========================================================
+// ESTADO
+// =========================================================
+const state = {
+  vistaActual:'dashboard',
+  resView:'tabla',
+  proDetalle:null,
+  convActiva:null,
+  notifs:[], notifCount:0
+};
+
+function svgWrap(inner){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${inner}</svg>`; }
+function iconNav(name){
+  const icons = {
+    dashboard:'<path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>',
+    reservas:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>',
+    profesionales:'<circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="7" r="3"/>',
+    espacios:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/>',
+    facturacion:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',
+    mensajes:'<path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>',
+    reportes:'<path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 4-8"/>'
+  };
+  return icons[name]||icons.dashboard;
+}
+const NAV_ITEMS = [
+  {id:'dashboard', label:'Dashboard'},
+  {id:'reservas', label:'Reservas'},
+  {id:'profesionales', label:'Profesionales'},
+  {id:'espacios', label:'Espacios'},
+  {id:'facturacion', label:'Membresías'},
+  {id:'mensajes', label:'Mensajes'},
+  {id:'reportes', label:'Reportes'}
+];
+
+function renderNav(){
+  const html = NAV_ITEMS.map(item => `<button data-goto="${item.id}" class="${item.id===state.vistaActual?'is-active':''}">${svgWrap(iconNav(item.id))}${item.label}</button>`).join('');
+  document.getElementById('sidebar-nav').innerHTML = html;
+  document.getElementById('mobile-sidebar-nav').innerHTML = html;
+  const mobileIds = ['dashboard','reservas','profesionales','mensajes','reportes'];
+  document.getElementById('mobile-nav-inner').innerHTML = mobileIds.map(id => {
+    const item = NAV_ITEMS.find(n=>n.id===id);
+    return `<button data-goto="${id}" class="${id===state.vistaActual?'is-active':''}">${svgWrap(iconNav(id))}${item.label}</button>`;
+  }).join('');
+  document.querySelectorAll('[data-goto]').forEach(btn => btn.addEventListener('click', () => irAVista(btn.dataset.goto)));
+}
+function irAVista(id){
+  state.vistaActual = id;
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('is-active', v.dataset.view===id));
+  renderNav();
+  cerrarMobileSidebar();
+  window.scrollTo({top:0,behavior:'smooth'});
+  const renderers = {dashboard:renderDashboard, reservas:renderReservasView, profesionales:renderProfesionalesView, espacios:renderEspaciosView, facturacion:renderFacturacionView, mensajes:renderMensajesView, reportes:renderReportesView};
+  if(renderers[id]) renderers[id]();
+}
+function abrirMobileSidebar(){document.getElementById('mobile-sidebar').classList.add('is-open');document.getElementById('mobile-sidebar-backdrop').classList.add('is-open');}
+function cerrarMobileSidebar(){document.getElementById('mobile-sidebar').classList.remove('is-open');document.getElementById('mobile-sidebar-backdrop').classList.remove('is-open');}
+
+// =========================================================
+// LOGIN
+// =========================================================
+document.getElementById('login-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  EMPLEADO.rol = document.getElementById('login-role').value;
+  const btn = document.getElementById('login-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Verificando…';
+  setTimeout(() => {
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app-shell').classList.add('is-active');
+    iniciarApp();
+  }, 900+Math.random()*300);
+});
+
+function iniciarApp(){
+  document.getElementById('sidebar-avatar').src = avatar(EMPLEADO.avatarSeed,80);
+  document.getElementById('sidebar-name').textContent = EMPLEADO.nombre;
+  document.getElementById('sidebar-role').textContent = EMPLEADO.rol;
+  document.getElementById('topbar-avatar').src = avatar(EMPLEADO.avatarSeed,80);
+  renderNav();
+  renderDashboard();
+  generarNotifsIniciales();
+  wireGlobalUI();
+  wireModals();
+  poblarSelects();
+  iniciarNotifsLive();
+}
+
+// =========================================================
+// DASHBOARD
+// =========================================================
+function renderDashboard(){
+  const activos = PROFESIONALES.filter(p=>p.estado==='activo').length;
+  const ocupados = ESPACIOS.filter(e=>e.estado==='ocupado').length;
+  const ocupacionPct = Math.round(ocupados/ESPACIOS.length*100);
+  const ingresosMes = ESPACIOS.reduce((s,e)=>s+e.ingresoMes,0);
+  const nuevasMembresias = 6;
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card"><b>${activos}</b><span>Profesionales activos</span></div>
+    <div class="kpi-card"><b>${ocupacionPct}%</b><span>Ocupación hoy</span></div>
+    <div class="kpi-card"><b>$${ingresosMes.toLocaleString('es-MX')}</b><span>Ingresos del mes</span></div>
+    <div class="kpi-card"><b>${nuevasMembresias}</b><span>Nuevas membresías este mes</span></div>
+    <div class="kpi-card"><b>91%</b><span>Tasa de renovación</span></div>
+  `;
+  document.getElementById('occ-grid').innerHTML = ESPACIOS.map(e => `
+    <div class="occ-cell ${e.estado}">${e.nombre.split(' ')[1]||e.nombre}<span>${e.estado}</span></div>
+  `).join('');
+
+  const proximas = RESERVAS.filter(r => r.estado==='confirmada').slice(0,7);
+  document.getElementById('arrivals-list').innerHTML = proximas.map(r => `
+    <div class="arrival-item">
+      <div><b>${r.hora} — ${r.profesional.nombre}</b><span>${r.espacio.nombre} · ${r.espacio.sede}</span></div>
+      ${r.tienePaciente ? '<span class="pac-tag">Con paciente</span>' : '<span class="pac-tag">Sin paciente</span>'}
+    </div>
+  `).join('') || '<p style="color:var(--muted-2);font-size:0.85rem;">Sin llegadas próximas.</p>';
+
+  const enLimpieza = ESPACIOS.filter(e=>e.estado==='limpieza');
+  const morosos = PROFESIONALES.filter(p=>p.estado==='moroso');
+  document.getElementById('alerts-list').innerHTML = `
+    ${enLimpieza.map(e=>`<div class="alert-item"><span class="alert-icon">🧹</span>${e.nombre} está en limpieza antes de su próxima reserva.</div>`).join('')}
+    ${morosos.map(p=>`<div class="alert-item"><span class="alert-icon">⚠️</span>${p.nombre} tiene un pago vencido.</div>`).join('')}
+    <div class="alert-item"><span class="alert-icon">📅</span>2 membresías vencen esta semana.</div>
+  ` || '<p style="color:var(--muted-2);font-size:0.85rem;">Sin alertas por ahora.</p>';
+
+  document.getElementById('activity-list').innerHTML = ACTIVIDAD.map(a => `<div class="activity-item"><span>${a.icono}</span><div>${a.texto}<div style="font-size:0.72rem;color:var(--muted-2);">${a.tiempo}</div></div></div>`).join('');
+}
+
+// =========================================================
+// RESERVAS (VISTA MAESTRA)
+// =========================================================
+function poblarSelects(){
+  document.getElementById('res-filter-espacio').innerHTML += ESPACIOS.map(e=>`<option value="${e.id}">${e.nombre}</option>`).join('');
+  document.getElementById('nr-pro').innerHTML = PROFESIONALES.map(p=>`<option value="${p.id}">${p.nombre}</option>`).join('');
+  document.getElementById('nr-espacio').innerHTML = ESPACIOS.map(e=>`<option value="${e.id}">${e.nombre}</option>`).join('');
+  const especialidades = [...new Set(PROFESIONALES.map(p=>p.especialidad))];
+  document.getElementById('pro-filter-especialidad').innerHTML += especialidades.map(e=>`<option value="${e}">${e}</option>`).join('');
+}
+function renderReservasView(){
+  document.querySelectorAll('.view-toggle2 button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.view-toggle2 button').forEach(x=>x.classList.remove('is-active'));
+    b.classList.add('is-active');
+    state.resView = b.dataset.rview;
+    document.getElementById('reservas-tabla-wrap').style.display = state.resView==='tabla' ? '' : 'none';
+    document.getElementById('limpieza-wrap').style.display = state.resView==='limpieza' ? '' : 'none';
+    if(state.resView==='limpieza') renderLimpieza();
+  });
+  ['res-filter-espacio','res-filter-estado','res-filter-fecha'].forEach(id => document.getElementById(id).onchange = renderReservasTabla);
+  document.getElementById('new-reservation-btn').onclick = () => document.getElementById('new-res-modal').classList.add('is-open');
+  renderReservasTabla();
+}
+function renderReservasTabla(){
+  const espFiltro = document.getElementById('res-filter-espacio').value;
+  const estFiltro = document.getElementById('res-filter-estado').value;
+  const fechaFiltro = document.getElementById('res-filter-fecha').value;
+  let list = RESERVAS.slice();
+  if(espFiltro) list = list.filter(r=>r.espacio.id===espFiltro);
+  if(estFiltro) list = list.filter(r=>r.estado===estFiltro);
+  if(fechaFiltro) list = list.filter(r=>r.fecha.toISOString().slice(0,10)===fechaFiltro);
+  document.getElementById('reservas-tbody').innerHTML = list.slice(0,60).map(r => `
+    <tr>
+      <td>${r.profesional.nombre}</td><td>${r.espacio.nombre}</td>
+      <td>${r.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'short'})}</td><td>${r.hora}</td>
+      <td><span class="status-pill ${r.estado}">${r.estado}</span></td>
+      <td>${r.tienePaciente ? 'Sí' : '—'}</td>
+      <td>${r.estado==='confirmada' ? `<button class="table-action" data-reagendar-m="${r.id}">Reagendar</button><button class="table-action" style="color:var(--danger);" data-cancelar-m="${r.id}">Cancelar</button>` : ''}</td>
+    </tr>
+  `).join('') || `<tr><td colspan="7" style="text-align:center;color:var(--muted-2);padding:30px;">Sin resultados con esos filtros.</td></tr>`;
+  document.querySelectorAll('[data-cancelar-m]').forEach(b => b.addEventListener('click', () => {
+    const r = RESERVAS.find(x=>x.id===b.dataset.cancelarM);
+    if(!confirm(`¿Cancelar la reserva de ${r.profesional.nombre}?`)) return;
+    r.estado='cancelada'; mostrarToast('✓','Reserva cancelada',`${r.profesional.nombre} — ${r.espacio.nombre}`); renderReservasTabla();
+  }));
+  document.querySelectorAll('[data-reagendar-m]').forEach(b => b.addEventListener('click', () => mostrarToast('📅','Reagendar','Función simulada en esta maqueta.')));
+}
+function renderLimpieza(){
+  const enLimpieza = ESPACIOS.filter(e=>e.estado==='limpieza');
+  document.getElementById('cleaning-grid').innerHTML = enLimpieza.map(e => `
+    <div class="cleaning-card" data-id="${e.id}">
+      <b>${e.nombre}</b><span style="font-size:0.78rem;color:var(--muted-2);">${e.sede}</span>
+      <div class="cleaning-timer">${5+Math.floor(seedRandom(e.id+'-time')()*10)} min restantes</div>
+      <button data-ready="${e.id}">Marcar como listo</button>
+    </div>
+  `).join('') || '<p style="color:var(--muted-2);">No hay espacios en limpieza en este momento.</p>';
+  document.querySelectorAll('[data-ready]').forEach(btn => btn.addEventListener('click', () => {
+    const e = ESPACIOS.find(x=>x.id===btn.dataset.ready);
+    e.estado='disponible';
+    mostrarToast('✓','Espacio listo',`${e.nombre} está disponible para la siguiente reserva.`);
+    renderLimpieza(); renderDashboard();
+  }));
+}
+document.getElementById('nr-save').addEventListener('click', () => {
+  const proId = document.getElementById('nr-pro').value;
+  const espId = document.getElementById('nr-espacio').value;
+  const fecha = document.getElementById('nr-fecha').value;
+  const hora = document.getElementById('nr-hora').value;
+  if(!fecha || !hora){ mostrarToast('⚠️','Faltan datos','Selecciona fecha y hora.'); return; }
+  const pro = PROFESIONALES.find(p=>p.id===proId);
+  const esp = ESPACIOS.find(e=>e.id===espId);
+  RESERVAS.unshift({id:'resm-new-'+Date.now(), espacio:esp, profesional:pro, fecha:new Date(fecha+'T12:00:00'), hora, duracion:'hora', precio:esp.precioHora, estado:'confirmada', tienePaciente:false});
+  document.getElementById('new-res-modal').classList.remove('is-open');
+  mostrarToast('✓','Reserva creada',`${pro.nombre} — ${esp.nombre}`);
+  if(state.vistaActual==='reservas') renderReservasTabla();
+  renderDashboard();
+});
+
+// =========================================================
+// PROFESIONALES
+// =========================================================
+function renderProfesionalesView(){
+  ['pro-filter-especialidad','pro-filter-plan','pro-filter-estado'].forEach(id => document.getElementById(id).onchange = renderProGrid);
+  document.getElementById('new-pro-btn').onclick = () => document.getElementById('new-pro-modal').classList.add('is-open');
+  renderProGrid();
+}
+function renderProGrid(){
+  const esp = document.getElementById('pro-filter-especialidad').value;
+  const plan = document.getElementById('pro-filter-plan').value;
+  const est = document.getElementById('pro-filter-estado').value;
+  let list = PROFESIONALES.slice();
+  if(esp) list = list.filter(p=>p.especialidad===esp);
+  if(plan) list = list.filter(p=>p.plan===plan);
+  if(est) list = list.filter(p=>p.estado===est);
+  document.getElementById('pro-grid').innerHTML = list.map(p => `
+    <div class="pro-card3" data-id="${p.id}">
+      <img src="${avatar(p.avatarSeed,100)}" alt="${p.nombre}">
+      <b>${p.nombre}</b><div class="esp">${p.especialidad}</div>
+      <div class="meta-row"><span>${p.plan}</span><span class="estado-badge ${p.estado}">${p.estado}</span></div>
+      <div class="meta-row"><span>⭐ ${p.calificacion}</span><span>Desde ${p.fechaIngreso}</span></div>
+    </div>
+  `).join('') || '<p style="color:var(--muted-2);">Sin resultados con esos filtros.</p>';
+  document.querySelectorAll('.pro-card3').forEach(card => card.addEventListener('click', () => abrirDetallePro(card.dataset.id)));
+}
+function abrirDetallePro(id){
+  const p = PROFESIONALES.find(x=>x.id===id);
+  const historial = RESERVAS.filter(r=>r.profesional.id===id).slice(0,6);
+  const cruces = [];
+  if(p.relacionArqueo) cruces.push('Diseñó su consultorio ideal con Arqueo Estudio.');
+  if(p.relacionTorreon) cruces.push('Construyó una remodelación con Torreón Constructora.');
+  document.getElementById('pro-detail-content').innerHTML = `
+    <button class="modal-close2" data-close-modal>✕</button>
+    <div style="display:flex;gap:14px;align-items:center;margin-bottom:18px;">
+      <img src="${avatar(p.avatarSeed,120)}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;">
+      <div><h3 style="font-size:1.1rem;">${p.nombre}</h3><span style="font-size:0.82rem;color:var(--muted-2);">${p.especialidad} · ${p.plan}</span></div>
+    </div>
+    <p style="font-size:0.85rem;margin-bottom:6px;"><b>Estado:</b> <span class="estado-badge ${p.estado}">${p.estado}</span></p>
+    <p style="font-size:0.85rem;margin-bottom:6px;"><b>Ingreso:</b> ${p.fechaIngreso}</p>
+    <p style="font-size:0.85rem;margin-bottom:16px;"><b>Calificación:</b> ⭐ ${p.calificacion}</p>
+    ${cruces.length ? `<div style="background:var(--paper);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:0.82rem;"><b>Grupo Meridiano:</b> ${cruces.join(' ')}</div>` : ''}
+    <h4 style="font-size:0.9rem;margin-bottom:10px;">Historial de reservas reciente</h4>
+    ${historial.map(r=>`<div style="font-size:0.82rem;padding:8px 0;border-top:1px solid var(--line);">${r.espacio.nombre} · ${r.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'short'})} ${r.hora} <span class="status-pill ${r.estado}" style="margin-left:6px;">${r.estado}</span></div>`).join('') || '<p style="font-size:0.82rem;color:var(--muted-2);">Sin reservas registradas.</p>'}
+    <h4 style="font-size:0.9rem;margin:16px 0 8px;">Notas internas</h4>
+    <textarea id="pro-notas" style="width:100%;min-height:70px;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:0.85rem;background:var(--surface);">${p.notasInternas}</textarea>
+    <button class="login-submit" id="pro-notas-save" style="margin-top:10px;">Guardar notas</button>
+  `;
+  document.getElementById('pro-detail-modal').classList.add('is-open');
+  document.getElementById('pro-notas-save').addEventListener('click', () => {
+    p.notasInternas = document.getElementById('pro-notas').value;
+    mostrarToast('✓','Notas guardadas',p.nombre);
+  });
+}
+document.getElementById('np-save').addEventListener('click', () => {
+  const nombre = document.getElementById('np-nombre').value.trim();
+  if(!nombre){ mostrarToast('⚠️','Falta el nombre','Escribe el nombre del profesional.'); return; }
+  const nuevo = {id:'pro-new-'+Date.now(), nombre, especialidad:document.getElementById('np-especialidad').value||'Sin especificar', plan:document.getElementById('np-plan').value, fechaIngreso:'Hoy', estado:'activo', calificacion:'—', avatarSeed:'ile-pro-new-'+Date.now(), notasInternas:'', relacionArqueo:false, relacionTorreon:false};
+  PROFESIONALES.unshift(nuevo);
+  document.getElementById('new-pro-modal').classList.remove('is-open');
+  document.getElementById('np-nombre').value=''; document.getElementById('np-especialidad').value='';
+  mostrarToast('🎉','Profesional registrado',nombre+' — notificación de bienvenida enviada.');
+  if(state.vistaActual==='profesionales') renderProGrid();
+});
+
+// =========================================================
+// ESPACIOS
+// =========================================================
+function renderEspaciosView(){
+  document.getElementById('new-space-btn').onclick = () => document.getElementById('new-space-modal').classList.add('is-open');
+  document.getElementById('espacios-grid').innerHTML = ESPACIOS.map(e => `
+    <div class="espacio-card3">
+      <img src="${img(e.seed,400,240)}" alt="${e.nombre}">
+      <div class="espacio-card3-body">
+        <b>${e.nombre}</b><div class="sede">${e.sede} · ${e.tipo==='cabina'?'Cabina':'Oficina'}</div>
+        <div class="espacio-stats-row"><div><b>${e.horasOcupadoMes}h</b>ocupado/mes</div><div><b>$${e.ingresoMes.toLocaleString('es-MX')}</b>ingreso/mes</div></div>
+        <div class="espacio-card3-actions"><button data-edit-space="${e.id}">Editar</button><button data-view-usage="${e.id}">Ver uso</button></div>
+      </div>
+    </div>
+  `).join('');
+  document.querySelectorAll('[data-edit-space]').forEach(b => b.addEventListener('click', () => mostrarToast('✎','Editar espacio','Formulario de edición simulado en esta maqueta.')));
+  document.querySelectorAll('[data-view-usage]').forEach(b => b.addEventListener('click', () => {
+    const e = ESPACIOS.find(x=>x.id===b.dataset.viewUsage);
+    mostrarToast('📊',e.nombre,`${e.horasOcupadoMes} horas ocupado este mes — $${e.ingresoMes.toLocaleString('es-MX')} generados.`);
+  }));
+  document.getElementById('maint-list').innerHTML = MANTENIMIENTO.map(m => `<div class="alert-item"><span class="alert-icon">🔧</span><b>${m.espacio}</b> — ${m.tipo}, ${m.fecha}</div>`).join('');
+}
+document.getElementById('ns-save').addEventListener('click', () => {
+  const nombre = document.getElementById('ns-nombre').value.trim();
+  if(!nombre){ mostrarToast('⚠️','Falta el nombre','Escribe el nombre del espacio.'); return; }
+  const nuevo = {id:'esp-new-'+Date.now(), seed:'ile-space-new-'+Date.now(), nombre, tipo:document.getElementById('ns-tipo').value, sede:document.getElementById('ns-sede').value, capacidad:1, precioHora:parseInt(document.getElementById('ns-precio').value)||180, amenidades:['wifi'], estado:'disponible', horasOcupadoMes:0, ingresoMes:0};
+  ESPACIOS.unshift(nuevo);
+  document.getElementById('new-space-modal').classList.remove('is-open');
+  document.getElementById('ns-nombre').value='';
+  mostrarToast('✓','Espacio agregado',nombre);
+  if(state.vistaActual==='espacios') renderEspaciosView();
+});
+
+// =========================================================
+// FACTURACIÓN
+// =========================================================
+function renderFacturacionView(){
+  document.getElementById('planes-admin-grid').innerHTML = PLANES.map(p => `
+    <div class="plan-admin-card"><h4>${p.nombre}</h4><div class="price">${p.precio}</div><p style="font-size:0.83rem;color:var(--muted);">${p.beneficios}</p><button data-edit-plan="${p.nombre}" style="margin-top:10px;font-size:0.78rem;font-weight:700;color:var(--clay);">Editar plan</button></div>
+  `).join('');
+  document.querySelectorAll('[data-edit-plan]').forEach(b => b.addEventListener('click', () => mostrarToast('✎','Editar plan','Formulario simulado en esta maqueta.')));
+  document.getElementById('fact-filter-estado').onchange = renderFactTabla;
+  document.getElementById('export-btn').onclick = () => mostrarToast('📤','Exportación iniciada','El archivo se descargará (simulado).');
+  renderFactTabla();
+  renderMorosidad();
+  renderMRR();
+}
+function renderFactTabla(){
+  const filtro = document.getElementById('fact-filter-estado').value;
+  let list = FACTURACION.slice();
+  if(filtro) list = list.filter(c=>c.estado===filtro);
+  document.getElementById('fact-tbody').innerHTML = list.map(c => `
+    <tr><td>${c.profesional.nombre}</td><td>${c.concepto}</td><td>$${c.monto.toLocaleString('es-MX')}</td>
+    <td><span class="status-pill ${c.estado==='pagado'?'confirmada':(c.estado==='vencido'?'cancelada':'completada')}">${c.estado}</span></td>
+    <td><button class="table-action" data-ver-cargo="${c.id}">Ver</button></td></tr>
+  `).join('');
+  document.querySelectorAll('[data-ver-cargo]').forEach(b => b.addEventListener('click', () => mostrarToast('📄','Detalle de cargo','Vista de comprobante simulada.')));
+}
+function renderMorosidad(){
+  const morosos = PROFESIONALES.filter(p=>p.estado==='moroso');
+  document.getElementById('morosidad-panel').innerHTML = morosos.length ? morosos.map(p => `
+    <div class="moros-item">
+      <div><b style="font-size:0.86rem;">${p.nombre}</b><div style="font-size:0.78rem;color:var(--muted-2);">${p.plan} · Pago vencido</div></div>
+      <div class="moros-actions"><button data-remind="${p.id}">Enviar recordatorio</button><button class="danger" data-suspend="${p.id}">Suspender acceso</button></div>
+    </div>
+  `).join('') : '<p style="color:var(--muted-2);font-size:0.85rem;">Sin profesionales morosos por ahora.</p>';
+  document.querySelectorAll('[data-remind]').forEach(b => b.addEventListener('click', () => {
+    const p = PROFESIONALES.find(x=>x.id===b.dataset.remind);
+    mostrarToast('✓','Recordatorio enviado',p.nombre);
+  }));
+  document.querySelectorAll('[data-suspend]').forEach(b => b.addEventListener('click', () => {
+    const p = PROFESIONALES.find(x=>x.id===b.dataset.suspend);
+    if(!confirm(`¿Suspender el acceso a reservas de ${p.nombre}? Esta acción es significativa y afecta su capacidad de reservar espacios.`)) return;
+    p.estado='pausado';
+    mostrarToast('⛔','Acceso suspendido',p.nombre);
+    renderMorosidad(); if(state.vistaActual==='profesionales') renderProGrid();
+  }));
+}
+function renderMRR(){
+  const max = Math.max(...MRR_HISTORICO.map(m=>m.valor));
+  document.getElementById('mrr-chart').innerHTML = MRR_HISTORICO.map(m => `
+    <div class="bar-col"><div class="bar" style="height:${(m.valor/max*140)}px;"></div><div class="bar-label">${m.mes}<br>$${Math.round(m.valor/1000)}k</div></div>
+  `).join('');
+}
+
+// =========================================================
+// MENSAJES
+// =========================================================
+function renderMensajesView(){
+  document.getElementById('conv-list').innerHTML = CONVERSACIONES.map(c => `
+    <div class="conv-item ${state.convActiva===c.id?'is-active':''}" data-id="${c.id}">
+      <img src="${avatar(c.profesional.avatarSeed,80)}" alt="${c.profesional.nombre}">
+      <div class="conv-item-info"><b>${c.profesional.nombre}</b><span>${c.mensajes[c.mensajes.length-1].texto}</span></div>
+      ${c.noLeido ? '<span class="unread-dot"></span>' : ''}
+    </div>
+  `).join('');
+  document.querySelectorAll('.conv-item').forEach(el => el.addEventListener('click', () => abrirConversacion(el.dataset.id)));
+}
+function abrirConversacion(id){
+  state.convActiva = id;
+  const c = CONVERSACIONES.find(x=>x.id===id);
+  c.noLeido = false;
+  renderMensajesView();
+  document.getElementById('conv-panel').innerHTML = `
+    <div class="conv-panel-header"><img src="${avatar(c.profesional.avatarSeed,80)}" alt=""><div><b style="font-size:0.9rem;display:block;">${c.profesional.nombre}</b><span style="font-size:0.76rem;color:var(--muted-2);">${c.profesional.especialidad}</span></div></div>
+    <div class="conv-panel-body" id="conv-panel-body"></div>
+    <div class="templates-row">${PLANTILLAS_RESPUESTA.map(t=>`<button data-template="${t}">${t}</button>`).join('')}</div>
+    <div class="conv-panel-input"><input type="text" id="conv-input" placeholder="Escribe tu respuesta…"><button id="conv-send">➤</button></div>
+  `;
+  pintarConv(c);
+  document.querySelectorAll('[data-template]').forEach(b => b.addEventListener('click', () => { document.getElementById('conv-input').value = b.dataset.template; }));
+  document.getElementById('conv-send').addEventListener('click', () => enviarRespuestaAdmin(c));
+  document.getElementById('conv-input').addEventListener('keydown', (e) => { if(e.key==='Enter') enviarRespuestaAdmin(c); });
+}
+function pintarConv(c){
+  const body = document.getElementById('conv-panel-body');
+  body.innerHTML = c.mensajes.map(m => `<div class="msg-bubble2 ${m.who}">${m.texto}</div>`).join('');
+  body.scrollTop = body.scrollHeight;
+}
+function enviarRespuestaAdmin(c){
+  const input = document.getElementById('conv-input');
+  const texto = input.value.trim();
+  if(!texto) return;
+  c.mensajes.push({who:'admin', texto, tiempo:'Ahora'});
+  input.value='';
+  pintarConv(c);
+  renderMensajesView();
+  if(Math.random() > 0.5){
+    setTimeout(() => {
+      c.mensajes.push({who:'pro', texto:'Perfecto, muchas gracias 🙏', tiempo:'Ahora'});
+      if(state.convActiva===c.id) pintarConv(c);
+    }, 2500+Math.random()*2000);
+  }
+}
+
+// =========================================================
+// REPORTES
+// =========================================================
+function renderReportesView(){
+  document.getElementById('generate-report-btn').onclick = generarReporte;
+}
+function generarReporte(){
+  const tipo = document.getElementById('report-type').value;
+  const preview = document.getElementById('report-preview');
+  preview.classList.add('show');
+  let contenido = '';
+  if(tipo === 'Ocupación por espacio'){
+    const top = ESPACIOS.slice().sort((a,b)=>b.horasOcupadoMes-a.horasOcupadoMes).slice(0,6);
+    const max = Math.max(...top.map(e=>e.horasOcupadoMes));
+    contenido = `<h4 style="margin-bottom:10px;">Ocupación por espacio (horas/mes)</h4><div class="bar-chart">${top.map(e=>`<div class="bar-col"><div class="bar" style="height:${e.horasOcupadoMes/max*140}px;"></div><div class="bar-label">${e.nombre.split(' ')[1]||e.nombre}<br>${e.horasOcupadoMes}h</div></div>`).join('')}</div>`;
+  } else if(tipo === 'Ingresos por periodo'){
+    contenido = `<h4 style="margin-bottom:10px;">Ingresos mensuales recurrentes</h4><div class="bar-chart">${MRR_HISTORICO.map(m=>`<div class="bar-col"><div class="bar" style="height:${m.valor/Math.max(...MRR_HISTORICO.map(x=>x.valor))*140}px;"></div><div class="bar-label">${m.mes}<br>$${Math.round(m.valor/1000)}k</div></div>`).join('')}</div>`;
+  } else if(tipo === 'Profesionales más activos'){
+    const top = PROFESIONALES.slice(0,6);
+    contenido = `<h4 style="margin-bottom:10px;">Profesionales más activos</h4>${top.map(p=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line);font-size:0.85rem;"><span>${p.nombre}</span><span>⭐ ${p.calificacion}</span></div>`).join('')}`;
+  } else if(tipo === 'Retención de membresías'){
+    contenido = `<h4 style="margin-bottom:10px;">Retención de membresías</h4><p style="font-size:1.6rem;font-family:var(--display);color:var(--clay);">91%</p><p style="font-size:0.85rem;color:var(--muted);">Tasa de renovación mensual promedio de los últimos 3 meses.</p>`;
+  } else {
+    const avg = (PROFESIONALES.reduce((s,p)=>s+parseFloat(p.calificacion||4.5),0)/PROFESIONALES.length).toFixed(2);
+    contenido = `<h4 style="margin-bottom:10px;">Satisfacción promedio</h4><p style="font-size:1.6rem;font-family:var(--display);color:var(--clay);">${avg}/5</p><p style="font-size:0.85rem;color:var(--muted);">Promedio de calificaciones entre todos los profesionales activos.</p>`;
+  }
+  preview.innerHTML = contenido + `<button class="login-submit" style="width:auto;padding:10px 18px;margin-top:16px;" id="download-report-btn">Descargar PDF</button>`;
+  document.getElementById('download-report-btn').addEventListener('click', () => mostrarToast('📄','Reporte descargado','El PDF se generó (simulado en esta maqueta).'));
+  renderHeatmap();
+}
+function renderHeatmap(){
+  const {dias, horas, data} = HEATMAP;
+  let html = `<div></div>` + horas.map(h=>`<div class="heatmap-label">${h}</div>`).join('');
+  dias.forEach(d => {
+    html += `<div class="heatmap-label">${d}</div>`;
+    horas.forEach(h => {
+      const cell = data.find(x=>x.dia===d && x.hora===h);
+      const alpha = cell.intensidad/100;
+      const color = `rgba(185,106,75,${0.15+alpha*0.75})`;
+      html += `<div class="heatmap-cell" style="background:${color};">${cell.intensidad}%</div>`;
+    });
+  });
+  document.getElementById('heatmap-grid').innerHTML = html;
+}
+document.addEventListener('DOMContentLoaded', renderHeatmap);
+
+// =========================================================
+// NOTIFICACIONES
+// =========================================================
+const NOTIF_POOL = [
+  'Nueva reserva confirmada — Cabina Roble, 3:00 PM',
+  'Cabina Musgo está lista tras limpieza',
+  'Nuevo profesional registrado: Andrea Solís',
+  'Pago vencido — recordatorio enviado a un profesional',
+  'Mensaje nuevo de un profesional esperando respuesta'
+];
+function generarNotifsIniciales(){
+  state.notifs = [
+    {texto:'Nueva reserva confirmada — Cabina Roble, 3:00 PM', tiempo:'Hace 10 min', unread:true},
+    {texto:'Cabina Musgo está lista tras limpieza', tiempo:'Hace 30 min', unread:true},
+    {texto:'Mensaje nuevo de Joaquín Herrera', tiempo:'Hace 1 h', unread:false},
+  ];
+  state.notifCount = state.notifs.filter(n=>n.unread).length;
+  pintarNotifs();
+}
+function pintarNotifs(){
+  document.getElementById('notif-badge').textContent = state.notifCount;
+  document.getElementById('notif-badge').style.display = state.notifCount ? 'flex' : 'none';
+  const list = document.getElementById('notif-list');
+  if(!state.notifs.length){ list.innerHTML = '<div style="padding:30px;text-align:center;color:var(--muted-2);">Sin notificaciones.</div>'; return; }
+  list.innerHTML = state.notifs.map((n,i) => `<div class="notif-item ${n.unread?'unread':''}" data-idx="${i}">${n.texto}<span>${n.tiempo}</span></div>`).join('');
+  list.querySelectorAll('.notif-item').forEach(el => el.addEventListener('click', () => {
+    state.notifs[el.dataset.idx].unread=false; state.notifCount=state.notifs.filter(n=>n.unread).length; pintarNotifs();
+  }));
+}
+function iniciarNotifsLive(){
+  function tick(){
+    const texto = NOTIF_POOL[Math.floor(Math.random()*NOTIF_POOL.length)];
+    state.notifs.unshift({texto, tiempo:'Ahora', unread:true});
+    state.notifCount++;
+    pintarNotifs();
+    mostrarToast('🔔','Nueva notificación', texto);
+    setTimeout(tick, 27000+Math.random()*18000);
+  }
+  setTimeout(tick, 20000);
+}
+
+// =========================================================
+// TOASTS
+// =========================================================
+function mostrarToast(icon,titulo,texto){
+  const stack = document.getElementById('toast-stack');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<span class="toast-icon">${icon}</span><span class="toast-text"><b>${titulo}</b><span>${texto}</span></span>`;
+  stack.appendChild(el);
+  setTimeout(() => { el.classList.add('leaving'); setTimeout(()=>el.remove(),300); }, 4500);
+}
+
+// =========================================================
+// GLOBAL UI
+// =========================================================
+function wireGlobalUI(){
+  document.getElementById('open-mobile-sidebar').addEventListener('click', abrirMobileSidebar);
+  document.getElementById('mobile-sidebar-backdrop').addEventListener('click', cerrarMobileSidebar);
+  document.getElementById('bell-btn').addEventListener('click', (e) => { e.stopPropagation(); document.getElementById('notif-dropdown').classList.toggle('is-open'); });
+  document.getElementById('mark-all-read').addEventListener('click', () => { state.notifs.forEach(n=>n.unread=false); state.notifCount=0; pintarNotifs(); });
+  document.addEventListener('click', (e) => { if(!e.target.closest('#notif-dropdown') && !e.target.closest('#bell-btn')) document.getElementById('notif-dropdown').classList.remove('is-open'); });
+}
+function wireModals(){
+  document.querySelectorAll('.modal-backdrop').forEach(bd => bd.addEventListener('click', (e) => { if(e.target===bd) bd.classList.remove('is-open'); }));
+  document.querySelectorAll('[data-close-modal]').forEach(btn => btn.addEventListener('click', () => btn.closest('.modal-backdrop').classList.remove('is-open')));
+}
+
+</script>
+</body>
+</html>

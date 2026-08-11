@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilé Wellness — Panel de profesional</title>
+<meta name="description" content="Gestiona tus reservas de cabinas y oficinas, tu agenda de pacientes y tu membresía en Ilé Wellness.">
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="preconnect" href="https://i.pravatar.cc">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea,select{font:inherit;}
+ul,ol{list-style:none;}
+:focus-visible{outline:3px solid #C9974C;outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}}
+
+:root{
+  --ink:#2B2420; --clay:#B96A4B; --clay-deep:#a1583c; --sage:#7C8B6F; --sage-deep:#657056;
+  --gold:#C9974C; --paper:#F4EEE5; --cream:#FBF8F3; --surface:#FFFEFB;
+  --line:rgba(43,36,32,0.1); --muted:#6b5f54; --muted-2:#8a7c70;
+  --display:'Ile-Display', Georgia, serif; --body:'Ile-Body', Arial, sans-serif;
+  --shadow-soft:0 10px 30px rgba(43,36,32,0.08); --shadow-lift:0 20px 46px rgba(43,36,32,0.14);
+  --danger:#B15642; --ok:#5c7a4e;
+}
+@font-face{font-family:'Ile-Display';src:local('Georgia'),local('Times New Roman');font-weight:400 700;}
+body{font-family:var(--body);background:var(--cream);color:var(--ink);line-height:1.5;}
+h1,h2,h3,h4,.display{font-family:var(--display);font-weight:600;letter-spacing:-0.01em;}
+.wrap{max-width:1280px;margin:0 auto;}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:#000;padding:10px 16px;z-index:999;}
+.skip-link:focus{left:8px;top:8px;}
+
+/* ============ LOGIN ============ */
+#login-screen{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+.login-visual{position:relative;overflow:hidden;}
+.login-visual img{width:100%;height:100%;object-fit:cover;filter:brightness(0.8) saturate(1.05);}
+.login-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,36,32,0.15),rgba(43,36,32,0.55));}
+.login-visual-copy{position:absolute;bottom:48px;left:48px;right:48px;color:#FBF8F3;z-index:2;}
+.login-visual-copy .eyebrow{color:#f0c9b4;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px;display:block;}
+.login-visual-copy h2{font-size:1.9rem;line-height:1.2;max-width:20ch;}
+.login-form-wrap{display:flex;align-items:center;justify-content:center;padding:40px;}
+.login-form{max-width:400px;width:100%;}
+.login-logo{font-family:var(--display);font-size:1.7rem;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.login-logo .dot{width:9px;height:9px;background:var(--clay);border-radius:50%;}
+.login-sub{color:var(--muted);font-size:0.92rem;margin-bottom:32px;}
+.login-demo-note{background:var(--paper);border-radius:12px;padding:12px 16px;font-size:0.82rem;color:var(--muted);margin-bottom:24px;border-left:3px solid var(--gold);}
+.login-field{margin-bottom:16px;}
+.login-field label{display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted-2);margin-bottom:7px;}
+.login-field input{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-size:0.94rem;background:var(--surface);}
+.login-field input:focus{border-color:var(--clay);outline:none;}
+.login-submit{width:100%;padding:14px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;font-size:0.94rem;margin-top:8px;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.login-submit:hover{background:var(--clay);}
+.login-submit:disabled{opacity:0.7;cursor:wait;}
+.login-forgot{display:block;text-align:center;margin-top:18px;font-size:0.85rem;color:var(--muted);text-decoration:underline;}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media (max-width:860px){
+  #login-screen{grid-template-columns:1fr;}
+  .login-visual{min-height:220px;}
+  .login-visual-copy{bottom:20px;left:24px;right:24px;}
+  .login-visual-copy h2{font-size:1.4rem;}
+}
+
+/* Forgot password modal */
+.simple-modal-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.6);z-index:600;display:none;align-items:center;justify-content:center;padding:20px;}
+.simple-modal-backdrop.is-open{display:flex;}
+.simple-modal{background:var(--cream);border-radius:20px;padding:32px;max-width:400px;width:100%;position:relative;}
+.simple-modal h3{margin-bottom:12px;}
+.simple-modal p{color:var(--muted);font-size:0.9rem;margin-bottom:20px;}
+.simple-modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--paper);}
+
+/* ============ APP SHELL ============ */
+#app-shell{display:none;min-height:100vh;}
+#app-shell.is-active{display:flex;}
+.sidebar{width:240px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:24px 16px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+.sidebar-logo{font-family:var(--display);font-size:1.3rem;padding:0 10px 20px;display:flex;align-items:center;gap:8px;}
+.sidebar-logo .dot{width:8px;height:8px;background:var(--clay);border-radius:50%;}
+.sidebar-nav{display:flex;flex-direction:column;gap:4px;flex:1;}
+.sidebar-nav button{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:0.88rem;font-weight:600;color:var(--muted);text-align:left;transition:background .15s,color .15s;}
+.sidebar-nav button svg{width:18px;height:18px;flex-shrink:0;}
+.sidebar-nav button:hover{background:var(--paper);color:var(--ink);}
+.sidebar-nav button.is-active{background:var(--clay);color:#fff;}
+.sidebar-user{display:flex;align-items:center;gap:10px;padding:14px 10px;border-top:1px solid var(--line);margin-top:12px;}
+.sidebar-user img{width:38px;height:38px;border-radius:50%;object-fit:cover;}
+.sidebar-user b{font-size:0.82rem;display:block;}
+.sidebar-user span{font-size:0.72rem;color:var(--muted-2);}
+
+.main-col{flex:1;min-width:0;}
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);padding:16px 28px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:40;}
+.topbar-search{flex:1;max-width:420px;display:flex;align-items:center;gap:10px;background:var(--paper);border-radius:12px;padding:10px 14px;}
+.topbar-search input{flex:1;background:transparent;border:none;font-size:0.88rem;}
+.topbar-search input:focus{outline:none;}
+.topbar-actions{display:flex;align-items:center;gap:14px;margin-left:auto;}
+.bell-btn{position:relative;width:42px;height:42px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;}
+.bell-btn .badge{position:absolute;top:-2px;right:-2px;background:var(--clay);color:#fff;font-size:0.65rem;font-weight:700;min-width:17px;height:17px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+.topbar-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;cursor:pointer;}
+.mobile-menu-btn{display:none;width:40px;height:40px;border-radius:10px;background:var(--paper);align-items:center;justify-content:center;}
+
+.view{display:none;padding:28px clamp(16px,3vw,32px) 60px;}
+.view.is-active{display:block;}
+.view-head{margin-bottom:24px;}
+.view-head h1{font-size:1.6rem;}
+.view-head p{color:var(--muted);font-size:0.9rem;margin-top:4px;}
+
+@media (max-width:980px){
+  .sidebar{display:none;}
+  .mobile-menu-btn{display:flex;}
+  .topbar-search{display:none;}
+}
+
+/* Mobile bottom nav */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--line);z-index:60;padding:8px 4px;}
+.mobile-nav-inner{display:flex;justify-content:space-around;}
+.mobile-nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:0.62rem;font-weight:600;color:var(--muted-2);padding:6px 4px;flex:1;}
+.mobile-nav button svg{width:20px;height:20px;}
+.mobile-nav button.is-active{color:var(--clay);}
+@media (max-width:980px){
+  .mobile-nav{display:block;}
+  .view{padding-bottom:90px;}
+}
+
+/* Mobile sidebar drawer */
+.mobile-sidebar-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.5);z-index:200;display:none;}
+.mobile-sidebar-backdrop.is-open{display:block;}
+.mobile-sidebar{position:fixed;top:0;left:0;height:100%;width:270px;background:var(--surface);z-index:210;transform:translateX(-100%);transition:transform .25s ease;padding:24px 16px;overflow-y:auto;}
+.mobile-sidebar.is-open{transform:translateX(0);}
+
+/* ============ DASHBOARD ============ */
+.greeting-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:24px;}
+.greeting{font-size:1.5rem;}
+.next-booking-card{background:linear-gradient(120deg,var(--clay),var(--clay-deep));color:#fff;border-radius:22px;padding:28px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;}
+.next-booking-card .label{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;opacity:0.85;margin-bottom:8px;}
+.next-booking-card h3{font-size:1.4rem;margin-bottom:6px;}
+.next-booking-card .meta{font-size:0.88rem;opacity:0.92;}
+.countdown{font-family:var(--display);font-size:1.8rem;}
+.next-booking-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.next-booking-actions button{padding:10px 18px;border-radius:999px;font-size:0.82rem;font-weight:700;}
+.btn-white{background:#fff;color:var(--clay-deep);}
+.btn-outline-white{border:1px solid rgba(255,255,255,0.6);color:#fff;}
+.btn-outline-white:hover{background:rgba(255,255,255,0.15);}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.kpi-card{background:var(--surface);border-radius:18px;padding:20px;border:1px solid var(--line);}
+.kpi-card b{font-family:var(--display);font-size:1.7rem;display:block;color:var(--clay);}
+.kpi-card span{font-size:0.78rem;color:var(--muted-2);}
+@media (max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr;}}
+
+.dash-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;}
+.panel-card{background:var(--surface);border-radius:20px;padding:22px 24px;border:1px solid var(--line);}
+.panel-card h3{font-size:1.05rem;margin-bottom:16px;}
+.today-avail-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line);}
+.today-avail-item:first-of-type{border-top:none;}
+.today-avail-item .name{font-size:0.86rem;font-weight:600;}
+.today-avail-item .sub{font-size:0.74rem;color:var(--muted-2);}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;}
+.status-dot.disponible{background:var(--sage);}
+.status-dot.ocupado{background:var(--danger);}
+.status-dot.limpieza{background:var(--gold);}
+.mini-reserve-btn{font-size:0.76rem;font-weight:700;color:var(--clay);}
+
+.timeline-item{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--line);}
+.timeline-item:first-child{border-top:none;}
+.timeline-icon{width:30px;height:30px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;}
+.timeline-text{font-size:0.84rem;}
+.timeline-time{font-size:0.72rem;color:var(--muted-2);}
+
+.crosssell-widget{background:var(--paper);border-radius:20px;padding:22px 24px;margin-top:20px;}
+.crosssell-widget h4{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted-2);margin-bottom:14px;}
+.crosssell-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.crosssell-mini{background:var(--surface);border-radius:14px;padding:16px;}
+.crosssell-mini b{font-size:0.86rem;display:block;margin-bottom:4px;}
+.crosssell-mini p{font-size:0.78rem;color:var(--muted);margin-bottom:10px;}
+.crosssell-mini button{font-size:0.76rem;font-weight:700;color:var(--clay);}
+@media (max-width:900px){.dash-grid{grid-template-columns:1fr;}.crosssell-mini-grid{grid-template-columns:1fr;}}
+
+/* ============ RESERVAR: PLANO ============ */
+.reservar-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;}
+.plano-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.plano-filter-chip{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:0.8rem;font-weight:600;color:var(--muted);background:var(--surface);}
+.plano-filter-chip.is-active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.plano-grid{background:var(--surface);border-radius:20px;padding:24px;border:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.plano-espacio{border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .15s;border:2px solid transparent;background:var(--paper);}
+.plano-espacio.tipo-oficina{background:#E4E9DE;}
+.plano-espacio b{font-size:0.78rem;display:block;}
+.plano-espacio span{font-size:0.68rem;color:var(--muted-2);}
+.plano-espacio.is-selected{border-color:var(--clay);background:var(--clay);color:#fff;}
+.plano-espacio.is-selected span{color:rgba(255,255,255,0.8);}
+.plano-espacio.estado-ocupado{opacity:0.45;cursor:not-allowed;}
+.plano-espacio.estado-limpieza{opacity:0.6;}
+.plano-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:0.78rem;color:var(--muted);}
+.plano-legend span{display:inline-flex;align-items:center;gap:6px;}
+.plano-legend i{width:10px;height:10px;border-radius:50%;display:inline-block;}
+@media (max-width:760px){.plano-grid{grid-template-columns:repeat(2,1fr);}}
+
+.booking-side{background:var(--surface);border-radius:20px;padding:24px;border:1px solid var(--line);position:sticky;top:90px;}
+.booking-side h3{font-size:1.05rem;margin-bottom:16px;}
+.no-selection{color:var(--muted-2);font-size:0.86rem;text-align:center;padding:30px 10px;}
+.selected-info{background:var(--paper);border-radius:12px;padding:14px;margin-bottom:16px;font-size:0.86rem;}
+.duration-tabs2{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:16px;}
+.duration-tabs2 button{padding:9px 4px;border-radius:9px;border:1px solid var(--line);font-size:0.7rem;font-weight:700;}
+.duration-tabs2 button.is-active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.field-group{margin-bottom:14px;}
+.field-group label{display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--muted-2);margin-bottom:6px;}
+.field-group input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-size:0.88rem;background:var(--cream);}
+.time-slots2{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.time-slot2{padding:8px 4px;border-radius:9px;border:1px solid var(--line);font-size:0.74rem;text-align:center;background:var(--cream);}
+.time-slot2.ocupado{opacity:0.35;text-decoration:line-through;cursor:not-allowed;}
+.time-slot2.is-selected{background:var(--clay);color:#fff;border-color:var(--clay);}
+.recurrente-check{display:flex;align-items:center;gap:8px;font-size:0.84rem;margin:14px 0;}
+.total-row2{display:flex;justify-content:space-between;padding:14px 0;margin:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.total-row2 b{font-family:var(--display);font-size:1.25rem;}
+.confirm-btn{width:100%;padding:14px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;transition:background .2s;}
+.confirm-btn:hover{background:var(--clay);}
+.confirm-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.success-inline{text-align:center;padding:30px 10px;}
+.success-icon2{width:64px;height:64px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.success-folio2{display:inline-block;background:var(--paper);padding:8px 16px;border-radius:999px;font-weight:700;font-family:var(--display);margin:12px 0;}
+@media (max-width:980px){.reservar-layout{grid-template-columns:1fr;}.booking-side{position:static;}}
+
+/* ============ MIS RESERVAS ============ */
+.res-tabs{display:flex;gap:10px;margin-bottom:20px;}
+.res-tabs button{padding:9px 18px;border-radius:999px;border:1px solid var(--line);font-size:0.84rem;font-weight:600;}
+.res-tabs button.is-active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.res-list{display:flex;flex-direction:column;gap:12px;}
+.res-item{background:var(--surface);border-radius:16px;padding:18px 20px;border:1px solid var(--line);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.res-item img{width:64px;height:64px;border-radius:12px;object-fit:cover;flex-shrink:0;}
+.res-info{flex:1;min-width:180px;}
+.res-info b{font-size:0.92rem;display:block;}
+.res-info span{font-size:0.8rem;color:var(--muted-2);}
+.res-status{font-size:0.72rem;font-weight:700;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:0.03em;}
+.res-status.confirmada{background:#E4E9DE;color:var(--sage-deep);}
+.res-status.completada{background:var(--paper);color:var(--muted);}
+.res-status.cancelada{background:#F4E1DB;color:var(--danger);}
+.res-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.res-actions button{font-size:0.78rem;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line);}
+.res-actions button.danger{color:var(--danger);border-color:rgba(177,86,66,0.3);}
+.empty-res{text-align:center;padding:50px 20px;color:var(--muted);}
+
+/* ============ AGENDA DE PACIENTES ============ */
+.agenda-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;}
+.pac-list{display:flex;flex-direction:column;gap:10px;}
+.pac-item{background:var(--surface);border-radius:14px;padding:14px 16px;border:1px solid var(--line);display:flex;align-items:center;gap:12px;cursor:pointer;}
+.pac-item img{width:44px;height:44px;border-radius:50%;object-fit:cover;}
+.pac-item-info{flex:1;}
+.pac-item-info b{font-size:0.86rem;display:block;}
+.pac-item-info span{font-size:0.74rem;color:var(--muted-2);}
+.pac-detail-card{background:var(--surface);border-radius:20px;padding:24px;border:1px solid var(--line);}
+.pac-add-btn{margin-bottom:16px;}
+@media (max-width:900px){.agenda-layout{grid-template-columns:1fr;}}
+
+.assign-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+.assign-btn{font-size:0.78rem;font-weight:700;color:var(--clay);}
+
+/* ============ MEMBRESÍA ============ */
+.membership-current{background:var(--surface);border-radius:20px;padding:26px;border:1px solid var(--line);margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.membership-current h3{font-size:1.2rem;margin-bottom:6px;}
+.membership-current p{font-size:0.86rem;color:var(--muted);}
+.pending-charge{background:#FBEFE8;border:1px solid rgba(185,106,75,0.3);border-radius:16px;padding:18px 22px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+.plans-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+.plan-mini-card{background:var(--surface);border-radius:18px;padding:22px;border:1px solid var(--line);}
+.plan-mini-card.is-featured{border-color:var(--clay);}
+.plan-mini-card h4{font-size:1.05rem;margin-bottom:6px;}
+.plan-mini-card .price{font-family:var(--display);font-size:1.4rem;color:var(--clay);margin:10px 0;}
+.plan-mini-card ul{margin:12px 0;display:flex;flex-direction:column;gap:6px;}
+.plan-mini-card li{font-size:0.8rem;display:flex;gap:6px;}
+.plan-mini-card li::before{content:"✓";color:var(--sage-deep);}
+.pay-history-table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:16px;overflow:hidden;}
+.pay-history-table th,.pay-history-table td{text-align:left;padding:12px 16px;font-size:0.85rem;border-bottom:1px solid var(--line);}
+.pay-history-table th{background:var(--paper);font-size:0.72rem;text-transform:uppercase;color:var(--muted-2);}
+.pay-status{font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:999px;background:#E4E9DE;color:var(--sage-deep);}
+.payment-method-card{background:var(--surface);border-radius:16px;padding:18px 20px;border:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap;gap:12px;}
+@media (max-width:900px){.plans-compare{grid-template-columns:1fr;}.pay-history-table{display:block;overflow-x:auto;}}
+
+/* ============ MENSAJES ============ */
+.chat-shell{background:var(--surface);border-radius:20px;border:1px solid var(--line);height:600px;display:flex;flex-direction:column;overflow:hidden;}
+.chat-shell-header{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+.chat-shell-header img{width:40px;height:40px;border-radius:50%;object-fit:cover;}
+.chat-shell-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;}
+.msg-bubble{max-width:70%;padding:11px 15px;border-radius:14px;font-size:0.87rem;}
+.msg-bubble.bot{background:var(--paper);align-self:flex-start;border-bottom-left-radius:4px;}
+.msg-bubble.user{background:var(--clay);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.msg-time{font-size:0.68rem;color:var(--muted-2);margin-top:4px;display:block;}
+.chat-shell-input{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--line);}
+.chat-shell-input input{flex:1;border:1px solid var(--line);border-radius:999px;padding:11px 16px;font-size:0.87rem;}
+.chat-shell-input input:focus{outline:none;border-color:var(--clay);}
+.chat-shell-input button{width:40px;height:40px;border-radius:50%;background:var(--clay);color:#fff;flex-shrink:0;}
+.typing-inline{align-self:flex-start;background:var(--paper);padding:11px 15px;border-radius:14px;display:flex;gap:4px;}
+.typing-inline span{width:6px;height:6px;background:#b8ada3;border-radius:50%;animation:tBounce 1.2s infinite ease-in-out;}
+.typing-inline span:nth-child(2){animation-delay:.15s;}
+.typing-inline span:nth-child(3){animation-delay:.3s;}
+@keyframes tBounce{0%,60%,100%{transform:translateY(0);opacity:0.4;}30%{transform:translateY(-4px);opacity:1;}}
+
+/* ============ COMUNIDAD ============ */
+.community-grid2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.pro-card2{background:var(--surface);border-radius:16px;padding:20px;text-align:center;border:1px solid var(--line);}
+.pro-card2 img{width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 10px;}
+.pro-card2 b{font-size:0.86rem;display:block;}
+.pro-card2 span{font-size:0.76rem;color:var(--muted-2);}
+.community-feed{margin-top:28px;background:var(--surface);border-radius:18px;padding:20px;border:1px solid var(--line);}
+.community-feed h4{margin-bottom:14px;font-size:1rem;}
+.feed-item{padding:10px 0;border-top:1px solid var(--line);font-size:0.86rem;}
+.feed-item:first-child{border-top:none;}
+@media (max-width:900px){.community-grid2{grid-template-columns:repeat(2,1fr);}}
+
+/* ============ NOTIFICATIONS DROPDOWN ============ */
+.notif-dropdown{position:absolute;top:60px;right:24px;width:340px;max-width:90vw;background:var(--surface);border-radius:16px;box-shadow:var(--shadow-lift);border:1px solid var(--line);z-index:100;display:none;max-height:70vh;overflow-y:auto;}
+.notif-dropdown.is-open{display:block;}
+.notif-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);}
+.notif-head b{font-size:0.9rem;}
+.notif-head button{font-size:0.76rem;font-weight:700;color:var(--clay);}
+.notif-item{padding:13px 16px;border-bottom:1px solid var(--line);font-size:0.84rem;cursor:pointer;transition:background .15s;}
+.notif-item:hover{background:var(--paper);}
+.notif-item.unread{background:#FBF3EC;}
+.notif-item span{display:block;font-size:0.72rem;color:var(--muted-2);margin-top:3px;}
+.notif-empty{padding:40px 20px;text-align:center;color:var(--muted-2);font-size:0.85rem;}
+
+/* ============ TOASTS ============ */
+.toast-stack{position:fixed;bottom:24px;right:24px;z-index:350;display:flex;flex-direction:column;gap:10px;pointer-events:none;align-items:flex-end;}
+.toast{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow-lift);font-size:0.82rem;max-width:320px;display:flex;gap:10px;opacity:0;transform:translateY(10px);animation:toastIn .4s ease forwards;pointer-events:auto;}
+.toast.leaving{animation:toastOut .3s ease forwards;}
+@keyframes toastIn{to{opacity:1;transform:translateY(0);}}
+@keyframes toastOut{to{opacity:0;transform:translateY(6px);}}
+.toast-icon{width:30px;height:30px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.toast-text b{display:block;font-size:0.83rem;}
+.toast-text span{font-size:0.76rem;color:var(--muted-2);}
+@media (max-width:640px){.toast-stack{right:12px;left:12px;bottom:90px;align-items:stretch;}.toast{max-width:none;}}
+
+/* ============ MODAL CARD PROFESIONAL/PACIENTE ============ */
+.modal-backdrop{position:fixed;inset:0;background:rgba(43,36,32,0.6);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-backdrop.is-open{display:flex;}
+.modal-box{background:var(--cream);border-radius:20px;padding:28px;max-width:440px;width:100%;position:relative;max-height:85vh;overflow-y:auto;}
+.modal-close2{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--paper);}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media (max-width:520px){.form-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+<!-- ============ LOGIN ============ -->
+<div id="login-screen">
+  <div class="login-visual">
+    <img src="https://picsum.photos/seed/ile-login-cabina/1000/1200" alt="Interior cálido de una cabina de Ilé Wellness">
+    <div class="login-visual-copy">
+      <span class="eyebrow">Panel de profesional</span>
+      <h2>Tu práctica, con el espacio resuelto.</h2>
+    </div>
+  </div>
+  <div class="login-form-wrap">
+    <div class="login-form">
+      <div class="login-logo"><span class="dot"></span>Ilé Wellness</div>
+      <p class="login-sub">Inicia sesión para gestionar tus reservas, tu agenda y tu membresía.</p>
+      <div class="login-demo-note">Panel de demostración — cualquier usuario y contraseña te dará acceso.</div>
+      <form id="login-form">
+        <div class="login-field">
+          <label for="login-user">Usuario o correo</label>
+          <input type="text" id="login-user" autocomplete="username">
+        </div>
+        <div class="login-field">
+          <label for="login-pass">Contraseña</label>
+          <input type="password" id="login-pass" autocomplete="current-password">
+        </div>
+        <button type="submit" class="login-submit" id="login-submit-btn"><span class="label">Iniciar sesión</span></button>
+      </form>
+      <button class="login-forgot" id="forgot-pass-btn">¿Olvidaste tu contraseña?</button>
+    </div>
+  </div>
+</div>
+
+<div class="simple-modal-backdrop" id="forgot-modal-backdrop">
+  <div class="simple-modal">
+    <button class="simple-modal-close" id="forgot-modal-close">✕</button>
+    <h3>Recuperar contraseña</h3>
+    <p>Escribe tu correo y te enviaremos instrucciones para restablecer tu contraseña. (Simulado — esta es una maqueta de demostración.)</p>
+    <div class="login-field"><input type="email" placeholder="tucorreo@ejemplo.com"></div>
+    <button class="login-submit" id="forgot-send-btn">Enviar instrucciones</button>
+  </div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="dot"></span>Ilé Wellness</div>
+    <nav class="sidebar-nav" id="sidebar-nav"></nav>
+    <div class="sidebar-user">
+      <img src="" alt="" id="sidebar-avatar">
+      <div><b id="sidebar-name"></b><span id="sidebar-role"></span></div>
+    </div>
+  </aside>
+
+  <div class="mobile-sidebar-backdrop" id="mobile-sidebar-backdrop"></div>
+  <aside class="mobile-sidebar" id="mobile-sidebar">
+    <div class="sidebar-logo"><span class="dot"></span>Ilé Wellness</div>
+    <nav class="sidebar-nav" id="mobile-sidebar-nav"></nav>
+  </aside>
+
+  <div class="main-col" id="main">
+    <div class="topbar">
+      <button class="mobile-menu-btn" id="open-mobile-sidebar" aria-label="Abrir menú">☰</button>
+      <div class="topbar-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Buscar disponibilidad de espacios…" id="topbar-search-input">
+      </div>
+      <div class="topbar-actions">
+        <button class="bell-btn" id="bell-btn" aria-label="Notificaciones">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0112 0c0 4 1.5 5.5 1.5 6.5H4.5C4.5 13.5 6 12 6 8z"/><path d="M10 19a2 2 0 004 0"/></svg>
+          <span class="badge" id="notif-badge">0</span>
+        </button>
+        <img class="topbar-avatar" src="" alt="" id="topbar-avatar">
+      </div>
+    </div>
+
+    <div class="notif-dropdown" id="notif-dropdown">
+      <div class="notif-head"><b>Notificaciones</b><button id="mark-all-read">Marcar todas como leídas</button></div>
+      <div id="notif-list"></div>
+    </div>
+
+    <!-- ===== VIEW: DASHBOARD ===== -->
+    <section class="view is-active" data-view="dashboard" id="main">
+      <div class="view-head greeting-row">
+        <div><h1 class="greeting" id="greeting-text"></h1><p>Aquí tienes un resumen de tu actividad en Ilé.</p></div>
+      </div>
+
+      <div class="next-booking-card" id="next-booking-card"></div>
+
+      <div class="kpi-grid" id="kpi-grid"></div>
+
+      <div class="dash-grid">
+        <div>
+          <div class="panel-card" style="margin-bottom:20px;">
+            <h3>Disponibilidad de hoy</h3>
+            <div id="today-avail-list"></div>
+          </div>
+          <div class="crosssell-widget">
+            <h4>También somos Grupo Meridiano</h4>
+            <div class="crosssell-mini-grid">
+              <div class="crosssell-mini">
+                <b>Arqueo Estudio</b>
+                <p>¿Buscas diseñar tu propio consultorio algún día?</p>
+                <button data-crosssell="Arqueo Estudio">Conocer más →</button>
+              </div>
+              <div class="crosssell-mini">
+                <b>Torreón Constructora</b>
+                <p>Remodelaciones y obra nueva para tu espacio de práctica.</p>
+                <button data-crosssell="Torreón Constructora">Conocer más →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-card">
+          <h3>Actividad reciente</h3>
+          <div id="timeline-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: RESERVAR ===== -->
+    <section class="view" data-view="reservar">
+      <div class="view-head"><h1>Reservar espacio</h1><p>Elige un espacio en el plano, selecciona horario y confirma tu reserva al instante.</p></div>
+      <div class="reservar-layout">
+        <div>
+          <div class="plano-filters" id="plano-filters">
+            <button class="plano-filter-chip is-active" data-tipo="">Todos</button>
+            <button class="plano-filter-chip" data-tipo="cabina">Cabinas</button>
+            <button class="plano-filter-chip" data-tipo="oficina">Oficinas</button>
+            <button class="plano-filter-chip" data-sede="Reforma CDMX">Reforma CDMX</button>
+            <button class="plano-filter-chip" data-sede="Tizayuca-Pachuca">Tizayuca-Pachuca</button>
+          </div>
+          <div class="plano-grid" id="plano-grid"></div>
+          <div class="plano-legend">
+            <span><i style="background:var(--sage);"></i>Disponible</span>
+            <span><i style="background:var(--danger);"></i>Ocupado</span>
+            <span><i style="background:var(--gold);"></i>En limpieza</span>
+          </div>
+        </div>
+        <div class="booking-side" id="booking-side">
+          <h3>Detalle de tu reserva</h3>
+          <div class="no-selection" id="no-selection-msg">Selecciona un espacio en el plano para comenzar.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: MIS RESERVAS ===== -->
+    <section class="view" data-view="reservas">
+      <div class="view-head"><h1>Mis reservas</h1><p>Consulta tus próximas reservas y tu historial.</p></div>
+      <div class="res-tabs">
+        <button class="is-active" data-tab="proximas">Próximas</button>
+        <button data-tab="pasadas">Pasadas</button>
+      </div>
+      <div class="res-list" id="res-list"></div>
+    </section>
+
+    <!-- ===== VIEW: AGENDA ===== -->
+    <section class="view" data-view="agenda">
+      <div class="view-head"><h1>Mi agenda de pacientes</h1><p>Gestiona tus pacientes y vincúlalos a tus reservas de espacio.</p></div>
+      <div class="agenda-layout">
+        <div>
+          <button class="login-submit pac-add-btn" id="add-patient-btn" style="width:auto;padding:10px 18px;">+ Agregar paciente</button>
+          <div class="pac-list" id="pac-list"></div>
+        </div>
+        <div class="pac-detail-card" id="pac-detail-card">
+          <p style="color:var(--muted-2);text-align:center;padding:40px 10px;">Selecciona un paciente para ver su detalle.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: MEMBRESÍA ===== -->
+    <section class="view" data-view="membresia">
+      <div class="view-head"><h1>Membresía y pagos</h1><p>Consulta tu plan actual, historial de pagos y método de pago.</p></div>
+      <div class="membership-current" id="membership-current"></div>
+      <div class="pending-charge" id="pending-charge" style="display:none;"></div>
+      <h3 style="margin-bottom:14px;font-size:1.05rem;">Cambiar de plan</h3>
+      <div class="plans-compare" id="plans-compare"></div>
+      <h3 style="margin-bottom:14px;font-size:1.05rem;">Historial de pagos</h3>
+      <table class="pay-history-table">
+        <thead><tr><th>Fecha</th><th>Concepto</th><th>Monto</th><th>Estado</th><th></th></tr></thead>
+        <tbody id="pay-history-body"></tbody>
+      </table>
+      <div class="payment-method-card">
+        <div><b>Tarjeta terminada en 4242</b><div style="font-size:0.8rem;color:var(--muted-2);">Vence 08/2028</div></div>
+        <button class="login-submit" id="update-card-btn" style="width:auto;padding:10px 18px;">Actualizar tarjeta</button>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: MENSAJES ===== -->
+    <section class="view" data-view="mensajes">
+      <div class="view-head"><h1>Mensajes</h1><p>Comunícate directo con el equipo de recepción de Ilé.</p></div>
+      <div class="chat-shell">
+        <div class="chat-shell-header">
+          <img src="https://picsum.photos/seed/ile-recepcion-avatar/100/100" alt="">
+          <div><b style="font-size:0.9rem;display:block;">Recepción Ilé</b><span style="font-size:0.75rem;color:var(--muted-2);">En línea</span></div>
+        </div>
+        <div class="chat-shell-body" id="chat-shell-body"></div>
+        <div class="chat-shell-input">
+          <input type="text" id="chat-shell-input" placeholder="Escribe tu mensaje…">
+          <button id="chat-shell-send">➤</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: COMUNIDAD ===== -->
+    <section class="view" data-view="comunidad">
+      <div class="view-head"><h1>Comunidad Ilé</h1><p>Conoce a otros profesionales activos en el espacio.</p></div>
+      <div class="community-grid2" id="community-grid2"></div>
+      <div class="community-feed">
+        <h4>Novedades de la comunidad</h4>
+        <div class="feed-item">Ilé dio la bienvenida a 3 nuevos profesionales este mes.</div>
+        <div class="feed-item">Taller de manejo de pacientes ansiosos — próximo jueves en la sala común.</div>
+        <div class="feed-item">Varios profesionales de nuestra comunidad han trabajado con Arqueo Estudio para diseñar su consultorio propio — conoce sus proyectos.</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-inner" id="mobile-nav-inner"></div>
+</div>
+
+<!-- ============ MODALS ============ -->
+<div class="modal-backdrop" id="patient-modal-backdrop">
+  <div class="modal-box">
+    <button class="modal-close2" id="patient-modal-close">✕</button>
+    <h3 style="margin-bottom:16px;">Agregar nuevo paciente</h3>
+    <div class="login-field"><label>Nombre completo</label><input type="text" id="np-nombre"></div>
+    <div class="form-row">
+      <div class="login-field"><label>Teléfono</label><input type="text" id="np-tel"></div>
+      <div class="login-field"><label>Correo</label><input type="email" id="np-email"></div>
+    </div>
+    <button class="login-submit" id="np-save-btn">Guardar paciente</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="card-modal-backdrop">
+  <div class="modal-box">
+    <button class="modal-close2" id="card-modal-close">✕</button>
+    <h3 style="margin-bottom:16px;">Actualizar método de pago</h3>
+    <div class="login-field"><label>Número de tarjeta</label><input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19"></div>
+    <div class="form-row">
+      <div class="login-field"><label>Vencimiento</label><input type="text" id="card-exp" placeholder="MM/AA" maxlength="5"></div>
+      <div class="login-field"><label>CVV</label><input type="text" id="card-cvv" placeholder="123" maxlength="4"></div>
+    </div>
+    <button class="login-submit" id="card-save-btn">Guardar tarjeta</button>
+  </div>
+</div>
+
+<div class="toast-stack" id="toast-stack"></div>
+
+<script>
+// =========================================================
+// DATOS — PANEL DE CLIENTE ILÉ WELLNESS
+// =========================================================
+function seedRandom(seed){
+  let h = 0;
+  for(let i=0;i<seed.length;i++){ h = (h*31 + seed.charCodeAt(i)) >>> 0; }
+  return function(){
+    h ^= h << 13; h >>>= 0; h ^= h >>> 17; h ^= h << 5; h >>>= 0;
+    return (h % 10000) / 10000;
+  };
+}
+function img(seed,w,h){ return `https://picsum.photos/seed/${seed}/${w}/${h}`; }
+function avatar(seed,size){ return `https://i.pravatar.cc/${size||100}?u=${seed}`; }
+
+const PROFESIONAL = {
+  nombre:'Lucía',
+  nombreCompleto:'Lucía Mendoza',
+  especialidad:'Masoterapeuta',
+  avatarSeed:'ile-cliente-lucia',
+  plan:'Mensual Cabina',
+  precioPlan:4200,
+  fechaRenovacion:'15 de septiembre, 2026',
+  calificacion:4.9,
+  reviewCount:58
+};
+
+const AMENIDADES_INFO = {
+  'aromaterapia':{label:'Aromaterapia', icon:'leaf'},
+  'insonorizacion':{label:'Insonorización', icon:'shield'},
+  'tina':{label:'Tina de hidroterapia', icon:'droplet'},
+  'luz-natural':{label:'Luz natural', icon:'sun'},
+  'acceso-independiente':{label:'Acceso independiente', icon:'key'},
+  'sonido':{label:'Sonido ambiental', icon:'music'},
+  'wifi':{label:'Wifi', icon:'wifi'},
+  'cafe':{label:'Café de cortesía', icon:'coffee'}
+};
+
+const NOMBRES_CABINA = ['Cabina Roble','Cabina Bruma','Cabina Musgo','Cabina Arcilla','Cabina Ceniza','Cabina Sal','Cabina Palma','Cabina Cedro','Cabina Nube','Cabina Ámbar','Cabina Jade','Cabina Vainilla'];
+const NOMBRES_OFICINA = ['Oficina Alcanfor','Oficina Membrillo','Oficina Azahar','Oficina Laurel','Oficina Romero','Oficina Girasol','Oficina Magnolia','Oficina Ciprés'];
+
+function generarEspacios(){
+  const espacios = [];
+  for(let i=0;i<12;i++){
+    const seed = 'ile-space-cabina-' + i;
+    const rnd = seedRandom(seed);
+    const sede = i % 2 === 0 ? 'Reforma CDMX' : 'Tizayuca-Pachuca';
+    const amenidades = ['sonido','wifi','cafe'];
+    if(rnd() > 0.2) amenidades.unshift('aromaterapia');
+    if(rnd() > 0.75) amenidades.push('tina');
+    if(rnd() > 0.5) amenidades.push('luz-natural');
+    if(rnd() > 0.8) amenidades.push('acceso-independiente');
+    espacios.push({
+      id:'esp-cabina-'+i, seed, nombre:NOMBRES_CABINA[i % NOMBRES_CABINA.length], tipo:'cabina',
+      sede, capacidad:1, precioHora:160+Math.round(rnd()*8)*10,
+      precioDia:0, precioMes:0, amenidades,
+      estadoAhora: rnd() > 0.6 ? 'ocupado' : (rnd() > 0.5 ? 'limpieza' : 'disponible')
+    });
+  }
+  for(let i=0;i<8;i++){
+    const seed = 'ile-space-oficina-' + i;
+    const rnd = seedRandom(seed);
+    const sede = i % 2 === 0 ? 'Tizayuca-Pachuca' : 'Reforma CDMX';
+    const amenidades = ['insonorizacion','wifi','cafe'];
+    if(rnd() > 0.6) amenidades.push('luz-natural');
+    espacios.push({
+      id:'esp-oficina-'+i, seed, nombre:NOMBRES_OFICINA[i % NOMBRES_OFICINA.length], tipo:'oficina',
+      sede, capacidad: i % 4 === 0 ? 3 : 1, precioHora:190+Math.round(rnd()*8)*10,
+      precioDia:0, precioMes:0, amenidades,
+      estadoAhora: rnd() > 0.55 ? 'ocupado' : (rnd() > 0.5 ? 'limpieza' : 'disponible')
+    });
+  }
+  espacios.forEach(e => { e.precioDia = Math.round(e.precioHora*6.2); e.precioMes = Math.round(e.precioHora*6.2*18); });
+  return espacios;
+}
+const ESPACIOS = generarEspacios();
+
+const HORARIOS_DIA = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+function horariosOcupados(espacio, fechaStr){
+  const rnd = seedRandom(espacio.seed + '-' + fechaStr);
+  return HORARIOS_DIA.filter(() => rnd() > 0.65);
+}
+
+// Reservas del profesional (mezcla de próximas y pasadas)
+function generarReservas(){
+  const reservas = [];
+  const hoy = new Date();
+  const items = [
+    {offsetDias:0, hora:'16:00', espacioId:'esp-cabina-0', estado:'confirmada'},
+    {offsetDias:1, hora:'10:00', espacioId:'esp-cabina-2', estado:'confirmada'},
+    {offsetDias:3, hora:'14:00', espacioId:'esp-oficina-1', estado:'confirmada'},
+    {offsetDias:7, hora:'09:00', espacioId:'esp-cabina-0', estado:'confirmada'},
+    {offsetDias:-1, hora:'11:00', espacioId:'esp-cabina-0', estado:'completada'},
+    {offsetDias:-2, hora:'15:00', espacioId:'esp-cabina-3', estado:'completada'},
+    {offsetDias:-4, hora:'10:00', espacioId:'esp-oficina-1', estado:'completada'},
+    {offsetDias:-6, hora:'17:00', espacioId:'esp-cabina-0', estado:'completada'},
+    {offsetDias:-8, hora:'12:00', espacioId:'esp-cabina-1', estado:'cancelada'},
+    {offsetDias:-10, hora:'09:00', espacioId:'esp-cabina-0', estado:'completada'},
+    {offsetDias:-13, hora:'16:00', espacioId:'esp-oficina-1', estado:'completada'},
+    {offsetDias:-15, hora:'11:00', espacioId:'esp-cabina-2', estado:'completada'},
+  ];
+  items.forEach((it,idx) => {
+    const fecha = new Date(hoy); fecha.setDate(hoy.getDate()+it.offsetDias);
+    const espacio = ESPACIOS.find(e=>e.id===it.espacioId);
+    reservas.push({
+      id:'res-'+idx, espacio, fecha, hora:it.hora, duracion:'hora',
+      precio:espacio.precioHora, estado:it.estado,
+      folio:'ILE-'+ (100000+idx*37).toString(36).toUpperCase(),
+      pacienteId: idx % 3 === 0 ? null : 'pac-' + (idx % 10)
+    });
+  });
+  return reservas.sort((a,b)=>a.fecha-b.fecha);
+}
+const RESERVAS = generarReservas();
+
+// Pacientes del profesional
+const NOMBRES_PACIENTE = ['Marisol Aguirre','Tomás Elizondo','Valentina Rojas','Gerardo Nava','Itzel Campos','Rodrigo Salinas','Ana Paula Cruz','Sebastián Vega','Renata Domínguez','Emiliano Torres','Fátima Reséndiz','Diego Armenta','Ximena Robles','Braulio Cantú'];
+function generarPacientes(){
+  return NOMBRES_PACIENTE.map((nombre,i) => {
+    const rnd = seedRandom('pac-'+i);
+    const diasUltima = 1+Math.floor(rnd()*40);
+    const diasProxima = Math.floor(rnd()*14)-4;
+    return {
+      id:'pac-'+i, nombre,
+      telefono:'55 ' + (1000+Math.floor(rnd()*8999)) + ' ' + (1000+Math.floor(rnd()*8999)),
+      email: nombre.toLowerCase().replace(/\s+/g,'.').replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u') + '@correo.mx',
+      ultimaVisita: diasUltima + ' días',
+      proximaCita: diasProxima > 0 ? 'En ' + diasProxima + ' días' : 'Sin cita programada',
+      avatarSeed:'ile-pac-'+i
+    };
+  });
+}
+const PACIENTES = generarPacientes();
+
+// Timeline de actividad
+const TIMELINE = [
+  {icono:'✓', texto:'Reserva confirmada: Cabina Roble, 2:00–3:00 PM', tiempo:'Hoy 9:00 AM'},
+  {icono:'⭐', texto:'Recibiste una calificación de 5 estrellas de un paciente', tiempo:'Ayer'},
+  {icono:'🔄', texto:'Se renovó tu membresía mensual — Plan Mensual Cabina', tiempo:'Hace 2 días'},
+  {icono:'💬', texto:'Recepción Ilé respondió tu mensaje sobre aromaterapia', tiempo:'Hace 3 días'},
+  {icono:'📅', texto:'Reservaste Oficina Alcanfor para el jueves 14:00', tiempo:'Hace 4 días'},
+  {icono:'👤', texto:'Agregaste a Marisol Aguirre a tu directorio de pacientes', tiempo:'Hace 5 días'},
+  {icono:'✓', texto:'Sesión completada: Cabina Bruma con paciente asignado', tiempo:'Hace 6 días'},
+  {icono:'💳', texto:'Se procesó el cargo mensual de tu membresía', tiempo:'Hace 8 días'},
+  {icono:'🎉', texto:'Ilé dio la bienvenida a 3 nuevos profesionales este mes', tiempo:'Hace 9 días'},
+  {icono:'📍', texto:'Reservaste por primera vez un espacio en Tizayuca-Pachuca', tiempo:'Hace 12 días'}
+];
+
+// Pagos
+const PAGOS = [
+  {fecha:'01 ago 2026', concepto:'Membresía mensual — Plan Mensual Cabina', monto:4200, estado:'pagado'},
+  {fecha:'01 jul 2026', concepto:'Membresía mensual — Plan Mensual Cabina', monto:4200, estado:'pagado'},
+  {fecha:'14 jun 2026', concepto:'Horas adicionales de cabina (3 hrs)', monto:540, estado:'pagado'},
+  {fecha:'01 jun 2026', concepto:'Membresía mensual — Plan Mensual Cabina', monto:4200, estado:'pagado'},
+  {fecha:'01 may 2026', concepto:'Membresía mensual — Plan Flexible', monto:2180, estado:'pagado'}
+];
+
+// Comunidad
+const ESPECIALIDADES_COMUNIDAD = ['Psicóloga clínica','Nutriólogo','Reflexóloga','Fisioterapeuta','Quiropráctico','Terapeuta familiar','Acupunturista','Nutrióloga deportiva'];
+const NOMBRES_COMUNIDAD = ['Andrés Falcón','Camila Ortiz','Renata Solís','Joaquín Herrera','Paola Nieto','Fernanda Castillo','Ricardo Palma','Diana Reyes'];
+const COMUNIDAD = NOMBRES_COMUNIDAD.map((nombre,i) => ({nombre, especialidad:ESPECIALIDADES_COMUNIDAD[i], avatarSeed:'ile-comu-'+i}));
+
+// Chat con recepción
+const CHAT_RECEPCION_INICIAL = [
+  {who:'bot', texto:'¡Hola Lucía! Soy el equipo de recepción de Ilé. ¿En qué te podemos ayudar hoy?', tiempo:'Hace 3 días'},
+  {who:'user', texto:'Hola, ¿podrían bajar un poco la intensidad de la aromaterapia en Cabina Roble? Mi próxima paciente es sensible a olores fuertes.', tiempo:'Hace 3 días'},
+  {who:'bot', texto:'Claro, ya quedó ajustada al nivel más suave para tu sesión de hoy a las 4 PM.', tiempo:'Hace 3 días'},
+  {who:'user', texto:'Perfecto, muchas gracias 🙏', tiempo:'Hace 3 días'},
+  {who:'bot', texto:'Con gusto. Cualquier otra cosa, aquí estamos.', tiempo:'Hace 3 días'},
+  {who:'user', texto:'Una pregunta, ¿hay disponibilidad de última hora para hoy en la tarde?', tiempo:'Hace 1 día'},
+  {who:'bot', texto:'Sí, tenemos Cabina Musgo libre de 5 a 7 PM. ¿Quieres que te la reserve?', tiempo:'Hace 1 día'},
+  {who:'user', texto:'Sí por favor, de 5 a 6.', tiempo:'Hace 1 día'},
+  {who:'bot', texto:'Listo, ya quedó reservada Cabina Musgo de 5 a 6 PM a tu nombre. Te llegó la confirmación por notificación.', tiempo:'Hace 1 día'},
+  {who:'user', texto:'Mi paciente de las 4 probablemente llegue 10 minutos tarde, ¿le avisan a recepción?', tiempo:'Hoy'},
+  {who:'bot', texto:'Anotado, la recibiremos con calma cuando llegue. Que tengas buena sesión.', tiempo:'Hoy'}
+];
+
+const PLANES = [
+  {nombre:'Flexible', precio:'Pago por uso', desc:'Sin compromiso mensual', features:['Acceso a todas las cabinas y oficinas','Reserva por hora, medio día o día','Sin permanencia mínima']},
+  {nombre:'Mensual Cabina', precio:'$4,200 MXN/mes', desc:'Para agenda regular de terapia manual', features:['40 horas de cabina incluidas','Prioridad de horario','Aromaterapia y sonido sin costo extra'], featured:true},
+  {nombre:'Mensual Oficina', precio:'$6,800 MXN/mes', desc:'Para consulta fija cada semana', features:['Oficina privada de tiempo completo','Sala de espera compartida','Casillero personal']}
+];
+
+</script>
+<script>
+// =========================================================
+// ESTADO
+// =========================================================
+const state = {
+  vistaActual:'dashboard',
+  planoTipo:'', planoSede:'',
+  espacioSel:null, duracionSel:'hora', fechaSel:null, horaSel:null, recurrente:false,
+  resTab:'proximas',
+  pacienteSel:null,
+  notifs:[],
+  notifCount:0,
+  chatGreeted:false
+};
+
+function iconNav(name){
+  const icons = {
+    dashboard:'<path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>',
+    reservar:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/>',
+    reservas:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>',
+    agenda:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
+    membresia:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',
+    mensajes:'<path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>',
+    comunidad:'<circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="7" r="3"/>'
+  };
+  return icons[name] || icons.dashboard;
+}
+const NAV_ITEMS = [
+  {id:'dashboard', label:'Dashboard'},
+  {id:'reservar', label:'Reservar espacio'},
+  {id:'reservas', label:'Mis reservas'},
+  {id:'agenda', label:'Mi agenda'},
+  {id:'membresia', label:'Membresía'},
+  {id:'mensajes', label:'Mensajes'},
+  {id:'comunidad', label:'Comunidad'}
+];
+
+function svgWrap(inner){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${inner}</svg>`; }
+
+function renderNav(){
+  const sidebarNav = document.getElementById('sidebar-nav');
+  const mobileSidebarNav = document.getElementById('mobile-sidebar-nav');
+  const html = NAV_ITEMS.map(item => `<button data-goto="${item.id}" class="${item.id===state.vistaActual?'is-active':''}">${svgWrap(iconNav(item.id))}${item.label}</button>`).join('');
+  sidebarNav.innerHTML = html;
+  mobileSidebarNav.innerHTML = html;
+
+  const mobileNavItems = ['dashboard','reservar','reservas','agenda','mensajes'];
+  document.getElementById('mobile-nav-inner').innerHTML = mobileNavItems.map(id => {
+    const item = NAV_ITEMS.find(n=>n.id===id);
+    return `<button data-goto="${id}" class="${id===state.vistaActual?'is-active':''}">${svgWrap(iconNav(id))}${item.label.split(' ')[0]}</button>`;
+  }).join('');
+
+  document.querySelectorAll('[data-goto]').forEach(btn => {
+    btn.addEventListener('click', () => irAVista(btn.dataset.goto));
+  });
+}
+
+function irAVista(viewId){
+  state.vistaActual = viewId;
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('is-active', v.dataset.view === viewId));
+  renderNav();
+  cerrarMobileSidebar();
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(viewId === 'reservar') initReservar();
+  if(viewId === 'reservas') renderReservas();
+  if(viewId === 'agenda') renderAgenda();
+  if(viewId === 'membresia') renderMembresia();
+  if(viewId === 'mensajes') renderMensajes();
+  if(viewId === 'comunidad') renderComunidad();
+}
+
+function abrirMobileSidebar(){
+  document.getElementById('mobile-sidebar').classList.add('is-open');
+  document.getElementById('mobile-sidebar-backdrop').classList.add('is-open');
+}
+function cerrarMobileSidebar(){
+  document.getElementById('mobile-sidebar').classList.remove('is-open');
+  document.getElementById('mobile-sidebar-backdrop').classList.remove('is-open');
+}
+
+// =========================================================
+// LOGIN
+// =========================================================
+document.getElementById('login-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('login-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Verificando…';
+  setTimeout(() => {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app-shell').classList.add('is-active');
+    iniciarApp();
+  }, 900 + Math.random()*300);
+});
+document.getElementById('forgot-pass-btn').addEventListener('click', () => document.getElementById('forgot-modal-backdrop').classList.add('is-open'));
+document.getElementById('forgot-modal-close').addEventListener('click', () => document.getElementById('forgot-modal-backdrop').classList.remove('is-open'));
+document.getElementById('forgot-send-btn').addEventListener('click', () => {
+  document.getElementById('forgot-modal-backdrop').classList.remove('is-open');
+  mostrarToast('✓','Instrucciones enviadas','Revisa tu correo (simulado).');
+});
+
+// =========================================================
+// INIT APP
+// =========================================================
+function iniciarApp(){
+  document.getElementById('sidebar-avatar').src = avatar(PROFESIONAL.avatarSeed,80);
+  document.getElementById('sidebar-name').textContent = PROFESIONAL.nombreCompleto;
+  document.getElementById('sidebar-role').textContent = PROFESIONAL.especialidad;
+  document.getElementById('topbar-avatar').src = avatar(PROFESIONAL.avatarSeed,80);
+
+  const hora = new Date().getHours();
+  const saludo = hora < 12 ? 'Buenos días' : (hora < 19 ? 'Buenas tardes' : 'Buenas noches');
+  document.getElementById('greeting-text').textContent = `${saludo}, ${PROFESIONAL.nombre} 🌿`;
+
+  renderNav();
+  renderDashboard();
+  generarNotificacionesIniciales();
+  wireGlobalUI();
+  iniciarNotificacionesLive();
+}
+
+// =========================================================
+// DASHBOARD
+// =========================================================
+function renderDashboard(){
+  const proxima = RESERVAS.find(r => r.estado === 'confirmada' && r.fecha >= new Date(new Date().setHours(0,0,0,0)));
+  const card = document.getElementById('next-booking-card');
+  if(proxima){
+    const dias = Math.round((proxima.fecha - new Date())/86400000);
+    const cuando = dias <= 0 ? 'Hoy' : (dias === 1 ? 'Mañana' : proxima.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'short'}));
+    card.innerHTML = `
+      <div>
+        <div class="label">Tu próxima reserva</div>
+        <h3>${proxima.espacio.nombre} · ${cuando} ${proxima.hora}</h3>
+        <div class="meta">${proxima.espacio.sede} · $${proxima.precio} MXN</div>
+      </div>
+      <div class="next-booking-actions">
+        <button class="btn-white" data-view-res="${proxima.id}">Ver detalles</button>
+        <button class="btn-outline-white" data-cancel-res="${proxima.id}">Cancelar</button>
+      </div>`;
+    card.querySelector('[data-view-res]').addEventListener('click', () => irAVista('reservas'));
+    card.querySelector('[data-cancel-res]').addEventListener('click', () => cancelarReserva(proxima.id));
+  } else {
+    card.innerHTML = `<div><div class="label">Sin próximas reservas</div><h3>Explora la disponibilidad de hoy</h3></div>
+      <button class="btn-white" onclick="irAVista('reservar')">Reservar ahora</button>`;
+  }
+
+  const horasMes = RESERVAS.filter(r=>r.estado==='completada').length * 1;
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card"><b>${horasMes}</b><span>Horas reservadas este mes</span></div>
+    <div class="kpi-card"><b>${PACIENTES.length}</b><span>Pacientes activos</span></div>
+    <div class="kpi-card"><b>$${(horasMes*180).toLocaleString('es-MX')}</b><span>Ingreso estimado del mes</span></div>
+    <div class="kpi-card"><b>${PROFESIONAL.calificacion}</b><span>Calificación promedio (${PROFESIONAL.reviewCount} reseñas)</span></div>
+  `;
+
+  document.getElementById('today-avail-list').innerHTML = ESPACIOS.slice(0,6).map(e => `
+    <div class="today-avail-item">
+      <div><div class="name"><span class="status-dot ${e.estadoAhora}"></span>${e.nombre}</div><div class="sub">${e.sede} · $${e.precioHora}/hora</div></div>
+      ${e.estadoAhora==='disponible' ? `<button class="mini-reserve-btn" data-quick-reserve="${e.id}">Reservar →</button>` : `<span style="font-size:0.74rem;color:var(--muted-2);text-transform:capitalize;">${e.estadoAhora}</span>`}
+    </div>
+  `).join('');
+  document.querySelectorAll('[data-quick-reserve]').forEach(btn => btn.addEventListener('click', () => { irAVista('reservar'); setTimeout(()=>seleccionarEspacio(btn.dataset.quickReserve),150); }));
+
+  document.getElementById('timeline-list').innerHTML = TIMELINE.map(t => `
+    <div class="timeline-item"><span class="timeline-icon">${t.icono}</span><div><div class="timeline-text">${t.texto}</div><div class="timeline-time">${t.tiempo}</div></div></div>
+  `).join('');
+
+  document.querySelectorAll('[data-crosssell]').forEach(btn => btn.addEventListener('click', () => mostrarToast('🏛️',btn.dataset.crosssell,'Esta acción es decorativa en la maqueta.')));
+}
+
+// =========================================================
+// RESERVAR (PLANO)
+// =========================================================
+function initReservar(){
+  wirePlanoFilters();
+  renderPlano();
+}
+function wirePlanoFilters(){
+  const chips = document.querySelectorAll('#plano-filters .plano-filter-chip');
+  chips.forEach(chip => {
+    chip.onclick = () => {
+      if(chip.dataset.tipo !== undefined && chip.hasAttribute('data-tipo')){
+        chips.forEach(c => { if(c.hasAttribute('data-tipo')) c.classList.remove('is-active'); });
+        chip.classList.add('is-active');
+        state.planoTipo = chip.dataset.tipo;
+      } else if(chip.hasAttribute('data-sede')){
+        const wasActive = chip.classList.contains('is-active');
+        chips.forEach(c => { if(c.hasAttribute('data-sede')) c.classList.remove('is-active'); });
+        if(!wasActive){ chip.classList.add('is-active'); state.planoSede = chip.dataset.sede; }
+        else state.planoSede = '';
+      }
+      renderPlano();
+    };
+  });
+}
+function renderPlano(){
+  let list = ESPACIOS.slice();
+  if(state.planoTipo) list = list.filter(e=>e.tipo===state.planoTipo);
+  if(state.planoSede) list = list.filter(e=>e.sede===state.planoSede);
+  document.getElementById('plano-grid').innerHTML = list.map(e => `
+    <div class="plano-espacio tipo-${e.tipo} estado-${e.estadoAhora} ${state.espacioSel && state.espacioSel.id===e.id ? 'is-selected':''}" data-id="${e.id}" role="button" tabindex="${e.estadoAhora==='ocupado'?-1:0}">
+      <b>${e.nombre}</b>
+      <span>${e.tipo==='cabina'?'Cabina':'Oficina'} · $${e.precioHora}/h</span>
+    </div>
+  `).join('');
+  document.querySelectorAll('.plano-espacio:not(.estado-ocupado)').forEach(el => {
+    el.addEventListener('click', () => seleccionarEspacio(el.dataset.id));
+  });
+}
+function seleccionarEspacio(id){
+  const espacio = ESPACIOS.find(e=>e.id===id);
+  if(!espacio) return;
+  state.espacioSel = espacio;
+  state.duracionSel = 'hora';
+  state.horaSel = null;
+  state.recurrente = false;
+  const today = new Date();
+  state.fechaSel = today.toISOString().slice(0,10);
+  document.querySelectorAll('.plano-espacio').forEach(el => el.classList.toggle('is-selected', el.dataset.id===id));
+  renderBookingSide();
+}
+function precioPorDuracion(e,dur){
+  switch(dur){ case 'medio-dia': return Math.round(e.precioDia*0.55); case 'dia': return e.precioDia; case 'mes': return e.precioMes; default: return e.precioHora; }
+}
+const DUR_LABEL = {hora:'hora',['medio-dia']:'medio día', dia:'día completo', mes:'mes completo'};
+
+function renderBookingSide(){
+  const e = state.espacioSel;
+  const side = document.getElementById('booking-side');
+  if(!e){ side.innerHTML = `<h3>Detalle de tu reserva</h3><div class="no-selection" id="no-selection-msg">Selecciona un espacio en el plano para comenzar.</div>`; return; }
+  side.innerHTML = `
+    <h3>Detalle de tu reserva</h3>
+    <div class="selected-info"><b>${e.nombre}</b><br>${e.sede} · Capacidad ${e.capacidad}</div>
+    <div class="duration-tabs2" id="dur-tabs2">
+      <button data-dur="hora" class="is-active">Hora</button>
+      <button data-dur="medio-dia">Medio día</button>
+      <button data-dur="dia">Día</button>
+      <button data-dur="mes">Mes</button>
+    </div>
+    <div class="field-group"><label>Fecha</label><input type="date" id="booking-fecha" value="${state.fechaSel}"></div>
+    <div class="field-group" id="booking-hora-field"><label>Horario disponible</label><div class="time-slots2" id="booking-slots"></div></div>
+    <label class="recurrente-check"><input type="checkbox" id="recurrente-check"> Reservar este horario todas las semanas por 8 semanas</label>
+    <div class="total-row2"><span>Total estimado</span><b id="booking-total">$${e.precioHora}</b></div>
+    <button class="confirm-btn" id="confirm-reserve-btn" disabled>Selecciona un horario</button>
+  `;
+  document.querySelectorAll('#dur-tabs2 button').forEach(b => b.addEventListener('click', () => seleccionarDuracion2(b.dataset.dur)));
+  document.getElementById('booking-fecha').addEventListener('change', (ev) => { state.fechaSel = ev.target.value; state.horaSel=null; renderSlots2(); });
+  document.getElementById('recurrente-check').addEventListener('change', (ev) => { state.recurrente = ev.target.checked; });
+  document.getElementById('confirm-reserve-btn').addEventListener('click', confirmarReservaPlano);
+  renderSlots2();
+}
+function seleccionarDuracion2(dur){
+  state.duracionSel = dur;
+  document.querySelectorAll('#dur-tabs2 button').forEach(b => b.classList.toggle('is-active', b.dataset.dur===dur));
+  document.getElementById('booking-hora-field').style.display = (dur==='hora'||dur==='medio-dia') ? '' : 'none';
+  document.getElementById('booking-total').textContent = '$' + precioPorDuracion(state.espacioSel, dur);
+  actualizarBotonConfirmar();
+}
+function renderSlots2(){
+  const e = state.espacioSel;
+  const ocupados = horariosOcupados(e, state.fechaSel);
+  document.getElementById('booking-slots').innerHTML = HORARIOS_DIA.map(h => `<div class="time-slot2 ${ocupados.includes(h)?'ocupado':''}" data-hora="${h}">${h}</div>`).join('');
+  document.querySelectorAll('#booking-slots .time-slot2:not(.ocupado)').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('#booking-slots .time-slot2').forEach(x=>x.classList.remove('is-selected'));
+      el.classList.add('is-selected');
+      state.horaSel = el.dataset.hora;
+      actualizarBotonConfirmar();
+    });
+  });
+}
+function actualizarBotonConfirmar(){
+  const btn = document.getElementById('confirm-reserve-btn');
+  const necesitaHora = state.duracionSel === 'hora' || state.duracionSel === 'medio-dia';
+  const listo = !necesitaHora || state.horaSel;
+  btn.disabled = !listo;
+  btn.textContent = listo ? 'Confirmar reserva' : 'Selecciona un horario';
+}
+function confirmarReservaPlano(){
+  const e = state.espacioSel;
+  const precio = precioPorDuracion(e, state.duracionSel);
+  const folio = 'ILE-' + Math.random().toString(36).slice(2,8).toUpperCase();
+  const fechaTxt = new Date(state.fechaSel+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'long'});
+  const nuevaReserva = {
+    id:'res-new-'+Date.now(), espacio:e, fecha:new Date(state.fechaSel+'T12:00:00'), hora:state.horaSel||'—',
+    duracion:state.duracionSel, precio, estado:'confirmada', folio, pacienteId:null
+  };
+  RESERVAS.unshift(nuevaReserva);
+
+  const side = document.getElementById('booking-side');
+  side.innerHTML = `
+    <div class="success-inline">
+      <div class="success-icon2">${svgWrap('<path d="M20 6L9 17l-5-5"/>')}</div>
+      <h3 style="font-size:1.15rem;">¡Reserva confirmada!</h3>
+      <p style="color:var(--muted);font-size:0.85rem;">${e.nombre} · ${fechaTxt}${state.horaSel?' a las '+state.horaSel:''}</p>
+      ${state.recurrente ? '<p style="color:var(--muted);font-size:0.82rem;">Se creó la serie recurrente semanal por 8 semanas.</p>' : ''}
+      <div class="success-folio2">Folio ${folio}</div>
+      <button class="confirm-btn" onclick="irAVista('reservas')">Ver mis reservas</button>
+    </div>
+  `;
+  mostrarToast('✓','Reserva confirmada',`${e.nombre} · folio ${folio}`);
+  renderDashboard();
+  state.espacioSel = null;
+}
+
+// =========================================================
+// MIS RESERVAS
+// =========================================================
+function renderReservas(){
+  document.querySelectorAll('.res-tabs button').forEach(b => b.onclick = () => { state.resTab = b.dataset.tab; document.querySelectorAll('.res-tabs button').forEach(x=>x.classList.toggle('is-active',x===b)); renderReservas(); });
+  const hoy = new Date(new Date().setHours(0,0,0,0));
+  const list = RESERVAS.filter(r => state.resTab==='proximas' ? (r.fecha >= hoy && r.estado==='confirmada') : (r.fecha < hoy || r.estado!=='confirmada'));
+  const container = document.getElementById('res-list');
+  if(!list.length){ container.innerHTML = `<div class="empty-res">No tienes reservas ${state.resTab==='proximas'?'próximas':'pasadas'} — explora la disponibilidad de hoy.<br><button class="login-submit" style="width:auto;padding:10px 18px;margin-top:14px;" onclick="irAVista('reservar')">Reservar ahora</button></div>`; return; }
+
+  container.innerHTML = list.map(r => `
+    <div class="res-item">
+      <img src="${img(r.espacio.seed,120,120)}" alt="${r.espacio.nombre}">
+      <div class="res-info">
+        <b>${r.espacio.nombre}</b>
+        <span>${r.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})} · ${r.hora} · ${r.espacio.sede}</span>
+      </div>
+      <span class="res-status ${r.estado}">${r.estado}</span>
+      <div class="res-actions">
+        ${r.estado==='confirmada' ? `<button data-reagendar="${r.id}">Reagendar</button><button class="danger" data-cancelar="${r.id}">Cancelar</button>` : ''}
+        ${r.estado==='completada' ? `<button data-repetir="${r.id}">Volver a reservar</button>` : ''}
+        <button data-ics="${r.id}">Agregar a calendario</button>
+      </div>
+    </div>
+  `).join('');
+  container.querySelectorAll('[data-cancelar]').forEach(b => b.addEventListener('click', () => cancelarReserva(b.dataset.cancelar)));
+  container.querySelectorAll('[data-reagendar]').forEach(b => b.addEventListener('click', () => { mostrarToast('📅','Reagendar','Te llevamos al plano para elegir un nuevo horario.'); irAVista('reservar'); }));
+  container.querySelectorAll('[data-repetir]').forEach(b => b.addEventListener('click', () => {
+    const r = RESERVAS.find(x=>x.id===b.dataset.repetir);
+    irAVista('reservar'); setTimeout(()=>seleccionarEspacio(r.espacio.id),150);
+  }));
+  container.querySelectorAll('[data-ics]').forEach(b => b.addEventListener('click', () => {
+    const r = RESERVAS.find(x=>x.id===b.dataset.ics);
+    descargarICS(r);
+  }));
+}
+function cancelarReserva(id){
+  const r = RESERVAS.find(x=>x.id===id);
+  if(!r) return;
+  if(!confirm(`¿Cancelar la reserva de ${r.espacio.nombre} el ${r.fecha.toLocaleDateString('es-MX')}? Recuerda la política de cancelación de 24 horas.`)) return;
+  r.estado = 'cancelada';
+  mostrarToast('✓','Reserva cancelada',`${r.espacio.nombre} — sin costo dentro de la política de 24h.`);
+  renderReservas(); renderDashboard();
+}
+function descargarICS(r){
+  const fecha = (r.fecha.toISOString().slice(0,10)).replace(/-/g,'');
+  const hora = (r.hora && r.hora!=='—' ? r.hora : '09:00').replace(':','')+'00';
+  const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nUID:${r.folio||r.id}@ilewellness.mx\nDTSTAMP:${fecha}T${hora}\nDTSTART:${fecha}T${hora}\nSUMMARY:Reserva Ilé — ${r.espacio.nombre}\nLOCATION:${r.espacio.sede}\nEND:VEVENT\nEND:VCALENDAR`;
+  const blob = new Blob([ics],{type:'text/calendar'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='reserva-ile.ics';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  mostrarToast('📅','Evento descargado','Ábrelo para agregarlo a tu calendario.');
+}
+
+// =========================================================
+// AGENDA DE PACIENTES
+// =========================================================
+function renderAgenda(){
+  document.getElementById('pac-list').innerHTML = PACIENTES.map(p => `
+    <div class="pac-item" data-id="${p.id}">
+      <img src="${avatar(p.avatarSeed,80)}" alt="${p.nombre}">
+      <div class="pac-item-info"><b>${p.nombre}</b><span>Última visita: hace ${p.ultimaVisita}</span></div>
+    </div>
+  `).join('');
+  document.querySelectorAll('.pac-item').forEach(el => el.addEventListener('click', () => mostrarDetallePaciente(el.dataset.id)));
+  document.getElementById('add-patient-btn').onclick = () => document.getElementById('patient-modal-backdrop').classList.add('is-open');
+}
+function mostrarDetallePaciente(id){
+  const p = PACIENTES.find(x=>x.id===id);
+  state.pacienteSel = p;
+  const reservasSinPaciente = RESERVAS.filter(r => r.estado==='confirmada' && !r.pacienteId);
+  document.getElementById('pac-detail-card').innerHTML = `
+    <div style="display:flex;gap:14px;align-items:center;margin-bottom:18px;">
+      <img src="${avatar(p.avatarSeed,100)}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;">
+      <div><h3 style="font-size:1.1rem;">${p.nombre}</h3><span style="font-size:0.82rem;color:var(--muted-2);">${p.telefono} · ${p.email}</span></div>
+    </div>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:6px;"><b>Última visita:</b> hace ${p.ultimaVisita}</p>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:18px;"><b>Próxima cita:</b> ${p.proximaCita}</p>
+    <h4 style="font-size:0.92rem;margin-bottom:10px;">Asignar a una reserva sin paciente</h4>
+    ${reservasSinPaciente.length ? reservasSinPaciente.map(r => `
+      <div class="assign-row"><span style="font-size:0.85rem;">${r.espacio.nombre} · ${r.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'short'})} ${r.hora}</span><button class="assign-btn" data-assign="${r.id}">Asignar</button></div>
+    `).join('') : '<p style="font-size:0.82rem;color:var(--muted-2);">No tienes reservas próximas sin paciente asignado.</p>'}
+  `;
+  document.querySelectorAll('[data-assign]').forEach(btn => btn.addEventListener('click', () => {
+    const r = RESERVAS.find(x=>x.id===btn.dataset.assign);
+    r.pacienteId = p.id;
+    mostrarToast('✓','Paciente asignado',`${p.nombre} → ${r.espacio.nombre}`);
+    mostrarDetallePaciente(id);
+  }));
+}
+document.getElementById('patient-modal-close').addEventListener('click', () => document.getElementById('patient-modal-backdrop').classList.remove('is-open'));
+document.getElementById('np-save-btn').addEventListener('click', () => {
+  const nombre = document.getElementById('np-nombre').value.trim();
+  if(!nombre){ mostrarToast('⚠️','Falta el nombre','Escribe el nombre del paciente.'); return; }
+  const nuevo = {id:'pac-new-'+Date.now(), nombre, telefono:document.getElementById('np-tel').value||'—', email:document.getElementById('np-email').value||'—', ultimaVisita:'0 días', proximaCita:'Sin cita programada', avatarSeed:'ile-pac-new-'+Date.now()};
+  PACIENTES.unshift(nuevo);
+  document.getElementById('patient-modal-backdrop').classList.remove('is-open');
+  document.getElementById('np-nombre').value=''; document.getElementById('np-tel').value=''; document.getElementById('np-email').value='';
+  mostrarToast('✓','Paciente agregado',nombre);
+  renderAgenda();
+});
+
+// =========================================================
+// MEMBRESÍA
+// =========================================================
+function renderMembresia(){
+  document.getElementById('membership-current').innerHTML = `
+    <div><h3>Plan actual: ${PROFESIONAL.plan}</h3><p>$${PROFESIONAL.precioPlan.toLocaleString('es-MX')} MXN/mes · Se renueva el ${PROFESIONAL.fechaRenovacion}</p></div>
+  `;
+  document.getElementById('plans-compare').innerHTML = PLANES.map(p => `
+    <div class="plan-mini-card ${p.featured?'is-featured':''}">
+      <h4>${p.nombre}</h4>
+      <div class="price">${p.precio}</div>
+      <p style="font-size:0.82rem;color:var(--muted);">${p.desc}</p>
+      <ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+      <button class="login-submit" data-select-plan="${p.nombre}" style="width:100%;">${p.nombre===PROFESIONAL.plan?'Plan actual':'Seleccionar plan'}</button>
+    </div>
+  `).join('');
+  document.querySelectorAll('[data-select-plan]').forEach(b => b.addEventListener('click', () => {
+    if(b.dataset.selectPlan === PROFESIONAL.plan) return;
+    mostrarToast('🌿','Cambio de plan solicitado',`Cambiarás a ${b.dataset.selectPlan} en tu próximo ciclo.`);
+  }));
+  document.getElementById('pay-history-body').innerHTML = PAGOS.map(p => `
+    <tr><td>${p.fecha}</td><td>${p.concepto}</td><td>$${p.monto.toLocaleString('es-MX')}</td><td><span class="pay-status">${p.estado}</span></td><td><button style="font-size:0.78rem;font-weight:700;color:var(--clay);" onclick="mostrarToast('📄','Comprobante descargado','Factura simulada.')">Descargar</button></td></tr>
+  `).join('');
+  document.getElementById('update-card-btn').onclick = () => document.getElementById('card-modal-backdrop').classList.add('is-open');
+}
+document.getElementById('card-modal-close').addEventListener('click', () => document.getElementById('card-modal-backdrop').classList.remove('is-open'));
+document.getElementById('card-save-btn').addEventListener('click', () => {
+  const num = document.getElementById('card-number').value.replace(/\s/g,'');
+  const exp = document.getElementById('card-exp').value;
+  const cvv = document.getElementById('card-cvv').value;
+  if(!/^\d{16}$/.test(num) || !/^\d{2}\/\d{2}$/.test(exp) || !/^\d{3,4}$/.test(cvv)){
+    mostrarToast('⚠️','Revisa los datos','Verifica el formato de tu tarjeta, vencimiento y CVV.'); return;
+  }
+  document.getElementById('card-modal-backdrop').classList.remove('is-open');
+  mostrarToast('✓','Tarjeta actualizada','Terminada en ' + num.slice(-4));
+});
+
+// =========================================================
+// MENSAJES
+// =========================================================
+let chatHistory = [];
+function renderMensajes(){
+  if(!state.chatGreeted){
+    chatHistory = CHAT_RECEPCION_INICIAL.slice();
+    state.chatGreeted = true;
+  }
+  pintarChat();
+  document.getElementById('chat-shell-send').onclick = enviarMensajeRecepcion;
+  document.getElementById('chat-shell-input').onkeydown = (e) => { if(e.key==='Enter') enviarMensajeRecepcion(); };
+}
+function pintarChat(){
+  document.getElementById('chat-shell-body').innerHTML = chatHistory.map(m => `<div class="msg-bubble ${m.who}">${m.texto}<span class="msg-time">${m.tiempo}</span></div>`).join('');
+  const body = document.getElementById('chat-shell-body');
+  body.scrollTop = body.scrollHeight;
+}
+function enviarMensajeRecepcion(){
+  const input = document.getElementById('chat-shell-input');
+  const texto = input.value.trim();
+  if(!texto) return;
+  chatHistory.push({who:'user', texto, tiempo:'Ahora'});
+  input.value = '';
+  pintarChat();
+  const body = document.getElementById('chat-shell-body');
+  const typing = document.createElement('div'); typing.className='typing-inline'; typing.innerHTML='<span></span><span></span><span></span>';
+  body.appendChild(typing); body.scrollTop = body.scrollHeight;
+  setTimeout(() => {
+    typing.remove();
+    const respuestas = ['Recibido, en un momento lo revisamos.','Claro, ya quedó anotado para el equipo.','Perfecto, gracias por avisarnos con tiempo.','Listo, cualquier otra cosa aquí seguimos.'];
+    chatHistory.push({who:'bot', texto: respuestas[Math.floor(Math.random()*respuestas.length)], tiempo:'Ahora'});
+    pintarChat();
+  }, 3000 + Math.random()*3000);
+}
+
+// =========================================================
+// COMUNIDAD
+// =========================================================
+function renderComunidad(){
+  document.getElementById('community-grid2').innerHTML = COMUNIDAD.map(c => `
+    <div class="pro-card2"><img src="${avatar(c.avatarSeed,120)}" alt="${c.nombre}"><b>${c.nombre}</b><span>${c.especialidad}</span></div>
+  `).join('');
+}
+
+// =========================================================
+// NOTIFICACIONES
+// =========================================================
+const NOTIF_POOL = [
+  'Tu reserva de mañana en Cabina Roble está confirmada.',
+  'Recibiste una nueva calificación de 5 estrellas ⭐',
+  'Tu membresía se renovará en 3 días.',
+  'Recepción Ilé te envió un mensaje.',
+  'Hay disponibilidad de última hora en Oficina Alcanfor para hoy a las 5 PM.'
+];
+function generarNotificacionesIniciales(){
+  state.notifs = [
+    {texto:'Tu reserva de hoy en Cabina Roble está confirmada.', tiempo:'Hace 10 min', unread:true},
+    {texto:'Recibiste una nueva calificación de 5 estrellas ⭐', tiempo:'Hace 1 h', unread:true},
+    {texto:'Recepción Ilé te envió un mensaje.', tiempo:'Ayer', unread:false},
+  ];
+  state.notifCount = state.notifs.filter(n=>n.unread).length;
+  pintarNotifs();
+}
+function pintarNotifs(){
+  document.getElementById('notif-badge').textContent = state.notifCount;
+  document.getElementById('notif-badge').style.display = state.notifCount ? 'flex' : 'none';
+  const list = document.getElementById('notif-list');
+  if(!state.notifs.length){ list.innerHTML = '<div class="notif-empty">Sin notificaciones por ahora.</div>'; return; }
+  list.innerHTML = state.notifs.map((n,i) => `<div class="notif-item ${n.unread?'unread':''}" data-idx="${i}">${n.texto}<span>${n.tiempo}</span></div>`).join('');
+  list.querySelectorAll('.notif-item').forEach(el => el.addEventListener('click', () => {
+    const idx = parseInt(el.dataset.idx);
+    state.notifs[idx].unread = false;
+    state.notifCount = state.notifs.filter(n=>n.unread).length;
+    pintarNotifs();
+  }));
+}
+function iniciarNotificacionesLive(){
+  function tick(){
+    const texto = NOTIF_POOL[Math.floor(Math.random()*NOTIF_POOL.length)];
+    state.notifs.unshift({texto, tiempo:'Ahora', unread:true});
+    state.notifCount++;
+    pintarNotifs();
+    mostrarToast('🔔','Nueva notificación', texto);
+    setTimeout(tick, 27000 + Math.random()*18000);
+  }
+  setTimeout(tick, 20000);
+}
+
+// =========================================================
+// TOASTS
+// =========================================================
+function mostrarToast(icon,titulo,texto){
+  const stack = document.getElementById('toast-stack');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<span class="toast-icon">${icon}</span><span class="toast-text"><b>${titulo}</b><span>${texto}</span></span>`;
+  stack.appendChild(el);
+  setTimeout(() => { el.classList.add('leaving'); setTimeout(()=>el.remove(),300); }, 4500);
+}
+
+// =========================================================
+// UI GLOBAL
+// =========================================================
+function wireGlobalUI(){
+  document.getElementById('open-mobile-sidebar').addEventListener('click', abrirMobileSidebar);
+  document.getElementById('mobile-sidebar-backdrop').addEventListener('click', cerrarMobileSidebar);
+  document.getElementById('bell-btn').addEventListener('click', (e) => { e.stopPropagation(); document.getElementById('notif-dropdown').classList.toggle('is-open'); });
+  document.getElementById('mark-all-read').addEventListener('click', () => { state.notifs.forEach(n=>n.unread=false); state.notifCount=0; pintarNotifs(); });
+  document.addEventListener('click', (e) => {
+    if(!e.target.closest('#notif-dropdown') && !e.target.closest('#bell-btn')) document.getElementById('notif-dropdown').classList.remove('is-open');
+  });
+  document.querySelectorAll('.modal-backdrop').forEach(bd => bd.addEventListener('click', (e) => { if(e.target===bd) bd.classList.remove('is-open'); }));
+  document.getElementById('forgot-modal-backdrop').addEventListener('click', (e) => { if(e.target.id==='forgot-modal-backdrop') e.target.classList.remove('is-open'); });
+}
+
+</script>
+</body>
+</html>

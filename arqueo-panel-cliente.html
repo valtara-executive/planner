@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arqueo Estudio — Panel de Cliente</title>
+<meta name="description" content="Panel de cliente de Arqueo Estudio: da seguimiento a tu proyecto de arquitectura, explora el catálogo y agenda citas. Grupo Meridiano.">
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="preconnect" href="https://i.pravatar.cc">
+<style>
+/* =========================================================
+   RESET
+========================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea,select{font:inherit;}
+ul,ol{list-style:none;}
+:focus-visible{outline:3px solid #D97A4D;outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+}
+
+/* =========================================================
+   TOKENS — identidad Arqueo Estudio (coherente con Grupo Meridiano)
+========================================================= */
+:root{
+  --ink:#15181C;
+  --paper:#F3F0E9;
+  --paper-alt:#1C2027;
+  --paper-alt-2:#232830;
+  --paper-alt-3:#282e37;
+  --line:#D97A4D;
+  --line-soft:rgba(217,122,77,0.35);
+  --line-2:#8FA79A;
+  --line-2-soft:rgba(143,167,154,0.3);
+  --steel:#9AA3AC;
+  --glass:#2A2F36;
+  --hairline:rgba(243,240,233,0.1);
+  --hairline-strong:rgba(243,240,233,0.18);
+  --danger:#D9704D;
+  --display:'Arq-Display', Arial, sans-serif;
+  --body:'Arq-Body', Arial, sans-serif;
+  --mono:'Arq-Mono', 'Courier New', monospace;
+}
+@font-face{font-family:'Arq-Display';src:local('Arial Narrow'),local('Arial');font-weight:600 800;}
+@font-face{font-family:'Arq-Mono';src:local('Courier New');font-weight:400 700;}
+
+body{
+  font-family:var(--body), Arial, Helvetica, sans-serif;
+  background:var(--ink);
+  color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:var(--display), Arial, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
+  font-weight:800;
+}
+.eyebrow{
+  font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;
+  color:var(--line);display:inline-flex;align-items:center;gap:8px;
+}
+.eyebrow::before{content:"";width:20px;height:2px;background:var(--line);display:inline-block;}
+.eyebrow.sage{color:var(--line-2);}
+.eyebrow.sage::before{background:var(--line-2);}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+
+/* =========================================================
+   PANTALLA DE LOGIN
+========================================================= */
+#login-screen{
+  min-height:100vh;display:grid;grid-template-columns:1.3fr 1fr;
+}
+.login-visual{position:relative;overflow:hidden;}
+.login-visual-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(0.9) brightness(0.5);transform:scale(1.03);}
+.login-visual-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(21,24,28,0.2), rgba(21,24,28,0.92));}
+.login-visual-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:48px;color:#EDEAE3;}
+.login-brand{display:flex;align-items:baseline;gap:8px;font-family:var(--display);font-size:1.1rem;letter-spacing:0.02em;}
+.login-brand em{font-style:normal;color:var(--line);}
+.login-brand .grp{font-family:var(--body);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);font-weight:400;margin-left:10px;padding-left:10px;border-left:1px solid var(--hairline-strong);}
+.login-quote{max-width:34ch;}
+.login-quote p{font-family:var(--display);font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.15;text-transform:none;letter-spacing:0;font-weight:600;}
+.login-quote span{display:block;margin-top:16px;font-size:0.8rem;color:var(--steel);letter-spacing:0.03em;}
+.login-visual-meta{display:flex;gap:36px;}
+.login-visual-meta div{padding-left:14px;border-left:1px solid var(--line);}
+.login-visual-meta b{display:block;font-family:var(--display);font-size:1.3rem;}
+.login-visual-meta span{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.75;}
+
+.login-panel{
+  display:flex;flex-direction:column;justify-content:center;padding:48px clamp(28px,5vw,72px);
+  background:var(--ink);position:relative;
+}
+.login-panel-inner{max-width:400px;width:100%;margin:0 auto;}
+.login-mobile-brand{display:none;}
+.login-panel h1{font-size:1.7rem;margin-bottom:8px;}
+.login-panel .sub{font-size:0.9rem;color:var(--steel);margin-bottom:8px;line-height:1.55;}
+.login-demo-note{
+  display:flex;gap:10px;align-items:flex-start;background:rgba(217,122,77,0.08);border:1px solid var(--line-soft);
+  border-radius:2px;padding:12px 14px;margin:20px 0 28px;font-size:0.8rem;color:var(--paper);line-height:1.5;
+}
+.login-demo-note svg{width:16px;height:16px;color:var(--line);flex-shrink:0;margin-top:1px;}
+
+.login-form-group{margin-bottom:20px;}
+.login-form-group label{display:block;font-size:0.74rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;}
+.login-form-group input{
+  width:100%;padding:13px 14px;border:1px solid var(--hairline-strong);background:var(--paper-alt-2);color:var(--paper);
+  font-size:0.94rem;border-radius:2px;transition:border-color .2s;
+}
+.login-form-group input::placeholder{color:var(--steel);}
+.login-form-group input:focus{border-color:var(--line);}
+.login-form-row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;font-size:0.82rem;}
+.login-form-row-between label{display:flex;align-items:center;gap:8px;color:var(--steel);cursor:pointer;}
+.login-form-row-between input[type=checkbox]{width:15px;height:15px;accent-color:var(--line);}
+.login-forgot-link{color:var(--line);font-weight:700;text-decoration:underline;text-underline-offset:2px;}
+.btn-login-submit{
+  width:100%;background:var(--line);color:var(--ink);padding:15px;border-radius:2px;font-weight:800;font-size:0.85rem;
+  text-transform:uppercase;letter-spacing:0.03em;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-login-submit:hover{background:#e8935f;}
+.btn-login-submit:disabled{opacity:0.75;cursor:wait;}
+.login-spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(21,24,28,0.3);border-top-color:var(--ink);animation:spin 0.7s linear infinite;display:none;}
+.btn-login-submit.is-loading .login-spinner{display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.login-role-select{margin-top:28px;padding-top:24px;border-top:1px solid var(--hairline);}
+.login-role-select > label{display:block;font-size:0.74rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px;color:var(--steel);}
+.role-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.role-pill{padding:9px 15px;border:1px solid var(--hairline-strong);border-radius:999px;font-size:0.78rem;font-weight:600;transition:all .15s;}
+.role-pill.is-active{background:var(--line);border-color:var(--line);color:var(--ink);font-weight:700;}
+.role-pill:not(.is-active):hover{border-color:var(--line);}
+
+/* Modal olvidé contraseña */
+.simple-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:900;display:none;align-items:center;justify-content:center;padding:24px;}
+.simple-modal-backdrop.is-open{display:flex;}
+.simple-modal{background:var(--paper-alt);border:1px solid var(--hairline);border-radius:4px;max-width:420px;width:100%;padding:32px;position:relative;}
+.simple-modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(243,240,233,0.08);display:flex;align-items:center;justify-content:center;}
+.simple-modal h3{font-size:1.2rem;margin-bottom:10px;}
+.simple-modal p{font-size:0.86rem;color:var(--steel);line-height:1.6;margin-bottom:20px;}
+.simple-modal .ok-icon{width:48px;height:48px;border-radius:50%;background:rgba(143,167,154,0.15);border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.simple-modal .ok-icon svg{width:22px;height:22px;color:var(--line-2);}
+
+@media (max-width:900px){
+  #login-screen{grid-template-columns:1fr;}
+  .login-visual{display:none;}
+  .login-mobile-brand{display:flex;align-items:baseline;gap:8px;font-family:var(--display);font-size:1.05rem;margin-bottom:40px;}
+  .login-mobile-brand em{font-style:normal;color:var(--line);}
+  .login-panel{padding:32px 22px;justify-content:flex-start;padding-top:56px;}
+}
+
+/* =========================================================
+   APP SHELL — sidebar + header + contenido
+========================================================= */
+#app-shell{display:none;min-height:100vh;}
+#app-shell.is-active{display:flex;}
+
+.sidebar{
+  width:264px;flex-shrink:0;background:var(--paper-alt);border-right:1px solid var(--hairline);
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:60;
+}
+.sidebar-brand{padding:24px 22px;border-bottom:1px solid var(--hairline);}
+.sidebar-brand .mark{font-family:var(--display);font-size:1rem;letter-spacing:0.02em;display:flex;align-items:baseline;gap:6px;}
+.sidebar-brand .mark em{font-style:normal;color:var(--line);}
+.sidebar-brand .grp{display:block;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--steel);margin-top:6px;}
+.sidebar-nav{flex:1;padding:18px 14px;display:flex;flex-direction:column;gap:2px;}
+.sidebar-nav-label{font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--steel);font-weight:700;padding:14px 10px 8px;}
+.sidebar-link{
+  display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:2px;font-size:0.86rem;font-weight:600;
+  color:var(--steel);transition:background .15s,color .15s;position:relative;
+}
+.sidebar-link svg{width:18px;height:18px;flex-shrink:0;}
+.sidebar-link:hover{background:var(--paper-alt-2);color:var(--paper);}
+.sidebar-link.is-active{background:rgba(217,122,77,0.1);color:var(--paper);}
+.sidebar-link.is-active::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;background:var(--line);border-radius:0 2px 2px 0;}
+.sidebar-link .badge{margin-left:auto;background:var(--line);color:var(--ink);font-size:0.68rem;font-weight:800;padding:1px 7px;border-radius:999px;}
+.sidebar-foot{padding:16px 14px;border-top:1px solid var(--hairline);}
+.sidebar-crosssell{background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;padding:14px;}
+.sidebar-crosssell .eyebrow{font-size:0.62rem;margin-bottom:8px;}
+.sidebar-crosssell p{font-size:0.78rem;color:var(--steel);line-height:1.5;margin-bottom:10px;}
+.sidebar-crosssell-links{display:flex;flex-direction:column;gap:6px;}
+.sidebar-crosssell-links button{font-size:0.76rem;color:var(--line);font-weight:700;text-align:left;}
+.sidebar-crosssell-links button:hover{text-decoration:underline;}
+
+.sidebar-burger{display:none;}
+.sidebar-backdrop{display:none;}
+
+.main-col{flex:1;min-width:0;display:flex;flex-direction:column;}
+.topbar{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
+  padding:14px 26px;background:rgba(21,24,28,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--hairline);
+}
+.topbar-burger{display:none;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid var(--hairline-strong);border-radius:2px;flex-shrink:0;}
+.topbar-burger svg{width:18px;height:18px;}
+.topbar-search{
+  flex:1;max-width:420px;display:flex;align-items:center;gap:10px;background:var(--paper-alt-2);
+  border:1px solid var(--hairline-strong);border-radius:2px;padding:10px 14px;
+}
+.topbar-search svg{width:15px;height:15px;color:var(--steel);flex-shrink:0;}
+.topbar-search input{flex:1;background:none;border:none;color:var(--paper);font-size:0.86rem;}
+.topbar-search input::placeholder{color:var(--steel);}
+.topbar-spacer{flex:1;}
+.topbar-actions{display:flex;align-items:center;gap:16px;}
+
+.notif-btn{position:relative;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--hairline-strong);flex-shrink:0;}
+.notif-btn svg{width:17px;height:17px;}
+.notif-btn .count{position:absolute;top:-4px;right:-4px;background:var(--line);color:var(--ink);font-size:0.64rem;font-weight:800;min-width:17px;height:17px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
+
+.user-menu-wrap{position:relative;}
+.user-menu-btn{display:flex;align-items:center;gap:10px;padding:5px 10px 5px 5px;border-radius:999px;border:1px solid transparent;transition:border-color .15s;}
+.user-menu-btn:hover{border-color:var(--hairline-strong);}
+.user-menu-btn img{width:32px;height:32px;border-radius:50%;object-fit:cover;}
+.user-menu-btn .u-info{text-align:left;display:none;}
+.user-menu-btn .u-info b{display:block;font-size:0.8rem;}
+.user-menu-btn .u-info span{font-size:0.68rem;color:var(--steel);}
+.user-menu-btn svg{width:13px;height:13px;color:var(--steel);}
+
+.dropdown-panel{
+  position:absolute;top:calc(100% + 10px);right:0;width:320px;max-width:calc(100vw - 32px);
+  background:var(--paper-alt);border:1px solid var(--hairline);border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  display:none;z-index:70;overflow:hidden;
+}
+.dropdown-panel.is-open{display:block;}
+.dropdown-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--hairline);}
+.dropdown-head b{font-size:0.86rem;}
+.dropdown-head button{font-size:0.74rem;color:var(--line);font-weight:700;}
+.dropdown-list{max-height:380px;overflow-y:auto;}
+.notif-item{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--hairline);cursor:pointer;transition:background .15s;}
+.notif-item:hover{background:var(--paper-alt-2);}
+.notif-item.is-unread{background:rgba(217,122,77,0.05);}
+.notif-item .n-dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex-shrink:0;margin-top:6px;opacity:0;}
+.notif-item.is-unread .n-dot{opacity:1;}
+.notif-item .n-body p{font-size:0.84rem;line-height:1.45;}
+.notif-item .n-body span{font-size:0.72rem;color:var(--steel);margin-top:4px;display:block;}
+.dropdown-empty{padding:40px 20px;text-align:center;color:var(--steel);font-size:0.85rem;}
+.user-dropdown-menu{padding:8px;}
+.user-dropdown-menu button{width:100%;text-align:left;padding:10px 12px;font-size:0.84rem;border-radius:2px;display:flex;align-items:center;gap:10px;}
+.user-dropdown-menu button:hover{background:var(--paper-alt-2);}
+.user-dropdown-menu button svg{width:16px;height:16px;color:var(--steel);}
+.user-dropdown-menu hr{border:none;border-top:1px solid var(--hairline);margin:6px 4px;}
+
+.content-area{flex:1;padding:32px clamp(20px,3vw,40px) 60px;}
+.view{display:none;}
+.view.is-active{display:block;animation:viewFade .3s ease;}
+@keyframes viewFade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.view-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:32px;}
+.view-head h1{font-size:clamp(1.5rem,2.6vw,2rem);}
+.view-head .sub{font-size:0.88rem;color:var(--steel);margin-top:6px;}
+
+@media (max-width:1080px){
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform .25s ease;box-shadow:0 0 60px rgba(0,0,0,0.5);}
+  .sidebar.is-open{transform:translateX(0);}
+  .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:59;}
+  .sidebar-backdrop.is-open{display:block;}
+  .topbar-burger{display:flex;}
+  .topbar-search{display:none;}
+}
+@media (max-width:640px){
+  .topbar{padding:12px 16px;gap:10px;}
+  .content-area{padding:22px 16px 50px;}
+  .dropdown-panel{position:fixed;top:64px;left:12px;right:12px;width:auto;}
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+.dash-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-bottom:24px;align-items:start;}
+.card{background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;padding:26px;}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px;}
+.card-head h2{font-size:1rem;text-transform:none;font-family:var(--body);font-weight:800;letter-spacing:0;}
+.card-head .sub{font-size:0.8rem;color:var(--steel);margin-top:4px;}
+
+.proyecto-hero-card{position:relative;overflow:hidden;padding:0;}
+.proyecto-hero-img{position:relative;aspect-ratio:16/7;overflow:hidden;}
+.proyecto-hero-img img{width:100%;height:100%;object-fit:cover;}
+.proyecto-hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(21,24,28,0.95),transparent 60%);}
+.proyecto-hero-tag{position:absolute;bottom:16px;left:22px;z-index:2;}
+.proyecto-hero-tag .eyebrow{color:#EDEAE3;margin-bottom:6px;}
+.proyecto-hero-tag .eyebrow::before{background:var(--line);}
+.proyecto-hero-tag h3{font-size:1.4rem;color:#F3F0E9;}
+.proyecto-hero-body{padding:24px 26px 26px;}
+
+.stepper{display:flex;margin:8px 0 4px;}
+.stepper-step{flex:1;position:relative;text-align:center;}
+.stepper-step:not(:last-child)::after{content:"";position:absolute;top:15px;left:50%;width:100%;height:2px;background:var(--hairline-strong);z-index:0;}
+.stepper-step.is-complete:not(:last-child)::after{background:var(--line-2);}
+.stepper-dot{width:30px;height:30px;border-radius:50%;background:var(--paper-alt-2);border:2px solid var(--hairline-strong);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;position:relative;z-index:1;font-size:0.78rem;font-weight:800;color:var(--steel);}
+.stepper-step.is-complete .stepper-dot{background:var(--line-2);border-color:var(--line-2);color:var(--ink);}
+.stepper-step.is-active .stepper-dot{background:var(--line);border-color:var(--line);color:var(--ink);box-shadow:0 0 0 4px rgba(217,122,77,0.18);}
+.stepper-label{font-size:0.7rem;font-weight:700;color:var(--steel);max-width:12ch;margin:0 auto;line-height:1.3;}
+.stepper-step.is-active .stepper-label,.stepper-step.is-complete .stepper-label{color:var(--paper);}
+.stepper-next-date{margin-top:20px;padding-top:16px;border-top:1px solid var(--hairline);font-size:0.86rem;color:var(--steel);}
+.stepper-next-date b{color:var(--paper);}
+
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:2px;overflow:hidden;margin-bottom:24px;}
+.kpi{background:var(--paper-alt);padding:20px 18px;}
+.kpi b{display:block;font-family:var(--display);font-size:1.7rem;font-weight:800;color:var(--line);}
+.kpi span{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.03em;color:var(--steel);margin-top:4px;display:block;}
+
+.arquitecto-card{display:flex;gap:16px;align-items:center;}
+.arquitecto-card img{width:58px;height:58px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.arquitecto-card .a-name{font-weight:700;font-size:0.98rem;}
+.arquitecto-card .a-role{font-size:0.8rem;color:var(--steel);margin-top:2px;}
+.btn-msg-arq{margin-top:14px;width:100%;padding:11px;border:1px solid var(--hairline-strong);border-radius:2px;font-size:0.82rem;font-weight:700;text-align:center;transition:border-color .2s;}
+.btn-msg-arq:hover{border-color:var(--line);}
+
+.cita-widget{display:flex;flex-direction:column;gap:14px;}
+.cita-row{display:flex;gap:14px;align-items:flex-start;}
+.cita-date-box{width:52px;flex-shrink:0;text-align:center;background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;padding:8px 4px;}
+.cita-date-box b{display:block;font-family:var(--display);font-size:1.2rem;color:var(--line);}
+.cita-date-box span{font-size:0.62rem;text-transform:uppercase;color:var(--steel);}
+.cita-info b{font-size:0.9rem;display:block;}
+.cita-info span{font-size:0.78rem;color:var(--steel);display:block;margin-top:2px;}
+.btn-ics{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:700;color:var(--line);}
+.btn-ics svg{width:14px;height:14px;}
+
+.mini-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.mini-gallery-item{aspect-ratio:1;border-radius:2px;overflow:hidden;cursor:pointer;position:relative;}
+.mini-gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease;}
+.mini-gallery-item:hover img{transform:scale(1.07);}
+
+.meridiano-widget{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.meridiano-mini-card{position:relative;border-radius:2px;overflow:hidden;min-height:130px;display:flex;align-items:flex-end;padding:16px;}
+.meridiano-mini-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.5);}
+.meridiano-mini-body{position:relative;z-index:2;color:#fff;}
+.meridiano-mini-body b{display:block;font-family:var(--display);font-size:0.95rem;}
+.meridiano-mini-body span{font-size:0.74rem;opacity:0.85;display:block;margin:4px 0 8px;}
+.meridiano-mini-body button{font-size:0.7rem;font-weight:800;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.5);padding-bottom:1px;}
+
+.catalogo-preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+
+.section-link-all{font-size:0.8rem;font-weight:700;color:var(--line);display:inline-flex;align-items:center;gap:6px;}
+.section-link-all svg{width:13px;height:13px;}
+
+@media (max-width:1200px){
+  .dash-grid{grid-template-columns:1fr;}
+  .kpi-row{grid-template-columns:1fr 1fr;}
+  .catalogo-preview-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:640px){
+  .kpi-row{grid-template-columns:1fr 1fr;}
+  .stepper-label{display:none;}
+  .catalogo-preview-grid{grid-template-columns:1fr;}
+  .meridiano-widget{grid-template-columns:1fr;}
+}
+
+/* =========================================================
+   VISTA CATÁLOGO
+========================================================= */
+.cat-tabs{display:flex;gap:8px;background:var(--paper-alt-2);padding:5px;border-radius:2px;border:1px solid var(--hairline);width:fit-content;margin-bottom:24px;}
+.cat-tab{padding:9px 16px;font-size:0.76rem;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;border-radius:2px;color:var(--steel);transition:all .2s;}
+.cat-tab.is-active{background:var(--line);color:var(--ink);}
+.cat-tab:not(.is-active):hover{color:var(--paper);}
+
+.cat-toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px;}
+.cat-toolbar-search{flex:1 1 240px;display:flex;align-items:center;gap:9px;background:var(--paper-alt-2);border:1px solid var(--hairline-strong);border-radius:2px;padding:10px 13px;}
+.cat-toolbar-search svg{width:15px;height:15px;color:var(--steel);flex-shrink:0;}
+.cat-toolbar-search input{flex:1;background:none;border:none;color:var(--paper);font-size:0.86rem;}
+.cat-filter-select{background:var(--paper-alt-2);border:1px solid var(--hairline-strong);color:var(--paper);border-radius:2px;padding:10px 30px 10px 13px;font-size:0.8rem;font-weight:600;appearance:none;position:relative;}
+.select-wrap{position:relative;}
+.select-wrap::after{content:"";position:absolute;right:12px;top:50%;width:7px;height:7px;border-right:2px solid var(--steel);border-bottom:2px solid var(--steel);transform:translateY(-70%) rotate(45deg);pointer-events:none;}
+.cat-count-line{font-size:0.82rem;color:var(--steel);margin-bottom:18px;}
+.cat-count-line b{color:var(--paper);}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.p-card{cursor:pointer;background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;overflow:hidden;transition:border-color .2s;display:flex;flex-direction:column;}
+.p-card:hover{border-color:var(--line-soft);}
+.p-card-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--glass);}
+.p-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.p-card:hover .p-card-img img{transform:scale(1.06);}
+.p-fav-btn{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(21,24,28,0.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.p-fav-btn:hover{background:rgba(21,24,28,0.8);}
+.p-fav-btn svg{width:16px;height:16px;color:#F3F0E9;}
+.p-fav-btn.is-fav svg{fill:var(--line);color:var(--line);}
+.p-compare-check{position:absolute;bottom:10px;right:10px;display:flex;align-items:center;gap:6px;background:rgba(21,24,28,0.7);backdrop-filter:blur(4px);padding:6px 9px 6px 7px;border-radius:999px;font-size:0.66rem;font-weight:700;color:#fff;text-transform:uppercase;}
+.p-compare-check input{width:13px;height:13px;accent-color:var(--line);}
+.p-card-info{padding:16px;flex:1;display:flex;flex-direction:column;}
+.p-card-cat{font-size:0.64rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--line);font-weight:800;}
+.p-card-cat.cat-institucional{color:var(--line-2);}
+.p-card-name{font-family:var(--display);text-transform:uppercase;font-weight:800;font-size:0.98rem;margin-top:5px;}
+.p-card-loc{font-size:0.78rem;color:var(--steel);margin-top:4px;}
+.p-card-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;padding-top:14px;border-top:1px solid var(--hairline);}
+.p-card-price{font-family:var(--display);font-size:0.98rem;font-weight:800;}
+.p-card-year{font-size:0.74rem;color:var(--steel);}
+
+.compare-bar{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(140%);z-index:250;background:var(--ink);border:1px solid var(--line);border-radius:999px;padding:10px 10px 10px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 16px 40px rgba(0,0,0,0.4);transition:transform .3s ease;max-width:calc(100vw - 32px);}
+.compare-bar.is-shown{transform:translateX(-50%) translateY(0);}
+.compare-bar span{font-size:0.8rem;font-weight:700;white-space:nowrap;}
+.compare-bar span b{color:var(--line);}
+.compare-bar button.go{background:var(--line);color:var(--ink);padding:9px 16px;border-radius:999px;font-size:0.76rem;font-weight:800;text-transform:uppercase;}
+.compare-bar button.clear{width:30px;height:30px;border-radius:50%;background:var(--paper-alt-2);color:var(--steel);display:flex;align-items:center;justify-content:center;}
+
+.empty-state{text-align:center;padding:70px 20px;color:var(--steel);grid-column:1/-1;}
+.empty-state svg{width:38px;height:38px;color:var(--steel);opacity:0.6;margin:0 auto 16px;}
+.empty-state h3{font-size:1.05rem;color:var(--paper);margin-bottom:8px;font-family:var(--body);text-transform:none;font-weight:700;}
+.empty-state p{font-size:0.86rem;max-width:38ch;margin:0 auto;}
+.empty-state button{margin-top:16px;}
+
+.compare-table-wrap{overflow-x:auto;}
+.compare-table{width:100%;border-collapse:collapse;min-width:520px;}
+.compare-table th,.compare-table td{padding:14px 16px;border-bottom:1px solid var(--hairline);text-align:left;font-size:0.86rem;}
+.compare-table th{color:var(--steel);font-size:0.7rem;text-transform:uppercase;font-weight:700;}
+.compare-table td.label-cell{color:var(--steel);font-weight:600;white-space:nowrap;}
+.compare-thead-project{display:flex;flex-direction:column;gap:8px;min-width:150px;}
+.compare-thead-project img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;}
+.compare-remove{font-size:0.68rem;color:var(--steel);text-decoration:underline;align-self:flex-start;}
+
+.btn-primary{background:var(--line);color:var(--ink);padding:12px 22px;border-radius:2px;font-weight:800;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.02em;transition:background .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:#e8935f;}
+.btn-secondary{border:1px solid var(--hairline-strong);color:var(--paper);padding:12px 22px;border-radius:2px;font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.02em;transition:border-color .2s;}
+.btn-secondary:hover{border-color:var(--line);}
+
+@media (max-width:1080px){ .grid-3{grid-template-columns:1fr 1fr;} }
+@media (max-width:640px){ .grid-3{grid-template-columns:1fr;} .cat-toolbar{flex-direction:column;align-items:stretch;} }
+
+/* =========================================================
+   MODAL DE FICHA DE PROYECTO (catálogo dentro del panel)
+========================================================= */
+.pmodal-backdrop{position:fixed;inset:0;background:rgba(11,13,16,0.86);z-index:550;display:none;align-items:flex-start;justify-content:center;padding:4vh 20px;overflow-y:auto;}
+.pmodal-backdrop.is-open{display:flex;}
+.pmodal{background:var(--paper-alt);color:var(--paper);max-width:1000px;width:100%;border-radius:4px;overflow:hidden;position:relative;margin-bottom:5vh;box-shadow:0 30px 90px rgba(0,0,0,0.55);border:1px solid var(--hairline);}
+.pmodal-close{position:absolute;top:16px;right:16px;z-index:8;width:38px;height:38px;border-radius:50%;background:rgba(11,13,16,0.65);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.05rem;}
+.pmodal-close:hover{background:var(--line);}
+.pmodal-gallery{position:relative;aspect-ratio:16/8;background:var(--glass);}
+.pmodal-gallery img{width:100%;height:100%;object-fit:cover;}
+.pmodal-gallery-nav{position:absolute;bottom:14px;right:14px;display:flex;gap:6px;}
+.pmodal-gallery-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.45);cursor:pointer;}
+.pmodal-gallery-dot.is-active{background:#fff;}
+.pmodal-gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(11,13,16,0.55);color:#fff;display:flex;align-items:center;justify-content:center;}
+.pmodal-gallery-arrow.prev{left:14px;}
+.pmodal-gallery-arrow.next{right:14px;}
+.pmodal-body{padding:32px clamp(20px,4vw,44px) 44px;}
+.pmodal-tag-row{display:flex;gap:10px;align-items:center;margin-bottom:8px;}
+.pmodal-tag{font-size:0.68rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:var(--line);}
+.pmodal-tag.institucional{color:var(--line-2);}
+.pmodal-fav{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:0.76rem;font-weight:700;color:var(--steel);}
+.pmodal-fav svg{width:18px;height:18px;}
+.pmodal-fav.is-fav svg{fill:var(--line);color:var(--line);}
+.pmodal-title{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:6px;}
+.pmodal-loc{font-size:0.9rem;color:var(--steel);margin-bottom:20px;}
+.pmodal-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--hairline);}
+.pmodal-price{font-family:var(--display);font-size:1.7rem;color:var(--line);}
+.pmodal-price-label{font-size:0.78rem;color:var(--steel);}
+.pmodal-specs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));border:1px solid var(--hairline);border-radius:2px;overflow:hidden;margin-bottom:24px;}
+.pmodal-spec{padding:14px 12px;border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
+.pmodal-spec b{display:block;font-family:var(--display);font-size:1.05rem;}
+.pmodal-spec span{font-size:0.64rem;text-transform:uppercase;color:var(--steel);}
+.pmodal-desc{font-size:0.94rem;line-height:1.7;margin-bottom:24px;max-width:70ch;}
+.pmodal-desc p+p{margin-top:12px;}
+.pmodal-crosssell{display:flex;gap:12px;font-size:0.82rem;color:var(--steel);margin-bottom:24px;padding:13px 16px;background:rgba(217,122,77,0.06);border-left:2px solid var(--line);}
+.pmodal-crosssell b{color:var(--paper);}
+.pmodal-crosssell a{color:var(--line);font-weight:700;text-decoration:underline;}
+.pmodal-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;}
+.pmodal-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.pmodal-related-card{cursor:pointer;border-radius:2px;overflow:hidden;background:var(--paper-alt-2);border:1px solid var(--hairline);}
+.pmodal-related-card img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.pmodal-related-card .r-info{padding:10px 12px;}
+.pmodal-related-card .r-name{font-size:0.8rem;font-weight:700;}
+.pmodal-related-card .r-loc{font-size:0.72rem;color:var(--steel);}
+@media (max-width:640px){ .pmodal-related-grid{grid-template-columns:1fr;} .pmodal-specs-grid{grid-template-columns:repeat(2,1fr);} }
+
+/* =========================================================
+   VISTA MI PROYECTO
+========================================================= */
+.proyecto-tabs{display:flex;gap:6px;border-bottom:1px solid var(--hairline);margin-bottom:28px;overflow-x:auto;}
+.proyecto-tab{padding:12px 4px;margin-right:26px;font-size:0.84rem;font-weight:700;color:var(--steel);border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;}
+.proyecto-tab.is-active{color:var(--paper);border-color:var(--line);}
+.proyecto-tab:hover{color:var(--paper);}
+.proyecto-subview{display:none;}
+.proyecto-subview.is-active{display:block;}
+
+.etapas-list{display:flex;flex-direction:column;gap:12px;}
+.etapa-card{background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;overflow:hidden;}
+.etapa-head{display:flex;align-items:center;gap:16px;padding:18px 20px;cursor:pointer;}
+.etapa-num{width:36px;height:36px;border-radius:50%;background:var(--paper-alt-2);border:2px solid var(--hairline-strong);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:0.9rem;font-weight:800;color:var(--steel);flex-shrink:0;}
+.etapa-card.is-complete .etapa-num{background:var(--line-2);border-color:var(--line-2);color:var(--ink);}
+.etapa-card.is-active .etapa-num{background:var(--line);border-color:var(--line);color:var(--ink);}
+.etapa-title-wrap{flex:1;min-width:0;}
+.etapa-title-wrap b{font-size:0.98rem;display:block;}
+.etapa-title-wrap span{font-size:0.78rem;color:var(--steel);}
+.etapa-status-badge{font-size:0.66rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;padding:5px 10px;border-radius:999px;flex-shrink:0;}
+.etapa-status-badge.completada{background:rgba(143,167,154,0.18);color:var(--line-2);border:1px solid rgba(143,167,154,0.4);}
+.etapa-status-badge.en-curso{background:rgba(217,122,77,0.18);color:var(--line);border:1px solid var(--line-soft);}
+.etapa-status-badge.pendiente{background:rgba(154,163,172,0.12);color:var(--steel);border:1px solid var(--hairline-strong);}
+.etapa-chevron{width:18px;height:18px;color:var(--steel);flex-shrink:0;transition:transform .2s;}
+.etapa-card.is-open .etapa-chevron{transform:rotate(180deg);}
+.etapa-body{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.etapa-card.is-open .etapa-body{max-height:600px;}
+.etapa-body-inner{padding:0 20px 22px;border-top:1px solid var(--hairline);padding-top:18px;}
+.etapa-body-inner p{font-size:0.86rem;color:var(--steel);line-height:1.6;margin-bottom:16px;}
+.etapa-fechas{display:flex;gap:24px;margin-bottom:16px;flex-wrap:wrap;}
+.etapa-fechas div{font-size:0.8rem;}
+.etapa-fechas b{display:block;color:var(--paper);}
+.etapa-fechas span{color:var(--steel);font-size:0.7rem;text-transform:uppercase;}
+.entregables-list{display:flex;flex-direction:column;gap:8px;}
+.entregable-item{display:flex;align-items:center;gap:10px;font-size:0.86rem;padding:8px 0;}
+.entregable-check{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--hairline-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.entregable-item.is-done .entregable-check{background:var(--line-2);border-color:var(--line-2);}
+.entregable-item.is-done .entregable-check svg{width:11px;height:11px;color:var(--ink);}
+.entregable-item.is-done span{color:var(--steel);text-decoration:line-through;}
+
+.avance-torreon-banner{display:flex;gap:12px;align-items:center;background:rgba(143,167,154,0.08);border-left:2px solid var(--line-2);padding:14px 18px;margin-top:16px;font-size:0.84rem;color:var(--steel);}
+.avance-torreon-banner b{color:var(--paper);}
+.avance-torreon-banner a{color:var(--line-2);font-weight:700;text-decoration:underline;}
+
+/* Galería de versiones */
+.version-block{margin-bottom:36px;}
+.version-block-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+.version-block-head h3{font-size:1.05rem;text-transform:none;font-family:var(--body);font-weight:800;}
+.version-badge{font-size:0.68rem;font-weight:800;text-transform:uppercase;padding:4px 10px;border-radius:999px;}
+.version-badge.aprobada{background:rgba(143,167,154,0.18);color:var(--line-2);}
+.version-badge.cambios{background:rgba(217,112,77,0.18);color:var(--danger);}
+.version-badge.revision{background:rgba(217,122,77,0.18);color:var(--line);}
+.version-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+.version-img{aspect-ratio:4/3;border-radius:2px;overflow:hidden;cursor:pointer;position:relative;}
+.version-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease;}
+.version-img:hover img{transform:scale(1.06);}
+.version-comment-thread{background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;padding:16px 18px;margin-bottom:14px;}
+.version-comment{display:flex;gap:12px;margin-bottom:14px;}
+.version-comment:last-child{margin-bottom:0;}
+.version-comment img{width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.version-comment-body{flex:1;}
+.version-comment-body b{font-size:0.82rem;}
+.version-comment-body span.vc-date{font-size:0.7rem;color:var(--steel);margin-left:8px;}
+.version-comment-body p{font-size:0.86rem;color:var(--steel);margin-top:4px;line-height:1.55;}
+.version-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.version-actions button{font-size:0.78rem;font-weight:700;padding:10px 16px;border-radius:2px;}
+.btn-approve{background:var(--line-2);color:var(--ink);}
+.btn-approve:hover{background:#a3bcae;}
+.btn-request-changes{border:1px solid var(--hairline-strong);color:var(--paper);}
+.btn-request-changes:hover{border-color:var(--line);}
+.version-actions.is-done{opacity:0.5;pointer-events:none;}
+.comment-form{display:none;margin-top:14px;}
+.comment-form.is-open{display:block;}
+.comment-form textarea{width:100%;padding:12px 14px;border:1px solid var(--hairline-strong);background:var(--paper-alt-2);color:var(--paper);border-radius:2px;font-size:0.86rem;min-height:80px;resize:vertical;margin-bottom:10px;}
+
+/* Timeline */
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--hairline-strong);}
+.timeline-item{position:relative;padding-bottom:26px;}
+.timeline-item::before{content:"";position:absolute;left:-28px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--line);border:2px solid var(--ink);}
+.timeline-item b{font-size:0.9rem;display:block;}
+.timeline-item .t-date{font-size:0.72rem;color:var(--steel);text-transform:uppercase;letter-spacing:0.03em;display:block;margin-bottom:4px;}
+.timeline-item p{font-size:0.85rem;color:var(--steel);margin-top:4px;line-height:1.55;}
+
+@media (max-width:900px){ .version-gallery{grid-template-columns:1fr 1fr;} }
+@media (max-width:640px){ .version-gallery{grid-template-columns:1fr;} .etapa-fechas{gap:14px;} }
+
+/* =========================================================
+   VISTA MIS CITAS
+========================================================= */
+.citas-list{display:flex;flex-direction:column;gap:12px;}
+.cita-card{display:flex;gap:18px;align-items:center;background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;padding:18px 20px;flex-wrap:wrap;}
+.cita-card .cd-box{width:60px;flex-shrink:0;text-align:center;background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;padding:10px 4px;}
+.cita-card .cd-box b{display:block;font-family:var(--display);font-size:1.4rem;color:var(--line);}
+.cita-card .cd-box span{font-size:0.64rem;text-transform:uppercase;color:var(--steel);}
+.cita-card .cc-info{flex:1;min-width:160px;}
+.cita-card .cc-info b{font-size:0.94rem;display:block;}
+.cita-card .cc-info .cc-meta{font-size:0.8rem;color:var(--steel);margin-top:4px;display:flex;gap:14px;flex-wrap:wrap;}
+.cita-card .cc-meta span{display:inline-flex;align-items:center;gap:5px;}
+.cita-card .cc-meta svg{width:13px;height:13px;}
+.cita-tipo-badge{font-size:0.66rem;font-weight:800;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(217,122,77,0.15);color:var(--line);border:1px solid var(--line-soft);white-space:nowrap;}
+.cita-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.cita-actions button{font-size:0.76rem;font-weight:700;padding:8px 14px;border-radius:2px;border:1px solid var(--hairline-strong);}
+.cita-actions button:hover{border-color:var(--line);}
+.cita-actions button.danger:hover{border-color:var(--danger);color:var(--danger);}
+.cita-card.is-cancelada{opacity:0.5;}
+.cita-card.is-cancelada .cita-actions{display:none;}
+
+.citas-section-title{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--steel);font-weight:700;margin:32px 0 14px;}
+.citas-section-title:first-child{margin-top:0;}
+
+/* =========================================================
+   VISTA DOCUMENTOS
+========================================================= */
+.doc-toolbar{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
+.doc-carpetas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.doc-carpeta-pill{padding:9px 15px;border:1px solid var(--hairline-strong);border-radius:999px;font-size:0.78rem;font-weight:600;transition:all .15s;}
+.doc-carpeta-pill.is-active{background:var(--line);border-color:var(--line);color:var(--ink);font-weight:700;}
+.doc-carpeta-pill:not(.is-active):hover{border-color:var(--line);}
+.doc-list{display:flex;flex-direction:column;gap:2px;}
+.doc-row{display:flex;align-items:center;gap:16px;padding:16px 18px;background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;flex-wrap:wrap;}
+.doc-row + .doc-row{margin-top:8px;}
+.doc-icon{width:42px;height:42px;border-radius:2px;background:var(--paper-alt-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--line);}
+.doc-icon svg{width:20px;height:20px;}
+.doc-info{flex:1;min-width:160px;}
+.doc-info b{font-size:0.9rem;display:block;}
+.doc-info span{font-size:0.76rem;color:var(--steel);}
+.doc-meta{font-size:0.76rem;color:var(--steel);white-space:nowrap;}
+.doc-actions{display:flex;gap:8px;}
+.doc-actions button{width:36px;height:36px;border-radius:2px;border:1px solid var(--hairline-strong);display:flex;align-items:center;justify-content:center;}
+.doc-actions button:hover{border-color:var(--line);}
+.doc-actions button svg{width:16px;height:16px;}
+
+@media (max-width:640px){
+  .cita-card{padding:16px;}
+  .doc-row{flex-direction:column;align-items:flex-start;}
+  .doc-meta{order:3;}
+}
+
+/* =========================================================
+   VISTA MENSAJES
+========================================================= */
+.msg-shell{display:grid;grid-template-columns:300px 1fr;border:1px solid var(--hairline);border-radius:2px;overflow:hidden;height:calc(100vh - 220px);min-height:520px;}
+.msg-threads{background:var(--paper-alt);border-right:1px solid var(--hairline);overflow-y:auto;}
+.msg-thread-item{display:flex;gap:12px;padding:16px;border-bottom:1px solid var(--hairline);cursor:pointer;transition:background .15s;position:relative;}
+.msg-thread-item:hover{background:var(--paper-alt-2);}
+.msg-thread-item.is-active{background:var(--paper-alt-2);}
+.msg-thread-item.is-active::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line);}
+.msg-thread-item img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.msg-thread-info{flex:1;min-width:0;}
+.msg-thread-info .t-name{font-size:0.88rem;font-weight:700;}
+.msg-thread-info .t-preview{font-size:0.78rem;color:var(--steel);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.msg-thread-info .t-time{font-size:0.68rem;color:var(--steel);float:right;}
+.msg-thread-unread{position:absolute;top:16px;right:14px;background:var(--line);color:var(--ink);font-size:0.64rem;font-weight:800;min-width:16px;height:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
+
+.msg-panel{display:flex;flex-direction:column;background:var(--ink);}
+.msg-panel-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--hairline);background:var(--paper-alt);}
+.msg-panel-head img{width:38px;height:38px;border-radius:50%;object-fit:cover;}
+.msg-panel-head b{display:block;font-size:0.9rem;}
+.msg-panel-head span{font-size:0.72rem;color:var(--line-2);display:flex;align-items:center;gap:5px;}
+.msg-panel-head span::before{content:"";width:7px;height:7px;background:var(--line-2);border-radius:50%;}
+.msg-body{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:12px;}
+.msg-bubble{max-width:68%;padding:11px 15px;border-radius:12px;font-size:0.88rem;line-height:1.55;}
+.msg-bubble.them{background:var(--paper-alt);border:1px solid var(--hairline);align-self:flex-start;border-bottom-left-radius:3px;}
+.msg-bubble.me{background:var(--line);color:var(--ink);align-self:flex-end;border-bottom-right-radius:3px;font-weight:500;}
+.msg-bubble .m-time{display:block;font-size:0.66rem;opacity:0.6;margin-top:5px;}
+.msg-typing-row{align-self:flex-start;background:var(--paper-alt);border:1px solid var(--hairline);padding:12px 16px;border-radius:12px;border-bottom-left-radius:3px;display:flex;gap:4px;}
+.msg-typing-row span{width:6px;height:6px;background:var(--steel);border-radius:50%;animation:msgTyping 1.2s infinite ease-in-out;}
+.msg-typing-row span:nth-child(2){animation-delay:.15s;}
+.msg-typing-row span:nth-child(3){animation-delay:.3s;}
+@keyframes msgTyping{0%,60%,100%{transform:translateY(0);opacity:0.5;}30%{transform:translateY(-4px);opacity:1;}}
+.msg-input-row{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--hairline);background:var(--paper-alt);}
+.msg-input-row input{flex:1;padding:12px 16px;border:1px solid var(--hairline-strong);background:var(--paper-alt-2);color:var(--paper);border-radius:999px;font-size:0.88rem;}
+.msg-input-row button{width:42px;height:42px;border-radius:50%;background:var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.msg-input-row button svg{width:17px;height:17px;}
+
+@media (max-width:900px){
+  .msg-shell{grid-template-columns:1fr;height:auto;}
+  .msg-threads{max-height:200px;}
+  .msg-body{min-height:340px;}
+}
+
+/* =========================================================
+   TOASTS
+========================================================= */
+.toast-stack{position:fixed;left:22px;bottom:22px;z-index:400;display:flex;flex-direction:column;gap:10px;max-width:320px;}
+.toast{background:var(--paper-alt-2);border:1px solid var(--hairline-strong);border-left:3px solid var(--line);border-radius:2px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 12px 28px rgba(0,0,0,0.35);opacity:0;transform:translateY(12px);transition:opacity .35s ease,transform .35s ease;cursor:pointer;}
+.toast.is-shown{opacity:1;transform:translateY(0);}
+.toast svg{width:17px;height:17px;color:var(--line);flex-shrink:0;margin-top:1px;}
+.toast p{font-size:0.82rem;line-height:1.45;color:var(--paper);}
+.toast p b{color:var(--line);}
+.toast .t-time{font-size:0.7rem;color:var(--steel);margin-top:3px;}
+@media (max-width:560px){ .toast-stack{left:16px;right:16px;max-width:none;} }
+
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     PANTALLA DE LOGIN
+========================================================= -->
+<div id="login-screen">
+  <div class="login-visual">
+    <div class="login-visual-bg" style="background-image:url('https://picsum.photos/seed/arqueo-hero-login/1400/1600')"></div>
+    <div class="login-visual-content">
+      <span class="login-brand">ARQUEO <em>·</em> ESTUDIO <span class="grp">Grupo Meridiano</span></span>
+      <div class="login-quote">
+        <p>La estructura es el argumento.</p>
+        <span>Panel de cliente — da seguimiento a tu proyecto, explora el catálogo y comunícate con tu arquitecto.</span>
+      </div>
+      <div class="login-visual-meta">
+        <div><b>18</b><span>Proyectos entregados</span></div>
+        <div><b>4.9/5</b><span>Satisfacción de clientes</span></div>
+        <div><b>2 días</b><span>Tiempo de respuesta</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-panel">
+    <div class="login-panel-inner">
+      <span class="login-mobile-brand">ARQUEO <em>·</em> ESTUDIO</span>
+      <span class="eyebrow">Panel de cliente</span>
+      <h1 style="margin-top:12px;">Bienvenido de vuelta</h1>
+      <p class="sub">Inicia sesión para ver el avance de tu proyecto.</p>
+
+      <div class="login-demo-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg>
+        <span>Panel de demostración — cualquier usuario y contraseña te dará acceso.</span>
+      </div>
+
+      <form id="login-form" novalidate>
+        <div class="login-form-group">
+          <label for="login-user">Usuario o correo</label>
+          <input type="text" id="login-user" placeholder="tú@correo.com" autocomplete="username">
+        </div>
+        <div class="login-form-group">
+          <label for="login-pass">Contraseña</label>
+          <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div class="login-form-row-between">
+          <label><input type="checkbox" id="login-remember"> Mantener sesión iniciada</label>
+          <button type="button" class="login-forgot-link" id="btn-forgot">¿Olvidaste tu contraseña?</button>
+        </div>
+        <button type="submit" class="btn-login-submit" id="login-submit-btn">
+          <span class="login-spinner"></span>
+          <span class="btn-label">Iniciar sesión</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL OLVIDÉ CONTRASEÑA -->
+<div class="simple-modal-backdrop" id="forgot-backdrop">
+  <div class="simple-modal">
+    <button class="simple-modal-close" id="forgot-close" aria-label="Cerrar">✕</button>
+    <div id="forgot-form-wrap">
+      <h3>Recupera tu acceso</h3>
+      <p>Escribe el correo con el que te registraste y te enviaremos instrucciones para restablecer tu contraseña.</p>
+      <div class="login-form-group">
+        <label for="forgot-email">Correo electrónico</label>
+        <input type="email" id="forgot-email" placeholder="tú@correo.com">
+      </div>
+      <button type="button" class="btn-login-submit" id="forgot-submit-btn"><span class="btn-label">Enviar instrucciones</span></button>
+    </div>
+    <div id="forgot-confirm-wrap" style="display:none;">
+      <div class="ok-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Instrucciones enviadas</h3>
+      <p>Si el correo existe en nuestro sistema, recibirás un enlace para restablecer tu contraseña en los próximos minutos. (Simulado — no se envía correo real en esta maqueta.)</p>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     APP SHELL
+========================================================= -->
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+<div id="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="mark">ARQUEO <em>·</em> ESTUDIO</span>
+      <span class="grp">Panel de cliente — Grupo Meridiano</span>
+    </div>
+    <nav class="sidebar-nav" aria-label="Navegación del panel">
+      <span class="sidebar-nav-label">General</span>
+      <button class="sidebar-link is-active" data-view="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Panel general
+      </button>
+      <button class="sidebar-link" data-view="proyecto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21V12h6v9"/></svg>
+        Mi proyecto
+      </button>
+      <button class="sidebar-link" data-view="catalogo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Explorar catálogo
+      </button>
+      <span class="sidebar-nav-label">Actividad</span>
+      <button class="sidebar-link" data-view="citas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        Mis citas
+      </button>
+      <button class="sidebar-link" data-view="documentos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z"/><path d="M14 3v5h5"/></svg>
+        Documentos
+      </button>
+      <button class="sidebar-link" data-view="mensajes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Mensajes
+        <span class="badge" id="sidebar-msg-badge" style="display:none;"></span>
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-crosssell">
+        <span class="eyebrow sage">También Grupo Meridiano</span>
+        <p>Conoce las marcas hermanas que construyen y operan lo que Arqueo diseña.</p>
+        <div class="sidebar-crosssell-links">
+          <button data-crosssell="constructora">Torreón Constructora →</button>
+          <button data-crosssell="wellness">Ilé Wellness →</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-col">
+    <header class="topbar">
+      <button class="topbar-burger" id="topbar-burger" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="global-search-input" placeholder="Buscar en el catálogo… ej. “Querétaro” o “Casa”" aria-label="Buscar">
+      </div>
+      <span class="topbar-spacer"></span>
+      <div class="topbar-actions">
+        <div class="user-menu-wrap">
+          <button class="notif-btn" id="notif-btn" aria-label="Notificaciones">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+            <span class="count" id="notif-count" style="display:none;"></span>
+          </button>
+          <div class="dropdown-panel" id="notif-panel">
+            <div class="dropdown-head"><b>Notificaciones</b><button id="notif-mark-all">Marcar todas como leídas</button></div>
+            <div class="dropdown-list" id="notif-list"></div>
+          </div>
+        </div>
+        <div class="user-menu-wrap">
+          <button class="user-menu-btn" id="user-menu-btn">
+            <img src="https://i.pravatar.cc/80?u=cliente-mariana" alt="">
+            <span class="u-info"><b>Mariana Cobos</b><span>Cliente</span></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="dropdown-panel" id="user-panel">
+            <div class="user-dropdown-menu">
+              <button id="menu-perfil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg> Mi perfil</button>
+              <button id="menu-config"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1h.1a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg> Configuración</button>
+              <hr>
+              <button id="menu-logout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg> Cerrar sesión</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-area" id="content-area">
+
+      <!-- ================= VISTA: DASHBOARD ================= -->
+      <section class="view is-active" id="view-dashboard" aria-labelledby="dash-title">
+        <div class="view-head">
+          <div>
+            <h1 id="dash-title">Hola, <span id="dash-nombre">Mariana</span></h1>
+            <p class="sub">Este es el resumen de tu proyecto con Arqueo Estudio.</p>
+          </div>
+        </div>
+
+        <div class="kpi-row" id="dash-kpi-row"></div>
+
+        <div class="dash-grid">
+          <div>
+            <div class="card proyecto-hero-card">
+              <div class="proyecto-hero-img">
+                <img src="https://picsum.photos/seed/rehab-cauce/1000/440" alt="Render del proyecto de la clienta">
+                <div class="proyecto-hero-tag">
+                  <span class="eyebrow">Tu proyecto</span>
+                  <h3 id="dash-proyecto-nombre">Rehabilitación Edificio Cauce</h3>
+                </div>
+              </div>
+              <div class="proyecto-hero-body">
+                <div class="stepper" id="dash-stepper"></div>
+                <div class="stepper-next-date" id="dash-next-date"></div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+              <div class="card-head">
+                <div><h2>Últimos renders y planos</h2><span class="sub">Toca cualquier imagen para verla en grande</span></div>
+                <button class="section-link-all" data-goto-view="proyecto">Ver todo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              </div>
+              <div class="mini-gallery" id="dash-mini-gallery"></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+              <div class="card-head">
+                <div><h2>Explora nuestro catálogo</h2><span class="sub">Proyectos con un lenguaje similar al tuyo</span></div>
+                <button class="section-link-all" data-goto-view="catalogo">Ver catálogo completo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              </div>
+              <div class="catalogo-preview-grid" id="dash-catalogo-preview"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-head"><h2>Tu arquitecto asignado</h2></div>
+              <div class="arquitecto-card">
+                <img src="https://i.pravatar.cc/120?u=arq-tomas" alt="Foto del arquitecto asignado">
+                <div>
+                  <div class="a-name">Tomás Aguilar</div>
+                  <div class="a-role">Arquitecto de proyecto</div>
+                </div>
+              </div>
+              <button class="btn-msg-arq" data-goto-view="mensajes">Enviar mensaje</button>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+              <div class="card-head"><h2>Próxima cita</h2></div>
+              <div class="cita-widget" id="dash-proxima-cita"></div>
+            </div>
+
+            <div class="card" style="margin-top:24px;">
+              <div class="card-head"><h2>Grupo Meridiano</h2><span class="sub" style="margin-top:0;">También somos parte de</span></div>
+              <div class="meridiano-widget">
+                <div class="meridiano-mini-card">
+                  <div class="meridiano-mini-bg" style="background-image:url('https://picsum.photos/seed/con-hero/400/300')"></div>
+                  <div class="meridiano-mini-body">
+                    <b>Torreón</b><span>Construye tu diseño</span>
+                    <button data-crosssell="constructora">Conocer más</button>
+                  </div>
+                </div>
+                <div class="meridiano-mini-card">
+                  <div class="meridiano-mini-bg" style="background-image:url('https://picsum.photos/seed/ile-hero/400/300')"></div>
+                  <div class="meridiano-mini-body">
+                    <b>Ilé</b><span>Espacios de bienestar</span>
+                    <button data-crosssell="wellness">Conocer más</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: CATÁLOGO ================= -->
+      <section class="view" id="view-catalogo" aria-labelledby="cat-title">
+        <div class="view-head">
+          <div>
+            <h1 id="cat-title">Explora el catálogo</h1>
+            <p class="sub">Proyectos ya diseñados por Arqueo Estudio, listos para adaptar a tu predio.</p>
+          </div>
+        </div>
+
+        <div class="cat-tabs" role="tablist">
+          <button class="cat-tab is-active" data-catview="todos">Todo el catálogo</button>
+          <button class="cat-tab" data-catview="favoritos">Mis favoritos <span id="fav-count-tab"></span></button>
+          <button class="cat-tab" data-catview="comparar">Comparador <span id="compare-count-tab"></span></button>
+        </div>
+
+        <div class="cat-toolbar">
+          <div class="cat-toolbar-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="cat-search-input" placeholder="Buscar por nombre o ubicación…">
+          </div>
+          <div class="select-wrap">
+            <select class="cat-filter-select" id="cat-filter-categoria">
+              <option value="">Toda categoría</option>
+              <option value="residencial">Residencial</option>
+              <option value="comercial">Comercial</option>
+              <option value="institucional">Institucional</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <select class="cat-filter-select" id="cat-filter-ubicacion">
+              <option value="">Toda ubicación</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <select class="cat-filter-select" id="cat-filter-precio">
+              <option value="">Cualquier precio</option>
+              <option value="0-3000000">Hasta $3M MXN</option>
+              <option value="3000000-6000000">$3M – $6M MXN</option>
+              <option value="6000000-15000000">$6M – $15M MXN</option>
+              <option value="15000000-999999999">Más de $15M MXN</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <select class="cat-filter-select" id="cat-sort-select">
+              <option value="reciente">Más reciente</option>
+              <option value="precio-asc">Precio: menor a mayor</option>
+              <option value="precio-desc">Precio: mayor a menor</option>
+              <option value="m2-desc">Metraje: mayor a menor</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="cat-count-line" id="cat-count-line"></p>
+
+        <div class="grid-3" id="cat-grid"></div>
+      </section>
+
+      <!-- ================= VISTA: MI PROYECTO ================= -->
+      <section class="view" id="view-proyecto" aria-labelledby="proyecto-title">
+        <div class="view-head">
+          <div>
+            <h1 id="proyecto-title">Rehabilitación Edificio Cauce</h1>
+            <p class="sub">Uso mixto · Ciudad de México · Iniciado el 14 de febrero de 2026</p>
+          </div>
+        </div>
+
+        <div class="proyecto-tabs" role="tablist">
+          <button class="proyecto-tab is-active" data-proyecto-tab="etapas">Etapas del proceso</button>
+          <button class="proyecto-tab" data-proyecto-tab="avance">Galería de avance</button>
+          <button class="proyecto-tab" data-proyecto-tab="historial">Historial del proyecto</button>
+        </div>
+
+        <div class="proyecto-subview is-active" id="proyecto-subview-etapas">
+          <div class="etapas-list" id="etapas-list"></div>
+        </div>
+
+        <div class="proyecto-subview" id="proyecto-subview-avance">
+          <div id="version-blocks"></div>
+        </div>
+
+        <div class="proyecto-subview" id="proyecto-subview-historial">
+          <div class="timeline" id="timeline-list"></div>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: MIS CITAS ================= -->
+      <section class="view" id="view-citas" aria-labelledby="citas-title">
+        <div class="view-head">
+          <div>
+            <h1 id="citas-title">Mis citas</h1>
+            <p class="sub">Presentaciones, visitas y reuniones con tu arquitecto.</p>
+          </div>
+        </div>
+        <div id="citas-content"></div>
+      </section>
+
+      <!-- ================= VISTA: DOCUMENTOS ================= -->
+      <section class="view" id="view-documentos" aria-labelledby="doc-title">
+        <div class="view-head">
+          <div>
+            <h1 id="doc-title">Documentos</h1>
+            <p class="sub">Contratos, planos, renders y presupuesto de tu proyecto.</p>
+          </div>
+        </div>
+        <div class="doc-toolbar">
+          <div class="cat-toolbar-search" style="max-width:340px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="doc-search-input" placeholder="Buscar documento…">
+          </div>
+        </div>
+        <div class="doc-carpetas" id="doc-carpetas"></div>
+        <div class="doc-list" id="doc-list"></div>
+      </section>
+
+      <!-- ================= VISTA: MENSAJES ================= -->
+      <section class="view" id="view-mensajes" aria-labelledby="msg-title">
+        <div class="view-head">
+          <div>
+            <h1 id="msg-title">Mensajes</h1>
+            <p class="sub">Comunícate directamente con tu arquitecto y con atención al cliente.</p>
+          </div>
+        </div>
+        <div class="msg-shell">
+          <div class="msg-threads" id="msg-threads"></div>
+          <div class="msg-panel">
+            <div class="msg-panel-head" id="msg-panel-head"></div>
+            <div class="msg-body" id="msg-body"></div>
+            <div class="msg-input-row">
+              <input type="text" id="msg-input" placeholder="Escribe un mensaje…" aria-label="Escribe un mensaje">
+              <button id="msg-send" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- BARRA DE COMPARADOR -->
+<div class="compare-bar" id="compare-bar">
+  <div id="compare-bar-thumbs" style="display:flex;gap:6px;"></div>
+  <span><b id="compare-bar-count">0</b> seleccionados</span>
+  <button class="go" id="btn-compare-go" type="button">Comparar</button>
+  <button class="clear" id="btn-compare-clear" type="button" aria-label="Quitar">✕</button>
+</div>
+
+<!-- MODAL DE FICHA DE PROYECTO -->
+<div class="pmodal-backdrop" id="pmodal-backdrop" role="dialog" aria-modal="true" aria-label="Detalle de proyecto">
+  <div class="pmodal">
+    <button class="pmodal-close" id="pmodal-close" aria-label="Cerrar">✕</button>
+    <div class="pmodal-gallery" id="pmodal-gallery">
+      <img id="pmodal-gallery-img" src="" alt="">
+      <button class="pmodal-gallery-arrow prev" id="pmodal-gallery-prev" aria-label="Foto anterior">←</button>
+      <button class="pmodal-gallery-arrow next" id="pmodal-gallery-next" aria-label="Foto siguiente">→</button>
+      <div class="pmodal-gallery-nav" id="pmodal-gallery-dots"></div>
+    </div>
+    <div class="pmodal-body">
+      <div class="pmodal-tag-row">
+        <span class="pmodal-tag" id="pmodal-cat"></span>
+        <button class="pmodal-fav" id="pmodal-fav-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+          <span id="pmodal-fav-label">Guardar en favoritos</span>
+        </button>
+      </div>
+      <h3 class="pmodal-title" id="pmodal-title"></h3>
+      <p class="pmodal-loc" id="pmodal-loc"></p>
+      <div class="pmodal-price-row">
+        <span class="pmodal-price" id="pmodal-price"></span>
+        <span class="pmodal-price-label">Estimado — sujeto a visita de sitio</span>
+      </div>
+      <div class="pmodal-specs-grid" id="pmodal-specs"></div>
+      <div class="pmodal-desc" id="pmodal-desc"></div>
+      <div class="pmodal-crosssell">
+        <span>Este proyecto puede construirse con <b>Torreón Constructora</b>, nuestra constructora hermana dentro de Grupo Meridiano. <a href="#" data-crosssell="constructora">Conocer Torreón →</a></span>
+      </div>
+      <div class="pmodal-cta-row">
+        <button class="btn-primary" id="pmodal-btn-visita" type="button">Agendar visita</button>
+        <button class="btn-secondary" id="pmodal-btn-similar" type="button">Solicitar proyecto similar</button>
+      </div>
+      <div>
+        <h4 style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--steel);margin-bottom:14px;">También te puede interesar</h4>
+        <div class="pmodal-related-grid" id="pmodal-related"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMODAL: AGENDAR VISITA -->
+<div class="simple-modal-backdrop" id="visita-backdrop">
+  <div class="simple-modal" style="max-width:460px;">
+    <button class="simple-modal-close" id="visita-close" aria-label="Cerrar">✕</button>
+    <div id="visita-form-wrap">
+      <h3>Agendar visita</h3>
+      <p id="visita-sub">Elige fecha y hora para visitar un proyecto similar.</p>
+      <div class="login-form-group">
+        <label for="visita-fecha">Fecha</label>
+        <input type="date" id="visita-fecha">
+      </div>
+      <div class="login-form-group">
+        <label for="visita-hora">Hora</label>
+        <select id="visita-hora" style="width:100%;padding:13px 14px;border:1px solid var(--hairline-strong);background:var(--paper-alt-2);color:var(--paper);border-radius:2px;">
+          <option value="">Selecciona</option>
+          <option>10:00</option><option>11:00</option><option>12:00</option>
+          <option>13:00</option><option>16:00</option><option>17:00</option>
+        </select>
+      </div>
+      <button type="button" class="btn-login-submit" id="visita-submit-btn"><span class="btn-label">Confirmar visita</span></button>
+    </div>
+    <div id="visita-confirm-wrap" style="display:none;">
+      <div class="ok-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Visita agendada</h3>
+      <p id="visita-confirm-text"></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="toast-stack" id="toast-stack"></div>
+
+
+<script>
+/* =========================================================
+   DATOS: CATÁLOGO (15 proyectos)
+========================================================= */
+window.__catalogo = [
+  {id:'p01', nombre:'Casa Basalto', cat:'residencial', ubicacion:'Valle de Bravo, Edo. Méx.', m2:340, m2Terreno:820, niveles:2, recamaras:4, anio:2025, precio:4200000, seed:'casa-basalto', vistas:412, favoritos:38, desc:['Vivienda unifamiliar asentada sobre un talud pronunciado, resuelta con muros de piedra volcánica local que sostienen el terreno y a la vez definen el carácter de la fachada norte.','La doble altura de la sala principal se orienta al valle, capturando la luz de la tarde a través de un muro cortina protegido por un alero de concreto.'], opciones:['Levantamiento topográfico incluido','Maqueta digital 3D','Renders fotorrealistas']},
+  {id:'p02', nombre:'Centro Comunitario Norte', cat:'institucional', ubicacion:'Pachuca, Hidalgo', m2:1200, m2Terreno:2100, niveles:1, recamaras:null, anio:2024, precio:9800000, seed:'centro-comunitario', vistas:189, favoritos:14, desc:['Equipamiento público organizado alrededor de un patio central que funciona como colchón térmico.','La estructura de concreto aparente queda expuesta también al interior, reduciendo el mantenimiento a largo plazo.'], opciones:['Gestión de permisos incluida','Coordinación con Torreón Constructora','Estudio de impacto ambiental']},
+  {id:'p03', nombre:'Edificio Cauce', cat:'comercial', ubicacion:'Ciudad de México', m2:2800, m2Terreno:950, niveles:6, recamaras:null, anio:2025, precio:18500000, seed:'edificio-cauce', vistas:567, favoritos:61, desc:['Edificio de uso mixto de seis niveles con una fachada de celosía de aluminio perforado que regula la ganancia solar.','Los primeros dos niveles se resolvieron como locales comerciales de doble altura.'], opciones:['Estudio de asoleamiento por nivel','Fachada paramétrica ajustable','Certificación de eficiencia energética']},
+  {id:'p04', nombre:'Casa Patio', cat:'residencial', ubicacion:'Tizayuca, Hidalgo', m2:210, m2Terreno:260, niveles:1, recamaras:3, anio:2023, precio:2800000, seed:'casa-patio', vistas:298, favoritos:29, desc:['Vivienda entre medianeras organizada alrededor de un patio interior que ventila la totalidad de la planta.','El patio también capta agua de lluvia hacia una cisterna bajo el jardín.'], opciones:['Patio bioclimático adaptable','Acabados en madera de encino','Sistema de captación pluvial']},
+  {id:'p05', nombre:'Oficinas Álamo', cat:'comercial', ubicacion:'Ciudad de México', m2:1650, m2Terreno:1400, niveles:2, recamaras:null, anio:2024, precio:9400000, seed:'oficinas-alamo', vistas:334, favoritos:22, desc:['Adaptación de una nave industrial de los años setenta a oficinas corporativas, conservando la cercha metálica original.','El proyecto resuelve un reto común: llevar luz natural al centro de la planta sin perder altura libre.'], opciones:['Reúso de estructura existente','Diseño de interiores incluido','Certificación LEED opcional']},
+  {id:'p06', nombre:'Biblioteca Del Bosque', cat:'institucional', ubicacion:'Toluca, Edo. Méx.', m2:980, m2Terreno:1600, niveles:1, recamaras:null, anio:2022, precio:11200000, seed:'biblioteca-bosque', vistas:156, favoritos:11, desc:['Sala de lectura cubierta con vigas de madera laminada, diseñada para que la luz entre siempre de forma indirecta.','La circulación se organiza en espiral alrededor de un patio de lectura exterior.'], opciones:['Cubierta de madera laminada a medida','Iluminación cenital indirecta','Mobiliario de lectura a medida']},
+  {id:'p07', nombre:'Casa Terraza', cat:'residencial', ubicacion:'Cuernavaca, Morelos', m2:410, m2Terreno:900, niveles:3, recamaras:4, anio:2025, precio:5600000, seed:'casa-terraza', vistas:445, favoritos:47, desc:['Residencia escalonada sobre una pendiente pronunciada, con terrazas ajardinadas en cada nivel.','Cada recámara tiene acceso directo a su propia terraza.'], opciones:['Terrazas ajardinadas por nivel','Estudio geotécnico incluido','Alberca infinita opcional']},
+  {id:'p08', nombre:'Mercado Cubierto Sur', cat:'comercial', ubicacion:'Ciudad de México', m2:3200, m2Terreno:2900, niveles:1, recamaras:null, anio:2023, precio:21000000, seed:'mercado-cubierto', vistas:201, favoritos:9, desc:['Reordenamiento de un mercado tradicional, con una nueva cubierta ligera desmontable.','La ventilación cruzada natural elimina la necesidad de extractores mecánicos.'], opciones:['Cubierta ligera desmontable','Reordenamiento de locales','Ventilación cruzada natural']},
+  {id:'p09', nombre:'Clínica Comunitaria Este', cat:'institucional', ubicacion:'Ecatepec, Edo. Méx.', m2:760, m2Terreno:1100, niveles:1, recamaras:null, anio:2024, precio:7300000, seed:'clinica-comunitaria', vistas:134, favoritos:8, desc:['Centro de salud de primer nivel con circulaciones separadas para personal y pacientes.','El diseño contempla una ampliación futura sin interrumpir el servicio.'], opciones:['Circulaciones separadas','Cumplimiento normativo NOM-salud','Ampliable a futuro']},
+  {id:'p10', nombre:'Casa Musgo', cat:'residencial', ubicacion:'Amecameca, Edo. Méx.', m2:180, m2Terreno:400, niveles:2, recamaras:3, anio:2024, precio:2400000, seed:'casa-musgo', vistas:267, favoritos:31, desc:['Vivienda de fin de semana pensada para clima frío de montaña, con muros de tierra compactada.','La chimenea central de doble cara calienta simultáneamente la sala y el estudio.'], opciones:['Muros de tierra compactada','Chimenea de doble cara','Aislamiento térmico reforzado']},
+  {id:'p11', nombre:'Torre Corporativa Insurgentes', cat:'comercial', ubicacion:'Ciudad de México', m2:6400, m2Terreno:1200, niveles:12, recamaras:null, anio:2025, precio:42000000, seed:'torre-insurgentes', vistas:389, favoritos:19, desc:['Torre corporativa de doce niveles con un núcleo estructural excéntrico que libera plantas diáfanas.','La fachada de doble piel reduce hasta 30% la carga de aire acondicionado.'], opciones:['Plantas libres reconfigurables','Certificación de eficiencia energética','Estacionamiento automatizado']},
+  {id:'p12', nombre:'Casa Encino', cat:'residencial', ubicacion:'Querétaro, Qro.', m2:295, m2Terreno:480, niveles:2, recamaras:3, anio:2023, precio:3900000, seed:'casa-encino', vistas:302, favoritos:25, desc:['Residencia entre medianeras que resuelve la privacidad con un patio inglés.','La escalera funciona como elemento escultórico bañado de luz cenital todo el día.'], opciones:['Patio inglés adaptable','Escalera como elemento central iluminado','Domótica básica de iluminación']},
+  {id:'p13', nombre:'Preparatoria Altavista', cat:'institucional', ubicacion:'Puebla, Puebla', m2:2100, m2Terreno:3400, niveles:2, recamaras:null, anio:2022, precio:16800000, seed:'prepa-altavista', vistas:98, favoritos:5, desc:['Plantel educativo organizado en torno a una plaza central que funciona como auditorio al aire libre.','Los salones tienen parasoles horizontales calculados para bloquear el sol de mediodía.'], opciones:['Plaza central multiuso','Parasoles calculados por latitud','Cumplimiento normativo educativo']},
+  {id:'p14', nombre:'Casa Ceniza', cat:'residencial', ubicacion:'Valle de Bravo, Edo. Méx.', m2:520, m2Terreno:1400, niveles:2, recamaras:5, anio:2025, precio:7800000, seed:'casa-ceniza', vistas:378, favoritos:42, desc:['Casa de fin de semana para una familia extendida, con dos alas independientes conectadas por una sala común.','El muro de concreto teñido en ceniza absorbe el calor del día y lo libera durante la noche.'], opciones:['Dos alas independientes o separables','Cuarto de huéspedes con entrada propia','Sistema de captación pluvial']},
+  {id:'p15', nombre:'Local Raíz', cat:'comercial', ubicacion:'Ciudad de México', m2:180, m2Terreno:180, niveles:1, recamaras:null, anio:2024, precio:2100000, seed:'local-raiz', vistas:210, favoritos:16, desc:['Local comercial diseñado para un restaurante de especialidad, con cocina visible tras vidrio resistente al calor.','La fachada plegable convierte el local en un espacio semiabierto los fines de semana.'], opciones:['Fachada plegable operable','Cocina visible con vidrio resistente','Extracción de olores integrada']}
+];
+
+/* =========================================================
+   DATOS: CLIENTE Y SU PROYECTO ACTIVO
+========================================================= */
+window.__cliente = {
+  nombre:'Mariana',
+  nombreCompleto:'Mariana Cobos',
+  email:'mariana.cobos@correo.com',
+  proyecto:{
+    nombre:'Rehabilitación Edificio Cauce',
+    tipo:'Remodelación integral · Uso mixto',
+    ubicacion:'Ciudad de México',
+    imagenSeed:'rehab-cauce',
+    inicio:'14 de febrero de 2026',
+    etapaActualIndex:2, // 0-indexed: 0 análisis, 1 anteproyecto, 2 proyecto ejecutivo, 3 permisos, 4 supervisión
+    proximaEntrega:'22 de agosto de 2026',
+    porcentajeAvance:52,
+    documentosEntregados:9,
+    diasDesdeInicio:178,
+    diasProximaEntrega:12
+  },
+  arquitecto:{ nombre:'Tomás Aguilar', rol:'Arquitecto de proyecto', avatar:'arq-tomas' }
+};
+
+/* =========================================================
+   DATOS: ETAPAS DEL PROCESO
+========================================================= */
+window.__etapas = [
+  { nombre:'Análisis de sitio', desc:'Levantamiento topográfico, estudio de asoleamiento y lectura normativa del predio antes de proponer una sola línea.',
+    entregables:[{n:'Levantamiento topográfico', done:true},{n:'Estudio de asoleamiento', done:true},{n:'Reporte normativo del predio', done:true}],
+    inicioEst:'14 feb 2026', finEst:'28 feb 2026', inicioReal:'14 feb 2026', finReal:'26 feb 2026' },
+  { nombre:'Anteproyecto', desc:'Volumetría, programa arquitectónico y primeras decisiones estructurales presentadas en maqueta digital.',
+    entregables:[{n:'Volumetría preliminar', done:true},{n:'Programa arquitectónico', done:true},{n:'Maqueta digital 3D', done:true},{n:'Presentación de anteproyecto', done:true}],
+    inicioEst:'1 mar 2026', finEst:'22 mar 2026', inicioReal:'27 feb 2026', finReal:'20 mar 2026' },
+  { nombre:'Proyecto ejecutivo', desc:'Planos arquitectónicos, estructurales e instalaciones listos para permisos y para licitar la obra.',
+    entregables:[{n:'Planos arquitectónicos definitivos', done:true},{n:'Cálculo estructural', done:true},{n:'Planos de instalaciones', done:false},{n:'Memoria descriptiva', done:false}],
+    inicioEst:'23 mar 2026', finEst:'2 may 2026', inicioReal:'21 mar 2026', finReal:null },
+  { nombre:'Gestión y permisos', desc:'Trámite ante autoridad local y coordinación con perito responsable de obra.',
+    entregables:[{n:'Trámite de licencia de construcción', done:false},{n:'Dictamen de perito responsable', done:false},{n:'Registro ante autoridad local', done:false}],
+    inicioEst:'5 may 2026', finEst:'2 jun 2026', inicioReal:null, finReal:null },
+  { nombre:'Supervisión de obra', desc:'Visitas periódicas para verificar que lo construido corresponda exactamente al proyecto ejecutivo, en coordinación con Torreón Constructora.',
+    entregables:[{n:'Plan de supervisión acordado con Torreón', done:false},{n:'Primera visita de obra', done:false},{n:'Bitácora fotográfica activa', done:false}],
+    inicioEst:'8 jun 2026', finEst:'—', inicioReal:null, finReal:null }
+];
+
+/* =========================================================
+   DATOS: VERSIONES DE DISEÑO (avance con revisiones)
+========================================================= */
+window.__versiones = [
+  {
+    version:'Versión 3 — Planos ejecutivos', fecha:'2 ago 2026', estado:'revision',
+    imgs:['rehab-cauce-v3-a','rehab-cauce-v3-b','rehab-cauce-v3-c'],
+    comentarios:[
+      {autor:'cliente', nombre:'Mariana Cobos', avatar:'cliente-mariana', fecha:'4 ago 2026, 10:14', texto:'Se ve muy bien. ¿Podemos revisar el ancho del pasillo del segundo nivel? Se siente un poco justo en el plano.'},
+      {autor:'arquitecto', nombre:'Tomás Aguilar', avatar:'arq-tomas', fecha:'4 ago 2026, 16:40', texto:'Buena observación — lo ampliamos 40cm sin afectar el programa. Lo verás reflejado en la versión 4, la subimos esta semana.'}
+    ]
+  },
+  {
+    version:'Versión 2 — Anteproyecto final', fecha:'18 mar 2026', estado:'aprobada',
+    imgs:['rehab-cauce-v2-a','rehab-cauce-v2-b','rehab-cauce-v2-c'],
+    comentarios:[
+      {autor:'cliente', nombre:'Mariana Cobos', avatar:'cliente-mariana', fecha:'19 mar 2026, 09:02', texto:'Aprobado. Me gusta mucho la solución del patio de instalaciones.'},
+      {autor:'arquitecto', nombre:'Tomás Aguilar', avatar:'arq-tomas', fecha:'19 mar 2026, 11:15', texto:'Perfecto, arrancamos con el proyecto ejecutivo sobre esta base.'}
+    ]
+  },
+  {
+    version:'Versión 1 — Primer anteproyecto', fecha:'3 mar 2026', estado:'cambios',
+    imgs:['rehab-cauce-v1-a','rehab-cauce-v1-b','rehab-cauce-v1-c'],
+    comentarios:[
+      {autor:'cliente', nombre:'Mariana Cobos', avatar:'cliente-mariana', fecha:'5 mar 2026, 14:20', texto:'La propuesta de fachada no convence al resto de los socios. ¿Podemos ver una alternativa con menos vidrio y más presencia de concreto?'},
+      {autor:'arquitecto', nombre:'Tomás Aguilar', avatar:'arq-tomas', fecha:'6 mar 2026, 08:55', texto:'Entendido. Trabajamos una fachada con mayor proporción de concreto aparente, conservando la doble altura del acceso. La verán en la versión 2.'}
+    ]
+  }
+];
+
+/* =========================================================
+   DATOS: HISTORIAL DEL PROYECTO (timeline completo)
+========================================================= */
+window.__timeline = [
+  {fecha:'4 ago 2026', titulo:'Comentario enviado sobre Versión 3', desc:'Solicitaste ajustar el ancho del pasillo del segundo nivel.'},
+  {fecha:'2 ago 2026', titulo:'Nueva versión de planos ejecutivos disponible', desc:'El arquitecto subió la Versión 3 con planos definitivos para tu revisión.'},
+  {fecha:'21 mar 2026', titulo:'Inicio de etapa: Proyecto ejecutivo', desc:'Arrancó la elaboración de planos arquitectónicos, estructurales y de instalaciones.'},
+  {fecha:'19 mar 2026', titulo:'Versión 2 aprobada', desc:'Aprobaste el anteproyecto final con la solución de patio de instalaciones.'},
+  {fecha:'18 mar 2026', titulo:'Nueva versión de anteproyecto disponible', desc:'El arquitecto subió la Versión 2 con la fachada ajustada.'},
+  {fecha:'6 mar 2026', titulo:'Arquitecto respondió a solicitud de cambios', desc:'Tomás Aguilar confirmó ajuste de fachada hacia mayor proporción de concreto.'},
+  {fecha:'5 mar 2026', titulo:'Cambios solicitados en Versión 1', desc:'Solicitaste una alternativa de fachada con menos vidrio y más concreto.'},
+  {fecha:'3 mar 2026', titulo:'Primera versión de anteproyecto disponible', desc:'El arquitecto subió la Versión 1 para tu revisión.'},
+  {fecha:'27 feb 2026', titulo:'Inicio de etapa: Anteproyecto', desc:'Arrancó el desarrollo de volumetría y programa arquitectónico.'},
+  {fecha:'26 feb 2026', titulo:'Etapa de análisis de sitio completada', desc:'Se entregó el levantamiento topográfico, estudio de asoleamiento y reporte normativo.'},
+  {fecha:'14 feb 2026', titulo:'Proyecto iniciado', desc:'Firma de contrato de servicios de diseño y arranque del análisis de sitio.'}
+];
+
+/* =========================================================
+   DATOS: CITAS
+========================================================= */
+window.__citas = [
+  {id:'c1', tipo:'Presentación de avance', proyecto:'Rehabilitación Edificio Cauce', fecha:'2026-08-13', hora:'11:00', modalidad:'Videollamada', estado:'confirmada'},
+  {id:'c2', tipo:'Reunión con arquitecto', proyecto:'Rehabilitación Edificio Cauce', fecha:'2026-08-20', hora:'16:00', modalidad:'Oficina — Paseo de la Reforma, CDMX', estado:'confirmada'},
+  {id:'c3', tipo:'Visita a predio', proyecto:'Rehabilitación Edificio Cauce', fecha:'2026-07-22', hora:'09:30', modalidad:'Predio del proyecto', estado:'realizada'},
+  {id:'c4', tipo:'Presentación de anteproyecto', proyecto:'Rehabilitación Edificio Cauce', fecha:'2026-03-18', hora:'12:00', modalidad:'Oficina — Paseo de la Reforma, CDMX', estado:'realizada'}
+];
+
+/* =========================================================
+   DATOS: DOCUMENTOS
+========================================================= */
+window.__documentos = [
+  {id:'d1', nombre:'Contrato de servicios de diseño.pdf', carpeta:'Contratos', tipo:'pdf', tamano:'1.2 MB', fecha:'14 feb 2026'},
+  {id:'d2', nombre:'Levantamiento topográfico.pdf', carpeta:'Análisis de sitio', tipo:'pdf', tamano:'3.8 MB', fecha:'26 feb 2026'},
+  {id:'d3', nombre:'Estudio de asoleamiento.pdf', carpeta:'Análisis de sitio', tipo:'pdf', tamano:'2.1 MB', fecha:'25 feb 2026'},
+  {id:'d4', nombre:'Planos arquitectónicos — Versión 2.dwg', carpeta:'Planos', tipo:'dwg', tamano:'8.4 MB', fecha:'18 mar 2026'},
+  {id:'d5', nombre:'Planos arquitectónicos — Versión 3.dwg', carpeta:'Planos', tipo:'dwg', tamano:'9.1 MB', fecha:'2 ago 2026'},
+  {id:'d6', nombre:'Renders alta resolución — Versión 3.zip', carpeta:'Renders', tipo:'zip', tamano:'42.6 MB', fecha:'2 ago 2026'},
+  {id:'d7', nombre:'Memoria descriptiva preliminar.pdf', carpeta:'Proyecto ejecutivo', tipo:'pdf', tamano:'1.6 MB', fecha:'15 jul 2026'},
+  {id:'d8', nombre:'Presupuesto de obra estimado.xlsx', carpeta:'Presupuesto', tipo:'xlsx', tamano:'0.4 MB', fecha:'20 mar 2026'},
+  {id:'d9', nombre:'Cálculo estructural preliminar.pdf', carpeta:'Proyecto ejecutivo', tipo:'pdf', tamano:'2.9 MB', fecha:'28 jul 2026'}
+];
+
+/* =========================================================
+   DATOS: MENSAJES
+========================================================= */
+window.__hilos = {
+  arquitecto: {
+    nombre:'Tomás Aguilar', rol:'Arquitecto de proyecto', avatar:'arq-tomas', noLeidos:1,
+    mensajes:[
+      {yo:false, texto:'¡Hola Mariana! Ya tenemos lista la Versión 3 de los planos ejecutivos. Te la subí a la galería de avance de tu proyecto.', fecha:'2 ago, 10:05'},
+      {yo:true, texto:'Perfecto, ahora la reviso con calma.', fecha:'2 ago, 14:22'},
+      {yo:false, texto:'Sin prisa. Cualquier duda me escribes por aquí.', fecha:'2 ago, 14:25'},
+      {yo:true, texto:'Ya la revisé. Se ve muy bien en general.', fecha:'4 ago, 09:58'},
+      {yo:true, texto:'Una sola cosa: ¿podemos revisar el ancho del pasillo del segundo nivel? Se siente un poco justo en el plano.', fecha:'4 ago, 10:14'},
+      {yo:false, texto:'Buena observación — lo ampliamos 40cm sin afectar el programa. Lo verás reflejado en la Versión 4, la subimos esta semana.', fecha:'4 ago, 16:40'},
+      {yo:true, texto:'Excelente, gracias por la rapidez.', fecha:'4 ago, 16:52'},
+      {yo:false, texto:'Con gusto. Por cierto, tu próxima cita de presentación de avance es el 13 de agosto a las 11:00, por videollamada.', fecha:'5 ago, 09:10'},
+      {yo:true, texto:'Anotado, ahí estaré.', fecha:'5 ago, 09:30'},
+      {yo:false, texto:'Perfecto. Aprovecho para comentarte que ya casi cerramos el cálculo estructural completo, vamos muy bien de tiempo con el proyecto ejecutivo.', fecha:'8 ago, 11:47'},
+    ]
+  },
+  soporte: {
+    nombre:'Atención al cliente', rol:'Grupo Meridiano', avatar:'soporte-meridiano', noLeidos:0,
+    mensajes:[
+      {yo:false, texto:'Hola Mariana, bienvenida al panel de cliente de Arqueo Estudio. Cualquier duda sobre tu cuenta, documentos o facturación, este es tu canal directo.', fecha:'14 feb, 09:00'},
+      {yo:true, texto:'Gracias, ¿pueden confirmarme que ya recibieron el pago inicial?', fecha:'14 feb, 09:20'},
+      {yo:false, texto:'Confirmado, recibimos el pago inicial el 14 de febrero. Tu proyecto ya está activo con el equipo de diseño.', fecha:'14 feb, 10:05'},
+    ]
+  }
+};
+
+/* =========================================================
+   DATOS: NOTIFICACIONES (semilla inicial + generador)
+========================================================= */
+window.__notifSeed = [
+  {texto:'Nueva versión de renders disponible para tu revisión — <b>Versión 3</b>', tiempo:'Hace 2 días', leida:false, goto:'proyecto'},
+  {texto:'Tu arquitecto <b>Tomás Aguilar</b> respondió tu mensaje', tiempo:'Hace 4 días', leida:false, goto:'mensajes'},
+  {texto:'Recordatorio: tu cita de <b>presentación de avance</b> es el 13 de agosto a las 11:00', tiempo:'Hace 5 días', leida:true, goto:'citas'},
+  {texto:'Se agregaron 3 nuevos proyectos al catálogo que podrían interesarte', tiempo:'Hace 6 días', leida:true, goto:'catalogo'},
+];
+
+window.__notifPool = [
+  {texto:'Nueva versión de renders disponible para tu revisión', goto:'proyecto'},
+  {texto:'Tu arquitecto <b>Tomás Aguilar</b> respondió tu mensaje', goto:'mensajes'},
+  {texto:'Recordatorio: tu cita de presentación es mañana a las 11:00', goto:'citas'},
+  {texto:'Se agregaron nuevos proyectos al catálogo que podrían interesarte', goto:'catalogo'},
+  {texto:'El permiso de construcción avanzó de estatus en el municipio', goto:'proyecto'},
+  {texto:'Nuevo documento disponible: memoria descriptiva actualizada', goto:'documentos'},
+];
+/* =========================================================
+   ESTADO GLOBAL
+========================================================= */
+const state = {
+  favoritos:new Set(),
+  comparador:new Set(),
+  catView:'todos',
+  catFilters:{cat:'', ubic:'', precio:'', q:''},
+  catSort:'reciente',
+  currentProject:null,
+  currentGalleryIdx:0,
+  currentThread:'arquitecto',
+  notifs: JSON.parse(JSON.stringify(window.__notifSeed)),
+  etapasAbiertas:new Set([2]),
+  docCarpeta:'',
+  visitaTargetProject:null
+};
+
+function money(n){ return '$' + n.toLocaleString('es-MX') + ' MXN'; }
+function moneyShort(n){
+  if(n >= 1000000) return '$' + (n/1000000).toFixed(1).replace(/\.0$/,'') + 'M MXN';
+  return '$' + n.toLocaleString('es-MX') + ' MXN';
+}
+const CATALOGO = window.__catalogo;
+const CAT_LABELS = {residencial:'Residencial', comercial:'Comercial', institucional:'Institucional'};
+
+/* =========================================================
+   LOGIN
+========================================================= */
+(function setupLogin(){
+  const form = document.getElementById('login-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = document.getElementById('login-submit-btn');
+    btn.disabled = true;
+    btn.classList.add('is-loading');
+    btn.querySelector('.btn-label').textContent = 'Verificando…';
+    new Promise(r => setTimeout(r, 800 + Math.random()*400)).then(() => {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app-shell').classList.add('is-active');
+      initApp();
+    });
+  });
+
+  document.getElementById('btn-forgot').addEventListener('click', () => {
+    document.getElementById('forgot-form-wrap').style.display = 'block';
+    document.getElementById('forgot-confirm-wrap').style.display = 'none';
+    document.getElementById('forgot-email').value = '';
+    document.getElementById('forgot-backdrop').classList.add('is-open');
+  });
+  document.getElementById('forgot-close').addEventListener('click', () => {
+    document.getElementById('forgot-backdrop').classList.remove('is-open');
+  });
+  document.getElementById('forgot-backdrop').addEventListener('click', (e) => {
+    if(e.target.id === 'forgot-backdrop') document.getElementById('forgot-backdrop').classList.remove('is-open');
+  });
+  document.getElementById('forgot-submit-btn').addEventListener('click', () => {
+    document.getElementById('forgot-form-wrap').style.display = 'none';
+    document.getElementById('forgot-confirm-wrap').style.display = 'block';
+  });
+})();
+
+/* =========================================================
+   NAVEGACIÓN ENTRE VISTAS
+========================================================= */
+function switchView(viewName){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('is-active'));
+  document.getElementById('view-' + viewName).classList.add('is-active');
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.toggle('is-active', l.dataset.view === viewName));
+  document.getElementById('content-area').scrollTop = 0;
+  window.scrollTo(0,0);
+  closeMobileSidebar();
+  if(viewName === 'mensajes') markThreadRead(state.currentThread);
+}
+
+function closeMobileSidebar(){
+  document.getElementById('sidebar').classList.remove('is-open');
+  document.getElementById('sidebar-backdrop').classList.remove('is-open');
+}
+
+function setupNav(){
+  document.querySelectorAll('[data-view]').forEach(el => {
+    el.addEventListener('click', () => switchView(el.dataset.view));
+  });
+  document.querySelectorAll('[data-goto-view]').forEach(el => {
+    el.addEventListener('click', () => switchView(el.dataset.gotoView));
+  });
+  document.getElementById('topbar-burger').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.add('is-open');
+    document.getElementById('sidebar-backdrop').classList.add('is-open');
+  });
+  document.getElementById('sidebar-backdrop').addEventListener('click', closeMobileSidebar);
+
+  // Dropdowns
+  document.getElementById('notif-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('user-panel').classList.remove('is-open');
+    document.getElementById('notif-panel').classList.toggle('is-open');
+  });
+  document.getElementById('user-menu-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('notif-panel').classList.remove('is-open');
+    document.getElementById('user-panel').classList.toggle('is-open');
+  });
+  document.addEventListener('click', () => {
+    document.getElementById('notif-panel').classList.remove('is-open');
+    document.getElementById('user-panel').classList.remove('is-open');
+  });
+  document.getElementById('menu-logout').addEventListener('click', () => {
+    document.getElementById('app-shell').classList.remove('is-active');
+    document.getElementById('login-screen').style.display = 'grid';
+    showToast('Sesión cerrada correctamente.', false);
+  });
+  document.getElementById('menu-perfil').addEventListener('click', () => showToast('La edición de perfil no está incluida en esta maqueta de demostración.', false));
+  document.getElementById('menu-config').addEventListener('click', () => showToast('La configuración de cuenta no está incluida en esta maqueta de demostración.', false));
+
+  document.addEventListener('click', (e) => {
+    const cs = e.target.closest('[data-crosssell]');
+    if(cs){
+      e.preventDefault();
+      const dest = cs.dataset.crosssell === 'constructora' ? 'Torreón Constructora' : 'Ilé Wellness';
+      showToast(`"${dest}" vive en otro panel de Grupo Meridiano — no está conectado en esta demo.`, false);
+    }
+  });
+
+  document.getElementById('global-search-input').addEventListener('input', debounce((e) => {
+    const q = e.target.value.trim();
+    if(q.length >= 2){
+      switchView('catalogo');
+      document.getElementById('cat-search-input').value = q;
+      state.catFilters.q = q;
+      renderCatalogView();
+    }
+  }, 400));
+}
+
+function debounce(fn, ms){
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+/* =========================================================
+   RENDER: DASHBOARD
+========================================================= */
+function renderDashboard(){
+  const cliente = window.__cliente;
+  document.getElementById('dash-nombre').textContent = cliente.nombre;
+  document.getElementById('dash-proyecto-nombre').textContent = cliente.proyecto.nombre;
+
+  // KPIs
+  document.getElementById('dash-kpi-row').innerHTML = `
+    <div class="kpi"><b>${cliente.proyecto.porcentajeAvance}%</b><span>Avance del diseño</span></div>
+    <div class="kpi"><b>${cliente.proyecto.documentosEntregados}</b><span>Documentos entregados</span></div>
+    <div class="kpi"><b>${cliente.proyecto.diasDesdeInicio}</b><span>Días desde el inicio</span></div>
+    <div class="kpi"><b>${cliente.proyecto.diasProximaEntrega}</b><span>Días para próxima entrega</span></div>
+  `;
+
+  // Stepper
+  const etapas = window.__etapas;
+  const activeIdx = cliente.proyecto.etapaActualIndex;
+  document.getElementById('dash-stepper').innerHTML = etapas.map((e,i) => `
+    <div class="stepper-step ${i < activeIdx ? 'is-complete' : ''} ${i === activeIdx ? 'is-active' : ''}">
+      <div class="stepper-dot">${i < activeIdx ? '✓' : i+1}</div>
+      <div class="stepper-label">${e.nombre}</div>
+    </div>
+  `).join('');
+  document.getElementById('dash-next-date').innerHTML = `Próxima entrega estimada: <b>${cliente.proyecto.proximaEntrega}</b> — ${etapas[activeIdx].nombre}`;
+
+  // Mini galería (últimos renders)
+  const ultimaVersion = window.__versiones[0];
+  document.getElementById('dash-mini-gallery').innerHTML = ultimaVersion.imgs.concat([window.__versiones[1].imgs[0], window.__versiones[1].imgs[1], window.__versiones[0].imgs[0]]).slice(0,6).map((seed,i) => `
+    <div class="mini-gallery-item" data-mini-idx="${i % ultimaVersion.imgs.length}">
+      <img src="https://picsum.photos/seed/${seed}/300/300" alt="Render del proyecto" loading="lazy">
+    </div>
+  `).join('');
+  document.querySelectorAll('.mini-gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      switchView('proyecto');
+      setTimeout(() => {
+        document.querySelector('[data-proyecto-tab="avance"]').click();
+      }, 50);
+    });
+  });
+
+  // Próxima cita
+  const proxCita = window.__citas.filter(c => c.estado === 'confirmada').sort((a,b) => new Date(a.fecha) - new Date(b.fecha))[0];
+  const citaWidget = document.getElementById('dash-proxima-cita');
+  if(proxCita){
+    const d = new Date(proxCita.fecha + 'T00:00:00');
+    const meses = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+    citaWidget.innerHTML = `
+      <div class="cita-row">
+        <div class="cita-date-box"><b>${d.getDate()}</b><span>${meses[d.getMonth()]}</span></div>
+        <div class="cita-info"><b>${proxCita.tipo}</b><span>${proxCita.hora} · ${proxCita.modalidad}</span></div>
+      </div>
+      <button class="btn-ics" id="dash-ics-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M7 10l5 5 5-5"/><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/></svg>Agregar a mi calendario</button>
+    `;
+    document.getElementById('dash-ics-btn').addEventListener('click', () => downloadICS(proxCita));
+  } else {
+    citaWidget.innerHTML = `<p style="font-size:0.85rem;color:var(--steel);">No tienes citas próximas agendadas.</p>`;
+  }
+
+  // Catálogo preview (3-4 tarjetas)
+  const preview = CATALOGO.filter(p => p.cat === 'comercial' || p.id === 'p03' || p.id === 'p11').slice(0,4);
+  const previewFinal = preview.length >= 4 ? preview : CATALOGO.slice(0,4);
+  document.getElementById('dash-catalogo-preview').innerHTML = previewFinal.map(p => `
+    <div class="p-card" data-id="${p.id}" style="cursor:pointer;">
+      <div class="p-card-img" style="aspect-ratio:1;">
+        <img src="https://picsum.photos/seed/${p.seed}/400/400" alt="${p.nombre}" loading="lazy">
+      </div>
+      <div class="p-card-info" style="padding:12px;">
+        <div class="p-card-name" style="font-size:0.82rem;">${p.nombre}</div>
+        <div class="p-card-loc" style="font-size:0.72rem;">${p.ubicacion}</div>
+      </div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#dash-catalogo-preview .p-card').forEach(card => {
+    card.addEventListener('click', () => {
+      switchView('catalogo');
+      setTimeout(() => openProjectModal(card.dataset.id), 60);
+    });
+  });
+}
+
+function downloadICS(cita){
+  const [y,m,d] = cita.fecha.split('-').map(Number);
+  const [hh,mm] = cita.hora.split(':').map(Number);
+  const pad = n => String(n).padStart(2,'0');
+  const dtStart = `${y}${pad(m)}${pad(d)}T${pad(hh)}${pad(mm)}00`;
+  const endHour = hh + 1;
+  const dtEnd = `${y}${pad(m)}${pad(d)}T${pad(endHour)}${pad(mm)}00`;
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Arqueo Estudio//Panel de Cliente//ES','BEGIN:VEVENT',
+    `UID:${cita.id}-${Date.now()}@arqueoestudio.mx`,
+    `DTSTART:${dtStart}`,`DTEND:${dtEnd}`,
+    `SUMMARY:${cita.tipo} — ${cita.proyecto}`,
+    `DESCRIPTION:${cita.modalidad}`,
+    `LOCATION:${cita.modalidad}`,
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `cita-${cita.id}.ics`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Archivo de calendario descargado.', false);
+}
+
+/* =========================================================
+   CATÁLOGO: FILTROS Y RENDER
+========================================================= */
+function initCatalogFilters(){
+  const ciudades = [...new Set(CATALOGO.map(p => p.ubicacion))].sort();
+  const sel = document.getElementById('cat-filter-ubicacion');
+  ciudades.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+
+  document.getElementById('cat-search-input').addEventListener('input', debounce((e) => {
+    state.catFilters.q = e.target.value.trim().toLowerCase();
+    renderCatalogView();
+  }, 250));
+  document.getElementById('cat-filter-categoria').addEventListener('change', (e) => { state.catFilters.cat = e.target.value; renderCatalogView(); });
+  document.getElementById('cat-filter-ubicacion').addEventListener('change', (e) => { state.catFilters.ubic = e.target.value; renderCatalogView(); });
+  document.getElementById('cat-filter-precio').addEventListener('change', (e) => { state.catFilters.precio = e.target.value; renderCatalogView(); });
+  document.getElementById('cat-sort-select').addEventListener('change', (e) => { state.catSort = e.target.value; renderCatalogView(); });
+
+  document.querySelectorAll('.cat-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      state.catView = tab.dataset.catview;
+      renderCatalogView();
+    });
+  });
+
+  document.getElementById('btn-compare-go').addEventListener('click', () => {
+    document.querySelector('.cat-tab[data-catview="comparar"]').click();
+  });
+  document.getElementById('btn-compare-clear').addEventListener('click', () => {
+    state.comparador.clear();
+    updateCompareBar();
+    renderCatalogView();
+  });
+}
+
+function matchesFilters(p){
+  const f = state.catFilters;
+  if(f.cat && p.cat !== f.cat) return false;
+  if(f.ubic && p.ubicacion !== f.ubic) return false;
+  if(f.precio){
+    const [min,max] = f.precio.split('-').map(Number);
+    if(p.precio < min || p.precio > max) return false;
+  }
+  if(f.q && !p.nombre.toLowerCase().includes(f.q) && !p.ubicacion.toLowerCase().includes(f.q)) return false;
+  return true;
+}
+
+function getFilteredSorted(){
+  let list = CATALOGO.filter(matchesFilters);
+  switch(state.catSort){
+    case 'precio-asc': list = list.slice().sort((a,b) => a.precio - b.precio); break;
+    case 'precio-desc': list = list.slice().sort((a,b) => b.precio - a.precio); break;
+    case 'm2-desc': list = list.slice().sort((a,b) => b.m2 - a.m2); break;
+    default: list = list.slice().sort((a,b) => b.anio - a.anio);
+  }
+  return list;
+}
+
+function cardTemplate(p){
+  const isFav = state.favoritos.has(p.id);
+  const isCompared = state.comparador.has(p.id);
+  return `
+    <article class="p-card" tabindex="0" role="button" aria-label="Ver proyecto ${p.nombre}" data-id="${p.id}">
+      <div class="p-card-img">
+        <img src="https://picsum.photos/seed/${p.seed}/600/450" alt="Fachada de ${p.nombre}" loading="lazy">
+        <button class="p-fav-btn ${isFav?'is-fav':''}" data-fav-toggle="${p.id}" aria-label="Favorito" type="button">
+          <svg viewBox="0 0 24 24" fill="${isFav?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        </button>
+        <label class="p-compare-check">
+          <input type="checkbox" data-compare-toggle="${p.id}" ${isCompared?'checked':''}> Comparar
+        </label>
+      </div>
+      <div class="p-card-info">
+        <span class="p-card-cat ${p.cat==='institucional'?'cat-institucional':''}">${CAT_LABELS[p.cat]}</span>
+        <div class="p-card-name">${p.nombre}</div>
+        <div class="p-card-loc">${p.ubicacion} · ${p.m2.toLocaleString('es-MX')} m²</div>
+        <div class="p-card-foot">
+          <span class="p-card-price">${moneyShort(p.precio)}</span>
+          <span class="p-card-year">${p.anio}</span>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function attachCardEvents(container){
+  container.querySelectorAll('.p-card[data-id]').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if(e.target.closest('[data-fav-toggle]') || e.target.closest('.p-compare-check')) return;
+      openProjectModal(card.dataset.id);
+    });
+  });
+  container.querySelectorAll('[data-fav-toggle]').forEach(btn => {
+    btn.addEventListener('click', (e) => { e.stopPropagation(); toggleFavorite(btn.dataset.favToggle); });
+  });
+  container.querySelectorAll('[data-compare-toggle]').forEach(chk => {
+    chk.addEventListener('click', (e) => e.stopPropagation());
+    chk.addEventListener('change', () => toggleCompare(chk.dataset.compareToggle));
+  });
+}
+
+function renderCatalogView(){
+  const grid = document.getElementById('cat-grid');
+  const countLine = document.getElementById('cat-count-line');
+
+  if(state.catView === 'favoritos'){ renderFavView(); return; }
+  if(state.catView === 'comparar'){ renderCompareView(); return; }
+
+  const filtered = getFilteredSorted();
+  countLine.innerHTML = `Mostrando <b>${filtered.length}</b> de <b>${CATALOGO.length}</b> proyectos`;
+  if(filtered.length === 0){
+    grid.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <h3>No encontramos proyectos con esos filtros</h3><p>Prueba ampliando el rango de precio o quitando algún filtro.</p></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(cardTemplate).join('');
+  attachCardEvents(grid);
+}
+
+function toggleFavorite(id){
+  if(state.favoritos.has(id)) state.favoritos.delete(id);
+  else state.favoritos.add(id);
+  updateFavCompareTabs();
+  renderCatalogView();
+  if(state.currentProject && state.currentProject.id === id) updatePmodalFavButton();
+}
+function updateFavCompareTabs(){
+  document.getElementById('fav-count-tab').textContent = state.favoritos.size ? `(${state.favoritos.size})` : '';
+  document.getElementById('compare-count-tab').textContent = state.comparador.size ? `(${state.comparador.size})` : '';
+  updateCompareBar();
+}
+function renderFavView(){
+  const grid = document.getElementById('cat-grid');
+  document.getElementById('cat-count-line').innerHTML = `Mostrando <b>${state.favoritos.size}</b> proyectos guardados`;
+  if(state.favoritos.size === 0){
+    grid.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+      <h3>Aún no tienes favoritos guardados</h3><p>Explora el catálogo y guarda los proyectos que más te gusten.</p>
+      <button class="btn-primary" id="fav-empty-explore">Explorar catálogo</button></div>`;
+    const btn = document.getElementById('fav-empty-explore');
+    if(btn) btn.addEventListener('click', () => document.querySelector('.cat-tab[data-catview="todos"]').click());
+    return;
+  }
+  const list = CATALOGO.filter(p => state.favoritos.has(p.id));
+  grid.innerHTML = list.map(cardTemplate).join('');
+  attachCardEvents(grid);
+}
+
+function toggleCompare(id){
+  if(state.comparador.has(id)) state.comparador.delete(id);
+  else{
+    if(state.comparador.size >= 3){ showToast('Puedes comparar hasta 3 proyectos a la vez.', false); renderCatalogView(); return; }
+    state.comparador.add(id);
+  }
+  updateFavCompareTabs();
+  renderCatalogView();
+}
+function updateCompareBar(){
+  const bar = document.getElementById('compare-bar');
+  const count = state.comparador.size;
+  document.getElementById('compare-bar-count').textContent = count;
+  const list = CATALOGO.filter(p => state.comparador.has(p.id));
+  document.getElementById('compare-bar-thumbs').innerHTML = list.map(p => `<img src="https://picsum.photos/seed/${p.seed}/60/60" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid var(--ink);margin-left:-8px;" alt="">`).join('');
+  const inCatalogo = document.getElementById('view-catalogo').classList.contains('is-active');
+  if(count >= 2 && inCatalogo && state.catView !== 'comparar') bar.classList.add('is-shown');
+  else bar.classList.remove('is-shown');
+}
+
+function renderCompareView(){
+  const grid = document.getElementById('cat-grid');
+  const list = CATALOGO.filter(p => state.comparador.has(p.id));
+  document.getElementById('cat-count-line').innerHTML = `Comparando <b>${list.length}</b> proyectos`;
+  if(list.length < 2){
+    grid.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg>
+      <h3>Selecciona al menos 2 proyectos</h3><p>Marca "Comparar" en las tarjetas del catálogo para verlos aquí.</p></div>`;
+    return;
+  }
+  const rows = [
+    {l:'Categoría', get:p=>CAT_LABELS[p.cat]},
+    {l:'Ubicación', get:p=>p.ubicacion},
+    {l:'Precio', get:p=>`<b style="color:var(--line);">${moneyShort(p.precio)}</b>`},
+    {l:'Metraje construido', get:p=>p.m2.toLocaleString('es-MX')+' m²'},
+    {l:'Metraje de terreno', get:p=>p.m2Terreno.toLocaleString('es-MX')+' m²'},
+    {l:'Niveles', get:p=>p.niveles},
+    {l:'Recámaras/espacios', get:p=>p.recamaras ?? '—'},
+    {l:'Año', get:p=>p.anio}
+  ];
+  grid.innerHTML = `<div style="grid-column:1/-1;">
+    <div class="compare-table-wrap"><table class="compare-table">
+      <thead><tr><th></th>${list.map(p => `<th><div class="compare-thead-project"><img src="https://picsum.photos/seed/${p.seed}/300/225" alt="${p.nombre}"><b style="font-size:0.82rem;">${p.nombre}</b><button class="compare-remove" data-remove-compare="${p.id}">Quitar</button></div></th>`).join('')}</tr></thead>
+      <tbody>${rows.map(r => `<tr><td class="label-cell">${r.l}</td>${list.map(p => `<td>${r.get(p)}</td>`).join('')}</tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+  grid.querySelectorAll('[data-remove-compare]').forEach(btn => btn.addEventListener('click', () => toggleCompare(btn.dataset.removeCompare)));
+}
+
+/* =========================================================
+   MODAL DE FICHA DE PROYECTO
+========================================================= */
+function getGallerySeeds(p){ return [p.seed, p.seed+'-2', p.seed+'-3', p.seed+'-4', p.seed+'-5']; }
+
+function openProjectModal(id){
+  const p = CATALOGO.find(x => x.id === id);
+  if(!p) return;
+  state.currentProject = p;
+  state.currentGalleryIdx = 0;
+  renderPmodalGallery();
+  document.getElementById('pmodal-cat').textContent = CAT_LABELS[p.cat];
+  document.getElementById('pmodal-cat').className = 'pmodal-tag' + (p.cat==='institucional' ? ' institucional' : '');
+  document.getElementById('pmodal-title').textContent = p.nombre;
+  document.getElementById('pmodal-loc').textContent = p.ubicacion;
+  document.getElementById('pmodal-price').textContent = moneyShort(p.precio);
+  const specs = [
+    {v:p.m2.toLocaleString('es-MX'), l:'m² construidos'},
+    {v:p.m2Terreno.toLocaleString('es-MX'), l:'m² de terreno'},
+    {v:p.niveles, l:'Niveles'},
+    {v:p.recamaras ?? '—', l:'Recámaras'},
+    {v:p.anio, l:'Año'}
+  ];
+  document.getElementById('pmodal-specs').innerHTML = specs.map(s => `<div class="pmodal-spec"><b>${s.v}</b><span>${s.l}</span></div>`).join('');
+  document.getElementById('pmodal-desc').innerHTML = p.desc.map(par => `<p>${par}</p>`).join('');
+  updatePmodalFavButton();
+  document.getElementById('pmodal-btn-visita').onclick = () => openVisitaModal(p);
+  document.getElementById('pmodal-btn-similar').onclick = () => {
+    closeProjectModal();
+    switchView('mensajes');
+    setTimeout(() => {
+      const input = document.getElementById('msg-input');
+      input.value = `Hola, me gustaría solicitar un proyecto similar a "${p.nombre}". ¿Podemos platicarlo?`;
+      document.getElementById('msg-send').click();
+    }, 100);
+  };
+  renderPmodalRelated(p);
+  document.getElementById('pmodal-backdrop').classList.add('is-open');
+  document.addEventListener('keydown', pmodalKeyHandler);
+}
+function updatePmodalFavButton(){
+  const p = state.currentProject; if(!p) return;
+  const isFav = state.favoritos.has(p.id);
+  document.getElementById('pmodal-fav-btn').classList.toggle('is-fav', isFav);
+  document.getElementById('pmodal-fav-label').textContent = isFav ? 'Guardado' : 'Guardar en favoritos';
+}
+function closeProjectModal(){
+  document.getElementById('pmodal-backdrop').classList.remove('is-open');
+  document.removeEventListener('keydown', pmodalKeyHandler);
+}
+function pmodalKeyHandler(e){
+  if(document.getElementById('visita-backdrop').classList.contains('is-open')) return;
+  if(e.key === 'Escape') closeProjectModal();
+  if(e.key === 'ArrowRight') pmodalGalleryNext();
+  if(e.key === 'ArrowLeft') pmodalGalleryPrev();
+}
+function renderPmodalGallery(){
+  const p = state.currentProject;
+  const seeds = getGallerySeeds(p);
+  const img = document.getElementById('pmodal-gallery-img');
+  img.src = `https://picsum.photos/seed/${seeds[state.currentGalleryIdx]}/1200/600`;
+  img.alt = `Fotografía ${state.currentGalleryIdx+1} de ${p.nombre}`;
+  const dots = document.getElementById('pmodal-gallery-dots');
+  dots.innerHTML = seeds.map((s,i) => `<span class="pmodal-gallery-dot ${i===state.currentGalleryIdx?'is-active':''}" data-i="${i}"></span>`).join('');
+  dots.querySelectorAll('.pmodal-gallery-dot').forEach(dot => dot.addEventListener('click', () => { state.currentGalleryIdx = parseInt(dot.dataset.i); renderPmodalGallery(); }));
+}
+function pmodalGalleryNext(){ const s = getGallerySeeds(state.currentProject); state.currentGalleryIdx = (state.currentGalleryIdx+1)%s.length; renderPmodalGallery(); }
+function pmodalGalleryPrev(){ const s = getGallerySeeds(state.currentProject); state.currentGalleryIdx = (state.currentGalleryIdx-1+s.length)%s.length; renderPmodalGallery(); }
+function renderPmodalRelated(p){
+  let related = CATALOGO.filter(x => x.cat === p.cat && x.id !== p.id);
+  related = (related.length >= 3 ? related : CATALOGO.filter(x => x.id !== p.id)).sort(()=>Math.random()-0.5).slice(0,3);
+  document.getElementById('pmodal-related').innerHTML = related.map(r => `
+    <div class="pmodal-related-card" data-id="${r.id}">
+      <img src="https://picsum.photos/seed/${r.seed}/400/300" alt="${r.nombre}" loading="lazy">
+      <div class="r-info"><div class="r-name">${r.nombre}</div><div class="r-loc">${r.ubicacion}</div></div>
+    </div>`).join('');
+  document.querySelectorAll('#pmodal-related .pmodal-related-card').forEach(card => card.addEventListener('click', () => openProjectModal(card.dataset.id)));
+}
+
+/* =========================================================
+   SUBMODAL: AGENDAR VISITA → agrega evento real a Mis Citas
+========================================================= */
+function openVisitaModal(p){
+  state.visitaTargetProject = p;
+  document.getElementById('visita-form-wrap').style.display = 'block';
+  document.getElementById('visita-confirm-wrap').style.display = 'none';
+  document.getElementById('visita-sub').textContent = `Elige fecha y hora para visitar un proyecto similar a "${p.nombre}".`;
+  document.getElementById('visita-fecha').value = '';
+  document.getElementById('visita-hora').value = '';
+  document.getElementById('visita-backdrop').classList.add('is-open');
+}
+function closeVisitaModal(){ document.getElementById('visita-backdrop').classList.remove('is-open'); }
+(function setupVisita(){
+  document.getElementById('visita-close').addEventListener('click', closeVisitaModal);
+  document.getElementById('visita-backdrop').addEventListener('click', (e) => { if(e.target.id === 'visita-backdrop') closeVisitaModal(); });
+  document.getElementById('visita-submit-btn').addEventListener('click', () => {
+    const fecha = document.getElementById('visita-fecha').value;
+    const hora = document.getElementById('visita-hora').value;
+    if(!fecha || !hora){ showToast('Selecciona fecha y hora para continuar.', false); return; }
+    const p = state.visitaTargetProject;
+    const nuevaCita = {
+      id:'c-nueva-'+Date.now(), tipo:`Visita a proyecto similar a ${p.nombre}`,
+      proyecto:p.nombre, fecha, hora, modalidad:p.ubicacion, estado:'confirmada'
+    };
+    window.__citas.unshift(nuevaCita);
+    document.getElementById('visita-confirm-text').textContent = `Tu visita quedó agendada para el ${fecha} a las ${hora}. La verás también en "Mis citas".`;
+    document.getElementById('visita-form-wrap').style.display = 'none';
+    document.getElementById('visita-confirm-wrap').style.display = 'block';
+    renderCitasView();
+    showToast('Visita agendada y agregada a "Mis citas".', false);
+  });
+})();
+
+/* =========================================================
+   VISTA: MI PROYECTO — ETAPAS
+========================================================= */
+function setupProyectoTabs(){
+  document.querySelectorAll('.proyecto-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.proyecto-tab').forEach(t => t.classList.remove('is-active'));
+      document.querySelectorAll('.proyecto-subview').forEach(v => v.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      document.getElementById('proyecto-subview-' + tab.dataset.proyectoTab).classList.add('is-active');
+    });
+  });
+}
+
+function renderEtapas(){
+  const etapas = window.__etapas;
+  const activeIdx = window.__cliente.proyecto.etapaActualIndex;
+  const list = document.getElementById('etapas-list');
+  list.innerHTML = etapas.map((e,i) => {
+    const status = i < activeIdx ? 'completada' : (i === activeIdx ? 'en-curso' : 'pendiente');
+    const statusLabel = {completada:'Completada', 'en-curso':'En curso', pendiente:'Pendiente'}[status];
+    const isOpen = state.etapasAbiertas.has(i);
+    const doneCount = e.entregables.filter(x=>x.done).length;
+    return `
+    <div class="etapa-card ${status==='completada'?'is-complete':''} ${status==='en-curso'?'is-active':''} ${isOpen?'is-open':''}" data-etapa-idx="${i}">
+      <div class="etapa-head" data-etapa-toggle="${i}">
+        <div class="etapa-num">${status==='completada'?'✓':i+1}</div>
+        <div class="etapa-title-wrap"><b>${e.nombre}</b><span>${doneCount}/${e.entregables.length} entregables completados</span></div>
+        <span class="etapa-status-badge ${status}">${statusLabel}</span>
+        <svg class="etapa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="etapa-body">
+        <div class="etapa-body-inner">
+          <p>${e.desc}</p>
+          <div class="etapa-fechas">
+            <div><b>${e.inicioReal || e.inicioEst}</b><span>${e.inicioReal ? 'Inicio real' : 'Inicio estimado'}</span></div>
+            <div><b>${e.finReal || e.finEst}</b><span>${e.finReal ? 'Fin real' : 'Fin estimado'}</span></div>
+          </div>
+          <div class="entregables-list">
+            ${e.entregables.map((ent,j) => `
+              <div class="entregable-item ${ent.done?'is-done':''}">
+                <span class="entregable-check">${ent.done ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>' : ''}</span>
+                <span>${ent.n}</span>
+              </div>`).join('')}
+          </div>
+          ${i === 4 ? `<div class="avance-torreon-banner"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.4 14.5L16 10 4 20"/><path d="M15 6l4 4-2 2-4-4 2-2z"/></svg><span>Cuando tu proyecto llegue a esta etapa, será construido por <b>Torreón Constructora</b> — pronto podrás acceder también a su panel de seguimiento de obra. <a href="#" data-crosssell="constructora">Conocer Torreón →</a></span></div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  list.querySelectorAll('[data-etapa-toggle]').forEach(head => {
+    head.addEventListener('click', () => {
+      const idx = parseInt(head.dataset.etapaToggle);
+      if(state.etapasAbiertas.has(idx)) state.etapasAbiertas.delete(idx);
+      else state.etapasAbiertas.add(idx);
+      renderEtapas();
+    });
+  });
+}
+
+/* =========================================================
+   VISTA: MI PROYECTO — GALERÍA DE AVANCE (versiones)
+========================================================= */
+function renderVersiones(){
+  const container = document.getElementById('version-blocks');
+  container.innerHTML = window.__versiones.map((v, vi) => {
+    const badgeLabel = {aprobada:'Aprobada', cambios:'Cambios solicitados', revision:'En revisión'}[v.estado];
+    const isPending = v.estado === 'revision';
+    return `
+    <div class="version-block" data-version-idx="${vi}">
+      <div class="version-block-head">
+        <h3>${v.version} <span style="font-size:0.78rem;color:var(--steel);font-weight:400;">— ${v.fecha}</span></h3>
+        <span class="version-badge ${v.estado}">${badgeLabel}</span>
+      </div>
+      <div class="version-gallery">
+        ${v.imgs.map(seed => `<div class="version-img" data-lightbox-seed="${seed}"><img src="https://picsum.photos/seed/${seed}/500/375" alt="Imagen de ${v.version}" loading="lazy"></div>`).join('')}
+      </div>
+      <div class="version-comment-thread">
+        ${v.comentarios.map(c => `
+          <div class="version-comment">
+            <img src="https://i.pravatar.cc/80?u=${c.avatar}" alt="">
+            <div class="version-comment-body"><b>${c.nombre}</b><span class="vc-date">${c.fecha}</span><p>${c.texto}</p></div>
+          </div>`).join('')}
+      </div>
+      ${isPending ? `
+        <div class="version-actions" id="version-actions-${vi}">
+          <button class="btn-approve" data-approve-version="${vi}">Aprobar esta versión</button>
+          <button class="btn-request-changes" data-request-changes="${vi}">Solicitar cambios</button>
+        </div>
+        <div class="comment-form" id="comment-form-${vi}">
+          <textarea id="comment-text-${vi}" placeholder="Describe qué cambios te gustaría solicitar…"></textarea>
+          <button class="btn-primary" data-send-changes="${vi}" type="button">Enviar solicitud de cambios</button>
+        </div>` : ''}
+    </div>`;
+  }).join('');
+
+  container.querySelectorAll('[data-lightbox-seed]').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.dataset.lightboxSeed));
+  });
+  container.querySelectorAll('[data-approve-version]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const vi = parseInt(btn.dataset.approveVersion);
+      window.__versiones[vi].estado = 'aprobada';
+      window.__timeline.unshift({fecha:'Hoy', titulo:`${window.__versiones[vi].version} aprobada`, desc:'Aprobaste esta versión del proyecto.'});
+      renderVersiones();
+      renderTimeline();
+      showToast(`Aprobaste "${window.__versiones[vi].version}". El equipo continuará con la siguiente etapa.`, false);
+    });
+  });
+  container.querySelectorAll('[data-request-changes]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const vi = btn.dataset.requestChanges;
+      document.getElementById(`comment-form-${vi}`).classList.add('is-open');
+      document.getElementById(`version-actions-${vi}`).classList.add('is-done');
+    });
+  });
+  container.querySelectorAll('[data-send-changes]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const vi = parseInt(btn.dataset.sendChanges);
+      const text = document.getElementById(`comment-text-${vi}`).value.trim();
+      if(!text){ showToast('Escribe una breve descripción de los cambios solicitados.', false); return; }
+      window.__versiones[vi].estado = 'cambios';
+      window.__versiones[vi].comentarios.push({autor:'cliente', nombre:window.__cliente.nombreCompleto, avatar:'cliente-mariana', fecha:'Hoy', texto:text});
+      window.__timeline.unshift({fecha:'Hoy', titulo:`Cambios solicitados en ${window.__versiones[vi].version}`, desc:text});
+      renderVersiones();
+      renderTimeline();
+      showToast('Solicitud de cambios enviada a tu arquitecto.', false);
+    });
+  });
+}
+
+/* =========================================================
+   VISTA: MI PROYECTO — HISTORIAL
+========================================================= */
+function renderTimeline(){
+  document.getElementById('timeline-list').innerHTML = window.__timeline.map(t => `
+    <div class="timeline-item"><span class="t-date">${t.fecha}</span><b>${t.titulo}</b><p>${t.desc}</p></div>
+  `).join('');
+}
+
+/* =========================================================
+   LIGHTBOX simple (reutilizado para versiones)
+========================================================= */
+function openLightbox(seed){
+  const backdrop = document.createElement('div');
+  backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(11,13,16,0.94);z-index:800;display:flex;align-items:center;justify-content:center;padding:30px;cursor:zoom-out;';
+  backdrop.innerHTML = `<img src="https://picsum.photos/seed/${seed}/1400/1000" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;" alt="Vista ampliada">`;
+  backdrop.addEventListener('click', () => backdrop.remove());
+  document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ backdrop.remove(); document.removeEventListener('keydown', esc); } });
+  document.body.appendChild(backdrop);
+}
+
+/* =========================================================
+   VISTA: MIS CITAS
+========================================================= */
+const MESES_CORTOS = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+function citaCardTemplate(c){
+  const d = new Date(c.fecha + 'T00:00:00');
+  const isCancelada = c.estado === 'cancelada';
+  const isRealizada = c.estado === 'realizada';
+  return `
+    <div class="cita-card ${isCancelada?'is-cancelada':''}" data-cita-id="${c.id}">
+      <div class="cd-box"><b>${d.getDate()}</b><span>${MESES_CORTOS[d.getMonth()]}</span></div>
+      <div class="cc-info">
+        <b>${c.tipo}</b>
+        <div class="cc-meta">
+          <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>${c.hora}</span>
+          <span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>${c.modalidad}</span>
+        </div>
+      </div>
+      <span class="cita-tipo-badge">${isRealizada ? 'Realizada' : isCancelada ? 'Cancelada' : 'Confirmada'}</span>
+      <div class="cita-actions">
+        <button data-reagendar="${c.id}">Reagendar</button>
+        <button class="danger" data-cancelar="${c.id}">Cancelar</button>
+      </div>
+    </div>`;
+}
+
+function renderCitasView(){
+  const citas = window.__citas.slice().sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
+  const proximas = citas.filter(c => c.estado === 'confirmada');
+  const pasadas = citas.filter(c => c.estado !== 'confirmada');
+  const container = document.getElementById('citas-content');
+
+  let html = '';
+  html += `<p class="citas-section-title">Próximas citas</p>`;
+  if(proximas.length === 0){
+    html += `<div class="empty-state" style="padding:40px 20px;"><h3>No tienes citas próximas</h3><p>Agenda una visita desde el catálogo o pídele una cita a tu arquitecto.</p></div>`;
+  } else {
+    html += `<div class="citas-list">${proximas.map(citaCardTemplate).join('')}</div>`;
+  }
+  html += `<p class="citas-section-title">Historial</p>`;
+  if(pasadas.length === 0){
+    html += `<p style="font-size:0.85rem;color:var(--steel);">Aún no tienes citas pasadas.</p>`;
+  } else {
+    html += `<div class="citas-list">${pasadas.map(citaCardTemplate).join('')}</div>`;
+  }
+  container.innerHTML = html;
+
+  container.querySelectorAll('[data-cancelar]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cita = window.__citas.find(c => c.id === btn.dataset.cancelar);
+      if(confirm(`¿Cancelar "${cita.tipo}" del ${cita.fecha}?`)){
+        cita.estado = 'cancelada';
+        renderCitasView();
+        showToast('Cita cancelada.', false);
+      }
+    });
+  });
+  container.querySelectorAll('[data-reagendar]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cita = window.__citas.find(c => c.id === btn.dataset.reagendar);
+      const nuevaFecha = prompt('Nueva fecha (AAAA-MM-DD):', cita.fecha);
+      if(nuevaFecha && /^\d{4}-\d{2}-\d{2}$/.test(nuevaFecha)){
+        cita.fecha = nuevaFecha;
+        renderCitasView();
+        showToast('Cita reagendada correctamente.', false);
+      } else if(nuevaFecha !== null){
+        showToast('Formato de fecha no válido. Usa AAAA-MM-DD.', false);
+      }
+    });
+  });
+}
+
+/* =========================================================
+   VISTA: DOCUMENTOS
+========================================================= */
+const DOC_ICONS = {
+  pdf:'<path d="M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z"/><path d="M14 3v5h5"/><path d="M9 13h1M9 16h4"/>',
+  dwg:'<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  zip:'<path d="M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z"/><path d="M14 3v5h5"/><path d="M11 13v6M11 13h1M11 16h1"/>',
+  xlsx:'<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M8 8l8 8M16 8l-8 8"/>'
+};
+function initDocFilters(){
+  const carpetas = ['Todos', ...new Set(window.__documentos.map(d => d.carpeta))];
+  document.getElementById('doc-carpetas').innerHTML = carpetas.map(c => `<button class="doc-carpeta-pill ${c==='Todos'?'is-active':''}" data-carpeta="${c==='Todos'?'':c}">${c}</button>`).join('');
+  document.querySelectorAll('.doc-carpeta-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.doc-carpeta-pill').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      state.docCarpeta = btn.dataset.carpeta;
+      renderDocumentos();
+    });
+  });
+  document.getElementById('doc-search-input').addEventListener('input', debounce(renderDocumentos, 250));
+}
+function renderDocumentos(){
+  const q = document.getElementById('doc-search-input').value.trim().toLowerCase();
+  let list = window.__documentos;
+  if(state.docCarpeta) list = list.filter(d => d.carpeta === state.docCarpeta);
+  if(q) list = list.filter(d => d.nombre.toLowerCase().includes(q));
+  const container = document.getElementById('doc-list');
+  if(list.length === 0){
+    container.innerHTML = `<div class="empty-state"><h3>No se encontraron documentos</h3><p>Prueba con otra carpeta o término de búsqueda.</p></div>`;
+    return;
+  }
+  container.innerHTML = list.map(d => `
+    <div class="doc-row">
+      <div class="doc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${DOC_ICONS[d.tipo]||DOC_ICONS.pdf}</svg></div>
+      <div class="doc-info"><b>${d.nombre}</b><span>${d.carpeta}</span></div>
+      <span class="doc-meta">${d.tamano} · ${d.fecha}</span>
+      <div class="doc-actions">
+        <button data-doc-view="${d.id}" aria-label="Ver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button data-doc-download="${d.id}" aria-label="Descargar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M7 10l5 5 5-5"/><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/></svg></button>
+      </div>
+    </div>`).join('');
+  container.querySelectorAll('[data-doc-view]').forEach(btn => btn.addEventListener('click', () => showToast('Vista previa no disponible en esta maqueta — usa "Descargar".', false)));
+  container.querySelectorAll('[data-doc-download]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const doc = window.__documentos.find(d => d.id === btn.dataset.docDownload);
+      showToast(`Descargando "${doc.nombre}"… (simulado, no hay archivo real en esta maqueta)`, false);
+    });
+  });
+}
+
+/* =========================================================
+   VISTA: MENSAJES
+========================================================= */
+function renderThreadsList(){
+  const container = document.getElementById('msg-threads');
+  const hilos = window.__hilos;
+  container.innerHTML = Object.keys(hilos).map(key => {
+    const h = hilos[key];
+    const last = h.mensajes[h.mensajes.length-1];
+    return `
+      <div class="msg-thread-item ${state.currentThread===key?'is-active':''}" data-thread="${key}">
+        <img src="https://i.pravatar.cc/80?u=${h.avatar}" alt="">
+        <div class="msg-thread-info">
+          <span class="t-time">${last.fecha.split(',')[0]}</span>
+          <div class="t-name">${h.nombre}</div>
+          <div class="t-preview">${last.texto}</div>
+        </div>
+        ${h.noLeidos > 0 ? `<span class="msg-thread-unread">${h.noLeidos}</span>` : ''}
+      </div>`;
+  }).join('');
+  container.querySelectorAll('[data-thread]').forEach(item => {
+    item.addEventListener('click', () => {
+      state.currentThread = item.dataset.thread;
+      markThreadRead(state.currentThread);
+      renderThreadsList();
+      renderActiveThread();
+    });
+  });
+}
+
+function markThreadRead(key){
+  if(window.__hilos[key]) window.__hilos[key].noLeidos = 0;
+  updateMsgBadge();
+}
+function updateMsgBadge(){
+  const total = Object.values(window.__hilos).reduce((s,h) => s + h.noLeidos, 0);
+  const badge = document.getElementById('sidebar-msg-badge');
+  if(total > 0){ badge.style.display='inline-flex'; badge.textContent = total; }
+  else badge.style.display = 'none';
+}
+
+function renderActiveThread(){
+  const h = window.__hilos[state.currentThread];
+  document.getElementById('msg-panel-head').innerHTML = `
+    <img src="https://i.pravatar.cc/80?u=${h.avatar}" alt="">
+    <div><b>${h.nombre}</b><span>${h.rol}</span></div>`;
+  const body = document.getElementById('msg-body');
+  body.innerHTML = h.mensajes.map(m => `
+    <div class="msg-bubble ${m.yo?'me':'them'}">${m.texto}<span class="m-time">${m.fecha}</span></div>
+  `).join('');
+  body.scrollTop = body.scrollHeight;
+}
+
+function setupMessaging(){
+  renderThreadsList();
+  renderActiveThread();
+  updateMsgBadge();
+
+  const input = document.getElementById('msg-input');
+  const send = document.getElementById('msg-send');
+
+  function sendMessage(){
+    const text = input.value.trim();
+    if(!text) return;
+    const h = window.__hilos[state.currentThread];
+    const now = 'Hoy, ' + new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'});
+    h.mensajes.push({yo:true, texto:text, fecha:now});
+    input.value = '';
+    renderActiveThread();
+    renderThreadsList();
+
+    // Simular respuesta con indicador de escribiendo
+    const body = document.getElementById('msg-body');
+    setTimeout(() => {
+      const typingEl = document.createElement('div');
+      typingEl.className = 'msg-typing-row';
+      typingEl.id = 'msg-typing';
+      typingEl.innerHTML = '<span></span><span></span><span></span>';
+      body.appendChild(typingEl);
+      body.scrollTop = body.scrollHeight;
+
+      const delay = 2500 + Math.random()*2500;
+      setTimeout(() => {
+        const t = document.getElementById('msg-typing');
+        if(t) t.remove();
+        const respuestas = state.currentThread === 'arquitecto' ? [
+          'Gracias por tu mensaje, lo reviso y te confirmo en breve.',
+          'Perfecto, lo tomo en cuenta para la siguiente entrega.',
+          'Buena pregunta — te contesto con detalle en un momento.',
+          'Anotado. Cualquier otra duda, aquí sigo.',
+        ] : [
+          'Gracias por escribirnos, en breve te apoyamos con esto.',
+          'Recibido, lo canalizamos con el equipo correspondiente.',
+        ];
+        const respuesta = respuestas[Math.floor(Math.random()*respuestas.length)];
+        h.mensajes.push({yo:false, texto:respuesta, fecha:'Hoy, ' + new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'})});
+        if(document.getElementById('view-mensajes').classList.contains('is-active') && state.currentThread){
+          renderActiveThread();
+        } else {
+          h.noLeidos++;
+          updateMsgBadge();
+        }
+        renderThreadsList();
+      }, delay);
+    }, 500);
+  }
+  send.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', e => { if(e.key === 'Enter') sendMessage(); });
+}
+
+/* =========================================================
+   NOTIFICACIONES
+========================================================= */
+function renderNotifs(){
+  const list = document.getElementById('notif-list');
+  const unread = state.notifs.filter(n => !n.leida).length;
+  const countEl = document.getElementById('notif-count');
+  if(unread > 0){ countEl.style.display='flex'; countEl.textContent = unread; }
+  else countEl.style.display = 'none';
+
+  if(state.notifs.length === 0){
+    list.innerHTML = `<div class="dropdown-empty">No tienes notificaciones.</div>`;
+    return;
+  }
+  list.innerHTML = state.notifs.map((n,i) => `
+    <div class="notif-item ${!n.leida?'is-unread':''}" data-notif-idx="${i}">
+      <span class="n-dot"></span>
+      <div class="n-body"><p>${n.texto}</p><span>${n.tiempo}</span></div>
+    </div>`).join('');
+  list.querySelectorAll('[data-notif-idx]').forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = parseInt(item.dataset.notifIdx);
+      state.notifs[idx].leida = true;
+      renderNotifs();
+      switchView(state.notifs[idx].goto);
+      document.getElementById('notif-panel').classList.remove('is-open');
+    });
+  });
+}
+function setupNotifs(){
+  document.getElementById('notif-mark-all').addEventListener('click', (e) => {
+    e.stopPropagation();
+    state.notifs.forEach(n => n.leida = true);
+    renderNotifs();
+  });
+  renderNotifs();
+  scheduleRandomNotif();
+}
+function scheduleRandomNotif(){
+  const delay = 25000 + Math.random()*20000;
+  setTimeout(() => {
+    if(document.getElementById('app-shell').classList.contains('is-active')){
+      const pool = window.__notifPool;
+      const pick = pool[Math.floor(Math.random()*pool.length)];
+      state.notifs.unshift({texto:pick.texto, tiempo:'Justo ahora', leida:false, goto:pick.goto});
+      if(state.notifs.length > 12) state.notifs.pop();
+      renderNotifs();
+      showToast(pick.texto, true);
+    }
+    scheduleRandomNotif();
+  }, delay);
+}
+
+/* =========================================================
+   TOASTS
+========================================================= */
+function showToast(message, isNotif){
+  const stack = document.getElementById('toast-stack');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><p>${message}<span class="t-time">Justo ahora</span></p>`;
+  if(isNotif) toast.addEventListener('click', () => document.getElementById('notif-btn').click());
+  stack.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('is-shown'));
+  setTimeout(() => { toast.classList.remove('is-shown'); setTimeout(() => toast.remove(), 400); }, 5200);
+  while(stack.children.length > 3){ stack.removeChild(stack.firstChild); }
+}
+
+/* =========================================================
+   BOOTSTRAP DE LA APP (tras login)
+========================================================= */
+function initApp(){
+  setupNav();
+  initCatalogFilters();
+  setupProyectoTabs();
+  initDocFilters();
+
+  renderDashboard();
+  renderCatalogView();
+  renderEtapas();
+  renderVersiones();
+  renderTimeline();
+  renderCitasView();
+  renderDocumentos();
+  setupMessaging();
+  setupNotifs();
+
+  document.getElementById('pmodal-close').addEventListener('click', closeProjectModal);
+  document.getElementById('pmodal-backdrop').addEventListener('click', (e) => { if(e.target.id==='pmodal-backdrop') closeProjectModal(); });
+  document.getElementById('pmodal-gallery-next').addEventListener('click', pmodalGalleryNext);
+  document.getElementById('pmodal-gallery-prev').addEventListener('click', pmodalGalleryPrev);
+  document.getElementById('pmodal-fav-btn').addEventListener('click', () => toggleFavorite(state.currentProject.id));
+
+  showToast('Bienvenida de vuelta. Tienes 1 mensaje nuevo de tu arquitecto.', true);
+}
+
+</script>
+</body>
+</html>

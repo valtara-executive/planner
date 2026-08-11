@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arqueo Estudio — Catálogo de proyectos y diseño a la medida</title>
+<meta name="description" content="Explora el catálogo de proyectos arquitectónicos de Arqueo Estudio: aparta un diseño ya resuelto o inicia un proyecto 100% a la medida. Grupo Meridiano.">
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="preconnect" href="https://i.pravatar.cc">
+<style>
+/* =========================================================
+   RESET
+========================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea,select{font:inherit;}
+ul,ol{list-style:none;}
+:focus-visible{outline:3px solid #D97A4D;outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+}
+
+/* =========================================================
+   TOKENS — identidad Arqueo Estudio (coherente con Grupo Meridiano)
+========================================================= */
+:root{
+  --ink:#15181C;
+  --paper:#F3F0E9;
+  --paper-alt:#1C2027;
+  --paper-alt-2:#232830;
+  --line:#D97A4D;
+  --line-soft:rgba(217,122,77,0.35);
+  --line-2:#8FA79A;
+  --steel:#9AA3AC;
+  --glass:#2A2F36;
+  --hairline:rgba(243,240,233,0.1);
+  --hairline-strong:rgba(243,240,233,0.18);
+  --display:'Arq-Display', Arial, sans-serif;
+  --body:'Arq-Body', Arial, sans-serif;
+  --mono:'Arq-Mono', 'Courier New', monospace;
+}
+@font-face{font-family:'Arq-Display';src:local('Arial Narrow'),local('Arial');font-weight:600 800;}
+@font-face{font-family:'Arq-Mono';src:local('Courier New');font-weight:400 700;}
+
+body{
+  font-family:var(--body), Arial, Helvetica, sans-serif;
+  background:var(--ink);
+  color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:var(--display), Arial, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
+  font-weight:800;
+}
+.wrap{max-width:1360px;margin:0 auto;padding-left:clamp(20px,4vw,64px);padding-right:clamp(20px,4vw,64px);}
+.eyebrow{
+  font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;
+  color:var(--line);display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--line);display:inline-block;}
+.eyebrow.sage{color:var(--line-2);}
+.eyebrow.sage::before{background:var(--line-2);}
+
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:#000;padding:10px 16px;z-index:9999;}
+.skip-link:focus{left:8px;top:8px;}
+
+section{padding:96px 0;}
+.lead{font-size:1.05rem;line-height:1.7;max-width:56ch;font-weight:400;text-transform:none;color:var(--paper);}
+.lead.muted{color:var(--steel);}
+
+/* =========================================================
+   NAV
+========================================================= */
+.nav{
+  position:sticky;top:0;z-index:80;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px clamp(20px,4vw,64px);
+  background:rgba(21,24,28,0.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--hairline);
+}
+.nav-logo{font-family:var(--display);font-weight:800;letter-spacing:0.02em;font-size:1.05rem;text-transform:uppercase;color:var(--paper);display:flex;align-items:baseline;gap:6px;}
+.nav-logo em{font-style:normal;color:var(--line);}
+.nav-logo .grp{font-family:var(--body);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);font-weight:400;margin-left:10px;padding-left:10px;border-left:1px solid var(--hairline-strong);}
+.nav-links{display:flex;gap:26px;font-size:0.8rem;font-weight:600;letter-spacing:0.02em;}
+.nav-links a{padding:4px 0;border-bottom:2px solid transparent;transition:border-color .2s,color .2s;color:var(--paper);}
+.nav-links a:hover{border-color:var(--line);}
+.nav-actions{display:flex;align-items:center;gap:14px;}
+.nav-login{font-size:0.78rem;font-weight:700;letter-spacing:0.03em;color:var(--steel);display:flex;align-items:center;gap:6px;transition:color .2s;}
+.nav-login:hover{color:var(--paper);}
+.nav-login svg{width:15px;height:15px;}
+.btn-cta{
+  background:var(--line);color:var(--ink);padding:11px 20px;border-radius:2px;
+  font-size:0.78rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;
+  transition:background .2s, transform .15s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-cta:hover{background:#e8935f;transform:translateY(-1px);}
+.nav-burger{display:none;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid var(--hairline-strong);border-radius:2px;}
+.nav-burger svg{width:18px;height:18px;}
+.nav-mobile-panel{display:none;}
+
+/* =========================================================
+   HERO
+========================================================= */
+.hero{
+  position:relative;min-height:94vh;display:flex;align-items:flex-end;
+  color:#EDEAE3;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:saturate(0.9) brightness(0.5);
+  transform:scale(1.03);
+}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(21,24,28,0.98) 0%, rgba(21,24,28,0.55) 45%, rgba(21,24,28,0.25) 100%);}
+.hero-inner{position:relative;z-index:2;padding:120px 0 60px;width:100%;}
+.hero-kicker{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+.hero-kicker .line{width:36px;height:2px;background:var(--line);}
+.hero-kicker span{font-size:0.74rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;color:#EDEAE3;opacity:0.85;}
+.hero h1{
+  font-size:clamp(2.4rem, 5.6vw, 4.6rem);line-height:0.96;max-width:16ch;
+}
+.hero h1 .accent{color:var(--line);}
+.hero p{
+  margin-top:22px;max-width:48ch;font-size:1.08rem;line-height:1.65;opacity:0.92;
+  font-family:var(--body);text-transform:none;font-weight:400;
+}
+.hero-ctas{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn-outline{
+  border:1px solid rgba(237,234,227,0.5);color:#EDEAE3;padding:13px 24px;border-radius:2px;
+  font-size:0.8rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;
+  transition:background .2s, border-color .2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{background:rgba(237,234,227,0.1);border-color:#EDEAE3;}
+.btn-outline svg{width:15px;height:15px;}
+.hero-meta{
+  margin-top:48px;display:flex;gap:40px;flex-wrap:wrap;
+  padding-top:28px;border-top:1px solid rgba(237,234,227,0.18);
+}
+.hero-meta div{padding-left:16px;border-left:1px solid var(--line);}
+.hero-meta b{display:block;font-family:var(--display);font-size:1.7rem;font-weight:800;}
+.hero-meta span{font-size:0.72rem;opacity:0.75;text-transform:uppercase;letter-spacing:0.05em;}
+
+/* TRUST BAR */
+.trustbar{padding:32px 0;border-bottom:1px solid var(--hairline);}
+.trustbar .wrap{display:flex;align-items:center;gap:clamp(20px,3vw,48px);flex-wrap:wrap;justify-content:space-between;}
+.trust-label{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--steel);white-space:nowrap;}
+.trust-badges{display:flex;gap:clamp(18px,3vw,40px);flex-wrap:wrap;align-items:center;}
+.trust-badge{display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:700;letter-spacing:0.01em;color:var(--paper);}
+.trust-badge svg{width:17px;height:17px;color:var(--line);flex-shrink:0;}
+.trust-badge.sage svg{color:var(--line-2);}
+
+/* =========================================================
+   CATÁLOGO
+========================================================= */
+.cat-section{background:var(--paper-alt);}
+.cat-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:36px;}
+.cat-head h2{font-size:clamp(1.8rem,3.2vw,2.8rem);line-height:1;}
+.cat-tabs{display:flex;gap:8px;background:var(--paper-alt-2);padding:5px;border-radius:2px;border:1px solid var(--hairline);}
+.cat-tab{padding:9px 16px;font-size:0.76rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;border-radius:2px;color:var(--steel);transition:all .2s;}
+.cat-tab.is-active{background:var(--line);color:var(--ink);}
+.cat-tab:not(.is-active):hover{color:var(--paper);}
+
+.cat-toolbar{
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:28px;
+  padding:16px 18px;background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;
+}
+.cat-search{
+  flex:1 1 260px;display:flex;align-items:center;gap:10px;
+  background:var(--ink);border:1px solid var(--hairline-strong);border-radius:2px;padding:11px 14px;
+}
+.cat-search svg{width:16px;height:16px;color:var(--steel);flex-shrink:0;}
+.cat-search input{flex:1;background:none;border:none;color:var(--paper);font-size:0.9rem;}
+.cat-search input::placeholder{color:var(--steel);}
+.cat-toolbar-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border:1px solid var(--hairline-strong);
+  border-radius:2px;font-size:0.78rem;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:var(--paper);
+  background:var(--ink);transition:border-color .2s,background .2s;white-space:nowrap;
+}
+.cat-toolbar-btn:hover{border-color:var(--line);}
+.cat-toolbar-btn svg{width:15px;height:15px;}
+.cat-toolbar-btn.is-active{border-color:var(--line);color:var(--line);}
+.cat-sort{position:relative;}
+.cat-sort select{
+  appearance:none;background:var(--ink);border:1px solid var(--hairline-strong);border-radius:2px;
+  color:var(--paper);font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.02em;
+  padding:11px 34px 11px 14px;
+}
+.cat-sort::after{content:"";position:absolute;right:13px;top:50%;width:8px;height:8px;border-right:2px solid var(--steel);border-bottom:2px solid var(--steel);transform:translateY(-70%) rotate(45deg);pointer-events:none;}
+.cat-count{font-size:0.82rem;color:var(--steel);font-weight:600;}
+.cat-count b{color:var(--paper);}
+
+.cat-layout{display:grid;grid-template-columns:270px 1fr;gap:32px;align-items:start;}
+.cat-filters{
+  background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;padding:26px 22px;
+  position:sticky;top:88px;max-height:calc(100vh - 110px);overflow-y:auto;
+}
+.cat-filters-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.cat-filters-head h3{font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:800;color:var(--paper);}
+.cat-clear{font-size:0.72rem;color:var(--line);font-weight:700;text-decoration:underline;text-underline-offset:2px;}
+.filter-group{margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid var(--hairline);}
+.filter-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.filter-group h4{font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:var(--steel);margin-bottom:12px;}
+.filter-check{display:flex;align-items:center;gap:10px;font-size:0.86rem;padding:6px 0;cursor:pointer;color:var(--paper);}
+.filter-check input{width:15px;height:15px;accent-color:var(--line);flex-shrink:0;cursor:pointer;}
+.filter-check .cnt{margin-left:auto;font-size:0.74rem;color:var(--steel);font-family:var(--mono);}
+.filter-range-row{display:flex;gap:10px;align-items:center;}
+.filter-range-row input[type=number]{width:100%;background:var(--ink);border:1px solid var(--hairline-strong);border-radius:2px;color:var(--paper);font-size:0.82rem;padding:8px 10px;}
+.filter-range-row span{color:var(--steel);font-size:0.78rem;}
+.filter-slider{width:100%;accent-color:var(--line);margin-top:10px;}
+.filter-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.filter-pill{padding:7px 13px;border:1px solid var(--hairline-strong);border-radius:999px;font-size:0.76rem;font-weight:600;color:var(--paper);transition:all .15s;}
+.filter-pill.is-active{background:var(--line);border-color:var(--line);color:var(--ink);}
+.filter-pill:not(.is-active):hover{border-color:var(--line);}
+
+/* Chips activos */
+.active-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+.active-chips:empty{display:none;}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--paper-alt-2);border:1px solid var(--line-soft);color:var(--paper);padding:7px 8px 7px 13px;border-radius:999px;font-size:0.76rem;font-weight:600;}
+.chip button{width:16px;height:16px;border-radius:50%;background:rgba(217,122,77,0.2);color:var(--line);display:flex;align-items:center;justify-content:center;font-size:0.7rem;}
+.chip button:hover{background:var(--line);color:var(--ink);}
+
+/* Grid de tarjetas */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.p-card{
+  cursor:pointer;position:relative;background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;overflow:hidden;
+  opacity:0;transform:translateY(20px);transition:opacity .5s ease, transform .5s ease, border-color .2s;
+  display:flex;flex-direction:column;
+}
+.p-card.is-visible{opacity:1;transform:translateY(0);}
+.p-card:hover{border-color:var(--line-soft);}
+.p-card-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--glass),var(--steel));}
+.p-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1);}
+.p-card:hover .p-card-img img{transform:scale(1.06);}
+.p-card-badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;}
+.p-badge{font-size:0.64rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;backdrop-filter:blur(4px);}
+.p-badge.disponible{background:rgba(143,167,154,0.92);color:#15181C;}
+.p-badge.referencia{background:rgba(21,24,28,0.72);color:#F3F0E9;border:1px solid rgba(243,240,233,0.35);}
+.p-fav-btn{
+  position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;
+  background:rgba(21,24,28,0.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;
+  transition:background .2s, transform .15s;
+}
+.p-fav-btn:hover{background:rgba(21,24,28,0.8);transform:scale(1.06);}
+.p-fav-btn svg{width:17px;height:17px;color:#F3F0E9;transition:all .15s;}
+.p-fav-btn.is-fav svg{fill:var(--line);color:var(--line);}
+.p-compare-check{
+  position:absolute;bottom:12px;right:12px;display:flex;align-items:center;gap:6px;
+  background:rgba(21,24,28,0.72);backdrop-filter:blur(4px);padding:6px 10px 6px 8px;border-radius:999px;
+  font-size:0.68rem;font-weight:700;color:#F3F0E9;text-transform:uppercase;letter-spacing:0.03em;
+}
+.p-compare-check input{width:14px;height:14px;accent-color:var(--line);}
+.p-card-info{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;}
+.p-card-cat{font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--line);font-weight:800;}
+.p-card-cat.cat-institucional{color:var(--line-2);}
+.p-card-name{font-family:var(--display);text-transform:uppercase;font-weight:800;font-size:1.05rem;margin-top:6px;line-height:1.15;}
+.p-card-loc{font-size:0.82rem;color:var(--steel);margin-top:4px;font-weight:400;display:flex;align-items:center;gap:5px;}
+.p-card-loc svg{width:12px;height:12px;flex-shrink:0;}
+.p-card-specs{display:flex;gap:14px;margin-top:12px;font-size:0.76rem;color:var(--steel);flex-wrap:wrap;}
+.p-card-specs span{display:flex;align-items:center;gap:5px;}
+.p-card-specs svg{width:13px;height:13px;}
+.p-card-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;padding-top:16px;border-top:1px solid var(--hairline);}
+.p-card-price{font-family:var(--display);font-size:1.05rem;font-weight:800;color:var(--paper);}
+.p-card-price small{display:block;font-family:var(--body);font-size:0.66rem;color:var(--steel);text-transform:uppercase;font-weight:600;letter-spacing:0.03em;margin-top:2px;}
+.p-card-year{font-size:0.76rem;color:var(--steel);font-weight:600;}
+
+.cat-empty{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--steel);}
+.cat-empty svg{width:44px;height:44px;color:var(--steel);margin:0 auto 18px;opacity:0.6;}
+.cat-empty h3{font-size:1.2rem;color:var(--paper);margin-bottom:8px;text-transform:none;font-family:var(--body);font-weight:700;}
+.cat-empty p{font-size:0.9rem;max-width:40ch;margin:0 auto;}
+.cat-empty button{margin-top:18px;}
+
+.cat-loadmore-wrap{display:flex;justify-content:center;margin-top:44px;}
+.btn-loadmore{
+  padding:14px 32px;border:1px solid var(--hairline-strong);border-radius:2px;font-size:0.8rem;font-weight:700;
+  letter-spacing:0.03em;text-transform:uppercase;color:var(--paper);transition:border-color .2s,background .2s;
+}
+.btn-loadmore:hover{border-color:var(--line);background:var(--paper-alt-2);}
+.btn-loadmore:disabled{opacity:0.4;cursor:default;}
+
+/* Botón flotante comparador */
+.compare-bar{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(140%);z-index:250;
+  background:var(--ink);border:1px solid var(--line);border-radius:999px;padding:10px 10px 10px 22px;
+  display:flex;align-items:center;gap:16px;box-shadow:0 16px 40px rgba(0,0,0,0.4);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);max-width:calc(100vw - 32px);
+}
+.compare-bar.is-shown{transform:translateX(-50%) translateY(0);}
+.compare-bar span{font-size:0.82rem;font-weight:700;color:var(--paper);white-space:nowrap;}
+.compare-bar span b{color:var(--line);}
+.compare-bar-thumbs{display:flex;gap:6px;}
+.compare-bar-thumbs img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--ink);margin-left:-10px;}
+.compare-bar-thumbs img:first-child{margin-left:0;}
+.compare-bar button.btn-compare-go{background:var(--line);color:var(--ink);padding:10px 18px;border-radius:999px;font-size:0.78rem;font-weight:800;text-transform:uppercase;}
+.compare-bar button.btn-compare-clear{width:32px;height:32px;border-radius:50%;background:var(--paper-alt-2);color:var(--steel);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
+
+/* =========================================================
+   PROCESO
+========================================================= */
+.process-wrap{display:grid;grid-template-columns:0.9fr 1.4fr;gap:64px;align-items:start;margin-bottom:56px;}
+.process-list{display:flex;flex-direction:column;border-top:1px solid var(--hairline);}
+.process-step{display:grid;grid-template-columns:90px 1fr;gap:24px;padding:30px 0;border-bottom:1px solid var(--hairline);align-items:start;}
+.process-step .num{font-family:var(--display);font-size:1.3rem;color:var(--line);}
+.process-step h3{font-size:1.1rem;margin:0 0 8px;}
+.process-step p{font-size:0.92rem;line-height:1.6;font-weight:400;text-transform:none;color:var(--steel);}
+.process-cta-card{background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;padding:36px;position:sticky;top:100px;}
+.process-cta-card h3{font-size:1.3rem;margin-bottom:14px;}
+.process-cta-card p{font-size:0.92rem;line-height:1.65;color:var(--steel);margin-bottom:24px;}
+
+/* =========================================================
+   MATERIALES
+========================================================= */
+.materiales-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;}
+.material-card{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:2px;}
+.material-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.material-card:hover img{transform:scale(1.08);}
+.material-label{position:absolute;left:0;right:0;bottom:0;padding:18px 16px;background:linear-gradient(0deg,rgba(21,24,28,0.92),transparent);color:#fff;}
+.material-label b{display:block;font-size:0.88rem;font-weight:700;}
+.material-label span{font-size:0.72rem;color:var(--steel);}
+
+/* =========================================================
+   CROSS-SELL GRUPO MERIDIANO
+========================================================= */
+.crosssell{background:var(--paper-alt);}
+.crosssell-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px;}
+.crosssell-card{
+  position:relative;border-radius:2px;overflow:hidden;min-height:280px;display:flex;align-items:flex-end;
+  padding:32px;color:#fff;
+}
+.crosssell-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.55);transition:transform .5s ease;}
+.crosssell-card:hover .crosssell-card-bg{transform:scale(1.05);}
+.crosssell-card-body{position:relative;z-index:2;}
+.crosssell-tag{font-size:0.68rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;opacity:0.85;margin-bottom:8px;display:block;}
+.crosssell-card h3{font-family:var(--display);font-size:1.5rem;margin-bottom:8px;}
+.crosssell-card p{font-size:0.88rem;line-height:1.55;max-width:36ch;opacity:0.9;font-weight:400;text-transform:none;margin-bottom:14px;}
+.crosssell-link{display:inline-flex;align-items:center;gap:7px;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;border-bottom:1px solid rgba(255,255,255,0.5);padding-bottom:2px;}
+.crosssell-link svg{width:13px;height:13px;}
+
+/* =========================================================
+   TESTIMONIOS
+========================================================= */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px;}
+.testi-card{background:var(--paper-alt-2);border:1px solid var(--hairline);padding:32px 28px;position:relative;box-shadow:0 12px 32px rgba(0,0,0,0.18);}
+.testi-quote{font-size:2.4rem;color:var(--line);line-height:1;font-family:Georgia,serif;margin-bottom:8px;display:block;}
+.testi-text{font-size:0.93rem;line-height:1.7;font-weight:400;text-transform:none;color:var(--paper);margin-bottom:20px;min-height:100px;}
+.testi-person{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.testi-name{font-weight:700;font-size:0.87rem;text-transform:none;}
+.testi-role{font-size:0.75rem;color:var(--steel);text-transform:none;font-weight:400;}
+.testi-stars{color:var(--line);font-size:0.8rem;margin-top:2px;}
+
+/* =========================================================
+   WIZARD DE CONTACTO
+========================================================= */
+.wizard-shell{background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;padding:clamp(24px,4vw,52px);margin-top:44px;}
+.wizard-progress{display:flex;gap:6px;margin-bottom:40px;}
+.wizard-progress-step{flex:1;height:3px;background:var(--hairline-strong);border-radius:2px;position:relative;overflow:hidden;}
+.wizard-progress-step::after{content:"";position:absolute;inset:0;background:var(--line);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;}
+.wizard-progress-step.is-done::after,.wizard-progress-step.is-active::after{transform:scaleX(1);}
+.wizard-progress-labels{display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--steel);font-weight:700;}
+.wizard-progress-labels span.is-current{color:var(--line);}
+.wizard-step{display:none;}
+.wizard-step.is-active{display:block;animation:wizFade .35s ease;}
+@keyframes wizFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.wizard-step h3{font-size:1.5rem;margin-bottom:8px;}
+.wizard-step .sub{font-size:0.9rem;color:var(--steel);margin-bottom:32px;max-width:56ch;}
+
+.path-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.path-card{
+  text-align:left;border:1.5px solid var(--hairline-strong);border-radius:2px;padding:28px 24px;
+  transition:all .2s ease;background:var(--paper-alt);
+}
+.path-card:hover{border-color:var(--line-soft);}
+.path-card.is-selected{border-color:var(--line);background:rgba(217,122,77,0.08);}
+.path-card .p-icon{width:38px;height:38px;color:var(--line);margin-bottom:16px;}
+.path-card .p-icon svg{width:100%;height:100%;}
+.path-card h4{font-size:1.1rem;margin-bottom:8px;text-transform:none;font-family:var(--body);font-weight:700;}
+.path-card p{font-size:0.86rem;line-height:1.55;color:var(--steel);font-weight:400;}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.form-grid.single{grid-template-columns:1fr;}
+.form-group{margin-bottom:20px;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{display:block;font-size:0.75rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;color:var(--paper);}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:13px 14px;border:1px solid var(--hairline-strong);background:var(--ink);color:var(--paper);
+  font-size:0.92rem;border-radius:2px;transition:border-color .2s;
+}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--steel);}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--line);}
+.form-group .err{color:var(--line);font-size:0.78rem;margin-top:6px;display:none;}
+.form-group.has-error input,.form-group.has-error textarea,.form-group.has-error select{border-color:var(--line);}
+.form-group.has-error .err{display:block;}
+.selected-project-banner{
+  display:flex;gap:16px;align-items:center;background:var(--paper-alt);border:1px solid var(--hairline);border-radius:2px;
+  padding:16px;margin-bottom:28px;
+}
+.selected-project-banner img{width:72px;height:56px;object-fit:cover;border-radius:2px;flex-shrink:0;}
+.selected-project-banner .info b{display:block;font-size:0.95rem;}
+.selected-project-banner .info span{font-size:0.8rem;color:var(--steel);}
+.selected-project-banner button{margin-left:auto;font-size:0.76rem;color:var(--line);text-decoration:underline;flex-shrink:0;}
+
+.budget-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+.budget-pill{padding:11px 18px;border:1px solid var(--hairline-strong);border-radius:999px;font-size:0.84rem;font-weight:600;transition:all .15s;}
+.budget-pill.is-active{background:var(--line);border-color:var(--line);color:var(--ink);font-weight:700;}
+.budget-pill:not(.is-active):hover{border-color:var(--line);}
+
+.summary-list{border-top:1px solid var(--hairline);}
+.summary-row{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--hairline);font-size:0.92rem;}
+.summary-row dt{color:var(--steel);}
+.summary-row dd{font-weight:700;text-align:right;max-width:60%;}
+
+.wizard-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:16px;}
+.wizard-nav .spacer{flex:1;}
+.btn-wizard-back{font-size:0.82rem;font-weight:700;color:var(--steel);display:inline-flex;align-items:center;gap:6px;}
+.btn-wizard-back:hover{color:var(--paper);}
+.btn-wizard-next{
+  background:var(--line);color:var(--ink);padding:14px 30px;border-radius:2px;font-weight:800;font-size:0.82rem;
+  text-transform:uppercase;letter-spacing:0.03em;transition:background .2s;
+}
+.btn-wizard-next:hover{background:#e8935f;}
+.btn-wizard-next:disabled{opacity:0.4;cursor:not-allowed;}
+
+.wizard-confirm{text-align:center;padding:20px 0 10px;}
+.wizard-confirm .check-circle{width:64px;height:64px;border-radius:50%;background:rgba(143,167,154,0.15);border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;}
+.wizard-confirm .check-circle svg{width:30px;height:30px;color:var(--line-2);}
+.wizard-confirm h3{font-size:1.6rem;margin-bottom:10px;}
+.wizard-confirm .folio{font-family:var(--mono);font-size:1rem;letter-spacing:0.04em;color:var(--line);background:var(--paper-alt);border:1px dashed var(--line-soft);display:inline-block;padding:10px 20px;border-radius:2px;margin:16px 0 20px;}
+.wizard-confirm p{max-width:52ch;margin:0 auto 8px;color:var(--steel);font-size:0.92rem;line-height:1.6;}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+.footer{background:var(--paper-alt);color:var(--paper);padding:64px 0 28px;border-top:1px solid var(--hairline);}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid var(--hairline);}
+.footer h4{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;opacity:0.6;font-weight:700;}
+.footer li{font-size:0.88rem;margin-bottom:10px;opacity:0.85;}
+.footer li a:hover,.footer li button:hover{text-decoration:underline;}
+.footer-bottom{display:flex;justify-content:space-between;padding-top:24px;font-size:0.78rem;opacity:0.55;flex-wrap:wrap;gap:12px;}
+.footer-bottom button{text-decoration:underline;}
+.footer-group-line{font-size:0.86rem;color:var(--steel);max-width:44ch;line-height:1.6;margin-top:6px;}
+
+/* =========================================================
+   LEGAL MODAL
+========================================================= */
+.legal-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:600;display:none;align-items:center;justify-content:center;padding:24px;}
+.legal-modal-backdrop.is-open{display:flex;}
+.legal-modal{background:var(--paper-alt);color:var(--paper);max-width:720px;width:100%;max-height:82vh;overflow-y:auto;padding:40px;border-radius:2px;position:relative;border:1px solid var(--hairline);}
+.legal-modal h2{margin-bottom:16px;font-size:1.4rem;}
+.legal-modal h3{margin:20px 0 8px;font-size:1rem;}
+.legal-modal p,.legal-modal li{font-size:0.9rem;line-height:1.65;margin-bottom:10px;color:var(--steel);}
+.legal-modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(243,240,233,0.08);font-size:1.2rem;color:var(--paper);}
+
+/* =========================================================
+   MODAL DE FICHA DE PROYECTO
+========================================================= */
+.pmodal-backdrop{position:fixed;inset:0;background:rgba(11,13,16,0.86);z-index:550;display:none;align-items:flex-start;justify-content:center;padding:4vh 20px;overflow-y:auto;}
+.pmodal-backdrop.is-open{display:flex;}
+.pmodal{background:var(--paper-alt);color:var(--paper);max-width:1080px;width:100%;border-radius:4px;overflow:hidden;position:relative;margin-bottom:5vh;box-shadow:0 30px 90px rgba(0,0,0,0.55);border:1px solid var(--hairline);}
+.pmodal-close{position:absolute;top:18px;right:18px;z-index:8;width:40px;height:40px;border-radius:50%;background:rgba(11,13,16,0.65);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.pmodal-close:hover{background:var(--line);}
+
+.pmodal-gallery{position:relative;aspect-ratio:16/8;background:var(--glass);}
+.pmodal-gallery img{width:100%;height:100%;object-fit:cover;}
+.pmodal-gallery-nav{position:absolute;bottom:16px;right:16px;display:flex;gap:6px;}
+.pmodal-gallery-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.45);cursor:pointer;}
+.pmodal-gallery-dot.is-active{background:#fff;}
+.pmodal-gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(11,13,16,0.55);color:#fff;display:flex;align-items:center;justify-content:center;}
+.pmodal-gallery-arrow.prev{left:16px;}
+.pmodal-gallery-arrow.next{right:16px;}
+.pmodal-gallery-counter{position:absolute;bottom:16px;left:16px;background:rgba(11,13,16,0.6);color:#fff;font-size:0.72rem;font-weight:700;padding:5px 11px;border-radius:999px;}
+
+.pmodal-body{padding:36px clamp(20px,4vw,48px) 48px;}
+.pmodal-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:6px;}
+.pmodal-tag-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.pmodal-tag{font-size:0.7rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--line);}
+.pmodal-tag.institucional{color:var(--line-2);}
+.pmodal-avail{font-size:0.68rem;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;padding:5px 11px;border-radius:999px;}
+.pmodal-avail.disponible{background:rgba(143,167,154,0.18);color:var(--line-2);border:1px solid rgba(143,167,154,0.4);}
+.pmodal-avail.referencia{background:rgba(154,163,172,0.15);color:var(--steel);border:1px solid var(--hairline-strong);}
+.pmodal-fav{display:flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:700;color:var(--steel);}
+.pmodal-fav svg{width:19px;height:19px;transition:all .15s;}
+.pmodal-fav.is-fav svg{fill:var(--line);color:var(--line);}
+.pmodal-fav:hover{color:var(--paper);}
+.pmodal-title{font-size:clamp(1.5rem,3.4vw,2.3rem);margin:10px 0 6px;}
+.pmodal-loc{font-size:0.94rem;color:var(--steel);margin-bottom:22px;display:flex;align-items:center;gap:6px;}
+.pmodal-loc svg{width:14px;height:14px;}
+
+.pmodal-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:24px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid var(--hairline);}
+.pmodal-price{font-family:var(--display);font-size:1.9rem;color:var(--line);}
+.pmodal-price-label{font-size:0.8rem;color:var(--steel);text-transform:uppercase;letter-spacing:0.03em;}
+
+.pmodal-specs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:0;margin-bottom:28px;border:1px solid var(--hairline);border-radius:2px;overflow:hidden;}
+.pmodal-spec{padding:16px 14px;border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
+.pmodal-spec:nth-last-child(-n+1){border-right:none;}
+.pmodal-spec b{display:block;font-family:var(--display);font-size:1.15rem;}
+.pmodal-spec span{font-size:0.68rem;text-transform:uppercase;color:var(--steel);letter-spacing:0.03em;}
+
+.pmodal-desc{font-size:0.98rem;line-height:1.75;margin-bottom:28px;max-width:70ch;color:var(--paper);}
+.pmodal-desc p+p{margin-top:14px;}
+
+.pmodal-personalizacion{background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;padding:20px 22px;margin-bottom:28px;display:flex;gap:14px;}
+.pmodal-personalizacion svg{width:22px;height:22px;color:var(--line);flex-shrink:0;margin-top:2px;}
+.pmodal-personalizacion b{display:block;font-size:0.9rem;margin-bottom:4px;}
+.pmodal-personalizacion p{font-size:0.86rem;color:var(--steel);line-height:1.55;}
+
+.pmodal-crosssell{display:flex;align-items:center;gap:12px;font-size:0.85rem;color:var(--steel);margin-bottom:28px;padding:14px 18px;background:rgba(217,122,77,0.06);border-left:2px solid var(--line);}
+.pmodal-crosssell svg{width:20px;height:20px;color:var(--line);flex-shrink:0;}
+.pmodal-crosssell b{color:var(--paper);font-weight:700;}
+.pmodal-crosssell a{color:var(--line);font-weight:700;text-decoration:underline;text-underline-offset:2px;}
+
+.pmodal-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;}
+.pmodal-cta-primary{background:var(--line);color:var(--ink);padding:15px 26px;font-weight:800;text-transform:uppercase;font-size:0.82rem;letter-spacing:0.03em;border-radius:2px;transition:background .2s;}
+.pmodal-cta-primary:hover{background:#e8935f;}
+.pmodal-cta-secondary{border:1px solid var(--hairline-strong);padding:15px 26px;font-weight:700;text-transform:uppercase;font-size:0.82rem;letter-spacing:0.03em;border-radius:2px;color:var(--paper);transition:border-color .2s;}
+.pmodal-cta-secondary:hover{border-color:var(--line);}
+.pmodal-cta-tertiary{padding:15px 10px;font-weight:700;text-transform:uppercase;font-size:0.82rem;letter-spacing:0.03em;color:var(--steel);border-bottom:1px solid var(--hairline-strong);transition:color .2s;}
+.pmodal-cta-tertiary:hover{color:var(--paper);}
+
+.pmodal-related h4{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;color:var(--steel);}
+.pmodal-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.pmodal-related-card{cursor:pointer;border-radius:2px;overflow:hidden;background:var(--paper-alt-2);border:1px solid var(--hairline);transition:border-color .2s;}
+.pmodal-related-card:hover{border-color:var(--line-soft);}
+.pmodal-related-card img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.pmodal-related-card .r-info{padding:12px 14px;}
+.pmodal-related-card .r-name{font-size:0.85rem;font-weight:700;}
+.pmodal-related-card .r-loc{font-size:0.76rem;color:var(--steel);margin-top:2px;}
+
+@media (max-width:640px){
+  .pmodal-related-grid{grid-template-columns:1fr;}
+  .pmodal-specs-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+/* Submodales de acción (apartado / visita) dentro de la ficha */
+.action-modal-backdrop{position:fixed;inset:0;background:rgba(11,13,16,0.9);z-index:650;display:none;align-items:center;justify-content:center;padding:24px;}
+.action-modal-backdrop.is-open{display:flex;}
+.action-modal{background:var(--paper-alt);border:1px solid var(--hairline);border-radius:4px;max-width:520px;width:100%;padding:36px;position:relative;max-height:88vh;overflow-y:auto;}
+.action-modal-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(243,240,233,0.08);color:var(--paper);display:flex;align-items:center;justify-content:center;}
+.action-modal h3{font-size:1.4rem;margin-bottom:8px;}
+.action-modal .sub{font-size:0.86rem;color:var(--steel);margin-bottom:26px;line-height:1.55;}
+.action-modal .amount-box{background:var(--paper-alt-2);border:1px solid var(--hairline);border-radius:2px;padding:18px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;}
+.action-modal .amount-box b{font-family:var(--display);font-size:1.3rem;color:var(--line);}
+.action-modal .amount-box span{font-size:0.78rem;color:var(--steel);}
+.action-confirm{text-align:center;padding:10px 0;}
+.action-confirm .check-circle{width:56px;height:56px;border-radius:50%;background:rgba(143,167,154,0.15);border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.action-confirm .check-circle svg{width:26px;height:26px;color:var(--line-2);}
+.action-confirm .folio{font-family:var(--mono);font-size:0.92rem;color:var(--line);background:var(--paper-alt-2);border:1px dashed var(--line-soft);display:inline-block;padding:9px 18px;border-radius:2px;margin:14px 0;}
+.action-confirm p{font-size:0.88rem;color:var(--steel);line-height:1.6;max-width:44ch;margin:0 auto;}
+
+/* =========================================================
+   VISTA FAVORITOS / COMPARADOR
+========================================================= */
+.empty-state{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--steel);}
+.empty-state svg{width:40px;height:40px;color:var(--steel);opacity:0.6;margin:0 auto 16px;}
+.empty-state h3{font-size:1.1rem;color:var(--paper);margin-bottom:8px;font-family:var(--body);text-transform:none;font-weight:700;}
+.empty-state p{font-size:0.88rem;max-width:38ch;margin:0 auto;}
+
+.compare-table-wrap{overflow-x:auto;margin-top:8px;}
+.compare-table{width:100%;border-collapse:collapse;min-width:560px;}
+.compare-table th,.compare-table td{padding:16px 18px;border-bottom:1px solid var(--hairline);text-align:left;font-size:0.88rem;}
+.compare-table th{color:var(--steel);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;font-weight:700;white-space:nowrap;}
+.compare-table td.label-cell{color:var(--steel);font-weight:600;white-space:nowrap;}
+.compare-table td b{color:var(--line);}
+.compare-thead-project{display:flex;flex-direction:column;gap:8px;min-width:170px;}
+.compare-thead-project img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;}
+.compare-thead-project .cname{font-family:var(--display);font-size:0.86rem;text-transform:uppercase;}
+.compare-remove{font-size:0.7rem;color:var(--steel);text-decoration:underline;align-self:flex-start;}
+.compare-remove:hover{color:var(--line);}
+
+/* =========================================================
+   TOASTS
+========================================================= */
+.toast-stack{position:fixed;left:22px;bottom:22px;z-index:400;display:flex;flex-direction:column;gap:10px;max-width:320px;}
+.toast{
+  background:var(--paper-alt-2);border:1px solid var(--hairline-strong);border-left:3px solid var(--line-2);border-radius:2px;
+  padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 12px 28px rgba(0,0,0,0.35);
+  opacity:0;transform:translateY(12px);transition:opacity .35s ease,transform .35s ease;
+}
+.toast.is-shown{opacity:1;transform:translateY(0);}
+.toast svg{width:17px;height:17px;color:var(--line-2);flex-shrink:0;margin-top:1px;}
+.toast p{font-size:0.82rem;line-height:1.45;color:var(--paper);}
+.toast p b{color:var(--line-2);}
+.toast .t-time{font-size:0.7rem;color:var(--steel);margin-top:3px;}
+
+/* =========================================================
+   FORM STATUS GENERIC (wizard / booking submodales)
+========================================================= */
+.form-status{margin-top:16px;font-size:0.88rem;padding:12px 14px;border-radius:2px;display:none;}
+.form-status.show{display:block;}
+.form-status.bad{background:rgba(217,122,77,0.12);color:var(--line);}
+
+/* =========================================================
+   CHATBOT FLOTANTE
+========================================================= */
+.chat-launcher{
+  position:fixed;bottom:24px;right:24px;z-index:300;
+  width:60px;height:60px;border-radius:50%;
+  background:var(--line);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 28px rgba(18,24,28,0.35);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.chat-launcher:hover{transform:scale(1.07);box-shadow:0 10px 34px rgba(18,24,28,0.45);}
+.chat-launcher svg{width:26px;height:26px;}
+.chat-launcher .dot{position:absolute;top:6px;right:6px;width:11px;height:11px;background:#4CAF6D;border-radius:50%;border:2px solid var(--paper);}
+.chat-window{
+  position:fixed;bottom:96px;right:24px;z-index:300;
+  width:min(380px,calc(100vw - 32px));height:min(560px,calc(100vh - 140px));
+  background:var(--paper);border-radius:10px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.35);
+  display:flex;flex-direction:column;overflow:hidden;
+  opacity:0;transform:translateY(16px) scale(0.97);pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.chat-window.is-open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.chat-header{background:var(--ink);color:var(--paper);padding:16px 18px;display:flex;align-items:center;gap:12px;}
+.chat-header img{width:38px;height:38px;border-radius:50%;object-fit:cover;}
+.chat-header .h-info b{display:block;font-size:0.9rem;text-transform:none;}
+.chat-header .h-info span{font-size:0.72rem;opacity:0.65;display:flex;align-items:center;gap:5px;}
+.chat-header .h-info span::before{content:"";width:7px;height:7px;background:#4CAF6D;border-radius:50%;display:inline-block;}
+.chat-header .close-x{margin-left:auto;opacity:0.7;font-size:1.2rem;}
+.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--paper);}
+.chat-msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:0.86rem;line-height:1.5;text-transform:none;font-weight:400;}
+.chat-msg.bot{background:#E8E4DA;border:1px solid rgba(18,24,28,0.1);align-self:flex-start;border-bottom-left-radius:4px;color:#15181C;}
+.chat-msg.user{background:var(--line);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.chat-typing{align-self:flex-start;background:#E8E4DA;border:1px solid rgba(18,24,28,0.1);padding:12px 16px;border-radius:14px;border-bottom-left-radius:4px;display:flex;gap:4px;}
+.chat-typing span{width:6px;height:6px;background:var(--steel);border-radius:50%;animation:chatTypingBounce 1.2s infinite ease-in-out;}
+.chat-typing span:nth-child(2){animation-delay:.15s;}
+.chat-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes chatTypingBounce{0%,60%,100%{transform:translateY(0);opacity:0.5;}30%{transform:translateY(-4px);opacity:1;}}
+.chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;transition:opacity .25s ease;}
+.chat-quick.is-hidden{opacity:0;}
+.chat-msg-img{margin-top:8px;border-radius:10px;overflow:hidden;}
+.chat-msg-img img{width:100%;display:block;border-radius:10px;}
+.chat-msg-img span{display:block;font-size:0.72rem;opacity:0.65;margin-top:5px;font-style:italic;}
+.chat-quick button{font-size:0.76rem;padding:7px 12px;border:1px solid rgba(18,24,28,0.2);border-radius:999px;background:#E8E4DA;color:#15181C;transition:background .15s;}
+.chat-quick button:hover{background:var(--paper);}
+.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(18,24,28,0.1);background:#E8E4DA;}
+.chat-input-row input{flex:1;padding:10px 14px;border:1px solid rgba(18,24,28,0.2);border-radius:999px;font-size:0.86rem;color:#15181C;background:#fff;}
+.chat-input-row button{width:38px;height:38px;border-radius:50%;background:var(--line);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.chat-input-row button svg{width:16px;height:16px;}
+
+@media (max-width:560px){
+  .chat-window{right:16px;bottom:88px;}
+  .chat-launcher{right:16px;bottom:16px;}
+  .toast-stack{left:16px;bottom:88px;}
+}
+
+@media (max-width:1080px){
+  .cat-layout{grid-template-columns:1fr;}
+  .cat-filters{position:static;max-height:none;display:none;}
+  .cat-filters.is-open{display:block;}
+  .cat-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:900px){
+  .nav-burger{display:flex;}
+  .nav-links{
+    display:none;position:fixed;top:65px;left:0;right:0;background:var(--ink);border-bottom:1px solid var(--hairline);
+    flex-direction:column;gap:0;padding:8px clamp(20px,4vw,64px) 16px;z-index:79;
+  }
+  .nav-links.is-open{display:flex;}
+  .nav-links a{padding:14px 0;border-bottom:1px solid var(--hairline);width:100%;}
+  .process-wrap{grid-template-columns:1fr;gap:32px;}
+  .process-cta-card{position:static;}
+  .materiales-grid{grid-template-columns:1fr 1fr;}
+  .crosssell-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .path-cards{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+}
+@media (max-width:760px){
+  .nav-links{display:none;}
+  .nav-links.is-open{display:flex;}
+  .nav-login span{display:none;}
+  .cat-grid{grid-template-columns:1fr;}
+  .cat-toolbar{flex-direction:column;align-items:stretch;}
+  .hero-meta{gap:24px;}
+  .materiales-grid{grid-template-columns:1fr 1fr;}
+  .process-step{grid-template-columns:1fr;gap:6px;}
+  .footer-top{grid-template-columns:1fr;}
+  .wizard-shell{padding:22px 16px;}
+  .compare-bar{flex-wrap:wrap;justify-content:center;padding:14px 18px;border-radius:16px;}
+}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+<nav class="nav" aria-label="Navegación principal">
+  <span class="nav-logo">ARQUEO <em>·</em> ESTUDIO <span class="grp">Grupo Meridiano</span></span>
+  <div class="nav-links" id="nav-links">
+    <a href="#catalogo">Catálogo</a>
+    <a href="#proceso">Proceso de diseño</a>
+    <a href="#materiales">Materiales</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-login" id="btn-login" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Iniciar sesión
+    </button>
+    <a href="#catalogo" class="btn-cta">Explorar catálogo</a>
+    <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="hero-bg" style="background-image:url('https://picsum.photos/seed/arqueo-catalogo-hero/1800/1300')"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-kicker"><span class="line"></span><span>Showroom de arquitectura — CDMX, Hidalgo, Querétaro, Puebla y Edo. Méx.</span></div>
+    <h1>Un catálogo de<br>arquitectura,<br>no de <span class="accent">anuncios.</span></h1>
+    <p>Explora proyectos residenciales, comerciales e institucionales ya resueltos por Arqueo Estudio. Aparta un diseño y adáptalo a tu predio, o construimos uno completamente a la medida contigo desde cero.</p>
+    <div class="hero-ctas">
+      <a href="#catalogo" class="btn-cta" style="padding:14px 26px;font-size:0.82rem;">Explorar el catálogo</a>
+      <a href="#contacto" class="btn-outline">
+        Iniciar un proyecto a la medida
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="hero-meta">
+      <div><b id="stat-total-proyectos">—</b><span>Proyectos en catálogo</span></div>
+      <div><b>15</b><span>Años de estudio</span></div>
+      <div><b>5</b><span>Estados con obra activa</span></div>
+      <div><b>4.9/5</b><span>Calificación de clientes</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="trustbar">
+  <div class="wrap">
+    <span class="trust-label">Por qué explorar el catálogo antes que empezar de cero</span>
+    <div class="trust-badges">
+      <span class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Diseño ya resuelto y probado en obra</span>
+      <span class="trust-badge sage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Adaptación más rápida que un proyecto nuevo</span>
+      <span class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>Precio de referencia desde el primer clic</span>
+      <span class="trust-badge sage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.4 14.5L16 10 4 20"/><path d="M15 6l4 4-2 2-4-4 2-2z"/></svg>Ejecutable con Torreón Constructora</span>
+    </div>
+  </div>
+</div>
+
+<section class="cat-section" id="catalogo">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <span class="eyebrow">Catálogo de proyectos</span>
+        <h2>Explora, aparta o inspírate</h2>
+      </div>
+      <div class="cat-tabs" role="tablist" aria-label="Vista del catálogo">
+        <button class="cat-tab is-active" data-view="todos" role="tab" aria-selected="true">Todo el catálogo</button>
+        <button class="cat-tab" data-view="favoritos" role="tab" aria-selected="false">Mis favoritos <span id="fav-count-tab"></span></button>
+        <button class="cat-tab" data-view="comparar" role="tab" aria-selected="false">Comparador <span id="compare-count-tab"></span></button>
+      </div>
+    </div>
+
+    <div class="cat-toolbar">
+      <div class="cat-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="cat-search-input" placeholder="Busca por nombre o ubicación… ej. “Basalto” o “Querétaro”" aria-label="Buscar proyectos">
+      </div>
+      <button class="cat-toolbar-btn" id="filters-toggle-btn" aria-expanded="false" aria-controls="cat-filters-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        Filtros <span id="filters-active-count"></span>
+      </button>
+      <div class="cat-sort">
+        <select id="cat-sort-select" aria-label="Ordenar por">
+          <option value="reciente">Más reciente</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="m2-desc">Metraje: mayor a menor</option>
+          <option value="m2-asc">Metraje: menor a mayor</option>
+        </select>
+      </div>
+      <span class="cat-count" id="cat-count">Mostrando <b>0</b> de <b>0</b> proyectos</span>
+    </div>
+
+    <div class="active-chips" id="active-chips"></div>
+
+    <div class="cat-layout">
+      <aside class="cat-filters" id="cat-filters-panel" aria-label="Filtros de catálogo">
+        <div class="cat-filters-head">
+          <h3>Filtrar catálogo</h3>
+          <button class="cat-clear" id="filters-clear-btn" type="button">Limpiar todo</button>
+        </div>
+
+        <div class="filter-group">
+          <h4>Categoría</h4>
+          <div id="filter-categoria"></div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Disponibilidad</h4>
+          <div id="filter-disponibilidad"></div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Ubicación</h4>
+          <div id="filter-ubicacion"></div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Rango de precio (MXN)</h4>
+          <div class="filter-range-row">
+            <input type="number" id="filter-precio-min" placeholder="Mín." min="0" step="100000">
+            <span>—</span>
+            <input type="number" id="filter-precio-max" placeholder="Máx." min="0" step="100000">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Metraje construido (m²)</h4>
+          <div class="filter-range-row">
+            <input type="number" id="filter-m2-min" placeholder="Mín." min="0" step="10">
+            <span>—</span>
+            <input type="number" id="filter-m2-max" placeholder="Máx." min="0" step="10">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Recámaras / espacios</h4>
+          <div class="filter-pills" id="filter-recamaras"></div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Niveles</h4>
+          <div class="filter-pills" id="filter-niveles"></div>
+        </div>
+      </aside>
+
+      <div>
+        <div class="cat-grid" id="cat-grid"></div>
+        <div class="cat-loadmore-wrap" id="cat-loadmore-wrap">
+          <button class="btn-loadmore" id="btn-loadmore">Cargar más proyectos</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PROCESO DE DISEÑO A LA MEDIDA
+========================================================= -->
+<section id="proceso">
+  <div class="wrap">
+    <span class="eyebrow">Si prefieres empezar de cero</span>
+    <h2 style="font-size:clamp(1.8rem,3.2vw,2.8rem);margin-bottom:44px;">Un proceso de cinco etapas para tu diseño a la medida</h2>
+    <div class="process-wrap">
+      <div class="process-list">
+        <div class="process-step">
+          <span class="num">01</span>
+          <div><h3>Análisis de sitio</h3><p>Levantamiento topográfico, estudio de asoleamiento y lectura normativa del predio antes de proponer una sola línea.</p></div>
+        </div>
+        <div class="process-step">
+          <span class="num">02</span>
+          <div><h3>Anteproyecto</h3><p>Volumetría, programa arquitectónico y primeras decisiones estructurales presentadas en maqueta digital.</p></div>
+        </div>
+        <div class="process-step">
+          <span class="num">03</span>
+          <div><h3>Proyecto ejecutivo</h3><p>Planos arquitectónicos, estructurales e instalaciones listos para permisos y para licitar la obra.</p></div>
+        </div>
+        <div class="process-step">
+          <span class="num">04</span>
+          <div><h3>Gestión y permisos</h3><p>Trámite ante autoridad local y coordinación con perito responsable de obra.</p></div>
+        </div>
+        <div class="process-step">
+          <span class="num">05</span>
+          <div><h3>Supervisión de obra</h3><p>Visitas periódicas para verificar que lo construido corresponda exactamente al proyecto ejecutivo, en coordinación con Torreón Constructora.</p></div>
+        </div>
+      </div>
+      <div class="process-cta-card">
+        <span class="eyebrow" style="margin-bottom:10px;">¿Catálogo o a la medida?</span>
+        <h3>¿No encuentras nada parecido en el catálogo?</h3>
+        <p>Si tu predio, presupuesto o programa no se parece a ningún proyecto del catálogo, podemos diseñar algo completamente nuevo contigo, desde el análisis de sitio. La consulta inicial no tiene costo.</p>
+        <a href="#contacto" class="btn-cta" style="width:100%;justify-content:center;">Empezar un proyecto a la medida</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     MATERIALES Y FILOSOFÍA
+========================================================= -->
+<section id="materiales" style="background:var(--paper-alt);">
+  <div class="wrap">
+    <span class="eyebrow sage">Lenguaje material</span>
+    <h2 style="font-size:clamp(1.8rem,3.2vw,2.8rem);">Concreto, madera, piedra, luz</h2>
+    <p class="lead muted" style="margin-top:16px;">Cada proyecto del catálogo se especifica con materiales nobles y de bajo mantenimiento en clima mexicano. La paleta exacta se ajusta en obra según el predio, nunca se elige de un catálogo genérico de acabados.</p>
+    <div class="materiales-grid">
+      <div class="material-card">
+        <img src="https://picsum.photos/seed/arq-concreto/500/640" alt="Textura de concreto aparente en fachada">
+        <div class="material-label"><b>Concreto aparente</b><span>Estructura y fachada, sin recubrimientos</span></div>
+      </div>
+      <div class="material-card">
+        <img src="https://picsum.photos/seed/arq-madera-cat/500/640" alt="Madera de encino en interior residencial">
+        <div class="material-label"><b>Madera de encino</b><span>Carpintería, pisos y acabados interiores</span></div>
+      </div>
+      <div class="material-card">
+        <img src="https://picsum.photos/seed/arq-piedra-cat/500/640" alt="Piedra volcánica local en muro exterior">
+        <div class="material-label"><b>Piedra local</b><span>Muros de contención y elementos de identidad</span></div>
+      </div>
+      <div class="material-card">
+        <img src="https://picsum.photos/seed/arq-luz-cat/500/640" alt="Luz cenital entrando en un espacio arquitectónico">
+        <div class="material-label"><b>Luz cenital</b><span>Calculada por hora y por estación, no decorativa</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CROSS-SELL GRUPO MERIDIANO
+========================================================= -->
+<section class="crosssell">
+  <div class="wrap">
+    <span class="eyebrow">Un mismo grupo, tres marcas</span>
+    <h2 style="font-size:clamp(1.6rem,2.8vw,2.3rem);">También somos Grupo Meridiano</h2>
+    <p class="lead muted" style="margin-top:14px;">Arqueo Estudio diseña. Nuestras marcas hermanas ejecutan la obra y operan espacios profesionales — todo bajo el mismo grupo, con un solo punto de contacto si así lo prefieres.</p>
+    <div class="crosssell-grid">
+      <a href="/constructora" class="crosssell-card" data-goto-hermana="constructora">
+        <div class="crosssell-card-bg" style="background-image:url('https://picsum.photos/seed/con-hero/900/600')"></div>
+        <div class="crosssell-card-body">
+          <span class="crosssell-tag">02 — Ejecución</span>
+          <h3>Torreón Constructora</h3>
+          <p>Construye cualquier diseño del catálogo o tu proyecto a la medida, con cronograma público y verificable.</p>
+          <span class="crosssell-link">Conocer Torreón <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a href="/wellness" class="crosssell-card" data-goto-hermana="wellness">
+        <div class="crosssell-card-bg" style="background-image:url('https://picsum.photos/seed/ile-hero/900/600')"></div>
+        <div class="crosssell-card-body">
+          <span class="crosssell-tag">03 — Bienestar</span>
+          <h3>Ilé Wellness &amp; Studios</h3>
+          <p>Cabinas terapéuticas y oficinas en renta para profesionales de la salud, en espacios ya construidos por el grupo.</p>
+          <span class="crosssell-link">Conocer Ilé <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     TESTIMONIOS
+========================================================= -->
+<section id="testimonios">
+  <div class="wrap">
+    <span class="eyebrow">Clientes</span>
+    <h2 style="font-size:clamp(1.8rem,3.2vw,2.8rem);">Diseños apartados, proyectos construidos</h2>
+    <div class="testi-grid" id="testi-grid"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     WIZARD DE CONTACTO
+========================================================= -->
+<section id="contacto" style="background:var(--paper-alt);">
+  <div class="wrap">
+    <span class="eyebrow">Empecemos</span>
+    <h2 style="font-size:clamp(1.8rem,3.2vw,2.8rem);">Aparta un diseño o inicia el tuyo</h2>
+    <p class="lead muted" style="margin-top:14px;">Cuatro pasos, sin compromiso. Responde toda solicitud en un máximo de 2 días hábiles.</p>
+
+    <div class="wizard-shell" id="wizard-shell">
+      <div class="wizard-progress-labels">
+        <span data-step-label="1">1. Camino</span>
+        <span data-step-label="2">2. Detalle</span>
+        <span data-step-label="3">3. Presupuesto y contacto</span>
+        <span data-step-label="4">4. Resumen</span>
+      </div>
+      <div class="wizard-progress" id="wizard-progress">
+        <div class="wizard-progress-step" data-step="1"></div>
+        <div class="wizard-progress-step" data-step="2"></div>
+        <div class="wizard-progress-step" data-step="3"></div>
+        <div class="wizard-progress-step" data-step="4"></div>
+      </div>
+
+      <form id="wizard-form" novalidate>
+        <!-- PASO 1: camino -->
+        <div class="wizard-step is-active" data-step="1">
+          <h3>¿Cómo quieres empezar?</h3>
+          <p class="sub">Puedes cambiar de opinión más adelante; esto solo nos ayuda a preparar la conversación correcta.</p>
+          <div class="path-cards">
+            <button type="button" class="path-card" data-path="catalogo">
+              <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+              <h4>Adaptar un diseño del catálogo</h4>
+              <p>Ya vi (o quiero ver) un proyecto que me gusta y quiero adaptarlo a mi terreno.</p>
+            </button>
+            <button type="button" class="path-card" data-path="medida">
+              <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+              <h4>Diseño 100% a la medida</h4>
+              <p>Quiero un proyecto diseñado desde cero para mi predio y mi programa específico.</p>
+            </button>
+          </div>
+          <div class="wizard-nav">
+            <span class="spacer"></span>
+            <button type="button" class="btn-wizard-next" id="wiz-next-1" disabled>Continuar</button>
+          </div>
+        </div>
+
+        <!-- PASO 2a: catálogo -->
+        <div class="wizard-step" data-step="2" data-path-variant="catalogo">
+          <h3>Elige el proyecto de tu interés</h3>
+          <p class="sub">Si llegaste desde una ficha de proyecto, ya lo preseleccionamos por ti.</p>
+          <div class="selected-project-banner" id="wiz-selected-banner" style="display:none;"></div>
+          <div class="form-group full">
+            <label for="wiz-proyecto-select">Proyecto del catálogo</label>
+            <select id="wiz-proyecto-select"></select>
+          </div>
+          <div class="wizard-nav">
+            <button type="button" class="btn-wizard-back" data-back="1"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Atrás</button>
+            <span class="spacer"></span>
+            <button type="button" class="btn-wizard-next" data-next="3">Continuar</button>
+          </div>
+        </div>
+
+        <!-- PASO 2b: a la medida -->
+        <div class="wizard-step" data-step="2" data-path-variant="medida">
+          <h3>Cuéntanos del proyecto que imaginas</h3>
+          <p class="sub">Con esto preparamos mejor la primera consulta de sitio.</p>
+          <div class="form-grid">
+            <div class="form-group" data-field="tipoProyecto">
+              <label for="wiz-tipo-proyecto">Tipo de proyecto</label>
+              <select id="wiz-tipo-proyecto">
+                <option value="">Selecciona una opción</option>
+                <option value="residencial">Vivienda residencial</option>
+                <option value="comercial">Local o edificio comercial</option>
+                <option value="institucional">Proyecto institucional</option>
+                <option value="remodelacion">Remodelación</option>
+              </select>
+              <span class="err">Selecciona el tipo de proyecto.</span>
+            </div>
+            <div class="form-group" data-field="ubicacionPredio">
+              <label for="wiz-ubicacion">Ubicación del predio</label>
+              <input type="text" id="wiz-ubicacion" placeholder="Ej. Pachuca, Hidalgo">
+              <span class="err">Indica al menos la ciudad o municipio.</span>
+            </div>
+            <div class="form-group full" data-field="metrajeAprox">
+              <label for="wiz-metraje">Metraje aproximado del terreno o proyecto (m²)</label>
+              <input type="number" id="wiz-metraje" min="0" placeholder="Ej. 250">
+              <span class="err">Escribe un metraje aproximado, aunque sea estimado.</span>
+            </div>
+          </div>
+          <div class="wizard-nav">
+            <button type="button" class="btn-wizard-back" data-back="1"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Atrás</button>
+            <span class="spacer"></span>
+            <button type="button" class="btn-wizard-next" data-next="3">Continuar</button>
+          </div>
+        </div>
+
+        <!-- PASO 3: presupuesto + contacto -->
+        <div class="wizard-step" data-step="3">
+          <h3>Presupuesto estimado y tus datos</h3>
+          <p class="sub">El presupuesto es solo de referencia; lo afinamos juntos después de la primera visita.</p>
+          <div class="form-group full">
+            <label>Rango de presupuesto estimado</label>
+            <div class="budget-pills" id="wiz-budget-pills">
+              <button type="button" class="budget-pill" data-budget="menos-2m">Menos de $2M MXN</button>
+              <button type="button" class="budget-pill" data-budget="2m-5m">$2M – $5M MXN</button>
+              <button type="button" class="budget-pill" data-budget="5m-15m">$5M – $15M MXN</button>
+              <button type="button" class="budget-pill" data-budget="mas-15m">Más de $15M MXN</button>
+              <button type="button" class="budget-pill" data-budget="no-seguro">Aún no lo sé</button>
+            </div>
+            <span class="err" id="wiz-budget-err" style="display:none;color:var(--line);font-size:0.78rem;margin-top:8px;">Selecciona un rango de presupuesto.</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group" data-field="nombre">
+              <label for="wiz-nombre">Nombre completo</label>
+              <input type="text" id="wiz-nombre" autocomplete="name">
+              <span class="err">Escribe tu nombre para saber a quién responder.</span>
+            </div>
+            <div class="form-group" data-field="email">
+              <label for="wiz-email">Correo electrónico</label>
+              <input type="email" id="wiz-email" autocomplete="email">
+              <span class="err">Escribe un correo válido, por ejemplo nombre@dominio.com</span>
+            </div>
+            <div class="form-group" data-field="telefono">
+              <label for="wiz-telefono">Teléfono</label>
+              <input type="tel" id="wiz-telefono" autocomplete="tel" placeholder="10 dígitos">
+              <span class="err">Escribe un teléfono a 10 dígitos.</span>
+            </div>
+            <div class="form-group">
+              <label for="wiz-comentario">Comentario adicional (opcional)</label>
+              <input type="text" id="wiz-comentario" placeholder="Algo más que debamos saber">
+            </div>
+          </div>
+          <div class="wizard-nav">
+            <button type="button" class="btn-wizard-back" id="wiz-back-3"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Atrás</button>
+            <span class="spacer"></span>
+            <button type="button" class="btn-wizard-next" data-next="4">Continuar</button>
+          </div>
+        </div>
+
+        <!-- PASO 4: resumen -->
+        <div class="wizard-step" data-step="4">
+          <h3>Revisa antes de enviar</h3>
+          <p class="sub">Verifica que todo esté correcto. Puedes regresar a cualquier paso para corregirlo.</p>
+          <dl class="summary-list" id="wiz-summary"></dl>
+          <div class="wizard-nav">
+            <button type="button" class="btn-wizard-back" id="wiz-back-4"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Atrás</button>
+            <span class="spacer"></span>
+            <button type="submit" class="btn-wizard-next" id="wiz-submit">Enviar solicitud</button>
+          </div>
+        </div>
+
+        <!-- CONFIRMACIÓN -->
+        <div class="wizard-step" data-step="confirm">
+          <div class="wizard-confirm">
+            <div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <h3>Solicitud recibida</h3>
+            <div class="folio" id="wiz-folio">AQ-000000</div>
+            <p id="wiz-confirm-msg">Un arquitecto del estudio revisará tu solicitud y te contactará en un máximo de 2 días hábiles.</p>
+            <p style="margin-top:16px;">Guarda tu folio para dar seguimiento a tu solicitud.</p>
+            <div style="margin-top:28px;">
+              <button type="button" class="btn-wizard-next" id="wiz-restart">Enviar otra solicitud</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- BARRA FLOTANTE COMPARADOR -->
+<div class="compare-bar" id="compare-bar">
+  <div class="compare-bar-thumbs" id="compare-bar-thumbs"></div>
+  <span><b id="compare-bar-count">0</b> seleccionados para comparar</span>
+  <button class="btn-compare-go" id="btn-compare-go" type="button">Comparar</button>
+  <button class="btn-compare-clear" id="btn-compare-clear" type="button" aria-label="Quitar comparación">✕</button>
+</div>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <span class="nav-logo" style="display:block;margin-bottom:14px;">ARQUEO · ESTUDIO</span>
+        <p class="footer-group-line">Catálogo y despacho de arquitectura de Grupo Meridiano. Arqueo Estudio forma parte de Grupo Meridiano, junto con Torreón Constructora e Ilé Wellness.</p>
+      </div>
+      <div>
+        <h4>Catálogo</h4>
+        <ul>
+          <li><a href="#catalogo">Explorar proyectos</a></li>
+          <li><a href="#proceso">Proceso a la medida</a></li>
+          <li><a href="#materiales">Materiales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Grupo Meridiano</h4>
+        <ul>
+          <li><button data-goto-hermana="portal">Portal Meridiano</button></li>
+          <li><button data-goto-hermana="constructora">Torreón Constructora</button></li>
+          <li><button data-goto-hermana="wellness">Ilé Wellness</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><button data-open-legal="privacidad">Aviso de privacidad</button></li>
+          <li><button data-open-legal="terminos">Términos de servicio</button></li>
+          <li><button data-open-legal="cookies">Política de cookies</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Arqueo Estudio — Grupo Meridiano. Boceto de demostración, no representa una empresa operativa.</span>
+      <span>Hecho en México</span>
+    </div>
+  </div>
+</footer>
+
+<!-- LEGAL MODALS -->
+<div class="legal-modal-backdrop" id="legal-privacidad">
+  <div class="legal-modal">
+    <button class="legal-modal-close" data-legal-close aria-label="Cerrar">✕</button>
+    <h2>Aviso de privacidad</h2>
+    <p>Arqueo Estudio, parte de Grupo Meridiano, es responsable del tratamiento de los datos personales que nos proporciones a través de este sitio.</p>
+    <h3>Datos que recabamos</h3>
+    <p>Nombre, correo electrónico, teléfono, tipo de proyecto de interés y cualquier mensaje enviado mediante el formulario de contacto, el asistente virtual o el flujo de apartado de un diseño.</p>
+    <h3>Finalidad</h3>
+    <p>Usamos estos datos únicamente para responder tu solicitud, dar seguimiento a proyectos apartados o a la medida, y agendar visitas de sitio. No compartimos tus datos con terceros ajenos al grupo.</p>
+    <h3>Derechos ARCO</h3>
+    <p>Puedes solicitar acceso, rectificación, cancelación u oposición al tratamiento de tus datos escribiendo a privacidad@grupomeridiano.mx</p>
+    <h3>Nota sobre este documento</h3>
+    <p>Este aviso de privacidad forma parte de un boceto de demostración y utiliza datos de contacto de ejemplo. Ningún dato enviado en este sitio se almacena en un servidor real.</p>
+  </div>
+</div>
+<div class="legal-modal-backdrop" id="legal-terminos">
+  <div class="legal-modal">
+    <button class="legal-modal-close" data-legal-close aria-label="Cerrar">✕</button>
+    <h2>Términos de servicio</h2>
+    <p>El uso de este sitio implica la aceptación de estos términos. La información de proyectos, precios y plazos mostrada tiene fines ilustrativos dentro de este boceto.</p>
+    <h3>Catálogo y apartados</h3>
+    <p>Apartar un diseño del catálogo mediante este sitio es una solicitud de información y reserva preliminar, no un contrato de servicios profesionales. El monto de apartado mostrado es simulado.</p>
+    <h3>Precios</h3>
+    <p>Los precios mostrados por proyecto son estimados y están sujetos a visita de sitio, cotización formal y condiciones particulares del predio.</p>
+    <h3>Propiedad intelectual</h3>
+    <p>Los proyectos mostrados en el catálogo son ejemplos de referencia visual y no representan obra construida real de esta demostración.</p>
+  </div>
+</div>
+<div class="legal-modal-backdrop" id="legal-cookies">
+  <div class="legal-modal">
+    <button class="legal-modal-close" data-legal-close aria-label="Cerrar">✕</button>
+    <h2>Política de cookies</h2>
+    <p>Este sitio de demostración no instala cookies de rastreo ni de terceros. Tus favoritos, comparador y filtros se guardan únicamente en la sesión de tu navegador y se pierden al cerrarlo.</p>
+  </div>
+</div>
+
+<!-- =========================================================
+     MODAL DE FICHA DE PROYECTO
+========================================================= -->
+<div class="pmodal-backdrop" id="pmodal-backdrop" role="dialog" aria-modal="true" aria-label="Detalle de proyecto">
+  <div class="pmodal">
+    <button class="pmodal-close" id="pmodal-close" aria-label="Cerrar">✕</button>
+    <div class="pmodal-gallery" id="pmodal-gallery">
+      <img id="pmodal-gallery-img" src="" alt="">
+      <button class="pmodal-gallery-arrow prev" id="pmodal-gallery-prev" aria-label="Foto anterior">←</button>
+      <button class="pmodal-gallery-arrow next" id="pmodal-gallery-next" aria-label="Foto siguiente">→</button>
+      <span class="pmodal-gallery-counter" id="pmodal-gallery-counter"></span>
+      <div class="pmodal-gallery-nav" id="pmodal-gallery-dots"></div>
+    </div>
+    <div class="pmodal-body">
+      <div class="pmodal-top">
+        <div class="pmodal-tag-row">
+          <span class="pmodal-tag" id="pmodal-cat"></span>
+          <span class="pmodal-avail" id="pmodal-avail"></span>
+        </div>
+        <button class="pmodal-fav" id="pmodal-fav-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+          <span id="pmodal-fav-label">Guardar en favoritos</span>
+        </button>
+      </div>
+      <h3 class="pmodal-title" id="pmodal-title"></h3>
+      <p class="pmodal-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg><span id="pmodal-loc"></span></p>
+
+      <div class="pmodal-price-row">
+        <span class="pmodal-price" id="pmodal-price"></span>
+        <span class="pmodal-price-label" id="pmodal-price-label">Estimado — sujeto a visita de sitio</span>
+      </div>
+
+      <div class="pmodal-specs-grid" id="pmodal-specs"></div>
+
+      <div class="pmodal-desc" id="pmodal-desc"></div>
+
+      <div class="pmodal-personalizacion" id="pmodal-personalizacion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <div>
+          <b id="pmodal-personalizacion-title">Personalización disponible</b>
+          <p id="pmodal-personalizacion-text"></p>
+        </div>
+      </div>
+
+      <div class="pmodal-crosssell">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.4 14.5L16 10 4 20"/><path d="M15 6l4 4-2 2-4-4 2-2z"/></svg>
+        <span>Este proyecto puede construirse con <b>Torreón Constructora</b>, nuestra constructora hermana dentro de Grupo Meridiano. <a href="/constructora" data-goto-hermana="constructora">Conocer Torreón →</a></span>
+      </div>
+
+      <div class="pmodal-cta-row" id="pmodal-cta-row">
+        <button class="pmodal-cta-primary" id="pmodal-btn-apartar" type="button">Apartar este diseño</button>
+        <button class="pmodal-cta-secondary" id="pmodal-btn-visita" type="button">Agendar visita a proyecto similar</button>
+        <button class="pmodal-cta-tertiary" id="pmodal-btn-medida" type="button">Quiero algo 100% a la medida</button>
+      </div>
+
+      <div class="pmodal-related">
+        <h4>También te puede interesar</h4>
+        <div class="pmodal-related-grid" id="pmodal-related"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMODAL: APARTAR DISEÑO -->
+<div class="action-modal-backdrop" id="apartar-backdrop">
+  <div class="action-modal">
+    <button class="action-modal-close" data-action-close aria-label="Cerrar">✕</button>
+    <div id="apartar-form-wrap">
+      <h3>Apartar este diseño</h3>
+      <p class="sub" id="apartar-sub">Con el apartado, un arquitecto del estudio te contacta para iniciar la etapa de adaptación del diseño a tu predio.</p>
+      <div class="amount-box">
+        <div><b id="apartar-monto">$25,000 MXN</b><br><span>Monto de apartado, se descuenta del proyecto ejecutivo</span></div>
+      </div>
+      <form id="apartar-form" novalidate>
+        <div class="form-group" data-field="nombre">
+          <label for="apartar-nombre">Nombre completo</label>
+          <input type="text" id="apartar-nombre" autocomplete="name">
+          <span class="err">Escribe tu nombre completo.</span>
+        </div>
+        <div class="form-group" data-field="email">
+          <label for="apartar-email">Correo electrónico</label>
+          <input type="email" id="apartar-email" autocomplete="email">
+          <span class="err">Escribe un correo válido.</span>
+        </div>
+        <div class="form-group" data-field="telefono">
+          <label for="apartar-telefono">Teléfono</label>
+          <input type="tel" id="apartar-telefono" autocomplete="tel" placeholder="10 dígitos">
+          <span class="err">Escribe un teléfono a 10 dígitos.</span>
+        </div>
+        <button type="submit" class="btn-wizard-next" style="width:100%;" id="apartar-submit-btn"><span class="btn-label">Confirmar apartado</span></button>
+        <div class="form-status" id="apartar-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+    <div id="apartar-confirm-wrap" style="display:none;">
+      <div class="action-confirm">
+        <div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Diseño apartado</h3>
+        <div class="folio" id="apartar-folio">AQ-000000</div>
+        <p>Un arquitecto te contactará en las próximas 48 horas para la etapa de adaptación del diseño a tu predio. Guarda tu folio para dar seguimiento.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMODAL: AGENDAR VISITA -->
+<div class="action-modal-backdrop" id="visita-backdrop">
+  <div class="action-modal">
+    <button class="action-modal-close" data-action-close aria-label="Cerrar">✕</button>
+    <div id="visita-form-wrap">
+      <h3>Agendar visita a un proyecto similar</h3>
+      <p class="sub" id="visita-sub">Coordina una visita a un proyecto ya construido con características similares, para conocer materiales y acabados en sitio.</p>
+      <form id="visita-form" novalidate>
+        <div class="form-group" data-field="nombre">
+          <label for="visita-nombre">Nombre completo</label>
+          <input type="text" id="visita-nombre" autocomplete="name">
+          <span class="err">Escribe tu nombre completo.</span>
+        </div>
+        <div class="form-group" data-field="email">
+          <label for="visita-email">Correo electrónico</label>
+          <input type="email" id="visita-email" autocomplete="email">
+          <span class="err">Escribe un correo válido.</span>
+        </div>
+        <div class="form-grid">
+          <div class="form-group" data-field="fecha">
+            <label for="visita-fecha">Fecha</label>
+            <input type="date" id="visita-fecha">
+            <span class="err">Selecciona una fecha.</span>
+          </div>
+          <div class="form-group" data-field="hora">
+            <label for="visita-hora">Hora</label>
+            <select id="visita-hora">
+              <option value="">Selecciona</option>
+              <option>10:00</option><option>11:00</option><option>12:00</option>
+              <option>13:00</option><option>16:00</option><option>17:00</option>
+            </select>
+            <span class="err">Selecciona un horario.</span>
+          </div>
+        </div>
+        <button type="submit" class="btn-wizard-next" style="width:100%;" id="visita-submit-btn"><span class="btn-label">Confirmar visita</span></button>
+        <div class="form-status" id="visita-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+    <div id="visita-confirm-wrap" style="display:none;">
+      <div class="action-confirm">
+        <div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Visita agendada</h3>
+        <div class="folio" id="visita-folio">AQ-000000</div>
+        <p id="visita-confirm-text">Te esperamos en la fecha y hora seleccionadas. Enviamos la dirección exacta a tu correo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="toast-stack" id="toast-stack"></div>
+
+<!-- CHATBOT -->
+<button class="chat-launcher" id="chat-launcher" aria-label="Abrir asistente virtual de Arqueo Estudio">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <span class="dot"></span>
+</button>
+<div class="chat-window" id="chat-window" role="dialog" aria-label="Asistente virtual de Arqueo Estudio">
+  <div class="chat-header">
+    <img src="https://picsum.photos/seed/arqueo-panel/100/72" alt="">
+    <div class="h-info"><b>Asistente Arqueo</b><span>En línea ahora</span></div>
+    <button class="close-x" id="chat-close" aria-label="Cerrar chat">✕</button>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-quick" id="chat-quick"></div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" placeholder="Escribe tu pregunta…" aria-label="Mensaje para el asistente">
+    <button id="chat-send" aria-label="Enviar mensaje"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button>
+  </div>
+</div>
+
+
+<script>
+window.__catalogo = [
+  {id:'p01', nombre:'Casa Basalto', cat:'residencial', ubicacion:'Valle de Bravo, Edo. Méx.', ciudad:'Edo. Méx.', m2:340, m2Terreno:820, niveles:2, recamaras:4, anio:2025, precio:4200000, disponible:true, seed:'casa-basalto', desc:['Vivienda unifamiliar asentada sobre un talud pronunciado, resuelta con muros de piedra volcánica local que sostienen el terreno y a la vez definen el carácter de la fachada norte.','La doble altura de la sala principal se orienta al valle, capturando la luz de la tarde a través de un muro cortina protegido por un alero de concreto que evita la ganancia solar directa en verano.'], materiales:'Piedra volcánica, concreto aparente, madera de encino', orientacion:'Fachada principal orientada al poniente, protegida con alero de 1.2m', opciones:['Levantamiento topográfico incluido en la adaptación','Maqueta digital 3D del predio','Renders fotorrealistas antes de firmar proyecto ejecutivo']},
+  {id:'p02', nombre:'Centro Comunitario Norte', cat:'institucional', ubicacion:'Pachuca, Hidalgo', ciudad:'Hidalgo', m2:1200, m2Terreno:2100, niveles:1, recamaras:null, anio:2024, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'centro-comunitario', desc:['Equipamiento público organizado alrededor de un patio central que funciona como colchón térmico: el aire se enfría al paso por la vegetación antes de entrar a las aulas.','La estructura de concreto aparente queda expuesta también al interior, reduciendo el mantenimiento a largo plazo típico de un edificio de uso comunitario intensivo.'], materiales:'Concreto aparente, celosía de block, vegetación de patio', orientacion:'Patio central norte-sur para ventilación cruzada', opciones:['Gestión de permisos municipales incluida','Coordinación directa con Torreón Constructora','Estudio de impacto ambiental']},
+  {id:'p03', nombre:'Edificio Cauce', cat:'comercial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:2800, m2Terreno:950, niveles:6, recamaras:null, anio:2025, precio:18500000, disponible:true, seed:'edificio-cauce', desc:['Edificio de uso mixto de seis niveles con una fachada de celosía de aluminio perforado que regula la ganancia solar sin sacrificar la vista hacia la avenida.','Los primeros dos niveles se resolvieron como locales comerciales de doble altura, y los niveles superiores como oficinas corporativas con plantas libres adaptables.'], materiales:'Aluminio perforado, concreto, cristal templado de baja emisividad', orientacion:'Fachada principal oriente, celosía regula ganancia solar', opciones:['Estudio de asoleamiento por nivel','Fachada paramétrica ajustable al predio','Certificación de eficiencia energética opcional']},
+  {id:'p04', nombre:'Casa Patio', cat:'residencial', ubicacion:'Tizayuca, Hidalgo', ciudad:'Hidalgo', m2:210, m2Terreno:260, niveles:1, recamaras:3, anio:2023, precio:2800000, disponible:true, seed:'casa-patio', desc:['Vivienda entre medianeras organizada alrededor de un patio interior que ventila la totalidad de la planta, resolviendo la falta de fachadas laterales típica de un lote urbano estrecho.','El patio también capta agua de lluvia hacia una cisterna bajo el jardín, reduciendo el consumo de agua potable del hogar durante buena parte del año.'], materiales:'Block aparente, madera de encino, piedra bola en patio', orientacion:'Patio central cenital, ventilación cruzada garantizada', opciones:['Patio central bioclimático adaptable a distintos anchos de lote','Acabados en madera de encino','Sistema de captación pluvial']},
+  {id:'p05', nombre:'Oficinas Álamo', cat:'comercial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:1650, m2Terreno:1400, niveles:2, recamaras:null, anio:2024, precio:9400000, disponible:true, seed:'oficinas-alamo', desc:['Adaptación de una nave industrial de los años setenta a oficinas corporativas, conservando la cercha metálica original como elemento visible del diseño interior.','El proyecto resuelve un reto común en reúso de naves: llevar suficiente luz natural al centro de la planta sin perder la altura libre que hace atractivo el espacio.'], materiales:'Estructura metálica reusada, tabla roca, piso de concreto pulido', orientacion:'Lucernarios cenitales orientados norte', opciones:['Reúso de estructura existente reduce tiempos de obra','Diseño de interiores incluido en el paquete','Certificación LEED opcional']},
+  {id:'p06', nombre:'Biblioteca Del Bosque', cat:'institucional', ubicacion:'Toluca, Edo. Méx.', ciudad:'Edo. Méx.', m2:980, m2Terreno:1600, niveles:1, recamaras:null, anio:2022, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'biblioteca-bosque', desc:['Sala de lectura cubierta con vigas de madera laminada, diseñada para que la luz entre siempre de forma indirecta y nunca incida directamente sobre los libros ni las mesas de trabajo.','La circulación se organiza en espiral alrededor de un patio de lectura exterior, de forma que ningún punto de la sala queda a más de 12 metros de una salida de emergencia.'], materiales:'Madera laminada, concreto pulido, vidrio de control solar', orientacion:'Luz cenital indirecta en toda la sala principal', opciones:['Cubierta de madera laminada a medida','Iluminación cenital indirecta calculada por zona','Mobiliario de lectura a medida']},
+  {id:'p07', nombre:'Casa Terraza', cat:'residencial', ubicacion:'Cuernavaca, Morelos', ciudad:'Otro', m2:410, m2Terreno:900, niveles:3, recamaras:4, anio:2025, precio:5600000, disponible:true, seed:'casa-terraza', desc:['Residencia escalonada sobre una pendiente pronunciada, con terrazas ajardinadas en cada nivel que evitan mover más tierra de la estrictamente necesaria para cimentar.','Cada recámara tiene acceso directo a su propia terraza, una decisión que responde al clima templado de Cuernavaca durante prácticamente todo el año.'], materiales:'Concreto aparente, piedra laja, vegetación en terrazas', orientacion:'Orientación sur aprovechando la pendiente natural', opciones:['Terrazas ajardinadas por nivel, adaptables a la pendiente real','Estudio geotécnico de pendiente incluido','Alberca infinita opcional']},
+  {id:'p08', nombre:'Mercado Cubierto Sur', cat:'comercial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:3200, m2Terreno:2900, niveles:1, recamaras:null, anio:2023, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'mercado-cubierto', desc:['Reordenamiento de un mercado tradicional que operaba de forma improvisada, con una nueva cubierta ligera desmontable que permite intervenir por secciones sin cerrar el mercado completo.','La ventilación cruzada natural elimina la necesidad de extractores mecánicos en los pasillos de comida, uno de los principales focos de calor del mercado anterior.'], materiales:'Estructura ligera de acero, policarbonato traslúcido', orientacion:'Cubierta orientada para ventilación cruzada dominante', opciones:['Cubierta ligera desmontable por secciones','Reordenamiento de locales sin cerrar operación','Ventilación cruzada natural, sin extracción mecánica']},
+  {id:'p09', nombre:'Clínica Comunitaria Este', cat:'institucional', ubicacion:'Ecatepec, Edo. Méx.', ciudad:'Edo. Méx.', m2:760, m2Terreno:1100, niveles:1, recamaras:null, anio:2024, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'clinica-comunitaria', desc:['Centro de salud de primer nivel con circulaciones separadas para personal y pacientes, una decisión normativa que además reduce el tiempo de espera percibido en sala.','El diseño contempla una ampliación futura de dos consultorios adicionales sin necesidad de interrumpir el servicio durante la obra.'], materiales:'Block aparente, piso vinílico sanitario, aluminio en ventanería', orientacion:'Consultorios orientados norte para luz estable sin deslumbramiento', opciones:['Circulaciones separadas personal / pacientes','Cumplimiento normativo NOM-salud','Ampliable a futuro sin interrumpir servicio']},
+  {id:'p10', nombre:'Casa Musgo', cat:'residencial', ubicacion:'Amecameca, Edo. Méx.', ciudad:'Edo. Méx.', m2:180, m2Terreno:400, niveles:2, recamaras:3, anio:2024, precio:2400000, disponible:true, seed:'casa-musgo', desc:['Vivienda de fin de semana pensada para clima frío de montaña, con muros gruesos de tierra compactada que retienen el calor durante la noche.','La chimenea central de doble cara calienta simultáneamente la sala y el estudio, reduciendo el número de puntos de calefacción necesarios en toda la casa.'], materiales:'Tierra compactada, madera de pino local, teja de barro', orientacion:'Vanos reducidos al norte, ventanales amplios al sur', opciones:['Muros de tierra compactada adaptables al clima local','Chimenea de doble cara','Aislamiento térmico reforzado en cubierta']},
+  {id:'p11', nombre:'Torre Corporativa Insurgentes', cat:'comercial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:6400, m2Terreno:1200, niveles:12, recamaras:null, anio:2025, precio:42000000, disponible:true, seed:'torre-insurgentes', desc:['Torre corporativa de doce niveles sobre un predio angosto, resuelta con un núcleo estructural excéntrico que libera plantas completamente diáfanas para renta flexible.','La fachada de doble piel reduce hasta 30% la carga de aire acondicionado frente a un curtain wall convencional, un ahorro que se traduce directamente en cuota de mantenimiento.'], materiales:'Fachada de doble piel, concreto de alta resistencia, aluminio', orientacion:'Doble piel en fachadas oriente y poniente', opciones:['Plantas libres reconfigurables por piso','Certificación de eficiencia energética','Estacionamiento automatizado opcional']},
+  {id:'p12', nombre:'Casa Encino', cat:'residencial', ubicacion:'Querétaro, Qro.', ciudad:'Querétaro', m2:295, m2Terreno:480, niveles:2, recamaras:3, anio:2023, precio:3900000, disponible:true, seed:'casa-encino', desc:['Residencia entre medianeras que resuelve la privacidad hacia los vecinos con un patio inglés que ilumina el nivel de estudio sin abrir ventanas hacia los colindantes.','La escalera funciona como elemento escultórico central, bañada de luz cenital todo el día gracias a un lucernario orientado al norte.'], materiales:'Concreto aparente, madera de encino, piedra en patio inglés', orientacion:'Lucernario norte sobre la escalera principal', opciones:['Patio inglés adaptable a distintas orientaciones','Escalera como elemento central iluminado','Domótica básica de iluminación']},
+  {id:'p13', nombre:'Preparatoria Altavista', cat:'institucional', ubicacion:'Puebla, Puebla', ciudad:'Puebla', m2:2100, m2Terreno:3400, niveles:2, recamaras:null, anio:2022, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'prepa-altavista', desc:['Plantel educativo de dos niveles organizado en torno a una plaza central que funciona como auditorio al aire libre para eventos escolares.','Los salones del nivel superior tienen parasoles horizontales fijos calculados para bloquear el sol de mediodía sin reducir la luz difusa necesaria para leer sin encender focos.'], materiales:'Concreto aparente, parasoles de aluminio, piso de barro recocido', orientacion:'Parasoles horizontales en fachada sur', opciones:['Plaza central multiuso','Parasoles calculados por latitud del predio','Cumplimiento normativo educativo vigente']},
+  {id:'p14', nombre:'Casa Ceniza', cat:'residencial', ubicacion:'Valle de Bravo, Edo. Méx.', ciudad:'Edo. Méx.', m2:520, m2Terreno:1400, niveles:2, recamaras:5, anio:2025, precio:7800000, disponible:true, seed:'casa-ceniza', desc:['Casa de fin de semana para una familia extendida, con dos alas independientes conectadas por una sala común, pensada para recibir huéspedes sin perder privacidad.','El muro de concreto teñido en ceniza absorbe el calor del día y lo libera lentamente durante la noche, aprovechando la amplitud térmica típica de Valle de Bravo.'], materiales:'Concreto teñido, madera de encino, piedra bola', orientacion:'Dos alas orientadas hacia el lago', opciones:['Dos alas independientes conectables o separables','Cuarto de huéspedes con entrada propia','Sistema de captación pluvial para riego']},
+  {id:'p15', nombre:'Local Raíz', cat:'comercial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:180, m2Terreno:180, niveles:1, recamaras:null, anio:2024, precio:2100000, disponible:true, seed:'local-raiz', desc:['Local comercial de planta baja diseñado para un restaurante de especialidad, con una cocina visible protegida por un vidrio resistente al calor que funciona como escaparate.','La fachada plegable convierte el local en un espacio semiabierto los fines de semana, sin comprometer el aislamiento térmico entre semana.'], materiales:'Acero pintado, vidrio templado, concreto pulido', orientacion:'Fachada plegable orientada a la calle principal', opciones:['Fachada plegable operable','Cocina visible con vidrio resistente al calor','Extracción de olores integrada al diseño']},
+  {id:'p16', nombre:'Casa Talud', cat:'residencial', ubicacion:'Tepoztlán, Morelos', ciudad:'Otro', m2:380, m2Terreno:1100, niveles:1, recamaras:4, anio:2024, precio:5200000, disponible:true, seed:'casa-talud', desc:['Vivienda de una sola planta enterrada parcialmente en el talud del predio, de forma que el techo se convierte en una terraza jardín accesible desde la parte alta del terreno.','El enterrado parcial mantiene una temperatura interior estable todo el año, reduciendo casi a cero el uso de aire acondicionado en un clima que suele superar los 30°C.'], materiales:'Concreto armado, piedra volcánica, cubierta ajardinada', orientacion:'Cubierta ajardinada, acceso desde nivel superior del predio', opciones:['Cubierta ajardinada transitable','Enterrado parcial adaptable a la pendiente real','Estudio térmico de la masa de concreto']},
+  {id:'p17', nombre:'Colegio San Rafael — Ampliación', cat:'institucional', ubicacion:'Querétaro, Qro.', ciudad:'Querétaro', m2:640, m2Terreno:900, niveles:2, recamaras:null, anio:2023, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'colegio-san-rafael', desc:['Ampliación de un colegio existente ejecutada en fases para no interrumpir el ciclo escolar, con una estructura independiente que no toca la cimentación del edificio original.','Los nuevos salones se conectan al edificio existente por un puente cubierto que también funciona como zona de sombra en el recreo.'], materiales:'Estructura metálica independiente, concreto, policarbonato', orientacion:'Puente de conexión orientado a patio de recreo existente', opciones:['Ejecución por fases sin cerrar el plantel','Estructura independiente de la cimentación existente','Puente cubierto como zona de sombra adicional']},
+  {id:'p18', nombre:'Casa Cráter', cat:'residencial', ubicacion:'Huasca de Ocampo, Hidalgo', ciudad:'Hidalgo', m2:260, m2Terreno:2200, niveles:1, recamaras:3, anio:2025, precio:3600000, disponible:true, seed:'casa-crater', desc:['Cabaña de descanso organizada alrededor de un patio hundido que protege del viento dominante de la región, típico de la zona boscosa de Huasca.','La cubierta a dos aguas con pendiente pronunciada resuelve de forma sencilla la ocasional nevada invernal, sin necesidad de sistemas mecánicos de deshielo.'], materiales:'Piedra de la región, madera de pino, teja de barro', orientacion:'Patio hundido protegido del viento norte', opciones:['Patio hundido adaptable a terrenos con pendiente','Cubierta de alta pendiente para nieve ocasional','Chimenea central de leña']},
+  {id:'p19', nombre:'Showroom Cerámica Noreste', cat:'comercial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:540, m2Terreno:600, niveles:1, recamaras:null, anio:2024, precio:6100000, disponible:true, seed:'showroom-ceramica', desc:['Showroom para una marca de cerámica arquitectónica, diseñado como una caja de concreto neutro que deja que los materiales exhibidos sean siempre el protagonista.','La iluminación cenital difusa evita el brillo directo sobre las piezas cerámicas, un problema recurrente en showrooms con iluminación puntual convencional.'], materiales:'Concreto pulido, acero negro, vidrio de piso a techo', orientacion:'Lucernarios difusos orientados norte', opciones:['Iluminación cenital difusa sin brillo directo','Muros neutros adaptables a distintas colecciones','Piso técnico para instalaciones flexibles']},
+  {id:'p20', nombre:'Casa Manantial', cat:'residencial', ubicacion:'Tequisquiapan, Qro.', ciudad:'Querétaro', m2:450, m2Terreno:1800, niveles:1, recamaras:4, anio:2025, precio:6400000, disponible:true, seed:'casa-manantial', desc:['Residencia de una sola planta organizada alrededor de un espejo de agua que refresca por evaporación el aire que entra a la sala principal durante el verano.','Todas las recámaras miran hacia jardines privados independientes, evitando vistas cruzadas entre habitaciones típicas de plantas más compactas.'], materiales:'Piedra caliza local, madera de encino, agua como elemento pasivo', orientacion:'Espejo de agua al poniente, refresca el aire de tarde', opciones:['Espejo de agua como enfriamiento pasivo','Jardines privados por recámara','Sistema de riego por goteo integrado']},
+  {id:'p21', nombre:'Nave-Oficina Bosques', cat:'comercial', ubicacion:'Naucalpan, Edo. Méx.', ciudad:'Edo. Méx.', m2:1900, m2Terreno:2400, niveles:2, recamaras:null, anio:2023, precio:12800000, disponible:true, seed:'nave-oficina-bosques', desc:['Edificio híbrido con nave de almacenamiento en planta baja y oficinas administrativas en el nivel superior, pensado para empresas de logística ligera.','Un patio de maniobras independiente separa físicamente el flujo de montacargas del acceso peatonal a oficinas, resolviendo un conflicto habitual en este tipo de naves.'], materiales:'Estructura metálica, panel aislante, concreto industrial', orientacion:'Patio de maniobras independiente del acceso peatonal', opciones:['Separación de flujos de carga y peatonal','Oficinas administrativas con fachada propia','Piso industrial de alta resistencia']},
+  {id:'p22', nombre:'Casa Roca Blanca', cat:'residencial', ubicacion:'San Miguel Regla, Hidalgo', ciudad:'Hidalgo', m2:310, m2Terreno:950, niveles:2, recamaras:3, anio:2024, precio:4100000, disponible:true, seed:'casa-roca-blanca', desc:['Vivienda de descanso construida sobre una plataforma de roca volcánica existente, minimizando el movimiento de tierra y respetando la vegetación nativa del predio.','El volumen superior en voladizo enmarca la vista hacia las prismas basálticas cercanas sin necesidad de talar ningún árbol maduro del terreno.'], materiales:'Concreto aparente en voladizo, piedra volcánica existente', orientacion:'Voladizo orientado hacia formación rocosa', opciones:['Cimentación adaptada a roca existente, sin movimiento de tierra','Voladizo estructural calculado por predio','Preservación de vegetación nativa']},
+  {id:'p23', nombre:'Guardería Semillas', cat:'institucional', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:420, m2Terreno:600, niveles:1, recamaras:null, anio:2023, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'guarderia-semillas', desc:['Centro de desarrollo infantil de una sola planta, con todos los salones abriendo directamente a un patio de juegos techado parcialmente para uso en temporada de lluvias.','Las alturas y proporciones de puertas, ventanas y mobiliario fijo están calculadas específicamente para niños de 1 a 5 años, no adaptadas de un proyecto para adultos.'], materiales:'Block aparente pintado, piso de caucho reciclado, madera', orientacion:'Salones orientados a patio de juegos techado', opciones:['Proporciones diseñadas para primera infancia','Patio techado parcialmente para lluvias','Cumplimiento normativo de guarderías']},
+  {id:'p24', nombre:'Casa Alero Largo', cat:'residencial', ubicacion:'Malinalco, Edo. Méx.', ciudad:'Edo. Méx.', m2:295, m2Terreno:1200, niveles:1, recamaras:3, anio:2025, precio:3950000, disponible:true, seed:'casa-alero-largo', desc:['Casa de planta libre bajo un solo alero continuo de seis metros de vuelo, que protege tanto la terraza como buena parte de la fachada del sol de mediodía.','La estructura de columnas de acero delgadas, en vez de muros de carga, permite reconfigurar la distribución interior en el futuro sin tocar la envolvente.'], materiales:'Estructura de acero, tabique aparente, concreto en alero', orientacion:'Alero continuo de 6m protegiendo fachada sur', opciones:['Alero de gran vuelo calculado por predio','Estructura de acero permite reconfigurar interiores','Terraza cubierta de uso todo el año']},
+  {id:'p25', nombre:'Torre Vivienda Nogal', cat:'residencial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:3400, m2Terreno:850, niveles:9, recamaras:null, anio:2024, precio:52000000, disponible:true, seed:'torre-nogal', desc:['Edificio de departamentos de nueve niveles con solo dos unidades por planta, priorizando departamentos más grandes con doble orientación sobre la densidad máxima permitida.','El patio de ventilación central, poco común en edificios de este tamaño, garantiza luz natural incluso en los baños y cocinas de las unidades interiores.'], materiales:'Concreto armado, fachada de aluminio y vidrio, patio de luz central', orientacion:'Patio de ventilación central en todo el edificio', opciones:['Solo dos unidades por planta, mayor privacidad','Patio de luz central en todos los niveles','Áreas comunes en azotea con vista']},
+  {id:'p26', nombre:'Casa Cactácea', cat:'residencial', ubicacion:'San Miguel de Allende, Gto.', ciudad:'Otro', m2:340, m2Terreno:1600, niveles:1, recamaras:3, anio:2023, precio:4700000, disponible:true, seed:'casa-cactacea', desc:['Residencia de una sola planta con jardín de especies nativas de bajo consumo de agua, diseñada específicamente para el clima semidesértico del Bajío.','Los muros gruesos de adobe estabilizado funcionan como amortiguador térmico entre el frío de la madrugada y el calor de la tarde, típicos de la región.'], materiales:'Adobe estabilizado, madera de mezquite, piedra de cantera', orientacion:'Jardín xerófilo al poniente como colchón térmico', opciones:['Jardín de especies nativas de bajo consumo de agua','Muros de adobe estabilizado','Sistema de captación pluvial para riego']},
+  {id:'p27', nombre:'Centro de Rehabilitación Fuente', cat:'institucional', ubicacion:'Puebla, Puebla', ciudad:'Puebla', m2:890, m2Terreno:1300, niveles:1, recamaras:null, anio:2022, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'centro-rehabilitacion', desc:['Centro de fisioterapia y rehabilitación con circulaciones completamente accesibles, pensadas desde el primer boceto y no añadidas después como rampas de cumplimiento.','Los espacios de terapia en grupo tienen vista directa a un jardín interior, un detalle que el equipo del centro reportó como significativo para la recuperación anímica de los pacientes.'], materiales:'Concreto aparente, piso antiderrapante, vidrio de piso a techo', orientacion:'Salas de terapia con vista a jardín interior', opciones:['Accesibilidad universal integrada al diseño, no añadida','Jardín interior visible desde áreas de terapia','Cumplimiento normativo de salud vigente']},
+  {id:'p28', nombre:'Casa Cedro Rojo', cat:'residencial', ubicacion:'Valle de Bravo, Edo. Méx.', ciudad:'Edo. Méx.', m2:290, m2Terreno:700, niveles:2, recamaras:3, anio:2024, precio:3800000, disponible:true, seed:'casa-cedro-rojo', desc:['Vivienda compacta de dos niveles pensada para una pareja joven, con un estudio en planta baja que puede convertirse en recámara adicional sin obra mayor.','La fachada de madera tratada envejece de forma controlada, un acabado que el estudio prefiere sobre pinturas que requieren mantenimiento constante en clima de montaña.'], materiales:'Madera tratada, concreto aparente, teja de barro', orientacion:'Estudio flexible orientado a jardín frontal', opciones:['Estudio convertible en recámara sin obra mayor','Fachada de madera de bajo mantenimiento','Chimenea compacta en sala principal']},
+  {id:'p29', nombre:'Plaza Comercial Del Valle', cat:'comercial', ubicacion:'Toluca, Edo. Méx.', ciudad:'Edo. Méx.', m2:4200, m2Terreno:5800, niveles:2, recamaras:null, anio:2023, precio:26500000, disponible:true, seed:'plaza-del-valle', desc:['Centro comercial de barrio con locales organizados alrededor de una plaza central abierta, evitando el pasillo cerrado típico de los centros comerciales convencionales.','El estacionamiento se distribuyó en dos niveles semienterrados, liberando la superficie del predio para áreas verdes y terrazas de restaurantes.'], materiales:'Concreto, acero, piso de adoquín en plaza central', orientacion:'Plaza central abierta, orientación norte-sur', opciones:['Plaza central abierta en vez de pasillo cerrado','Estacionamiento semienterrado en dos niveles','Terrazas de restaurante hacia plaza']},
+  {id:'p30', nombre:'Casa Ala Sur', cat:'residencial', ubicacion:'Pachuca, Hidalgo', ciudad:'Hidalgo', m2:225, m2Terreno:380, niveles:2, recamaras:3, anio:2025, precio:2950000, disponible:true, seed:'casa-ala-sur', desc:['Vivienda entre medianeras orientada íntegramente hacia un patio trasero, resolviendo la privacidad de la fachada frontal con un muro casi ciego hacia la calle.','Todas las áreas sociales están en planta baja mirando al patio, mientras que las recámaras del nivel superior reciben luz cenital indirecta desde un ducto central.'], materiales:'Tabique aparente, concreto, madera en carpintería interior', orientacion:'Fachada frontal cerrada, apertura total al patio trasero', opciones:['Fachada frontal privada, apertura hacia patio propio','Ducto de luz cenital para recámaras','Patio trasero ajardinado incluido en el diseño base']},
+  {id:'p31', nombre:'Oficinas Cumbre', cat:'comercial', ubicacion:'Querétaro, Qro.', ciudad:'Querétaro', m2:2200, m2Terreno:1800, niveles:4, recamaras:null, anio:2024, precio:15200000, disponible:true, seed:'oficinas-cumbre', desc:['Edificio de oficinas corporativas de cuatro niveles con terraza ajardinada en azotea, pensada como área común para las empresas que rentan cada planta.','El sistema de fachada ventilada reduce la temperatura interior sin depender exclusivamente del aire acondicionado, un ahorro relevante en el altiplano queretano.'], materiales:'Fachada ventilada, concreto, aluminio compuesto', orientacion:'Fachada ventilada en orientación poniente', opciones:['Terraza ajardinada de uso común en azotea','Fachada ventilada, menor dependencia de A/C','Plantas libres configurables por inquilino']},
+  {id:'p32', nombre:'Casa Punta de Lanza', cat:'residencial', ubicacion:'Tepoztlán, Morelos', ciudad:'Otro', m2:480, m2Terreno:2000, niveles:2, recamaras:4, anio:2025, precio:6900000, disponible:true, seed:'casa-punta-lanza', desc:['Residencia de fin de semana con un volumen principal orientado hacia el cerro Tepozteco, resuelto en forma de cuña para maximizar la vista sin comprometer la estructura.','Una alberca de borde infinito remata la terraza principal, calculada para que su línea de agua desaparezca visualmente contra el paisaje montañoso.'], materiales:'Concreto aparente, piedra de la región, vidrio estructural', orientacion:'Volumen en cuña orientado al cerro Tepozteco', opciones:['Alberca de borde infinito adaptable a la topografía','Volumen en cuña calculado según vista del predio','Terraza principal con parasoles móviles']},
+  {id:'p33', nombre:'Escuela Técnica Progreso', cat:'institucional', ubicacion:'Tizayuca, Hidalgo', ciudad:'Hidalgo', m2:1450, m2Terreno:2600, niveles:1, recamaras:null, anio:2023, precio:null, precioTexto:'Cotización por licitación', disponible:false, seed:'escuela-progreso', desc:['Plantel técnico con talleres de gran altura libre y aulas teóricas separadas físicamente, reconociendo que ambos espacios tienen requerimientos acústicos muy distintos.','La circulación exterior techada conecta todos los edificios sin necesidad de pasillos interiores, reduciendo significativamente el costo de mantenimiento del inmueble.'], materiales:'Estructura metálica en talleres, block en aulas, policarbonato', orientacion:'Talleres orientados norte para luz uniforme sin sombras duras', opciones:['Talleres de gran altura libre, separados acústicamente de aulas','Circulación exterior techada entre edificios','Cumplimiento normativo técnico-educativo']},
+  {id:'p34', nombre:'Casa Vereda', cat:'residencial', ubicacion:'Amecameca, Edo. Méx.', ciudad:'Edo. Méx.', m2:195, m2Terreno:340, niveles:1, recamaras:2, anio:2024, precio:2250000, disponible:true, seed:'casa-vereda', desc:['Vivienda compacta de una sola planta, pensada como primera casa para una pareja, con posibilidad de crecimiento vertical planeado desde la cimentación.','La cimentación y estructura ya consideran un segundo nivel futuro, evitando reforzar cimientos si la familia decide ampliar en unos años.'], materiales:'Block aparente, concreto, lámina en cubierta provisional de crecimiento', orientacion:'Orientación sur para recámaras, ahorro en calefacción', opciones:['Cimentación preparada para crecimiento vertical futuro','Distribución compacta y eficiente','Posibilidad de ampliar sin reforzar cimientos']},
+  {id:'p35', nombre:'Restaurante La Presa', cat:'comercial', ubicacion:'Valle de Bravo, Edo. Méx.', ciudad:'Edo. Méx.', m2:620, m2Terreno:1400, niveles:1, recamaras:null, anio:2025, precio:7300000, disponible:true, seed:'restaurante-la-presa', desc:['Restaurante de un solo nivel con terraza escalonada hacia el lago, resuelto para que cada mesa tenga vista al agua sin sacrificar capacidad total del salón.','La cocina se ubicó en el punto más alto del predio para facilitar la evacuación de humos por gravedad, reduciendo la potencia necesaria del sistema de extracción.'], materiales:'Madera tratada, piedra, teja de barro en cubierta principal', orientacion:'Terraza escalonada orientada al lago', opciones:['Terraza escalonada adaptable a la pendiente hacia el agua','Cocina ubicada para extracción de humos eficiente','Área de bar independiente del salón principal']},
+  {id:'p36', nombre:'Casa Del Manantial Norte', cat:'residencial', ubicacion:'Huasca de Ocampo, Hidalgo', ciudad:'Hidalgo', m2:330, m2Terreno:1900, niveles:2, recamaras:4, anio:2023, precio:4450000, disponible:true, seed:'casa-manantial-norte', desc:['Casa de bosque con estructura de madera y concreto combinados, elevada sobre pilotes en la zona más cercana al arroyo para no alterar el cauce natural.','Las ventanas de piso a techo en el estudio principal enmarcan directamente los pinos existentes, que el equipo de obra tuvo instrucción expresa de no talar.'], materiales:'Madera de pino, concreto en pilotes, piedra en chimenea', orientacion:'Volumen elevado sobre pilotes cerca del arroyo', opciones:['Cimentación sobre pilotes, sin alterar el cauce','Preservación garantizada de arbolado existente','Chimenea de piedra de doble altura']},
+  {id:'p37', nombre:'Clínica Dental Reforma', cat:'comercial', ubicacion:'Ciudad de México', ciudad:'CDMX', m2:210, m2Terreno:210, niveles:1, recamaras:null, anio:2024, precio:2650000, disponible:true, seed:'clinica-dental', desc:['Adaptación de un local comercial a clínica dental de tres consultorios, resolviendo la instalación hidráulica especializada sin romper la losa estructural existente.','La sala de espera se diseñó deliberadamente sin vista directa a los sillones dentales, un detalle simple que redujo notablemente la ansiedad reportada por pacientes durante las pruebas.'], materiales:'Tabla roca, piso vinílico clínico, vidrio esmerilado', orientacion:'Consultorios interiores, sala de espera hacia fachada', opciones:['Instalación hidráulica especializada sin romper losa existente','Consultorios acústicamente aislados entre sí','Sala de espera sin vista directa a consultorios']},
+  {id:'p38', nombre:'Casa Del Fresno', cat:'residencial', ubicacion:'San Miguel de Allende, Gto.', ciudad:'Otro', m2:265, m2Terreno:600, niveles:1, recamaras:3, anio:2025, precio:3550000, disponible:true, seed:'casa-del-fresno', desc:['Vivienda de una planta alrededor de un fresno existente que el proyecto conservó como eje central del jardín, ajustando la geometría de la casa a su copa.','El corredor perimetral cubierto conecta todas las habitaciones sin pasar por el interior de la sala, útil para familias con niños o mascotas en movimiento constante.'], materiales:'Tabique aparente, madera, teja de barro', orientacion:'Casa organizada alrededor de árbol existente conservado', opciones:['Diseño ajustado para conservar arbolado existente','Corredor perimetral cubierto conectando todas las habitaciones','Jardín central como eje organizador']},
+  {id:'p39', nombre:'Bodega-Showroom Muebles Norte', cat:'comercial', ubicacion:'Cuautitlán Izcalli, Edo. Méx.', ciudad:'Edo. Méx.', m2:2600, m2Terreno:3200, niveles:1, recamaras:null, anio:2022, precio:14100000, disponible:true, seed:'bodega-showroom', desc:['Nave industrial con área de showroom de mobiliario integrada, separando visualmente el área de exhibición del área de almacenamiento sin muros que interrumpan la altura libre.','La luz natural cenital sobre el área de showroom permite exhibir los muebles sin la distorsión de color típica de la iluminación artificial fluorescente.'], materiales:'Estructura metálica, panel aislante, piso epóxico', orientacion:'Lucernarios cenitales sobre área de showroom', opciones:['Showroom integrado sin muros divisorios','Iluminación cenital natural sin distorsión de color','Área de almacenamiento con acceso independiente para carga']},
+  {id:'p40', nombre:'Casa Del Risco', cat:'residencial', ubicacion:'Malinalco, Edo. Méx.', ciudad:'Edo. Méx.', m2:390, m2Terreno:1500, niveles:2, recamaras:4, anio:2024, precio:5450000, disponible:true, seed:'casa-del-risco', desc:['Residencia construida al borde de un risco natural, con una terraza en voladizo estructural que el equipo de ingeniería calculó específicamente para las condiciones sísmicas del predio.','El acceso principal se resolvió en el nivel superior, de forma que la casa se recorre de arriba hacia abajo, revelando la vista al valle de forma progresiva en cada nivel.'], materiales:'Concreto armado, acero estructural en voladizo, piedra', orientacion:'Terraza en voladizo orientada al valle', opciones:['Voladizo estructural calculado por condiciones sísmicas del predio','Recorrido descendente revelando vista progresivamente','Estudio geotécnico de risco incluido']}
+];
+window.__testimonios = [
+  {nombre:'Renata Solís', rol:'Casa Basalto, Valle de Bravo', avatar:'arq-renata', texto:'Apartamos Casa Basalto desde el catálogo y el arquitecto adaptó la orientación exacta a nuestro predio en menos de tres semanas. Fue mucho más rápido que empezar de cero.', estrellas:5},
+  {nombre:'Joaquín Herrera', rol:'Local Raíz, CDMX', avatar:'arq-joaquin', texto:'Coordinaron directo con Torreón Constructora para la ejecución. Tener arquitectura y obra bajo el mismo grupo evitó las fricciones típicas entre diseñador y constructor.', estrellas:5},
+  {nombre:'Paola Nieto', rol:'Proyecto institucional, Querétaro', avatar:'arq-paola', texto:'La gestión de permisos fue el punto que más nos preocupaba y fue el que menos tuvimos que tocar. Todo el trámite ante el municipio lo llevó el estudio.', estrellas:5},
+  {nombre:'Diego Salazar', rol:'Casa Encino, Querétaro', avatar:'arq-diego', texto:'El monto de apartado se descontó tal cual del proyecto ejecutivo, sin sorpresas. Agendamos visita a un proyecto similar antes de firmar y eso nos dio mucha confianza.', estrellas:5},
+  {nombre:'Marcela Duarte', rol:'Oficinas Álamo, CDMX', avatar:'arq-marcela', texto:'Buscábamos algo específico: reusar la nave sin perder la altura libre. El catálogo tenía un proyecto casi idéntico y solo ajustaron el programa a nuestro equipo.', estrellas:5},
+  {nombre:'Tomás Aguilar', rol:'Casa Talud, Tepoztlán', avatar:'arq-tomas', texto:'Comparé tres casas del catálogo con la herramienta de comparación antes de decidir. Ver metraje, precio y ubicación lado a lado hizo la decisión mucho más simple.', estrellas:5},
+  {nombre:'Ximena Roble', rol:'Torre Vivienda Nogal, CDMX', avatar:'arq-ximena', texto:'Empezamos pensando en un proyecto a la medida, pero el equipo nos mostró un diseño del catálogo que resolvía exactamente lo que buscábamos, en menos tiempo.', estrellas:5},
+  {nombre:'Andrés Falcón', rol:'Clínica Dental Reforma, CDMX', avatar:'arq-andres', texto:'La ficha del proyecto tenía tanto detalle técnico que llegamos a la primera llamada ya con casi todas las dudas resueltas. Se sintió un proceso muy serio.', estrellas:5}
+];
+/* =========================================================
+   ESTADO GLOBAL
+========================================================= */
+const state = {
+  filters:{ categorias:[], disponibilidad:[], ubicaciones:[], precioMin:null, precioMax:null, m2Min:null, m2Max:null, recamaras:null, niveles:null, q:'' },
+  sort:'reciente',
+  visibleCount:9,
+  pageSize:9,
+  favoritos:new Set(),
+  comparador:new Set(),
+  view:'todos',
+  currentGalleryIdx:0,
+  currentProject:null,
+  wizard:{ path:null, projectId:null, tipoProyecto:'', ubicacionPredio:'', metrajeAprox:'', budget:null, nombre:'', email:'', telefono:'', comentario:'' }
+};
+
+function money(n){
+  if(n == null) return '';
+  return '$' + n.toLocaleString('es-MX') + ' MXN';
+}
+function moneyShort(n){
+  if(n == null) return '';
+  if(n >= 1000000) return '$' + (n/1000000).toFixed(1).replace(/\.0$/,'') + 'M MXN';
+  return '$' + n.toLocaleString('es-MX') + ' MXN';
+}
+function folio(prefix){
+  return prefix + '-' + Math.floor(100000 + Math.random()*899999);
+}
+
+/* =========================================================
+   INICIALIZACIÓN DE FILTROS (poblar checkboxes desde datos)
+========================================================= */
+const CATALOGO = window.__catalogo;
+const TESTIMONIOS = window.__testimonios;
+
+function initFilterPanels(){
+  document.getElementById('stat-total-proyectos').textContent = CATALOGO.length;
+
+  const cats = [
+    {key:'residencial', label:'Residencial'},
+    {key:'comercial', label:'Comercial'},
+    {key:'institucional', label:'Institucional'}
+  ];
+  const catCounts = {};
+  CATALOGO.forEach(p => catCounts[p.cat] = (catCounts[p.cat]||0)+1);
+  const catEl = document.getElementById('filter-categoria');
+  catEl.innerHTML = cats.map(c => `
+    <label class="filter-check">
+      <input type="checkbox" data-filter-type="categorias" value="${c.key}">
+      ${c.label} <span class="cnt">${catCounts[c.key]||0}</span>
+    </label>
+  `).join('');
+
+  const disponEl = document.getElementById('filter-disponibilidad');
+  const dispCount = CATALOGO.filter(p=>p.disponible).length;
+  const refCount = CATALOGO.filter(p=>!p.disponible).length;
+  disponEl.innerHTML = `
+    <label class="filter-check"><input type="checkbox" data-filter-type="disponibilidad" value="disponible">Diseño disponible para adaptar <span class="cnt">${dispCount}</span></label>
+    <label class="filter-check"><input type="checkbox" data-filter-type="disponibilidad" value="referencia">Proyecto entregado — inspírate <span class="cnt">${refCount}</span></label>
+  `;
+
+  const ciudades = [...new Set(CATALOGO.map(p=>p.ciudad))].sort();
+  const ubicEl = document.getElementById('filter-ubicacion');
+  ubicEl.innerHTML = ciudades.map(c => {
+    const cnt = CATALOGO.filter(p=>p.ciudad===c).length;
+    return `<label class="filter-check"><input type="checkbox" data-filter-type="ubicaciones" value="${c}">${c} <span class="cnt">${cnt}</span></label>`;
+  }).join('');
+
+  const recEl = document.getElementById('filter-recamaras');
+  recEl.innerHTML = ['1-2','3','4','5+'].map(r => `<button type="button" class="filter-pill" data-filter-recamaras="${r}">${r}</button>`).join('');
+
+  const nivEl = document.getElementById('filter-niveles');
+  nivEl.innerHTML = ['1','2','3+'].map(n => `<button type="button" class="filter-pill" data-filter-niveles="${n}">${n === '3+' ? '3 o más' : n}</button>`).join('');
+
+  document.querySelectorAll('[data-filter-type]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const type = cb.dataset.filterType;
+      const val = cb.value;
+      const arr = state.filters[type];
+      if(cb.checked){ if(!arr.includes(val)) arr.push(val); }
+      else{ state.filters[type] = arr.filter(v => v !== val); }
+      state.visibleCount = state.pageSize;
+      renderCatalog();
+    });
+  });
+  document.querySelectorAll('[data-filter-recamaras]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.filterRecamaras;
+      const wasActive = state.filters.recamaras === val;
+      document.querySelectorAll('[data-filter-recamaras]').forEach(b=>b.classList.remove('is-active'));
+      state.filters.recamaras = wasActive ? null : val;
+      if(!wasActive) btn.classList.add('is-active');
+      state.visibleCount = state.pageSize;
+      renderCatalog();
+    });
+  });
+  document.querySelectorAll('[data-filter-niveles]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.filterNiveles;
+      const wasActive = state.filters.niveles === val;
+      document.querySelectorAll('[data-filter-niveles]').forEach(b=>b.classList.remove('is-active'));
+      state.filters.niveles = wasActive ? null : val;
+      if(!wasActive) btn.classList.add('is-active');
+      state.visibleCount = state.pageSize;
+      renderCatalog();
+    });
+  });
+
+  ['filter-precio-min','filter-precio-max','filter-m2-min','filter-m2-max'].forEach(id => {
+    document.getElementById(id).addEventListener('input', debounce(() => {
+      state.filters.precioMin = parseFloat(document.getElementById('filter-precio-min').value) || null;
+      state.filters.precioMax = parseFloat(document.getElementById('filter-precio-max').value) || null;
+      state.filters.m2Min = parseFloat(document.getElementById('filter-m2-min').value) || null;
+      state.filters.m2Max = parseFloat(document.getElementById('filter-m2-max').value) || null;
+      state.visibleCount = state.pageSize;
+      renderCatalog();
+    }, 300));
+  });
+}
+
+function debounce(fn, ms){
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+/* =========================================================
+   FILTRADO / ORDEN / BÚSQUEDA
+========================================================= */
+function matchesFilters(p){
+  const f = state.filters;
+  if(f.categorias.length && !f.categorias.includes(p.cat)) return false;
+  if(f.disponibilidad.length){
+    const dispKey = p.disponible ? 'disponible' : 'referencia';
+    if(!f.disponibilidad.includes(dispKey)) return false;
+  }
+  if(f.ubicaciones.length && !f.ubicaciones.includes(p.ciudad)) return false;
+  if(f.precioMin != null && (p.precio == null || p.precio < f.precioMin)) return false;
+  if(f.precioMax != null && (p.precio == null || p.precio > f.precioMax)) return false;
+  if(f.m2Min != null && p.m2 < f.m2Min) return false;
+  if(f.m2Max != null && p.m2 > f.m2Max) return false;
+  if(f.recamaras){
+    if(p.recamaras == null) return false;
+    if(f.recamaras === '1-2' && !(p.recamaras >= 1 && p.recamaras <= 2)) return false;
+    if(f.recamaras === '3' && p.recamaras !== 3) return false;
+    if(f.recamaras === '4' && p.recamaras !== 4) return false;
+    if(f.recamaras === '5+' && p.recamaras < 5) return false;
+  }
+  if(f.niveles){
+    if(f.niveles === '1' && p.niveles !== 1) return false;
+    if(f.niveles === '2' && p.niveles !== 2) return false;
+    if(f.niveles === '3+' && p.niveles < 3) return false;
+  }
+  if(f.q){
+    const q = f.q.toLowerCase();
+    if(!p.nombre.toLowerCase().includes(q) && !p.ubicacion.toLowerCase().includes(q)) return false;
+  }
+  return true;
+}
+
+function getFilteredSorted(){
+  let list = CATALOGO.filter(matchesFilters);
+  switch(state.sort){
+    case 'precio-asc': list = list.slice().sort((a,b) => (a.precio ?? Infinity) - (b.precio ?? Infinity)); break;
+    case 'precio-desc': list = list.slice().sort((a,b) => (b.precio ?? -Infinity) - (a.precio ?? -Infinity)); break;
+    case 'm2-desc': list = list.slice().sort((a,b) => b.m2 - a.m2); break;
+    case 'm2-asc': list = list.slice().sort((a,b) => a.m2 - b.m2); break;
+    default: list = list.slice().sort((a,b) => b.anio - a.anio || b.id.localeCompare(a.id));
+  }
+  return list;
+}
+
+/* =========================================================
+   RENDER: TARJETAS
+========================================================= */
+function svgLocPin(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+}
+function svgArea(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M8 3v18M3 8h5"/></svg>';
+}
+function svgBed(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a2 2 0 012-2h14a2 2 0 012 2v6"/><path d="M3 12V6a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M3 18v2M21 18v2"/></svg>';
+}
+function svgLevels(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="6" rx="1"/><rect x="4" y="15" width="16" height="6" rx="1"/></svg>';
+}
+
+function cardTemplate(p){
+  const isFav = state.favoritos.has(p.id);
+  const isCompared = state.comparador.has(p.id);
+  const priceLabel = p.precio != null ? moneyShort(p.precio) : p.precioTexto;
+  const priceSmall = p.precio != null ? 'Desde' : '';
+  return `
+    <article class="p-card" tabindex="0" role="button" aria-label="Ver proyecto ${p.nombre}" data-id="${p.id}">
+      <div class="p-card-img">
+        <img src="https://picsum.photos/seed/${p.seed}/700/540" alt="Fachada del proyecto ${p.nombre} en ${p.ubicacion}" loading="lazy">
+        <div class="p-card-badges">
+          <span class="p-badge ${p.disponible ? 'disponible' : 'referencia'}">${p.disponible ? 'Disponible para adaptar' : 'Proyecto entregado — inspírate'}</span>
+        </div>
+        <button class="p-fav-btn ${isFav?'is-fav':''}" data-fav-toggle="${p.id}" aria-label="${isFav ? 'Quitar de favoritos' : 'Guardar en favoritos'}" type="button">
+          <svg viewBox="0 0 24 24" fill="${isFav?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        </button>
+        <label class="p-compare-check" title="Agregar al comparador">
+          <input type="checkbox" data-compare-toggle="${p.id}" ${isCompared ? 'checked' : ''}> Comparar
+        </label>
+      </div>
+      <div class="p-card-info">
+        <span class="p-card-cat ${p.cat === 'institucional' ? 'cat-institucional' : ''}">${p.cat}</span>
+        <div class="p-card-name">${p.nombre}</div>
+        <div class="p-card-loc">${svgLocPin()} ${p.ubicacion}</div>
+        <div class="p-card-specs">
+          <span>${svgArea()} ${p.m2.toLocaleString('es-MX')} m²</span>
+          ${p.recamaras ? `<span>${svgBed()} ${p.recamaras} rec.</span>` : ''}
+          <span>${svgLevels()} ${p.niveles} niv.</span>
+        </div>
+        <div class="p-card-foot">
+          <span class="p-card-price">${priceLabel}<small>${priceSmall}</small></span>
+          <span class="p-card-year">${p.anio}</span>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderCatalog(){
+  updateActiveChips();
+  const grid = document.getElementById('cat-grid');
+  const loadmoreWrap = document.getElementById('cat-loadmore-wrap');
+
+  if(state.view === 'favoritos'){ renderFavoritesView(); loadmoreWrap.style.display='none'; return; }
+  if(state.view === 'comparar'){ renderCompareView(); loadmoreWrap.style.display='none'; return; }
+
+  const filtered = getFilteredSorted();
+  const visible = filtered.slice(0, state.visibleCount);
+
+  document.getElementById('cat-count').innerHTML = `Mostrando <b>${visible.length}</b> de <b>${filtered.length}</b> proyectos`;
+
+  if(filtered.length === 0){
+    grid.innerHTML = `
+      <div class="cat-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <h3>No encontramos proyectos con esos filtros</h3>
+        <p>Prueba ampliando el rango de precio o metraje, o quitando alguno de los filtros activos.</p>
+        <button class="btn-cta" id="cat-empty-clear" type="button">Limpiar filtros</button>
+      </div>`;
+    document.getElementById('cat-empty-clear').addEventListener('click', clearAllFilters);
+    loadmoreWrap.style.display = 'none';
+    return;
+  }
+
+  grid.innerHTML = visible.map(cardTemplate).join('');
+  loadmoreWrap.style.display = visible.length < filtered.length ? 'flex' : 'none';
+
+  attachCardEvents(grid);
+  revealCards(grid);
+}
+
+function attachCardEvents(container){
+  container.querySelectorAll('.p-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if(e.target.closest('[data-fav-toggle]') || e.target.closest('[data-compare-toggle]') || e.target.closest('.p-compare-check')) return;
+      openProjectModal(card.dataset.id);
+    });
+    card.addEventListener('keydown', e => {
+      if((e.key === 'Enter' || e.key === ' ') && !e.target.closest('[data-fav-toggle]') && !e.target.closest('.p-compare-check')){
+        e.preventDefault(); openProjectModal(card.dataset.id);
+      }
+    });
+  });
+  container.querySelectorAll('[data-fav-toggle]').forEach(btn => {
+    btn.addEventListener('click', (e) => { e.stopPropagation(); toggleFavorite(btn.dataset.favToggle); });
+  });
+  container.querySelectorAll('[data-compare-toggle]').forEach(chk => {
+    chk.addEventListener('click', (e) => e.stopPropagation());
+    chk.addEventListener('change', () => toggleCompare(chk.dataset.compareToggle));
+  });
+}
+
+function revealCards(container){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, {threshold:0.1});
+  container.querySelectorAll('.p-card').forEach(c => io.observe(c));
+}
+
+/* =========================================================
+   CHIPS DE FILTROS ACTIVOS
+========================================================= */
+const CAT_LABELS = {residencial:'Residencial', comercial:'Comercial', institucional:'Institucional'};
+function updateActiveChips(){
+  const f = state.filters;
+  const chips = [];
+  f.categorias.forEach(c => chips.push({type:'categorias', val:c, label:CAT_LABELS[c]}));
+  f.disponibilidad.forEach(d => chips.push({type:'disponibilidad', val:d, label:d==='disponible'?'Disponible para adaptar':'Proyecto entregado'}));
+  f.ubicaciones.forEach(u => chips.push({type:'ubicaciones', val:u, label:u}));
+  if(f.precioMin != null || f.precioMax != null){
+    chips.push({type:'precio', val:'precio', label:`Precio: ${f.precioMin?moneyShort(f.precioMin):'$0'} — ${f.precioMax?moneyShort(f.precioMax):'sin tope'}`});
+  }
+  if(f.m2Min != null || f.m2Max != null){
+    chips.push({type:'m2', val:'m2', label:`Metraje: ${f.m2Min??0} — ${f.m2Max??'sin tope'} m²`});
+  }
+  if(f.recamaras) chips.push({type:'recamaras', val:'recamaras', label:`${f.recamaras} recámaras`});
+  if(f.niveles) chips.push({type:'niveles', val:'niveles', label:`${f.niveles === '3+' ? '3+' : f.niveles} niveles`});
+  if(f.q) chips.push({type:'q', val:'q', label:`Búsqueda: “${f.q}”`});
+
+  const el = document.getElementById('active-chips');
+  el.innerHTML = chips.map(c => `<span class="chip" data-chip-type="${c.type}" data-chip-val="${c.val}">${c.label}<button type="button" aria-label="Quitar filtro">✕</button></span>`).join('');
+  el.querySelectorAll('.chip button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const chip = btn.closest('.chip');
+      removeFilterChip(chip.dataset.chipType, chip.dataset.chipVal);
+    });
+  });
+
+  const activeCount = chips.length;
+  const countBadge = document.getElementById('filters-active-count');
+  countBadge.textContent = activeCount ? `(${activeCount})` : '';
+}
+
+function removeFilterChip(type, val){
+  const f = state.filters;
+  if(type === 'categorias' || type === 'disponibilidad' || type === 'ubicaciones'){
+    f[type] = f[type].filter(v => v !== val);
+    document.querySelectorAll(`[data-filter-type="${type}"][value="${val}"]`).forEach(cb => cb.checked = false);
+  } else if(type === 'precio'){
+    f.precioMin = null; f.precioMax = null;
+    document.getElementById('filter-precio-min').value = '';
+    document.getElementById('filter-precio-max').value = '';
+  } else if(type === 'm2'){
+    f.m2Min = null; f.m2Max = null;
+    document.getElementById('filter-m2-min').value = '';
+    document.getElementById('filter-m2-max').value = '';
+  } else if(type === 'recamaras'){
+    f.recamaras = null;
+    document.querySelectorAll('[data-filter-recamaras]').forEach(b=>b.classList.remove('is-active'));
+  } else if(type === 'niveles'){
+    f.niveles = null;
+    document.querySelectorAll('[data-filter-niveles]').forEach(b=>b.classList.remove('is-active'));
+  } else if(type === 'q'){
+    f.q = '';
+    document.getElementById('cat-search-input').value = '';
+  }
+  state.visibleCount = state.pageSize;
+  renderCatalog();
+}
+
+function clearAllFilters(){
+  state.filters = { categorias:[], disponibilidad:[], ubicaciones:[], precioMin:null, precioMax:null, m2Min:null, m2Max:null, recamaras:null, niveles:null, q:'' };
+  document.querySelectorAll('[data-filter-type]').forEach(cb => cb.checked = false);
+  document.querySelectorAll('[data-filter-recamaras],[data-filter-niveles]').forEach(b => b.classList.remove('is-active'));
+  ['filter-precio-min','filter-precio-max','filter-m2-min','filter-m2-max'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('cat-search-input').value = '';
+  state.visibleCount = state.pageSize;
+  renderCatalog();
+}
+
+/* =========================================================
+   FAVORITOS
+========================================================= */
+function toggleFavorite(id){
+  if(state.favoritos.has(id)) state.favoritos.delete(id);
+  else state.favoritos.add(id);
+  updateFavCompareTabs();
+  renderCatalog();
+  if(state.currentProject && state.currentProject.id === id) updatePmodalFavButton();
+}
+function updateFavCompareTabs(){
+  const favTab = document.getElementById('fav-count-tab');
+  favTab.textContent = state.favoritos.size ? `(${state.favoritos.size})` : '';
+  const compTab = document.getElementById('compare-count-tab');
+  compTab.textContent = state.comparador.size ? `(${state.comparador.size})` : '';
+  updateCompareBar();
+}
+
+function renderFavoritesView(){
+  const grid = document.getElementById('cat-grid');
+  document.getElementById('cat-count').innerHTML = `Mostrando <b>${state.favoritos.size}</b> de <b>${state.favoritos.size}</b> proyectos guardados`;
+  if(state.favoritos.size === 0){
+    grid.innerHTML = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        <h3>Aún no guardas ningún proyecto</h3>
+        <p>Toca el ícono de corazón en cualquier tarjeta del catálogo para guardarlo aquí.</p>
+      </div>`;
+    return;
+  }
+  const list = CATALOGO.filter(p => state.favoritos.has(p.id));
+  grid.innerHTML = list.map(cardTemplate).join('');
+  attachCardEvents(grid);
+  revealCards(grid);
+}
+
+/* =========================================================
+   COMPARADOR
+========================================================= */
+function toggleCompare(id){
+  if(state.comparador.has(id)){
+    state.comparador.delete(id);
+  } else {
+    if(state.comparador.size >= 3){
+      showToast('Puedes comparar hasta 3 proyectos a la vez. Quita uno para agregar otro.', 'info');
+      renderCatalog();
+      return;
+    }
+    state.comparador.add(id);
+  }
+  updateFavCompareTabs();
+  renderCatalog();
+}
+
+function updateCompareBar(){
+  const bar = document.getElementById('compare-bar');
+  const count = state.comparador.size;
+  document.getElementById('compare-bar-count').textContent = count;
+  const thumbs = document.getElementById('compare-bar-thumbs');
+  const list = CATALOGO.filter(p => state.comparador.has(p.id));
+  thumbs.innerHTML = list.map(p => `<img src="https://picsum.photos/seed/${p.seed}/80/80" alt="${p.nombre}">`).join('');
+  if(count >= 2 && state.view !== 'comparar') bar.classList.add('is-shown');
+  else bar.classList.remove('is-shown');
+}
+
+function renderCompareView(){
+  const grid = document.getElementById('cat-grid');
+  const list = CATALOGO.filter(p => state.comparador.has(p.id));
+  document.getElementById('cat-count').innerHTML = `Comparando <b>${list.length}</b> proyectos`;
+  if(list.length < 2){
+    grid.innerHTML = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg>
+        <h3>Selecciona al menos 2 proyectos</h3>
+        <p>Marca la casilla “Comparar” en las tarjetas del catálogo para verlos lado a lado aquí.</p>
+      </div>`;
+    return;
+  }
+  const rows = [
+    {label:'Categoría', get:p=>CAT_LABELS[p.cat]},
+    {label:'Ubicación', get:p=>p.ubicacion},
+    {label:'Precio', get:p=> p.precio!=null ? `<b>${moneyShort(p.precio)}</b>` : (p.precioTexto||'—')},
+    {label:'Metraje construido', get:p=>p.m2.toLocaleString('es-MX')+' m²'},
+    {label:'Metraje de terreno', get:p=>p.m2Terreno.toLocaleString('es-MX')+' m²'},
+    {label:'Niveles', get:p=>p.niveles},
+    {label:'Recámaras / espacios', get:p=>p.recamaras ?? '—'},
+    {label:'Año', get:p=>p.anio},
+    {label:'Disponibilidad', get:p=> p.disponible ? 'Disponible para adaptar' : 'Proyecto entregado'}
+  ];
+  grid.innerHTML = `
+    <div style="grid-column:1/-1;">
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead><tr>
+            <th></th>
+            ${list.map(p => `<th><div class="compare-thead-project"><img src="https://picsum.photos/seed/${p.seed}/300/225" alt="${p.nombre}"><span class="cname">${p.nombre}</span><button class="compare-remove" data-remove-compare="${p.id}">Quitar</button></div></th>`).join('')}
+          </tr></thead>
+          <tbody>
+            ${rows.map(r => `<tr><td class="label-cell">${r.label}</td>${list.map(p => `<td>${r.get(p)}</td>`).join('')}</tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+        ${list.map(p => `<button class="btn-outline" style="color:var(--paper);border-color:var(--hairline-strong);" data-view-project="${p.id}">Ver ficha de ${p.nombre}</button>`).join('')}
+      </div>
+    </div>
+  `;
+  grid.querySelectorAll('[data-remove-compare]').forEach(btn => {
+    btn.addEventListener('click', () => toggleCompare(btn.dataset.removeCompare));
+  });
+  grid.querySelectorAll('[data-view-project]').forEach(btn => {
+    btn.addEventListener('click', () => openProjectModal(btn.dataset.viewProject));
+  });
+}
+
+/* =========================================================
+   MODAL DE FICHA DE PROYECTO
+========================================================= */
+function getGallerySeeds(p){
+  return [p.seed, p.seed+'-2', p.seed+'-3', p.seed+'-4', p.seed+'-5', p.seed+'-6'];
+}
+
+function openProjectModal(id){
+  const p = CATALOGO.find(x => x.id === id);
+  if(!p) return;
+  state.currentProject = p;
+  state.currentGalleryIdx = 0;
+  renderPmodalGallery();
+
+  document.getElementById('pmodal-cat').textContent = CAT_LABELS[p.cat];
+  document.getElementById('pmodal-cat').className = 'pmodal-tag' + (p.cat === 'institucional' ? ' institucional' : '');
+  const availEl = document.getElementById('pmodal-avail');
+  availEl.textContent = p.disponible ? 'Disponible para adaptar' : 'Proyecto entregado — inspírate';
+  availEl.className = 'pmodal-avail ' + (p.disponible ? 'disponible' : 'referencia');
+
+  document.getElementById('pmodal-title').textContent = p.nombre;
+  document.getElementById('pmodal-loc').textContent = p.ubicacion;
+  document.getElementById('pmodal-price').textContent = p.precio != null ? moneyShort(p.precio) : p.precioTexto;
+  document.getElementById('pmodal-price-label').textContent = p.precio != null ? 'Estimado — sujeto a visita de sitio' : 'Sujeto a proceso de licitación';
+
+  const specs = [
+    {v:p.m2.toLocaleString('es-MX'), l:'m² construidos'},
+    {v:p.m2Terreno.toLocaleString('es-MX'), l:'m² de terreno'},
+    {v:p.niveles, l:'Niveles'},
+    {v:p.recamaras ?? '—', l:'Recámaras/espacios'},
+    {v:p.anio, l:'Año'},
+  ];
+  document.getElementById('pmodal-specs').innerHTML = specs.map(s => `<div class="pmodal-spec"><b>${s.v}</b><span>${s.l}</span></div>`).join('');
+
+  document.getElementById('pmodal-desc').innerHTML = p.desc.map(par => `<p>${par}</p>`).join('') +
+    `<p style="margin-top:14px;font-size:0.86rem;color:var(--steel);"><b style="color:var(--paper);">Materiales principales:</b> ${p.materiales}. <b style="color:var(--paper);">Orientación:</b> ${p.orientacion}.</p>`;
+
+  document.getElementById('pmodal-personalizacion-title').textContent = p.disponible ? 'Personalización disponible' : 'Proyecto de referencia';
+  document.getElementById('pmodal-personalizacion-text').textContent = p.disponible
+    ? 'Puedes adaptar este diseño a tu terreno con ajustes menores de orientación, distribución o metraje. El arquitecto que te contacte te dirá exactamente qué tan cerca queda tu predio del diseño original.'
+    : 'Este proyecto ya fue entregado y no está disponible para replicar tal cual, pero puede inspirar un diseño 100% a la medida con un lenguaje material similar.';
+
+  updatePmodalFavButton();
+
+  const ctaRow = document.getElementById('pmodal-cta-row');
+  const btnApartar = document.getElementById('pmodal-btn-apartar');
+  btnApartar.style.display = p.disponible ? 'inline-flex' : 'none';
+  btnApartar.onclick = () => openApartarModal(p);
+  document.getElementById('pmodal-btn-visita').onclick = () => openVisitaModal(p);
+  document.getElementById('pmodal-btn-medida').onclick = () => {
+    closeProjectModal();
+    startWizardFromOutside('medida');
+  };
+
+  renderPmodalRelated(p);
+
+  document.getElementById('pmodal-backdrop').classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', pmodalKeyHandler);
+
+  maybeShowSocialProofForProject(p);
+}
+
+function updatePmodalFavButton(){
+  const p = state.currentProject;
+  if(!p) return;
+  const isFav = state.favoritos.has(p.id);
+  const btn = document.getElementById('pmodal-fav-btn');
+  btn.classList.toggle('is-fav', isFav);
+  document.getElementById('pmodal-fav-label').textContent = isFav ? 'Guardado en favoritos' : 'Guardar en favoritos';
+}
+
+function closeProjectModal(){
+  document.getElementById('pmodal-backdrop').classList.remove('is-open');
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', pmodalKeyHandler);
+}
+function pmodalKeyHandler(e){
+  if(document.querySelector('.action-modal-backdrop.is-open')) return;
+  if(e.key === 'Escape') closeProjectModal();
+  if(e.key === 'ArrowRight') pmodalGalleryNext();
+  if(e.key === 'ArrowLeft') pmodalGalleryPrev();
+}
+
+function renderPmodalGallery(){
+  const p = state.currentProject;
+  const seeds = getGallerySeeds(p);
+  const img = document.getElementById('pmodal-gallery-img');
+  img.src = `https://picsum.photos/seed/${seeds[state.currentGalleryIdx]}/1400/700`;
+  img.alt = `Fotografía ${state.currentGalleryIdx+1} de ${p.nombre}`;
+  document.getElementById('pmodal-gallery-counter').textContent = `${state.currentGalleryIdx+1} / ${seeds.length}`;
+  const dots = document.getElementById('pmodal-gallery-dots');
+  dots.innerHTML = seeds.map((s,i) => `<span class="pmodal-gallery-dot ${i===state.currentGalleryIdx?'is-active':''}" data-i="${i}"></span>`).join('');
+  dots.querySelectorAll('.pmodal-gallery-dot').forEach(dot => {
+    dot.addEventListener('click', () => { state.currentGalleryIdx = parseInt(dot.dataset.i); renderPmodalGallery(); });
+  });
+}
+function pmodalGalleryNext(){
+  const seeds = getGallerySeeds(state.currentProject);
+  state.currentGalleryIdx = (state.currentGalleryIdx+1) % seeds.length;
+  renderPmodalGallery();
+}
+function pmodalGalleryPrev(){
+  const seeds = getGallerySeeds(state.currentProject);
+  state.currentGalleryIdx = (state.currentGalleryIdx-1+seeds.length) % seeds.length;
+  renderPmodalGallery();
+}
+
+function renderPmodalRelated(p){
+  let related = CATALOGO.filter(x => x.cat === p.cat && x.id !== p.id);
+  related = related.length >= 3 ? related : CATALOGO.filter(x => x.id !== p.id);
+  related = related.sort(() => Math.random()-0.5).slice(0,3);
+  document.getElementById('pmodal-related').innerHTML = related.map(r => `
+    <div class="pmodal-related-card" data-id="${r.id}">
+      <img src="https://picsum.photos/seed/${r.seed}/500/375" alt="${r.nombre}" loading="lazy">
+      <div class="r-info"><div class="r-name">${r.nombre}</div><div class="r-loc">${r.ubicacion}</div></div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#pmodal-related .pmodal-related-card').forEach(card => {
+    card.addEventListener('click', () => openProjectModal(card.dataset.id));
+  });
+}
+
+/* =========================================================
+   SUBMODAL: APARTAR DISEÑO
+========================================================= */
+function openApartarModal(p){
+  document.getElementById('apartar-form-wrap').style.display = 'block';
+  document.getElementById('apartar-confirm-wrap').style.display = 'none';
+  document.getElementById('apartar-sub').textContent = `Con el apartado de "${p.nombre}", un arquitecto del estudio te contacta para iniciar la etapa de adaptación del diseño a tu predio.`;
+  const monto = p.precio ? Math.round(p.precio * 0.006 / 1000) * 1000 : 25000;
+  document.getElementById('apartar-monto').textContent = money(Math.max(monto, 15000));
+  document.getElementById('apartar-form').reset();
+  document.querySelectorAll('#apartar-form .form-group').forEach(g => g.classList.remove('has-error'));
+  document.getElementById('apartar-status').className = 'form-status';
+  document.getElementById('apartar-backdrop').classList.add('is-open');
+  document.getElementById('apartar-backdrop').dataset.projectId = p.id;
+}
+function closeApartarModal(){ document.getElementById('apartar-backdrop').classList.remove('is-open'); }
+
+function validateSimpleForm(prefix, fields){
+  let ok = true;
+  fields.forEach(f => {
+    const el = document.getElementById(`${prefix}-${f.id}`);
+    const group = el.closest('.form-group');
+    const valid = f.test(el.value);
+    group.classList.toggle('has-error', !valid);
+    if(!valid) ok = false;
+  });
+  return ok;
+}
+
+(function setupApartarForm(){
+  const form = document.getElementById('apartar-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const ok = validateSimpleForm('apartar', [
+      {id:'nombre', test:v=>v.trim().length>=2},
+      {id:'email', test:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())},
+      {id:'telefono', test:v=>v.replace(/\D/g,'').length===10},
+    ]);
+    if(!ok){
+      const status = document.getElementById('apartar-status');
+      status.className = 'form-status show bad';
+      status.textContent = 'Revisa los campos marcados antes de continuar.';
+      return;
+    }
+    const btn = document.getElementById('apartar-submit-btn');
+    btn.disabled = true;
+    btn.querySelector('.btn-label').textContent = 'Confirmando…';
+    new Promise(r => setTimeout(r, 1300)).then(() => {
+      const f = folio('AQ');
+      document.getElementById('apartar-folio').textContent = f;
+      document.getElementById('apartar-form-wrap').style.display = 'none';
+      document.getElementById('apartar-confirm-wrap').style.display = 'block';
+      btn.disabled = false;
+      btn.querySelector('.btn-label').textContent = 'Confirmar apartado';
+      showToast(`Diseño apartado con folio ${f}. Revisa tu correo para los próximos pasos.`, 'success');
+    });
+  });
+})();
+
+/* =========================================================
+   SUBMODAL: AGENDAR VISITA
+========================================================= */
+function openVisitaModal(p){
+  document.getElementById('visita-form-wrap').style.display = 'block';
+  document.getElementById('visita-confirm-wrap').style.display = 'none';
+  document.getElementById('visita-sub').textContent = p.disponible
+    ? `Coordina una visita a un proyecto ya construido con características similares a "${p.nombre}", para conocer materiales y acabados en sitio.`
+    : `"${p.nombre}" ya fue entregado. Agenda una visita para conocerlo en persona y conversar sobre un diseño con un lenguaje similar.`;
+  document.getElementById('visita-form').reset();
+  document.querySelectorAll('#visita-form .form-group').forEach(g => g.classList.remove('has-error'));
+  document.getElementById('visita-status').className = 'form-status';
+  document.getElementById('visita-backdrop').classList.add('is-open');
+  document.getElementById('visita-backdrop').dataset.projectId = p.id;
+}
+function closeVisitaModal(){ document.getElementById('visita-backdrop').classList.remove('is-open'); }
+
+(function setupVisitaForm(){
+  const form = document.getElementById('visita-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const ok = validateSimpleForm('visita', [
+      {id:'nombre', test:v=>v.trim().length>=2},
+      {id:'email', test:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())},
+      {id:'fecha', test:v=>!!v},
+      {id:'hora', test:v=>!!v},
+    ]);
+    if(!ok){
+      const status = document.getElementById('visita-status');
+      status.className = 'form-status show bad';
+      status.textContent = 'Revisa los campos marcados antes de continuar.';
+      return;
+    }
+    const btn = document.getElementById('visita-submit-btn');
+    btn.disabled = true;
+    btn.querySelector('.btn-label').textContent = 'Confirmando…';
+    const fecha = document.getElementById('visita-fecha').value;
+    const hora = document.getElementById('visita-hora').value;
+    new Promise(r => setTimeout(r, 1200)).then(() => {
+      const f = folio('AQ');
+      document.getElementById('visita-folio').textContent = f;
+      document.getElementById('visita-confirm-text').textContent = `Te esperamos el ${fecha} a las ${hora}. Enviamos la dirección exacta y los datos de contacto del arquitecto a tu correo.`;
+      document.getElementById('visita-form-wrap').style.display = 'none';
+      document.getElementById('visita-confirm-wrap').style.display = 'block';
+      btn.disabled = false;
+      btn.querySelector('.btn-label').textContent = 'Confirmar visita';
+      showToast(`Visita agendada con folio ${f}.`, 'success');
+    });
+  });
+})();
+
+/* =========================================================
+   WIZARD DE CONTACTO / INICIO DE PROYECTO
+========================================================= */
+let wizCurrentStep = 1;
+
+function startWizardFromOutside(path, projectId){
+  document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
+  resetWizard();
+  if(path){
+    state.wizard.path = path;
+    document.querySelectorAll('.path-card').forEach(c => c.classList.toggle('is-selected', c.dataset.path === path));
+    document.getElementById('wiz-next-1').disabled = false;
+  }
+  if(projectId){
+    state.wizard.projectId = projectId;
+  }
+  setTimeout(() => {
+    if(path){ goToWizardStep(2); }
+  }, 550);
+}
+
+function resetWizard(){
+  wizCurrentStep = 1;
+  state.wizard = { path:null, projectId:null, tipoProyecto:'', ubicacionPredio:'', metrajeAprox:'', budget:null, nombre:'', email:'', telefono:'', comentario:'' };
+  document.querySelectorAll('.path-card').forEach(c => c.classList.remove('is-selected'));
+  document.getElementById('wiz-next-1').disabled = true;
+  document.querySelectorAll('.budget-pill').forEach(b => b.classList.remove('is-active'));
+  document.getElementById('wizard-form').reset();
+  document.querySelectorAll('#wizard-form .form-group').forEach(g => g.classList.remove('has-error'));
+  showWizardStep(1);
+}
+
+function showWizardStep(step){
+  document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('is-active'));
+  if(step === 'confirm'){
+    document.querySelector('.wizard-step[data-step="confirm"]').classList.add('is-active');
+    return;
+  }
+  if(step === 2){
+    const variant = state.wizard.path === 'medida' ? 'medida' : 'catalogo';
+    document.querySelector(`.wizard-step[data-step="2"][data-path-variant="${variant}"]`).classList.add('is-active');
+    if(variant === 'catalogo') populateWizardProjectSelect();
+  } else {
+    document.querySelector(`.wizard-step[data-step="${step}"]`).classList.add('is-active');
+  }
+  updateWizardProgress(step);
+  if(step === 4) renderWizardSummary();
+}
+
+function updateWizardProgress(step){
+  const stepNum = step === 'confirm' ? 4 : step;
+  document.querySelectorAll('.wizard-progress-step').forEach(el => {
+    const n = parseInt(el.dataset.step);
+    el.classList.toggle('is-done', n < stepNum);
+    el.classList.toggle('is-active', n <= stepNum);
+  });
+  document.querySelectorAll('[data-step-label]').forEach(el => {
+    el.classList.toggle('is-current', parseInt(el.dataset.stepLabel) === stepNum);
+  });
+}
+
+function goToWizardStep(step){
+  wizCurrentStep = step;
+  showWizardStep(step);
+  document.getElementById('wizard-shell').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function populateWizardProjectSelect(){
+  const sel = document.getElementById('wiz-proyecto-select');
+  const disponibles = CATALOGO.filter(p => p.disponible);
+  sel.innerHTML = disponibles.map(p => `<option value="${p.id}">${p.nombre} — ${p.ubicacion} (${moneyShort(p.precio)})</option>`).join('');
+  const banner = document.getElementById('wiz-selected-banner');
+  if(state.wizard.projectId){
+    sel.value = state.wizard.projectId;
+    const p = CATALOGO.find(x=>x.id===state.wizard.projectId);
+    if(p){
+      banner.style.display = 'flex';
+      banner.innerHTML = `<img src="https://picsum.photos/seed/${p.seed}/200/150" alt="${p.nombre}"><div class="info"><b>${p.nombre}</b><span>${p.ubicacion} · ${moneyShort(p.precio)}</span></div><button type="button" id="wiz-change-project">Elegir otro</button>`;
+      document.getElementById('wiz-change-project').addEventListener('click', () => { banner.style.display='none'; });
+    }
+  } else {
+    banner.style.display = 'none';
+  }
+  sel.onchange = () => { state.wizard.projectId = sel.value; };
+}
+
+function renderWizardSummary(){
+  const w = state.wizard;
+  const rows = [];
+  rows.push(['Camino elegido', w.path === 'medida' ? 'Diseño 100% a la medida' : 'Adaptar un diseño del catálogo']);
+  if(w.path === 'medida'){
+    rows.push(['Tipo de proyecto', {residencial:'Vivienda residencial',comercial:'Local o edificio comercial',institucional:'Proyecto institucional',remodelacion:'Remodelación'}[w.tipoProyecto] || '—']);
+    rows.push(['Ubicación del predio', w.ubicacionPredio || '—']);
+    rows.push(['Metraje aproximado', w.metrajeAprox ? w.metrajeAprox + ' m²' : '—']);
+  } else {
+    const p = CATALOGO.find(x=>x.id===w.projectId);
+    rows.push(['Proyecto de interés', p ? `${p.nombre} — ${p.ubicacion}` : '—']);
+  }
+  const budgetLabels = {'menos-2m':'Menos de $2M MXN','2m-5m':'$2M – $5M MXN','5m-15m':'$5M – $15M MXN','mas-15m':'Más de $15M MXN','no-seguro':'Aún no lo sabe'};
+  rows.push(['Presupuesto estimado', budgetLabels[w.budget] || '—']);
+  rows.push(['Nombre', w.nombre || '—']);
+  rows.push(['Correo', w.email || '—']);
+  rows.push(['Teléfono', w.telefono || '—']);
+  if(w.comentario) rows.push(['Comentario', w.comentario]);
+
+  document.getElementById('wiz-summary').innerHTML = rows.map(([k,v]) => `<div class="summary-row"><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+}
+
+/* Eventos del wizard */
+(function setupWizard(){
+  document.querySelectorAll('.path-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.path-card').forEach(c => c.classList.remove('is-selected'));
+      card.classList.add('is-selected');
+      state.wizard.path = card.dataset.path;
+      document.getElementById('wiz-next-1').disabled = false;
+    });
+  });
+  document.getElementById('wiz-next-1').addEventListener('click', () => goToWizardStep(2));
+
+  document.querySelectorAll('[data-back="1"]').forEach(btn => btn.addEventListener('click', () => goToWizardStep(1)));
+  document.querySelectorAll('[data-next="3"]').forEach(btn => btn.addEventListener('click', () => {
+    if(state.wizard.path === 'medida'){
+      const ok = validateSimpleForm('wiz', [
+        {id:'tipo-proyecto', test:v=>!!v},
+      ]);
+      const okUbic = document.getElementById('wiz-ubicacion').value.trim().length >= 2;
+      const okM2 = parseFloat(document.getElementById('wiz-metraje').value) > 0;
+      document.querySelector('[data-field="ubicacionPredio"]').classList.toggle('has-error', !okUbic);
+      document.querySelector('[data-field="metrajeAprox"]').classList.toggle('has-error', !okM2);
+      if(!ok || !okUbic || !okM2) return;
+      state.wizard.tipoProyecto = document.getElementById('wiz-tipo-proyecto').value;
+      state.wizard.ubicacionPredio = document.getElementById('wiz-ubicacion').value.trim();
+      state.wizard.metrajeAprox = document.getElementById('wiz-metraje').value;
+    } else {
+      state.wizard.projectId = document.getElementById('wiz-proyecto-select').value;
+    }
+    goToWizardStep(3);
+  }));
+
+  document.getElementById('wiz-back-3').addEventListener('click', () => goToWizardStep(2));
+  document.querySelectorAll('#wiz-budget-pills .budget-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#wiz-budget-pills .budget-pill').forEach(b=>b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      state.wizard.budget = btn.dataset.budget;
+      document.getElementById('wiz-budget-err').style.display = 'none';
+    });
+  });
+  document.querySelector('[data-next="4"]').addEventListener('click', () => {
+    const okBudget = !!state.wizard.budget;
+    document.getElementById('wiz-budget-err').style.display = okBudget ? 'none' : 'block';
+    const ok = validateSimpleForm('wiz', [
+      {id:'nombre', test:v=>v.trim().length>=2},
+      {id:'email', test:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())},
+      {id:'telefono', test:v=>v.replace(/\D/g,'').length===10},
+    ]);
+    if(!okBudget || !ok) return;
+    state.wizard.nombre = document.getElementById('wiz-nombre').value.trim();
+    state.wizard.email = document.getElementById('wiz-email').value.trim();
+    state.wizard.telefono = document.getElementById('wiz-telefono').value.trim();
+    state.wizard.comentario = document.getElementById('wiz-comentario').value.trim();
+    goToWizardStep(4);
+  });
+
+  document.getElementById('wiz-back-4').addEventListener('click', () => goToWizardStep(3));
+
+  document.getElementById('wizard-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = document.getElementById('wiz-submit');
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    new Promise(r => setTimeout(r, 1400)).then(() => {
+      const f = folio('AQ');
+      document.getElementById('wiz-folio').textContent = f;
+      const w = state.wizard;
+      document.getElementById('wiz-confirm-msg').textContent = w.path === 'medida'
+        ? 'Un arquitecto del estudio revisará tu solicitud y te contactará en un máximo de 2 días hábiles para agendar la visita de sitio, sin costo.'
+        : 'Un arquitecto del estudio revisará tu solicitud y te contactará en un máximo de 2 días hábiles para la etapa de adaptación del diseño a tu predio.';
+      showWizardStep('confirm');
+      btn.disabled = false;
+      btn.textContent = 'Enviar solicitud';
+      showToast(`Solicitud enviada con folio ${f}.`, 'success');
+    });
+  });
+
+  document.getElementById('wiz-restart').addEventListener('click', resetWizard);
+})();
+
+/* =========================================================
+   TESTIMONIOS
+========================================================= */
+function renderTestimonials(){
+  const grid = document.getElementById('testi-grid');
+  grid.innerHTML = TESTIMONIOS.map(t => `
+    <div class="testi-card">
+      <span class="testi-quote">"</span>
+      <div class="testi-stars">${'★'.repeat(t.estrellas)}</div>
+      <p class="testi-text">${t.texto}</p>
+      <div class="testi-person">
+        <img class="testi-avatar" src="https://i.pravatar.cc/100?u=${t.avatar}" alt="Retrato de ${t.nombre}">
+        <div><div class="testi-name">${t.nombre}</div><div class="testi-role">${t.rol}</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   TOASTS
+========================================================= */
+function showToast(message, kind){
+  const stack = document.getElementById('toast-stack');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  const iconOk = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
+  const iconInfo = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg>';
+  toast.innerHTML = `${kind==='success'?iconOk:iconInfo}<p>${message}<span class="t-time">Justo ahora</span></p>`;
+  stack.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('is-shown'));
+  setTimeout(() => {
+    toast.classList.remove('is-shown');
+    setTimeout(() => toast.remove(), 400);
+  }, 5200);
+  while(stack.children.length > 3){ stack.removeChild(stack.firstChild); }
+}
+
+/* Notificaciones de prueba social en vivo */
+const SOCIAL_PROOF_MESSAGES = [
+  () => { const p = randomProject(); return `Alguien en ${p.ciudad === 'Otro' ? p.ubicacion.split(',')[0] : p.ciudad} apartó un diseño similar a <b>${p.nombre}</b> hace unos minutos.`; },
+  () => { const p = randomProject(); return `${2+Math.floor(Math.random()*6)} personas están viendo <b>${p.nombre}</b> ahora mismo.`; },
+  () => { const p = randomProject(); return `Se agendó una visita a un proyecto similar a <b>${p.nombre}</b> hace un momento.`; },
+  () => `Una solicitud de diseño a la medida fue enviada desde ${['Puebla','Querétaro','CDMX','Hidalgo'][Math.floor(Math.random()*4)]} hace unos minutos.`,
+];
+function randomProject(){ return CATALOGO[Math.floor(Math.random()*CATALOGO.length)]; }
+
+let socialProofTimer = null;
+function scheduleSocialProof(){
+  const delay = 22000 + Math.random()*26000;
+  socialProofTimer = setTimeout(() => {
+    if(document.visibilityState === 'visible'){
+      const msg = SOCIAL_PROOF_MESSAGES[Math.floor(Math.random()*SOCIAL_PROOF_MESSAGES.length)]();
+      showToast(msg, 'info');
+    }
+    scheduleSocialProof();
+  }, delay);
+}
+function maybeShowSocialProofForProject(p){
+  if(Math.random() < 0.35){
+    setTimeout(() => {
+      const viewers = 2+Math.floor(Math.random()*5);
+      showToast(`${viewers} personas están viendo <b>${p.nombre}</b> en este momento.`, 'info');
+    }, 2200);
+  }
+}
+
+/* =========================================================
+   NAVEGACIÓN / TOOLBAR / MISC
+========================================================= */
+function setupNavAndToolbar(){
+  document.getElementById('cat-search-input').addEventListener('input', debounce((e) => {
+    state.filters.q = e.target.value.trim();
+    state.visibleCount = state.pageSize;
+    renderCatalog();
+  }, 250));
+
+  document.getElementById('cat-sort-select').addEventListener('change', (e) => {
+    state.sort = e.target.value;
+    renderCatalog();
+  });
+
+  document.getElementById('btn-loadmore').addEventListener('click', () => {
+    state.visibleCount += state.pageSize;
+    renderCatalog();
+  });
+
+  document.getElementById('filters-toggle-btn').addEventListener('click', () => {
+    const panel = document.getElementById('cat-filters-panel');
+    const isOpen = panel.classList.toggle('is-open');
+    document.getElementById('filters-toggle-btn').setAttribute('aria-expanded', isOpen);
+    document.getElementById('filters-toggle-btn').classList.toggle('is-active', isOpen);
+  });
+  document.getElementById('filters-clear-btn').addEventListener('click', clearAllFilters);
+
+  document.querySelectorAll('.cat-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.cat-tab').forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected','true');
+      state.view = tab.dataset.view;
+      updateCompareBar();
+      renderCatalog();
+    });
+  });
+
+  document.getElementById('btn-compare-go').addEventListener('click', () => {
+    document.querySelector('.cat-tab[data-view="comparar"]').click();
+    document.getElementById('catalogo').scrollIntoView({behavior:'smooth'});
+  });
+  document.getElementById('btn-compare-clear').addEventListener('click', () => {
+    state.comparador.clear();
+    updateFavCompareTabs();
+    renderCatalog();
+  });
+
+  document.getElementById('btn-login').addEventListener('click', () => {
+    showToast('El panel de cliente es parte de otra maqueta de Grupo Meridiano — este botón es decorativo en este catálogo.', 'info');
+  });
+
+  document.getElementById('nav-burger').addEventListener('click', () => {
+    const links = document.getElementById('nav-links');
+    const isOpen = links.classList.toggle('is-open');
+    document.getElementById('nav-burger').setAttribute('aria-expanded', isOpen);
+  });
+  document.getElementById('nav-links').addEventListener('click', (e) => {
+    if(e.target.tagName === 'A') document.getElementById('nav-links').classList.remove('is-open');
+  });
+
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('[data-open-legal]');
+    if(openBtn){
+      document.getElementById('legal-' + openBtn.dataset.openLegal).classList.add('is-open');
+    }
+    const closeBtn = e.target.closest('[data-legal-close]');
+    if(closeBtn){ closeBtn.closest('.legal-modal-backdrop').classList.remove('is-open'); }
+    if(e.target.classList && e.target.classList.contains('legal-modal-backdrop')){
+      e.target.classList.remove('is-open');
+    }
+    const hermanaBtn = e.target.closest('[data-goto-hermana]');
+    if(hermanaBtn){
+      e.preventDefault();
+      const dest = hermanaBtn.dataset.gotoHermana;
+      showToast(`"${dest === 'portal' ? 'Portal Meridiano' : dest === 'constructora' ? 'Torreón Constructora' : 'Ilé Wellness'}" vive en otro archivo de la maqueta de Grupo Meridiano — no está conectado en esta demo.`, 'info');
+    }
+  });
+
+  document.getElementById('pmodal-close').addEventListener('click', closeProjectModal);
+  document.getElementById('pmodal-backdrop').addEventListener('click', (e) => { if(e.target.id === 'pmodal-backdrop') closeProjectModal(); });
+  document.getElementById('pmodal-gallery-next').addEventListener('click', pmodalGalleryNext);
+  document.getElementById('pmodal-gallery-prev').addEventListener('click', pmodalGalleryPrev);
+  document.getElementById('pmodal-fav-btn').addEventListener('click', () => toggleFavorite(state.currentProject.id));
+
+  document.querySelectorAll('[data-action-close]').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.action-modal-backdrop').classList.remove('is-open'));
+  });
+  document.querySelectorAll('.action-modal-backdrop').forEach(bd => {
+    bd.addEventListener('click', (e) => { if(e.target === bd) bd.classList.remove('is-open'); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key !== 'Escape') return;
+    const openAction = document.querySelector('.action-modal-backdrop.is-open');
+    if(openAction) openAction.classList.remove('is-open');
+  });
+}
+
+/* =========================================================
+   CHATBOT — Asistente Arqueo (catálogo)
+========================================================= */
+(function(){
+  const launcher = document.getElementById('chat-launcher');
+  const win = document.getElementById('chat-window');
+  const closeBtn = document.getElementById('chat-close');
+  const body = document.getElementById('chat-body');
+  const quick = document.getElementById('chat-quick');
+  const input = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+
+  const respuestas = [
+    { match: /precio|costo|cu[aá]nto cuesta|presupuesto|cotiza/i,
+      reply: 'Los precios del catálogo van desde poco más de $2M hasta $50M+ MXN, según metraje y categoría. Cada ficha de proyecto muestra el precio estimado. ¿Quieres que te lleve al catálogo con el filtro de precio abierto?',
+      action: 'goto-catalogo' },
+    { match: /apart|reserv/i,
+      reply: 'Para apartar un diseño, entra a la ficha del proyecto que te interese y usa el botón "Apartar este diseño". El monto de apartado se descuenta del proyecto ejecutivo, y un arquitecto te contacta en 48 horas.' },
+    { match: /medida|desde cero|dise[ñn]o propio|nuevo dise[ñn]o/i,
+      reply: 'Si prefieres algo 100% a la medida, baja hasta "Aparta un diseño o inicia el tuyo" y elige esa opción en el primer paso. También puedes empezar ahí mismo desde el chat.',
+      action: 'goto-contacto' },
+    { match: /tiempo|tarda|cu[aá]nto dura|plazo|duraci[oó]n/i,
+      reply: 'Adaptar un diseño del catálogo suele ser más rápido que empezar de cero: normalmente 3-5 semanas para el anteproyecto adaptado. Un proyecto 100% a la medida toma de 6 a 10 semanas adicionales de proyecto ejecutivo.' },
+    { match: /construy|obra|torre[oó]n|ejecuci[oó]n/i,
+      reply: 'Arqueo Estudio diseña; la construcción la ejecuta Torreón Constructora, marca hermana dentro de Grupo Meridiano. Cualquier proyecto del catálogo puede construirse con ellos.' },
+    { match: /favorit|guardar/i,
+      reply: 'Toca el ícono de corazón en cualquier tarjeta del catálogo para guardarla. Puedes ver todos tus proyectos guardados en la pestaña "Mis favoritos", arriba del catálogo.',
+      action: 'goto-catalogo' },
+    { match: /compar|comparador/i,
+      reply: 'Marca la casilla "Comparar" en hasta 3 tarjetas del catálogo y aparecerá una barra abajo para ver la tabla comparativa lado a lado: metraje, precio, ubicación y más.',
+      action: 'goto-catalogo' },
+    { match: /permiso|tr[aá]mite|licencia|municipio/i,
+      reply: 'Gestionamos el trámite ante la autoridad local y coordinamos con el perito responsable de obra, tanto para proyectos del catálogo adaptados como para diseños a la medida.' },
+    { match: /d[oó]nde est[aá]n|ubicaci[oó]n|oficina|direcci[oó]n/i,
+      reply: 'Nuestra oficina está en Paseo de la Reforma, Ciudad de México. El catálogo tiene proyectos en CDMX, Hidalgo, Querétaro, Puebla y Estado de México.' },
+    { match: /material|concreto|madera|piedra|acabado/i,
+      reply: 'Trabajamos principalmente con concreto aparente, madera de encino, piedra local y luz cenital calculada. Puedes ver la galería completa en la sección "Materiales" de esta página.',
+      img: 'https://picsum.photos/seed/arq-concreto/700/460',
+      imgCaption: 'Textura de concreto aparente en fachada residencial',
+      action: 'goto-materiales' },
+    { match: /proceso|c[oó]mo trabajan|etapas|metodolog[ií]a/i,
+      reply: 'El proceso a la medida tiene 5 etapas: análisis de sitio, anteproyecto, proyecto ejecutivo, gestión de permisos y supervisión de obra. Te llevo a verlas.',
+      action: 'goto-proceso' },
+    { match: /catalogo|catálogo|cu[aá]ntos proyectos|inventario/i,
+      reply: `El catálogo tiene ${CATALOGO.length} proyectos entre residencial, comercial e institucional, con filtros por precio, metraje, ubicación y más. Te llevo directo.`,
+      action: 'goto-catalogo' },
+    { match: /hola|buenas|qu[eé] tal|buen d[ií]a/i,
+      reply: '¡Hola! Soy el asistente de Arqueo Estudio. Puedo ayudarte a explorar el catálogo, apartar un diseño, comparar proyectos o resolver dudas de precio, tiempos y materiales. ¿Qué te gustaría saber?' },
+    { match: /gracias/i, reply: 'Con gusto. Si tienes otra duda, aquí sigo.' },
+  ];
+  const fallback = 'No estoy seguro de haber entendido bien. Puedo ayudarte con el catálogo, precios, apartados, comparador, materiales o el proceso a la medida. ¿Podrías darme un poco más de detalle?';
+
+  const quickPool = [
+    '¿Cuánto cuesta un proyecto?','¿Cómo aparto un diseño?','Quiero algo a la medida','¿Cuánto tarda?',
+    '¿Ustedes también construyen?','¿Cómo funciona el comparador?','¿Qué materiales usan?','¿Cuántos proyectos hay en el catálogo?',
+    '¿Dónde están ubicados?','¿Cómo guardo mis favoritos?'
+  ];
+  function pickQuick(n){
+    const shuffled = [...quickPool].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, n);
+  }
+
+  function addMsg(text, who, imgUrl, imgCaption){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    div.innerHTML = text;
+    if(imgUrl){
+      const figure = document.createElement('div');
+      figure.className = 'chat-msg-img';
+      figure.innerHTML = `<img src="${imgUrl}" alt="${imgCaption||''}" loading="lazy">${imgCaption ? `<span>${imgCaption}</span>` : ''}`;
+      div.appendChild(figure);
+    }
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  function showTyping(){
+    const div = document.createElement('div');
+    div.className = 'chat-typing';
+    div.id = 'chat-typing-indicator';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  function hideTyping(){
+    const t = document.getElementById('chat-typing-indicator');
+    if(t) t.remove();
+  }
+  function renderQuick(){
+    quick.classList.remove('is-hidden');
+    quick.innerHTML = pickQuick(3).map(q => `<button type="button">${q}</button>`).join('');
+    quick.querySelectorAll('button').forEach(b => b.addEventListener('click', () => handleUserMessage(b.textContent)));
+  }
+  function botReply(userText){
+    quick.classList.add('is-hidden');
+    quick.innerHTML = '';
+    showTyping();
+    new Promise(r => setTimeout(r, 650 + Math.random()*450)).then(() => {
+      hideTyping();
+      const match = respuestas.find(r => r.match.test(userText));
+      const reply = match ? match.reply : fallback;
+      addMsg(reply, 'bot', match && match.img, match && match.imgCaption);
+      if(match && match.action === 'goto-catalogo'){
+        setTimeout(() => document.getElementById('catalogo').scrollIntoView({behavior:'smooth'}), 400);
+      }
+      if(match && match.action === 'goto-contacto'){
+        setTimeout(() => document.getElementById('contacto').scrollIntoView({behavior:'smooth'}), 400);
+      }
+      if(match && match.action === 'goto-proceso'){
+        setTimeout(() => document.getElementById('proceso').scrollIntoView({behavior:'smooth'}), 400);
+      }
+      if(match && match.action === 'goto-materiales'){
+        setTimeout(() => document.getElementById('materiales').scrollIntoView({behavior:'smooth'}), 400);
+      }
+      setTimeout(renderQuick, 300);
+    });
+  }
+  function handleUserMessage(text){
+    if(!text.trim()) return;
+    addMsg(text, 'user');
+    input.value = '';
+    botReply(text);
+  }
+  launcher.addEventListener('click', () => {
+    win.classList.add('is-open');
+    if(!body.dataset.greeted){
+      addMsg('¡Hola! 👋 Soy el asistente virtual de Arqueo Estudio. Puedo ayudarte a explorar el catálogo, apartar un diseño o resolver dudas de precio, tiempos y materiales. ¿En qué te ayudo?', 'bot');
+      renderQuick();
+      body.dataset.greeted = '1';
+    }
+    input.focus();
+  });
+  closeBtn.addEventListener('click', () => win.classList.remove('is-open'));
+  sendBtn.addEventListener('click', () => handleUserMessage(input.value));
+  input.addEventListener('keydown', e => { if(e.key === 'Enter') handleUserMessage(input.value); });
+
+  window.__chatOpenWithMessage = (text) => {
+    win.classList.add('is-open');
+    if(!body.dataset.greeted){
+      addMsg('¡Hola! 👋 Soy el asistente virtual de Arqueo Estudio.', 'bot');
+      body.dataset.greeted = '1';
+    }
+    handleUserMessage(text);
+  };
+})();
+
+/* =========================================================
+   BOOTSTRAP
+========================================================= */
+document.addEventListener('DOMContentLoaded', function(){
+  initFilterPanels();
+  setupNavAndToolbar();
+  renderTestimonials();
+  renderCatalog();
+  scheduleSocialProof();
+});
+
+</script>
+</body>
+</html>
